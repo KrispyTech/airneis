@@ -1,1 +1,1 @@
-some bullshit to explain pr and code reviews
+Some dummy text to explain pr and code reviews
