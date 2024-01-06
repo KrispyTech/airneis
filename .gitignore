@@ -10,7 +10,7 @@
 # Dependency directories 
 vendor/
 tmp
-/node_modules
+node_modules/
 /.pnp
 .pnp.js
 .yarn/install-state.gz
@@ -24,6 +24,7 @@ go.work
 
 # next.js
 /.next/
+.next
 /out/
 
 # production
