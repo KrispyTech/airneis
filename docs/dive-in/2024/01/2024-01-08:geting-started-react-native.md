@@ -23,4 +23,5 @@ FIRST THING RUN `npm i` !! and then you can `npm start`.
 If you want the preview on your phone, you have to connect it to your pc for the first use and download `Expo Go` and then if nothing appears when you do `npm start` with phone connected to pc you can try by scaning the QR Code.
 
 I installed nativewind and the doc is at: https://www.nativewind.dev/  
-_Not all is explained for all the times where it's not specific they send you to tailwindcss doc._
+_Not all is explained for all the times where it's not specific they send you to tailwindcss doc._  
+To run nativewind properly I had to install a specific tailwindcss verison: `npm install tailwindcss@3.3.2 --save-dev`
