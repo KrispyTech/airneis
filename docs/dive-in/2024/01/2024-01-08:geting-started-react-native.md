@@ -4,7 +4,7 @@ I did React Native installation with Expo, this library comes with some features
 
 FIRST THING RUN `npm i` !! and then you can `npm start`.
 
-> #### When you start with `npm start` you have acces to some commands:
+> #### When you start with `npm start` you have access to some commands:
 >
 > › Press s │ switch to development build  
 > › Press a │ open Android  
@@ -24,7 +24,7 @@ If you want the preview on your phone, you have to connect it to your pc for the
 
 I installed nativewind and the doc is at: https://www.nativewind.dev/  
 _Not all is explained for all the times where it's not specific they send you to tailwindcss doc._  
-To run nativewind properly I had to install a specific tailwindcss verison: `npm install tailwindcss@3.3.2 --save-dev`
+To run nativewind properly I had to install a specific tailwindcss version: `npm install tailwindcss@3.3.2 --save-dev`
 
 ## Create an ios simulator
 
