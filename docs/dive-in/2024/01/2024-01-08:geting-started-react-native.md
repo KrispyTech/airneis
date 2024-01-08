@@ -2,6 +2,8 @@
 
 I did React Native installation with Expo, this library comes with some features that makes you can preview app on your phone or on simulators like: Xcode simulator (ios) and AndroidStudio.
 
+FIRST THING RUN `npm i` !! and then you can `npm start`.
+
 > #### When you start with `npm start` you have acces to some commands:
 >
 > › Press s │ switch to development build  
