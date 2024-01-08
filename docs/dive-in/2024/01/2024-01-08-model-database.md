@@ -152,3 +152,8 @@ If it's an order it means that it has been paid and that it will be delivered.
 Can be both shipping or billing address.
 The comment is optional and can be used to give more information about the address for the delivery person.
 The zipCode is a string because some countries have letters in their zipCode.
+
+# Contact
+
+This table represents the contact form.
+The content of this table will be displayed in backoffice.
