@@ -25,3 +25,10 @@ If you want the preview on your phone, you have to connect it to your pc for the
 I installed nativewind and the doc is at: https://www.nativewind.dev/  
 _Not all is explained for all the times where it's not specific they send you to tailwindcss doc._  
 To run nativewind properly I had to install a specific tailwindcss verison: `npm install tailwindcss@3.3.2 --save-dev`
+
+## Create an ios simulator
+
+If you want to test the app on a simulator instead of your phone you can do it with Xcode simulators.
+First download Xcode on the AppStore then press cmd + , to open settings the go to platform and download the version of ios.
+The press cmd + space to search for simulator and open it.
+Then you can open the app with `npm start` and press `i` to open the ios simulator.
