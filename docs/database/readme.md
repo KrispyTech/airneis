@@ -19,7 +19,7 @@ Materials <|-- ProductsMaterials
 Products <|-- ProductsMaterials
 
 class Users {
-    id number
+    id increments notNull
     fullName text notNull
     email text unique notNull
     isAdmin boolean default false notNull
@@ -27,7 +27,7 @@ class Users {
 }
 
 class Categories {
-    id number notNull
+    id increments notNull
     name text notNull
     thumbnailUrl text notNull
     slug text unique notNull
@@ -35,7 +35,7 @@ class Categories {
 }
 
 class Products {
-    id number notNull
+    id increments notNull
     name text notNull
     slug unique notNull
     categoryId number notNull
@@ -47,24 +47,24 @@ class Products {
 }
 
 class ProductImages {
-    id number notNull
+    id increments notNull
     productId number notNull
     imageUrl text notNull
 }
 
 class Materials{
-    id number notNull
+    id increments notNull
     name text notNull
 }
 
 class ProductsMaterials {
-    id number notNull
+    id increments notNull
     productId number notNull
     materialId number notNull
 }
 
 class Addresses {
-    id number notNull
+    id increments notNull
     userId number notNull
     address text notNull
     address2 text
@@ -79,7 +79,7 @@ class Addresses {
 }
 
 class Carts {
-    id number notNull
+    id increments notNull
     userId number notNull
     statusId number notNull
     shippingAddressId number notNull
@@ -88,20 +88,20 @@ class Carts {
 }
 
 class Status {
-    id number notNull
+    id increments notNull
     name text notNull
     isOrder boolean notNull
 }
 
 class CartsProducts {
-    id number notNull
+    id increments notNull
     productId number notNull
     cartId number notNull
     quantity number notNull
 }
 
 class Contact {
-    id number notNull
+    id increments notNull
     email text notNull
     subject text notNull
     message text notNull
