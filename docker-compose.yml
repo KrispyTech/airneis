@@ -2,8 +2,24 @@ version: "3.8"
 services:
   front:
     build:
-      context: .
+      context: ./front
     ports:
       - "3000:3000"
     environment:
       NEXT_ENV: development
+
+  back:
+    build:
+      context: ./back
+    ports:
+      - "3001:3001"
+    environment:
+      NEXT_ENV: development
+
+  db:
+    image: postgres:16.1
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: fake_passwd
