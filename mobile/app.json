@@ -20,9 +20,6 @@
         "foregroundImage": "./assets/AirneisAdaptiveIcon.png",
         "backgroundColor": "#ffffff"
       }
-    },
-    "web": {
-      "favicon": "./assets/AirneisAdaptiveIcon.png"
     }
   }
 }
