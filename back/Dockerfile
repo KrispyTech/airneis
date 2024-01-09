@@ -14,4 +14,4 @@ FROM scratch
 
 COPY --from=builder ["/build/apiserver", "/"]
 
-ENTRYPOINT ["/apiserver"]
+CMD ["/apiserver"]
