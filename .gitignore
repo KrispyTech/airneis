@@ -29,6 +29,10 @@ go.work
 # production
 /build
 
+
+#binaries when launching air file
+back/bin
+
 # misc
 .DS_Store
 *.pem
