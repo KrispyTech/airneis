@@ -7,7 +7,7 @@ title: Airneis database model
 
 classDiagram
 
-Categories <|-- Products
+Categories "*" <|-- "1" Products
 Carts <|-- Status
 Products <|-- Carts
 Users <|-- Addresses
@@ -20,8 +20,11 @@ Products <|-- ProductsMaterials
 
 class Users {
     id increments notNull
-    fullName text notNull
+    firstName text notNull
+    lastName text notNull
     email text unique notNull
+    passwordHash text notNull
+    passwordSalt text notNull
     isAdmin boolean default false notNull
     isActive boolean default false notNull
 }
@@ -102,7 +105,7 @@ class CartsProducts {
 
 class Contact {
     id increments notNull
-    email text notNull
+    senderEmail text notNull
     subject text notNull
     message text notNull
 }
