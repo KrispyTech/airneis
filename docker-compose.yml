@@ -5,21 +5,17 @@ services:
       context: ./front
     ports:
       - "3000:3000"
-    environment:
-      NEXT_ENV: development
 
   back:
     build:
       context: ./back
     ports:
       - "3001:3001"
-    environment:
-      NEXT_ENV: development
 
   db:
     image: postgres:16.1
     restart: always
+    env_file:
+      - .env.local
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: fake_passwd

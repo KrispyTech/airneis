@@ -3,7 +3,9 @@
 <p> In order to have a consistant environment to test and deploy our app, we will containerized each part of our application with the help of docker.
 
 Docker is a software platform responsable for building, running, and managing containers. <br>
-Containers are smalls, standalone virtual environment containing just what's necessary to run the application it deploys. </p>
+Containers are smalls, standalone virtual environment containing just what's necessary to run the application it deploys. <br>
+Docker compose is a tool for defining and running multi-container Docker applications. A YAML file configures the application's services. Then, with a single command, it creates and starts all the services from the configuration. <br>
+Dockerfiles are documents containing the commands to setup and build the images used to create the containers.</p>
 
 We are going to use three containers:
 
