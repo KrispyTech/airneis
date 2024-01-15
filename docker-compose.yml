@@ -10,7 +10,7 @@ services:
     build:
       context: ./back
     ports:
-      - "3001:3001"
+      - "3001:3000"
 
   db:
     image: postgres:16.1
