@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  front:
+    build:
+      context: ./front
+    ports:
+      - "3000:3000"
+
+  back:
+    build:
+      context: ./back
+    ports:
+      - "3001:3000"
+
+  db:
+    image: postgres:16.1
+    restart: always
+    env_file:
+      - .env.local
+    ports:
+      - "5432:5432"
