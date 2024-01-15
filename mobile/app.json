@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "mobile",
+    "slug": "mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/AirneisLogoWhite.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/AirneisSplash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/AirneisAdaptiveIcon.png",
+        "backgroundColor": "#ffffff"
+      }
+    }
+  }
+}
