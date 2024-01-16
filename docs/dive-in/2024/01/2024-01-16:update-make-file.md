@@ -2,7 +2,8 @@
 
 Make is a utility to automate somme commands.  
 Also it allows to have a kind of consistency between commands or to simplify commands.  
-It allows with a single command to run that will run multiple commands.
+By running a single command make can execute multiple commands
+For example a make install could install all the packages in backend, backend, and mobile.
 
 Those commands are registered in the `Makefile` and have the same skeleton:  
 `make [commandName] [arguments]`
