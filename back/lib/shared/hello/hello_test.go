@@ -11,7 +11,7 @@ import (
 
 func TestHello(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecsWithDefaultAndCustomReporters(t, "Hello", []Reporter{reporters.NewJUnitReporter("test_report-hello.xml")})
+	RunSpecsWithDefaultAndCustomReporters(t, "Hello", []Reporter{reporters.NewJUnitReporter("test_report_hello.xml")})
 }
 
 var _ = Describe("HelloTest", func() {
