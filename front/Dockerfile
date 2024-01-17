@@ -5,13 +5,13 @@ FROM base as deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY ./front/package.json ./front/package-lock.json ./
-RUN  npm install --production
+COPY ./package.json ./package-lock.json ./
+RUN  npm install
 
 FROM base as builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY ./front/ .
+COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 

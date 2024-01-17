@@ -21,11 +21,13 @@ Navigate to the root directory **airneis/**:
 
 > cd path/to/airneis/
 
+Create a .env.local with your Postgres password such as: POSTGRES_PASSWORD=fakepassword
+
 This command execute the code in docker-compose.yml, which builds then run the containers:
 
 > docker compose up -d
 
-The option -d runs the container in detached mode, meaning it gives back the CLI after running successfuly the containers instead of logging in the terminal.
+The option -d runs the containers in detached mode, meaning it gives back the CLI after running successfuly the containers instead of logging in the terminal.
 
 To see your running containers:
 
@@ -39,6 +41,10 @@ CONTAINER ID   IMAGE           COMMAND                  CREATED         STATUS  
 f10d32bac1e2   airneis-back    "/apiserver"             2 seconds ago   Up 1 second   0.0.0.0:3001->3001/tcp, :::3001->3001/tcp   airneis-back-1
 1dcde425de1a   airneis-front   "npm start"              2 seconds ago   Up 1 second   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   airneis-front-1
 ```
+
+To stop the containers:
+
+> docker compose down
 
 Command is the instruction used to run the application inside the container. <br>
 Ports follow the logic: [host_port]:[container_port]
