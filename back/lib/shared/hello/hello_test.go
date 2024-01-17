@@ -19,7 +19,7 @@ var _ = Describe("HelloTest", func() {
 		word, number := HelloWorld()
 		It("should return a string with hello world and 25 as an integer", func() {
 			Expect(word).To(Equal("HelloWorld"))
-			Expect(number).To(Equal(13))
+			Expect(number).To(Equal(25))
 		})
 	})
 })
