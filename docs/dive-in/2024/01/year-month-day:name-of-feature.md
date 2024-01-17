@@ -1,5 +1,8 @@
 # TITLE: You know what you’re working, so in a few words give us a clear title
 
+Author : John Doe
+Date : 2024-01-01
+
 ## SUMMARY:
 
 Gather all the information you have grasped and start by writing a
