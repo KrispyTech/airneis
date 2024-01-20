@@ -16,7 +16,7 @@ All these different services provide tokens to connect to them.
 ## Solution
 
 **The right place to store secrets.**
-To store the secrets in the right place, we need to find a wayy to store our them securely in vault that allows potential identity-based secrets and encryption management system.
+To store the secrets in the right place, we need to find a way to store our them securely in vault that allows potential identity-based secrets and encryption management system.
 
 For this we have a few choices :
 
