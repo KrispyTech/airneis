@@ -9,7 +9,7 @@ Protect application secrets in our environnements by safely fetching secrets in 
 
 ## Context
 
-We are currently building a product in which we use secrets to be able to connect to differennt services. It could be to connect to a database, an email service or a payment service like Stripe.
+We are currently building a product in which we use secrets to be able to connect to different services. It could be to connect to a database, an email service or a payment service like Stripe.
 
 All these different services provide tokens to connect to them.
 
