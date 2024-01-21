@@ -1,27 +1,26 @@
-FROM alpine:3.19 as base
-RUN apk add --update npm
-
-FROM base as deps
-RUN apk add --no-cache libc6-compat
+FROM oven/bun as base
 WORKDIR /app
 
-COPY ./package.json ./package-lock.json ./
-RUN  npm install
+COPY . .
+RUN  bun install
+
+FROM base as dev
+WORKDIR /app
+
+CMD ["bun", "run", "dev"]
 
 FROM base as builder
+
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
 ENV NEXT_TELEMETRY_DISABLED 1
+RUN bun run build
 
-RUN npm run build
+FROM oven/bun as prod
 
-FROM base as runner
 WORKDIR /app
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
-CMD ["npm", "start"]
+CMD ["bun", "run", "start"]

@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  front:
+    build:
+      target: dev
+    volumes:
+      - ./front:/app
+
+  back:
+    build:
+      target: dev
+    volumes:
+      - ./back:/build
