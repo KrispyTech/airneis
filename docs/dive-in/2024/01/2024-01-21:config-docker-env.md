@@ -59,3 +59,9 @@ volumes:
 ```
 
 Allow us to share files from our host to our container, as needed for hot reloading.
+
+### Make
+
+#### Commands to add:
+
+- `make up dev`: `docker compose -f docker-compose.yml -f docker-compose-dev.yml up -d` start all containers of the `docker-compose.yml` in dev mode
