@@ -1,5 +1,8 @@
 # Configure Docker environments
 
+- Author: Magali Deslous-Paoli
+- Date : 2024-01-21
+
 ## Summary
 
 Be able to up docker containers in prod or in dev environment
