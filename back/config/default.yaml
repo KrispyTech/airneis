@@ -1,0 +1,11 @@
+env:
+  text:
+    vault: 
+      organization_id: blablabla
+      project_id: blablabla
+      app_name: blablabla
+  secrets:
+    STRIPE_ID: stripe_id
+    STRIPE_TOKEN: stripe_token
+    SENGDRID_ID: sendgrid_id
+    SENDGRID_TOKEN: sendgrid_token
