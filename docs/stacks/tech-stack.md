@@ -3,7 +3,6 @@
 | Data Started   | 05-11-2023     |
 | Data Published | 20-11-2023     |
 
-
 # Summary
 
 We want to define the architecture for an application that we'll be making from the ground up. This application focuses around selling products on a websites.
@@ -37,10 +36,6 @@ We'll be using NextJS for these main reasons :
 
 The image above shows the difference between a SPA and an MPA. You can see that the MPA reloads the entire page for each tab. In our case, **React JS** with **NextJS** uses the SPA to avoid reloading the page between each tab with the use of the Virtual DOM which allows to change just the difference between the current state and the previous state. The image below represents how the virtual dom works.
 
-##### Project Scaffolding
-
-> The scaffolding of our project is the the file system of our repository
-
 ###### Routing
 
 We'll be using NextJS' App Router instead of using the Pages Router to adopt the new routing system of NextJS but it's **good to know** that it can work both alongside each other but the App Router takes priority over the Pages Router in the case there is a duplicate page.
@@ -50,6 +45,8 @@ We'll be using NextJS' App Router instead of using the Pages Router to adopt the
 **Notes :**
 
 - To add a global component in the app that will be available on each page, we'll have to place the react component function in `_document.js`
+- As NextJs has a system of nested layouts we can have a component on each children page by putting it into `layout.js`. The component will be displayed in the children without having to mention it in the children `page.js`
+- NextJs can handle both server side and client side rendering on the same app.
 
 ### Mobile
 
@@ -150,7 +147,7 @@ Add a CI to be integrated before being able to merge requests - Add lingting che
 - Creating a CI with an amazing pipeline has bonus points
 - Use of containers to be able to deploy and dev comfortably
 - You are going to need to Use NEON, a serverless function for PostgreSQL
-- We could use [Storybook](https://storybook.js.org/) to build UI components and pages in isolation.
+- We could use [Storybook](https://storybook.js.org/) to build UI components and pages in isolation.(It will be a bonus we are not sure to implement it)
 - We could get secrets securely if needed on docker containers by fetching them from Hashicorp Vault
 
 ### Recap
