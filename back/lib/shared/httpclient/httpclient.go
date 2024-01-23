@@ -12,10 +12,6 @@ const methodGet string = "GET"
 
 type HttpApi interface {
 	Get(url string, headers map[string]string) ([]byte, int, error)
-	// Post(url string, headers map[string]string, jsonBody []byte) ([]byte, int, error)
-	// Patch(url string, headers map[string]string, jsonBody []byte) ([]byte, int, error)
-	// Put(url string, headers map[string]string, jsonBody []byte) ([]byte, int, error)
-	// Delete(url string, headers map[string]string) ([]byte, int, error)
 }
 
 type HttpClient struct {
