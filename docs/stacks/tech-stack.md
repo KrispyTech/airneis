@@ -44,7 +44,6 @@ We'll be using NextJS' App Router instead of using the Pages Router to adopt the
 
 **Notes :**
 
-- To add a global component in the app that will be available on each page, we'll have to place the react component function in `_document.js`
 - As NextJs has a system of nested layouts we can have a component on each children page by putting it into `layout.js`. The component will be displayed in the children without having to mention it in the children `page.js`
 - NextJs can handle both server side and client side rendering on the same app.
 
