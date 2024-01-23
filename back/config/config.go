@@ -2,20 +2,40 @@ package config
 
 import (
 	"airneis/lib/shared/httpclient"
+	"fmt"
 	"os"
 
 	"github.com/pkg/errors"
+	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 )
 
+const stagingEnv string = "staging"
+const productionEnv string = "production"
+
 type Config struct {
-	Env     Env `yaml:"env"`
-	Handler ClientHandler
+	Env        Env `yaml:"env"`
+	Handler    ClientHandler
+	Production ProductionConfig
+	Staging    StagingConfig
+}
+
+type StagingConfig struct {
+	Env struct {
+		Name string `yaml:"name"`
+	} `yaml:"staging"`
+}
+
+type ProductionConfig struct {
+	Env struct {
+		Name string `yaml:"name"`
+	} `yaml:"production"`
 }
 
 type Env struct {
-	Text    Text    `yaml:"text"`
-	Secrets Secrets `yaml:"secrets"`
+	BuildProduction bool    `yaml:"build_production"`
+	Text            Text    `yaml:"text"`
+	Secrets         Secrets `yaml:"secrets"`
 }
 
 type ClientHandler struct {
@@ -50,5 +70,46 @@ func InitializeConfig() (config Config, err error) {
 	}
 
 	config.Handler = ClientHandler{httpClient: httpclient.InitializeHttpApi()}
+
+	if !config.Env.BuildProduction {
+		config, err = loadConfig(config, stagingEnv)
+		if err != nil {
+			return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load staging config")
+		}
+		logrus.Info("Staging Environment has been loaded")
+	} else {
+		config, err = loadConfig(config, productionEnv)
+		if err != nil {
+			return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load config")
+		}
+		logrus.Info("Production Environment has been loaded")
+	}
+
 	return
+}
+
+func loadConfig(config Config, envName string) (Config, error) {
+	var stagingConfig StagingConfig
+	var productionConfig ProductionConfig
+
+	configFile, err := os.ReadFile(fmt.Sprintf("config/%s.yaml", envName))
+	if err != nil {
+		return Config{}, errors.Wrapf(err, "loadConfig, unable to read config file")
+	}
+
+	switch envName {
+	case stagingEnv:
+		if err = yaml.Unmarshal(configFile, &stagingConfig); err != nil {
+			return Config{}, errors.Wrapf(err, "loadConfig, unable to unmarshal")
+		}
+		config.Staging = stagingConfig
+
+	default:
+		if err = yaml.Unmarshal(configFile, &productionConfig); err != nil {
+			return Config{}, errors.Wrapf(err, "loadConfig, unable to unmarshal")
+		}
+		config.Production = productionConfig
+	}
+
+	return config, nil
 }

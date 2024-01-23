@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-
 	log.Info("Backend configuration booting")
 	_, err := config.InitializeConfig()
 	if err != nil {
