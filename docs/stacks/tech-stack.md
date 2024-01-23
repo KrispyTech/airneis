@@ -2,7 +2,7 @@
 | -------------- | -------------- |
 | Data Started   | 05-11-2023     |
 | Data Published | 20-11-2023     |
-| Work Time      | ~12 hours      |
+
 
 # Summary
 
