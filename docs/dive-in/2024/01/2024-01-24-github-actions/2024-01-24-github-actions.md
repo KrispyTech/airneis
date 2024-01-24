@@ -19,3 +19,11 @@ Here is the pricing for Github Actions:
 As we are a free organization, we have 2000 free minutes per month. Witch is almost 34 hours and a should be a bit less than 400 runs per month.
 
 We will run the linter and the test on every merge request.
+
+```mermaid
+flowchart CI
+    A[PR created ] --> B(Go shopping)
+    B --> C{Running tests & linting}
+    C -->|Success| D[Code can be merged]
+    C -->|Fail| E[Can't be merged]
+```
