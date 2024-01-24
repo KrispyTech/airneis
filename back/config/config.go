@@ -1,11 +1,12 @@
 package config
 
 import (
-	"airneis/lib/shared/httpclient"
-	"airneis/lib/shared/vault"
-
 	"fmt"
 	"os"
+
+	"github.com/KrispyTech/airneis/lib/shared/httpclient"
+	"github.com/KrispyTech/airneis/lib/shared/vault"
+	"github.com/joho/godotenv"
 
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
@@ -46,11 +47,11 @@ type ClientHandler struct {
 }
 
 type HashicorpVault struct {
-	BaseURL        string `yaml:"base_url"`
-	AuthURL        string `yaml:"authentication-url"`
-	OrganizationID string `yaml:"organization_id"`
-	ProjectID      string `yaml:"project_id"`
 	AppName        string `yaml:"app_name"`
+	AuthURL        string `yaml:"authentication-url"`
+	BaseURL        string `yaml:"base_url"`
+	OrganizationID string
+	ProjectID      string
 }
 
 type Text struct {
@@ -72,6 +73,10 @@ func InitializeConfig() (config Config, err error) {
 
 	if err = yaml.Unmarshal(envFile, &config); err != nil {
 		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to unmarshal")
+	}
+
+	if err := godotenv.Load(); err != nil {
+		return Config{}, errors.Wrapf(err, "Couldn't load .env file")
 	}
 
 	config.Handler, err = loadClientHandler(config)
@@ -98,7 +103,7 @@ func InitializeConfig() (config Config, err error) {
 
 func loadClientHandler(config Config) (ClientHandler, error) {
 	httpClient := httpclient.InitializeHttpApi()
-	vc, err := vault.CreateVaultClient(httpClient, vault.Vault(config.Env.Text.HashicorpVault))
+	vc, err := vault.InitializeVaultApi(httpClient, vault.Vault(config.Env.Text.HashicorpVault))
 	if err != nil {
 		return ClientHandler{}, errors.Wrapf(err, "loadClientHandler, unable to create vault client")
 	}

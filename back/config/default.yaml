@@ -2,11 +2,9 @@ env:
   build_production: false
   text:
     vault:
-      authentication-url: https://auth.idp.hashicorp.com
+      authentication-url: https://auth.hashicorp.com
       base_url: https://api.cloud.hashicorp.com
-      organization_id: blablabla
-      project_id: blablabla
-      app_name: airneis
+      app_name: Airneis
   secrets:
     STRIPE_ID: stripe_id
     STRIPE_TOKEN: stripe_token
