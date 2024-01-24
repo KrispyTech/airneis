@@ -2,6 +2,7 @@ package httpclient
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"net/http"
 
@@ -9,9 +10,11 @@ import (
 )
 
 const methodGet string = "GET"
+const methodPost string = "POST"
 
 type HttpApi interface {
 	Get(url string, headers map[string]string) ([]byte, int, error)
+	Post(url string, headers map[string]string, jsonBody []byte) ([]byte, int, error)
 }
 
 type HttpClient struct {
@@ -30,8 +33,21 @@ func InitializeHttpApi() HttpApi {
 	return &HttpClient{api: &http.Client{}}
 }
 
+func (c *HttpClient) PrepareBody(reqBody any) (body []byte, err error) {
+	body, err = json.Marshal(reqBody)
+	if err != nil {
+		return nil, err
+	}
+
+	return
+}
+
 func (c *HttpClient) Get(url string, headers map[string]string) (body []byte, statusCode int, err error) {
 	return c.makeRequest(Request{Url: url, Method: methodGet, Headers: headers})
+}
+
+func (c *HttpClient) Post(url string, headers map[string]string, jsonBody []byte) (body []byte, statusCode int, err error) {
+	return c.makeRequest(Request{Url: url, Method: methodPost, Headers: headers, Body: jsonBody})
 }
 
 func addHeaders(req *http.Request, headers map[string]string) *http.Request {
