@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["next/babel","eslint:recommended", "prettier", "next/core-web-vitals", "plugin:react/recommended"],
+  "extends": ["eslint:recommended", "prettier", "next/core-web-vitals", "plugin:react/recommended"],
   "plugins": ["react", "react-hooks"],
   "env": {
     "browser": true,
