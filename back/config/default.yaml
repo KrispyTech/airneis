@@ -1,0 +1,12 @@
+env:
+  build_production: false
+  text:
+    vault: 
+      organization_id: blablabla
+      project_id: blablabla
+      app_name: airneis
+  secrets:
+    STRIPE_ID: stripe_id
+    STRIPE_TOKEN: stripe_token
+    SENGDRID_ID: sendgrid_id
+    SENDGRID_TOKEN: sendgrid_token
