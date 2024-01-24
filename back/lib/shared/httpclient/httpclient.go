@@ -15,6 +15,7 @@ const methodPost string = "POST"
 type HttpApi interface {
 	Get(url string, headers map[string]string) ([]byte, int, error)
 	Post(url string, headers map[string]string, jsonBody []byte) ([]byte, int, error)
+	PrepareBody(reqBody interface{}) (body []byte, err error)
 }
 
 type HttpClient struct {
@@ -33,7 +34,7 @@ func InitializeHttpApi() HttpApi {
 	return &HttpClient{api: &http.Client{}}
 }
 
-func (c *HttpClient) PrepareBody(reqBody any) (body []byte, err error) {
+func (c *HttpClient) PrepareBody(reqBody interface{}) (body []byte, err error) {
 	body, err = json.Marshal(reqBody)
 	if err != nil {
 		return nil, err
