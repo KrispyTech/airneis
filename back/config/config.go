@@ -2,6 +2,8 @@ package config
 
 import (
 	"airneis/lib/shared/httpclient"
+	"airneis/lib/shared/vault"
+
 	"fmt"
 	"os"
 
@@ -39,10 +41,13 @@ type Env struct {
 }
 
 type ClientHandler struct {
-	httpClient httpclient.HttpApi
+	httpClient  httpclient.HttpApi
+	VaultClient vault.VaultClient
 }
 
 type HashicorpVault struct {
+	BaseURL        string `yaml:"base_url"`
+	AuthURL        string `yaml:"authentication-url"`
 	OrganizationID string `yaml:"organization_id"`
 	ProjectID      string `yaml:"project_id"`
 	AppName        string `yaml:"app_name"`
@@ -69,7 +74,10 @@ func InitializeConfig() (config Config, err error) {
 		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to unmarshal")
 	}
 
-	config.Handler = ClientHandler{httpClient: httpclient.InitializeHttpApi()}
+	config.Handler, err = loadClientHandler(config)
+	if err != nil {
+		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load client handler")
+	}
 
 	if !config.Env.BuildProduction {
 		config, err = loadConfig(config, stagingEnv)
@@ -86,6 +94,20 @@ func InitializeConfig() (config Config, err error) {
 	}
 
 	return
+}
+
+func loadClientHandler(config Config) (ClientHandler, error) {
+	httpClient := httpclient.InitializeHttpApi()
+	vc, err := vault.CreateVaultClient(httpClient, vault.Vault(config.Env.Text.HashicorpVault))
+	if err != nil {
+		return ClientHandler{}, errors.Wrapf(err, "loadClientHandler, unable to create vault client")
+	}
+
+	ch := ClientHandler{
+		httpClient:  httpClient,
+		VaultClient: vc,
+	}
+	return ch, nil
 }
 
 func loadConfig(config Config, envName string) (Config, error) {

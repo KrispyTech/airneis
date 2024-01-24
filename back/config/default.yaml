@@ -1,7 +1,9 @@
 env:
   build_production: false
   text:
-    vault: 
+    vault:
+      authentication-url: https://auth.idp.hashicorp.com
+      base_url: https://api.cloud.hashicorp.com
       organization_id: blablabla
       project_id: blablabla
       app_name: airneis
