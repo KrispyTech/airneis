@@ -1,6 +1,6 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "prettier", "next/core-web-vitals", "plugin:react/recommended"],
+  "extends": ["eslint:recommended", "prettier", "plugin:react/recommended"],
   "plugins": ["react", "react-hooks"],
   "env": {
     "browser": true,
@@ -188,7 +188,6 @@
     "space-infix-ops": "error",
     "semi": ["error", "never"],
     // extra
-    "@next/next/no-html-link-for-pages": ["error", "./src/app"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/no-unescaped-entities": [
