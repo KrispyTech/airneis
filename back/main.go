@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/KrispyTech/airneis/config"
 
 	"github.com/gofiber/fiber/v2"

@@ -13,8 +13,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const stagingEnv string = "staging"
-const productionEnv string = "production"
+const (
+	stagingEnv    string = "staging"
+	productionEnv string = "production"
+)
 
 type Config struct {
 	Env        Env `yaml:"env"`
