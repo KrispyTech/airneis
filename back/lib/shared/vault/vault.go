@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
-
 	"github.com/pkg/errors"
 )
 
@@ -169,7 +168,6 @@ func (vc *VaultClient) ReadSecret(secretName string) (secret string, err error) 
 	headers["Authorization"] = fmt.Sprintf("Bearer %s", token.AccessToken)
 
 	url := fmt.Sprintf("%s/secrets/2023-06-13/organizations/%s/projects/%s/apps/%s/open/%s", vc.Vault.BaseURL, vc.Vault.OrganizationID, vc.Vault.ProjectID, vc.Vault.AppName, secretName)
-
 	res, status, err := vc.HttpApi.Get(url, headers)
 	if err != nil || status != http.StatusOK {
 		return "", errors.Wrapf(err, "ReadSecret, request impossible")
