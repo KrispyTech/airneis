@@ -5,7 +5,7 @@ Date : 2024-01-24
 
 ## SUMMARY:
 
-We want to have our code linted and tested automatically when pushed. As we our code is hosted on Github, we will use Github Actions to do so.
+We want to have our code linted and tested automatically when pushed. As our code is hosted on Github, we will use Github Actions to do so.
 
 ## CONTEXT:
 
