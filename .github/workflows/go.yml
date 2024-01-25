@@ -1,0 +1,56 @@
+name: Go
+
+on:
+  # If a code is pushed straight into staging we need it to have the same tests as the code pushed via a pr
+  push:
+    branches: ["staging", "main"]
+  pull_request:
+    branches: ["staging", "main"]
+
+jobs:
+  # Check that the code is clean
+  # It's done in a separate job as advised by the doc
+  # https://github.com/marketplace/actions/run-golangci-lint
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    # With the 3 following lines the commands will be executed in the back directory
+    defaults:
+      run:
+        working-directory: ./back
+    steps:
+      # Checkout to our repository. It allows to run the commands in the rigth place
+      - uses: actions/checkout@v3
+      # Set up go on environement
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "1.21"
+          cache: true
+      # Check that the code is clean
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          working-directory: ./back
+          version: v1.54
+
+  build:
+    # With the 3 following lines the commands will be executed in the back directory
+    defaults:
+      run:
+        working-directory: ./back
+    name: build and test
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout to our repository. It allows to run the commands in the rigth place
+      - uses: actions/checkout@v3
+      # Set up go on environement
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21"
+      # Check that all the tests of the backend are passed
+      - name: Test
+        run: go test -v ./...
+      # Check that the code build
+      - name: Build
+        run: go build -v ./...
