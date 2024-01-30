@@ -4,7 +4,8 @@ services:
     build:
       target: dev
     volumes:
-      - ./front:/app
+      - ./front/src:/app/src
+      - ./front/public:/app/public
 
   back:
     build:

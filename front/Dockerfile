@@ -7,7 +7,7 @@ RUN  bun install
 FROM base as dev
 WORKDIR /app
 
-CMD ["bun", "run", "dev"]
+CMD ["bun", "--bun", "run", "dev"]
 
 FROM base as builder
 
