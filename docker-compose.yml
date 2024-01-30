@@ -10,6 +10,7 @@ services:
   back:
     build:
       context: ./back
+      target: prod
     ports:
       - "3001:3000"
 

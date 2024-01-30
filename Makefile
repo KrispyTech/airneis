@@ -19,11 +19,11 @@ build: test
 	@if [ -d "$(BACKEND_PATH)" ]; then cd $(BACKEND_PATH) && $(MAKE) build; fi
 
 up:
-	@docker compose up -d
+	@docker compose up --build -d
 	@echo "Containers started"
 
 dev:
-	@docker compose -f docker-compose.yml -f docker-compose-dev.yml up -d
+	@docker compose -f docker-compose.yml -f docker-compose-dev.yml up --build -d
 	@echo "Dev containers started"
 
 down:
