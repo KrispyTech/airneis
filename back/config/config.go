@@ -1,17 +1,22 @@
 package config
 
 import (
-	"airneis/lib/shared/httpclient"
 	"fmt"
 	"os"
+
+	"github.com/KrispyTech/airneis/lib/shared/httpclient"
+	"github.com/KrispyTech/airneis/lib/shared/vault"
+	"github.com/joho/godotenv"
 
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 )
 
-const stagingEnv string = "staging"
-const productionEnv string = "production"
+const (
+	stagingEnv    string = "staging"
+	productionEnv string = "production"
+)
 
 type Config struct {
 	Env        Env `yaml:"env"`
@@ -39,13 +44,16 @@ type Env struct {
 }
 
 type ClientHandler struct {
-	httpClient httpclient.HttpApi
+	httpClient  httpclient.HttpApi
+	VaultClient vault.VaultClient
 }
 
 type HashicorpVault struct {
-	OrganizationID string `yaml:"organization_id"`
-	ProjectID      string `yaml:"project_id"`
 	AppName        string `yaml:"app_name"`
+	AuthURL        string `yaml:"authentication-url"`
+	BaseURL        string `yaml:"base_url"`
+	OrganizationID string
+	ProjectID      string
 }
 
 type Text struct {
@@ -69,7 +77,14 @@ func InitializeConfig() (config Config, err error) {
 		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to unmarshal")
 	}
 
-	config.Handler = ClientHandler{httpClient: httpclient.InitializeHttpApi()}
+	if err := godotenv.Load(); err != nil {
+		return Config{}, errors.Wrapf(err, "Couldn't load .env file")
+	}
+
+	config.Handler, err = loadClientHandler(config)
+	if err != nil {
+		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load client handler")
+	}
 
 	if !config.Env.BuildProduction {
 		config, err = loadConfig(config, stagingEnv)
@@ -86,6 +101,20 @@ func InitializeConfig() (config Config, err error) {
 	}
 
 	return
+}
+
+func loadClientHandler(config Config) (ClientHandler, error) {
+	httpClient := httpclient.InitializeHttpApi()
+	vc, err := vault.InitializeVaultApi(httpClient, vault.Vault(config.Env.Text.HashicorpVault))
+	if err != nil {
+		return ClientHandler{}, errors.Wrapf(err, "loadClientHandler, unable to create vault client")
+	}
+
+	ch := ClientHandler{
+		httpClient:  httpClient,
+		VaultClient: vc,
+	}
+	return ch, nil
 }
 
 func loadConfig(config Config, envName string) (Config, error) {
