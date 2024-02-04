@@ -44,7 +44,7 @@ _Initial configuration so that everyone can start the project in a clean environ
   - Description: Difficulties getting Docker to work within the group.
   - Consequences: All the members of the team hadn't the same configuration.
   - Commitment:
-    - Said by: Magalie
+    - Said by: Magali
     - What: This problem has been resolved by pushing a patch that works correctly.
     - When: During the first Sprint.
 
@@ -53,7 +53,7 @@ _Initial configuration so that everyone can start the project in a clean environ
   - Description: Neon could not be deployed in time.
   - Consequences: An additional task for the next Sprint.
   - Commitment:
-    - Said by: Magalie
+    - Said by: Magali
     - What: Try to complete these configurations quickly in the next Sprint.
     - When: 05/02/2024 - 11/02/2024
 
@@ -93,7 +93,7 @@ No questions for this Sprint.
 
   - Description: Have the same group vision to work in good conditions.
   - Commitment:
-    - Said by: Magalie
+    - Said by: Magali
     - What: Define the architecture in detail so, that everyone has the same vision, and develop in a clean, organised environment.
     - When: The next Sprint (#2).
 
@@ -109,5 +109,5 @@ No questions for this Sprint.
 
 - Barnabé
 - Kylian
-- Magalie
+- Magali
 - Cédric
