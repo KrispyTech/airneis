@@ -8,7 +8,7 @@ _Initial configuration so that everyone can start the project in a clean environ
 
   - Description: A dynamic, motivated team that does its utmost to give the best of itself.
   - Commitment:
-    - Who: Barnabé
+    - Said by: Barnabé
     - What: Continuing in this direction.
     - When: Until the end of the project.
 
@@ -16,7 +16,7 @@ _Initial configuration so that everyone can start the project in a clean environ
 
   - Description: The use of Jira was very much appreciated and enabled us to get tasks organised.
   - Commitment:
-    - Who: Kylian
+    - Said by: Kylian
     - What: Continue to use Jira seriously and update Jira regularly to keep it well organised at all times.
     - When: Until the end of the project.
 
@@ -24,7 +24,7 @@ _Initial configuration so that everyone can start the project in a clean environ
 
   - Description: Numerous investments in new technologies. Discovering and mastering new technologies that add value to the project.
   - Commitment:
-    - Who: Cédric
+    - Said by: Cédric
     - What: Continue to be curious and courageous.
     - When: Until the end of the project.
 
@@ -35,7 +35,7 @@ _Initial configuration so that everyone can start the project in a clean environ
   - Description: Atlas and Ent have not been configured on time.
   - Consequences: Delays in database and backend development.
   - Commitment:
-    - Who: Barnabé
+    - Said by: Barnabé
     - What: Try to complete these configurations quickly in the next Sprint.
     - When: 05/02/2024 - 11/02/2024
 
@@ -44,7 +44,7 @@ _Initial configuration so that everyone can start the project in a clean environ
   - Description: Difficulties getting Docker to work within the group.
   - Consequences: All the members of the team hadn't the same configuration.
   - Commitment:
-    - Who: Magalie
+    - Said by: Magalie
     - What: This problem has been resolved by pushing a patch that works correctly.
     - When: During the first Sprint.
 
@@ -53,7 +53,7 @@ _Initial configuration so that everyone can start the project in a clean environ
   - Description: Neon could not be deployed in time.
   - Consequences: An additional task for the next Sprint.
   - Commitment:
-    - Who: Magalie
+    - Said by: Magalie
     - What: Try to complete these configurations quickly in the next Sprint.
     - When: 05/02/2024 - 11/02/2024
 
@@ -62,7 +62,7 @@ _Initial configuration so that everyone can start the project in a clean environ
   - Description: Not enough responsiveness within the group on messages and communication.
   - Consequences: A feeling of loneliness and task awaiting an answer.
   - Commitment:
-    - Who: Cédric
+    - Said by: Cédric
     - What: Try to be more responsive to messages within 24 hours. Give more feedback and more concrete details.
     - When: During the next Sprint (#2).
 
@@ -71,7 +71,7 @@ _Initial configuration so that everyone can start the project in a clean environ
   - Description: Always the same people reviewing.
   - Consequences: Always the same people taking part in the project.
   - Commitment:
-    - Who: Cédric
+    - Said by: Cédric
     - What: Try to be a little more diverse in the reviews. Make an effort.
     - When: During the next Sprint (#2).
 
@@ -85,7 +85,7 @@ No questions for this Sprint.
 
   - Description: Don't forget to regularly update the status of US or Tasks on Jira.
   - Commitment:
-    - Who: Kylian
+    - Said by: Kylian
     - What: When the Task or US has been finished, get into the habit of changing the status of this US or Task.
     - When: The next Sprint (#2).
 
@@ -93,7 +93,7 @@ No questions for this Sprint.
 
   - Description: Have the same group vision to work in good conditions.
   - Commitment:
-    - Who: Magalie
+    - Said by: Magalie
     - What: Define the architecture in detail so, that everyone has the same vision, and develop in a clean, organised environment.
     - When: The next Sprint (#2).
 
@@ -101,7 +101,7 @@ No questions for this Sprint.
 
   - Description: Approve reviews by understanding the broad outlines
   - Commitment:
-    - Who: Cédric
+    - Said by: Cédric
     - What: Before approving a review, make sure you fully understand it. Do not hesitate to ask questions of the person concerned or request a demo.
     - When: The next Sprint (#2).
 
