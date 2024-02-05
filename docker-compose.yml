@@ -3,12 +3,14 @@ services:
   front:
     build:
       context: ./front
+      target: prod
     ports:
       - "3000:3000"
 
   back:
     build:
       context: ./back
+      target: prod
     ports:
       - "3001:3000"
 

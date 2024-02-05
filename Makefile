@@ -19,8 +19,12 @@ build: test
 	@if [ -d "$(BACKEND_PATH)" ]; then cd $(BACKEND_PATH) && $(MAKE) build; fi
 
 up:
-	@docker compose up -d
+	@docker compose up --build -d
 	@echo "Containers started"
+
+dev:
+	@docker compose -f docker-compose.yml -f docker-compose-dev.yml up --build -d
+	@echo "Dev containers started"
 
 down:
 	@docker compose down
@@ -80,6 +84,7 @@ commands:
 	@echo "	- test: runs the test. It can be used in frontend or backend"
 	@echo "	- run: test the code and runs it. It can be used in frontend or backend"
 	@echo "	- up: create and start all containers"
+	@echo "	- dev: create and start all containers in dev mode"
 	@echo "	- down: stop and delete all the containers"
 	@echo "	- start: starts all containers "
 	@echo "	- stop: stop all the containers"
