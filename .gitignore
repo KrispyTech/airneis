@@ -54,3 +54,7 @@ bun.lockb
 
 test_report*
 .env
+
+
+#Ide for GoLand
+.idea
