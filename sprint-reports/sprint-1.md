@@ -121,3 +121,4 @@ At the beginning of January, we took the time to prepare the first sprint with t
 - Kylian
 - Magali
 - Cédric
+- Alix
