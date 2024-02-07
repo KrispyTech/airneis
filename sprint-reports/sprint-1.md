@@ -105,9 +105,20 @@ No questions for this Sprint.
     - What: Before approving a review, make sure you fully understand it. Do not hesitate to ask questions of the person concerned or request a demo.
     - When: The next Sprint (#2).
 
+## Burnup Report
+
+![image](./Sprint1.png)
+
+This overview of the Burnup report allows us to visualise the work accomplished during a sprint and compare it to the total scope of the sprint.
+
+For this first sprint, we can see that we did a lot of story points in the middle of January.
+After that, we increased the number of jobs done and completed a lot of story points up until the end of the month.
+At the beginning of January, we took the time to prepare the first sprint with the tasks we had to do and we put everything in place so that we could start in a clean and efficient environment.
+
 ## Participants
 
 - Barnabé
 - Kylian
 - Magali
 - Cédric
+- Alix
