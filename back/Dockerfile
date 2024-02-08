@@ -21,5 +21,7 @@ RUN go build -ldflags="-s -w" -o airneis .
 
 FROM scratch as prod
 
+COPY --from=builder ["/build/config", "/config"]
+COPY --from=builder ["/build/.env", "/"]
 COPY --from=builder ["/build/airneis", "/"]
 CMD ["/airneis"]
