@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/KrispyTech/airneis/config"
+	"github.com/KrispyTech/airneis/lib/shared/neon"
 
 	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
@@ -29,6 +30,8 @@ func main() {
 	}
 
 	fmt.Println(secret)
+	neon.CheckVersion()
+	
 
 	log.Info("Routes defined")
 	log.Fatal(app.Listen(":3000"))
