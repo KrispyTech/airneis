@@ -1,93 +1,102 @@
 # WIP NOT FINISHED
 
-# Doubts that needs to be dispelled
-
-- Cant ent interact with atlas schemas
-
 # Configure ent and atlas dive-in
 
-Author : Barnabé PILLIAUDIN
+Author : Barnabé PILLIAUDIN  
 Date : 2024-02-07
 
 ## SUMMARY:
 We want to declare a schema of our database and this schema to be applied to the database.
-But we don't want it to be like a dark magic. We want to have some control over it.
-As we are using golang for our backend we will be using ent and atlas to achieve that.
+But we don't want it to be like dark magic. We want to have some control over it.
+As we are using golang for our backend we think about using gorm and atlas to achieve that.
 
 ## SOLUTION:
 
-Ent combined with atlas offers a clean to do versioned migrations.
+Atlas offers a clean to do versioned migrations.
 
-Ent provides it own schema system, and it looks like this:
+To declare your schema with gorm you can create a struct that represent a table where each attribute is a column.
+That's a pretty nice way of declaring schema as we will be able to use those structs as our types.
+
 ```go
+package model
 
-package schema
+import "gorm.io/gorm"
 
-import (
-    'entgo.io/ent'
-    "entgo.io/ent/schema/field"
-)
+type User struct {
+gorm.Model
+Name    string `json:"name" gorm:"unique"`
+Age     int    `json:"age"`
+IsAdmin bool   `json:"isAdmin"`
+}
 
-// Fields of the User.
-func (User) Fields() []ent.Field {
-    return []ent.Field{
-        field.Int("age").
-            Positive(),
-        field.String("name").
-            Default("unknown"),
+type Car struct {
+gorm.Model
+Owner       User   `json:"owner" gorm:"-"`
+Constructor string `json:"constructor"`
+ModelName   string `json:"modelName"`
+}
+```
+
+To make the migrations we will use Atlas.
+First you need to install it. You can use homebrew for macos or your favorite package manager if you are using linux
+To set it up create an ```atlas.hcl``` file following this example
+
+```hcl
+
+data "external_schema" "gorm" {
+  program = [
+    "go",
+    "run",
+    "-mod=mod",
+    "ariga.io/atlas-provider-gorm",
+    "load",
+    "--path", "./model",
+    "--dialect", "postgres", // | postgres | sqlite | sqlserver
+  ]
+}
+
+env "gorm" {
+  src = data.external_schema.gorm.url
+  dev = "Your dev database uri" # Don't forget to add sslmode=disable if ssl is not enable and search_path=public as queries string
+  url =  "Your database uri" # In local it can be the same url
+  migration {
+    dir = "file://migrations" 
+  }
+  format {
+    migrate {
+      diff = "{{ sql . \"  \" }}"
     }
-}
-```
-
-It not that bad but atlas has a better system
-
-```sql
-table "blog_posts" {
-  schema = schema.example
-  column "id" {
-    null = false
-    type = int
-  }
-  column "title" {
-    null = true
-    type = varchar(100)
-  }
-  column "body" {
-    null = true
-    type = text
-  }
-  column "author_id" {
-    null = true
-    type = int
-  }
-  primary_key {
-    columns = [column.id]
-  }
-  foreign_key "author_fk" {
-    columns     = [column.author_id]
-    ref_columns = [table.users.column.id]
   }
 }
+
+
 ```
 
-which is the equivalent of this sql code 
+To create a migration run the following command
 
-```SQL
-CREATE TABLE `blog_posts` (
-  `id` int NOT NULL,
-  `title` varchar(100) NULL,
-  `body` text NULL,
-  `author_id` int NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `author_fk` FOREIGN KEY (`author_id`) REFERENCES `example`.`users` (`id`)
-);
+```shell
+ atlas migrate diff  migration_name --env gorm   
 ```
 
-Then we create a migration that will allow us to update the state of ou DB
+To apply the migration run
 
-#
+```shell
+atlas migrate apply --env gorm
+```
 
 ## Useful links
 - Atlas documentation: https://atlasgo.io/
-- Ent documentations: https://entgo.io/
+- Gorm documentation: https://gorm.io/docs/
 
+
+# PROBLEMS
+
+When trying to rollback a migration or trying to create a second migration I have this error
+
+![img.png](img.png)
+
+The best I was able to do was to clear all the database  by running this command
+
+```shell 
+atlas schema clean -u "dburi"
+```
