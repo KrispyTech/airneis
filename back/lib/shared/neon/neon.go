@@ -3,13 +3,13 @@ package neon
 import (
   "database/sql"
   "fmt"
-  "log"
+  log "github.com/sirupsen/logrus"
   "github.com/KrispyTech/airneis/config"
   
   _ "github.com/lib/pq"
 )
 
-func CheckVersion() {
+func CheckVersion() (string){
   config, err := config.InitializeConfig()
 	if err != nil {
 		log.Fatal("Unable to load config - ", err.Error())
@@ -27,7 +27,7 @@ func CheckVersion() {
 		println(err)
 	}
 
-  connStr := "postgresql://" + username + ":" + secret + "@" + server + "/airneis?sslmode=require"
+  connStr := fmt.Sprintf("postgresql://%s:%s@%s/airneis?sslmode=require", username, secret, server)
   db, err := sql.Open("postgres", connStr)
   if err != nil {
     log.Fatal(err)
@@ -48,5 +48,5 @@ func CheckVersion() {
     }
   }
   
-  fmt.Printf("version=%s\n", version)
+  return fmt.Sprintf("version=%s\n", version)
 }
