@@ -103,7 +103,7 @@ Users have different access to the burger menu if they are logged in or not.
 
 ### Design System
 
-We use a design system with a library of component graphics.
+We use a design system with a library of  graphics component.
 Because if the site evolves, it is possible that the design evolves too.
 
 ### i18n
