@@ -17,7 +17,7 @@ Everyone has a coding style, their own way to write software but we would like t
 
 ### Linting
 
-First of all, there is a linting standard that we'd like to respect. We'll have one for both parts : backend and frontend
+First of all, there is a linting standard that we'd like to respect. We'll have one for both parts : backend, frontend and mobile.
 
 #### Back-End
 
@@ -49,7 +49,7 @@ const (
 )
 ```
 
-- If there are more than 2 possibilities of a result, use a switch case. Default
+- If there are more than 2 possibilities of a result, use a switch case. Having a default value is also recommended if you're awaiting a default task.
 
 ```go
 switch song.Name {
@@ -64,7 +64,7 @@ switch song.Name {
     fmt.Sprintf("Best song ever is %s", song.Name)
 ```
 
-- When there are more than 3 data types to return. Make a struct to return your data, you should do something like this :
+- When there are more than 3 data types to return. Make a struct to return your data, you should do something like this:
 
 ```go
 package main
@@ -115,6 +115,8 @@ func main() {
 #### Back-End
 
 - Always add context to errors. This makes it easier to know where your code has crashed and debug the current issue.
+
+Context can be : "Unable to marshall, unable to connect, unable to find, ..."
 
 ```go
 return errors.Wrapf(err, "parentFunction, context %s", childVariable)
