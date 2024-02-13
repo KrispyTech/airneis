@@ -29,16 +29,21 @@ You can build and run the image as a standalone container.
 In airneis/front/:
 
 #### Prod
+
 ```
 docker build --tag airneis-front .
 docker run -d -p 3000:3000 airneis-front
 ```
+
 #### Dev
+
 ```
 docker build --tag airneis-front-dev --target dev .
 docker run -d -p 3000:3000 --mount type=bind,source=./src,target=/app/src airneis-front-dev
 ```
+
 Dev mode allow for hot reloading.
+
 ## Linter
 
 Our ESLint is based on a standard that was given by our client and we improved it with these additional features to have a more elegant codebase that resembles to our coding style.
