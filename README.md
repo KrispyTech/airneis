@@ -29,13 +29,18 @@ So, this page contains all categories information.
 
 ### The Category Page
 
-The category page is the main access point to the product catalogue in one category.
+The category page is the main access point to the product catalogue of a category.
 So, this page contains information about products in a single category.
+
+### The Product Page
+
+The product page is the most important page on which the customer can purchase a product.
+So, this page contains all information about a single product.
 
 ### The Search Page
 
-The product page is the most important page on which the customer can purchase a product.
-So, this page contains all information about a single product with the possibility to add a product in the card.
+The search page is accessible everywhere from the site header.
+So, this page allows them to research a specific product or type of product. The user also be able to sort the result by price or newness.
 
 ### The Shopping Cart Page
 
