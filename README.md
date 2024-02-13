@@ -40,7 +40,7 @@ So, this page contains all information about a single product.
 ### The Search Page
 
 The search page is accessible everywhere from the site header.
-So, this page allows them to research a specific product or type of product. The user also be able to sort the result by price or newness.
+This page allows them to research a specific product or type of product. The user also be able to sort the result by price or newness.
 
 ### The Shopping Cart Page
 
