@@ -65,7 +65,7 @@ This page contains mandatory information for a user before registering on the si
 ### The Login Page
 
 The login page allows all users who already have an account to login to the site or application.
-So, this page therefore contains mandatory information for full access to the site or application.
+This page therefore contains mandatory information for full access to the site or application.
 
 ### The Account Settings Page
 
