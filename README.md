@@ -50,7 +50,7 @@ So, this page contains the list of added products and presents the total to be p
 ### The Checkout Page
 
 The checkout page comes after the shopping cart page.
-So, this page contains all the information about the delivery or order.
+This page contains all the information about the delivery or order.
 He contains several steps like:
 
 - Delivery.
