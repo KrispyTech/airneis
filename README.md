@@ -70,7 +70,7 @@ This page therefore contains mandatory information for full access to the site o
 ### The Account Settings Page
 
 The account settings allow a user to modify their account information and profile.
-So, this page contains main and additional information of the logged in user.
+This page contains all the information of the logged in user.
 
 ### My Orders Page
 
