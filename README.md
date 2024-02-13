@@ -8,4 +8,4 @@
 
 # Jira link
 
-[Link Jira Here]https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2
+[Tracker - Kanban board]https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2
