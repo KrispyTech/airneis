@@ -89,7 +89,7 @@ This page contains minimal information if a user has a problem with the site or 
 ## The Backoffice
 
 The back office allows the administrator to see all the information on a product, a category or an user.
-Based on CRUD method, we can create, read, update, or delete an item.
+An administrator can see, create, update, or delete an item.
 It must be accessible to administrators only.
 The back office is as simple and functional as possible.
 
