@@ -45,7 +45,7 @@ So, this page allows them to research a specific product or type of product. The
 ### The Shopping Cart Page
 
 The shopping cart page is accessible to all users, logged or not, they can manage their shopping cart.
-So, this page contains the list of added products and presents the total to be paid.
+This page contains the list of added products and presents the total to be paid.
 
 ### The Checkout Page
 
