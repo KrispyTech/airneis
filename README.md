@@ -60,7 +60,7 @@ He contains several steps like:
 ### The Registration Page
 
 The registration page allows all users to register on the site or application.
-So, this page contains mandatory information for a user before registering on the site or application.
+This page contains mandatory information for a user before registering on the site or application.
 
 ### The Login Page
 
