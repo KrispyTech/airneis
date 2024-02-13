@@ -20,7 +20,7 @@ We want to create our own e-commerce solution for an international clientele wit
 To do this, we created an e-commerce site as well an application, and a Backoffice to manage the content.
 All with a secure and maintainable payment system over time.
 
-## The Different Pages in our site and application
+## What does our app contain ?
 
 ### The Home Page
 
