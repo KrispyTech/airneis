@@ -75,7 +75,7 @@ So, this page contains main and additional information of the logged in user.
 ### My Orders Page
 
 My orders page allows a user to see their past orders, grouped by year.
-So, this page contains a list of all orders with the status like:
+This page contains a list of all orders with the status like:
 
 - In progress
 - Delivered
