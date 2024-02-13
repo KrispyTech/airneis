@@ -10,7 +10,6 @@
 
 [Tracker - Kanban board](https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2)
 
-FUNCTIONALITIES
 
 ## Introduction
 
