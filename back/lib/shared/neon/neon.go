@@ -9,7 +9,7 @@ import (
   _ "github.com/lib/pq"
 )
 
-func CheckVersion() (string){
+func CheckVersion() (string, error){
   config, err := config.InitializeConfig()
 	if err != nil {
 		log.Fatal("Unable to load config - ", err.Error())
@@ -48,5 +48,5 @@ func CheckVersion() (string){
     }
   }
   
-  return fmt.Sprintf("version=%s\n", version)
+  return fmt.Sprintf("version=%s\n", version), errors.Wrapf(err, "getClientVariables, unable to get env variables")
 }
