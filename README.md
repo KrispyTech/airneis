@@ -17,7 +17,7 @@
 _ÀIRNEIS is a Scottish company and they are resellers of furniture designed by Scottish designers._
 
 We want to create our own e-commerce solution for an international clientele with products they already have locally.
-To do this, we created an e-commerce site as well an apllication, and a Backoffice to manage the content.
+To do this, we created an e-commerce site as well an application, and a Backoffice to manage the content.
 All with a secure and maintainable payment system over time.
 
 ## The Different Pages in our site and application
