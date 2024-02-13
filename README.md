@@ -84,7 +84,7 @@ So, this page contains a list of all orders with the status like:
 ### The Contact Page
 
 The contact page is a simple page where all users can write to the site and application managers a simple contact form.
-So, this page contains minimal information if a user has a problem with the site or a recommendation.
+This page contains minimal information if a user has a problem with the site or a recommendation.
 
 ## The Backoffice
 
