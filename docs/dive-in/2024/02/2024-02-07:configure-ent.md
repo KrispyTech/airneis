@@ -1,6 +1,4 @@
-# WIP NOT FINISHED
-
-# Configure gorm dive-in
+# Dive-in: Configure gorm 
 
 Author : Barnabé PILLIAUDIN  
 Co-Assignee: Cédric Gautier  
@@ -11,9 +9,12 @@ We want to declare a schema of our database and this schema to be applied to the
 But we don't want it to be like dark magic. We want to have some control over it.
 As we are using golang for our backend we think about using gorm and atlas to achieve that.
 
-## SOLUTION:
+## RESEARCH AND TESTS:
 
-Atlas offers a clean to do versioned migrations.
+Gorm is an orm and a query builder for golang. It's known for its simplicity. It also provides a migration system but it
+won't be our first choice.
+
+Before generating a migration we will need to declare our schema. 
 
 To declare your schema with gorm you can create a struct that represent a table where each attribute is a column.
 That's a pretty nice way of declaring schema as we will be able to use those structs as our types.
@@ -38,10 +39,10 @@ ModelName   string `json:"modelName"`
 }
 ```
 
-To make the migrations could use Atlas.
+To make the migrations could use Atlas.It offers a clean to do versioned migrations.
 
 If we want to use Atlas we would need  to install it. 
-To do so you can use homebrew for macos or your favorite package manager if you are using linux
+To do so you can use homebrew for macOS or your favorite package manager if you are using linux
 To set it up create an ```atlas.hcl``` file following this example
 
 ```hcl
@@ -100,7 +101,7 @@ The best I was able to do was to clear all the database  by running this command
 atlas schema clean -u "dburi"
 ```
 
-### Solution 
+# Solution 
 
 After some discutions with a teacher and go developers it seems that's gorm automigrate would be 
 enough for our project. If needed we can still create SQL script to correct things that automigrate would have done wrong.
