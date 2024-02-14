@@ -38,8 +38,10 @@ ModelName   string `json:"modelName"`
 }
 ```
 
-To make the migrations we will use Atlas.
-First you need to install it. You can use homebrew for macos or your favorite package manager if you are using linux
+To make the migrations could use Atlas.
+
+If we want to use Atlas we would need  to install it. 
+To do so you can use homebrew for macos or your favorite package manager if you are using linux
 To set it up create an ```atlas.hcl``` file following this example
 
 ```hcl
