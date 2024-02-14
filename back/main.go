@@ -28,6 +28,10 @@ func main() {
 		println(err)
 	}
 
+	if err := config.DB.AutoMigrate( /* PLACE HERE THE STRUCTS OF THE MODEL*/ ); err != nil {
+		log.Fatal("Unable to run automigrate", err.Error())
+	}
+
 	fmt.Println(secret)
 
 	log.Info("Routes defined")

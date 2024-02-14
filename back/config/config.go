@@ -7,6 +7,7 @@ import (
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"github.com/joho/godotenv"
+	"gorm.io/gorm"
 
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
@@ -19,6 +20,7 @@ const (
 )
 
 type Config struct {
+	DB         *gorm.DB
 	Env        Env `yaml:"env"`
 	Handler    ClientHandler
 	Production ProductionConfig
@@ -139,6 +141,10 @@ func loadConfig(config Config, envName string) (Config, error) {
 		}
 		config.Production = productionConfig
 	}
-
+	database, err := InitDatabase()
+	if err != nil {
+		return Config{}, errors.Wrapf(err, "Unable to Init database")
+	}
+	config.DB = database
 	return config, nil
 }
