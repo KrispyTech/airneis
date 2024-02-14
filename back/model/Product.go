@@ -15,6 +15,6 @@ type Product struct {
 	OutOfStock              string         `json:"outOfStock" gorm:"default:false"`
 	Materials               []Material     `json:"materials" gorm:"many2many:materials_of_products"`
 	IsHighlanderOfTheMoment bool           `json:"isHighlanderOfTheMoment" gorm:"default:false"`
-        OrderOfPriority           int                     `json:"orderOfPriority"`
+	OrderOfPriority         int            `json:"orderOfPriority"`
 	ProductImages           []ProductImage `json:"productImages" gorm:"many2many:images_of_products"`
 }
