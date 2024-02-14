@@ -41,7 +41,7 @@ Press A on the previous menu to start the virtual device automatically
 
 - Download Xcode from the AppStore
 - Open Settings
-- Got to 'Platform' and download your version of iOs
+- Go to 'Platform' and download your version of iOs
 - Press `cmd + space` to search for simulator and open it.
 
 Press i on the previous menu to open the iOs simulator.
