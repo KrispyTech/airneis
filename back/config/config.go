@@ -20,7 +20,7 @@ const (
 )
 
 type Config struct {
-    neon   	   neon.Database
+    Neon   	   neon.Database
     Env        Env `yaml:"env"`
     Handler    ClientHandler
     Production ProductionConfig

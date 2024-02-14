@@ -5,6 +5,7 @@ go 1.21.3
 require (
 	github.com/gofiber/fiber/v2 v2.52.0
 	github.com/joho/godotenv v1.5.1
+	github.com/lib/pq v1.10.9
 	github.com/onsi/ginkgo/v2 v2.15.0
 	github.com/onsi/gomega v1.31.1
 	github.com/sirupsen/logrus v1.9.3
@@ -15,7 +16,6 @@ require (
 	github.com/go-logr/logr v1.3.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/google/pprof v0.0.0-20210407192527-94a9f03dee38 // indirect
-	github.com/lib/pq v1.10.9 // indirect
 	golang.org/x/tools v0.16.1 // indirect
 )
 
