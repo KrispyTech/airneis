@@ -1,10 +1,8 @@
-# Front
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 This project is configured to run with Docker. You should usually not run the frontend alone, but rather use the `make` command to run all containers at once.
 
-## Getting Start
+## Getting Started
 
 ### Local machine
 

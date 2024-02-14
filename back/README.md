@@ -1,10 +1,8 @@
-# Back
-
 This is a [Fiber](https://gofiber.io/) project.
 
 This project is configured to run with Docker. You should usually not run the backend alone, but rather use the `make` command to run all containers at once.
 
-## Getting Start
+## Getting Started
 
 ### Local machine
 

@@ -1,5 +1,3 @@
-# Mobile
-
 ## Getting started
 
 First install your modules:
