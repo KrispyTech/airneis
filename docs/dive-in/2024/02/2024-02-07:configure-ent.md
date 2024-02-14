@@ -3,7 +3,7 @@
 # Configure gorm dive-in
 
 Author : Barnabé PILLIAUDIN  
-Helped by: Cédric Gautier
+Co-Assignee: Cédric Gautier  
 Date : 2024-02-07
 
 ## SUMMARY:
