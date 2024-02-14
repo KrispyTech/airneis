@@ -9,11 +9,7 @@ import (
   _ "github.com/lib/pq"
 )
 
-func CheckVersion() (string, error){
-  config, err := config.InitializeConfig()
-	if err != nil {
-		log.Fatal("Unable to load config - ", err.Error())
-	}
+func InitializeDatabase()  {
   username, err := config.Handler.VaultClient.ReadSecret("neon_username")
 	if err != nil {
 		println(err)
@@ -33,6 +29,12 @@ func CheckVersion() (string, error){
     log.Fatal(err)
   }
   defer db.Close()
+
+  return db
+}
+
+func CheckVersion(config Config) (string, error){
+
 
   rows, err := db.Query("select version()")
   if err != nil {
