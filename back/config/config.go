@@ -19,10 +19,11 @@ const (
 )
 
 type Config struct {
-	Env        Env `yaml:"env"`
-	Handler    ClientHandler
-	Production ProductionConfig
-	Staging    StagingConfig
+    Database   neon.DB
+    Env        Env `yaml:"env"`
+    Handler    ClientHandler
+    Production ProductionConfig
+    Staging    StagingConfig
 }
 
 type StagingConfig struct {
