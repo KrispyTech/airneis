@@ -19,7 +19,7 @@ We want to create our own e-commerce solution for an international clientele wit
 To do this, we created an e-commerce site as well an application, and a Backoffice to manage the content.
 All with a secure and maintainable payment system over time.
 
-## Get started
+## Getting started
 
 This project is configured to run with Docker through `make` command.<br>
 To deploy the project in dev mode:
