@@ -1,17 +1,27 @@
-FROM golang:1.21 AS builder
+FROM golang:1.21 AS base
 
 WORKDIR /build
 
-COPY go.mod go.sum ./
+COPY . .
 RUN go mod download && go mod verify
 
-COPY . .
+FROM base as dev
 
+WORKDIR /build
+
+RUN go install github.com/cosmtrek/air@v1.49.0
+CMD ["air", "-c", ".air.toml"]
+
+FROM base as builder
+
+WORKDIR /build
 ENV CGO_ENABLED=0 GOOS=linux GOARCH=amd64
-RUN go build -ldflags="-s -w" -o apiserver .
 
-FROM scratch
+RUN go build -ldflags="-s -w" -o airneis .
 
-COPY --from=builder ["/build/apiserver", "/"]
+FROM scratch as prod
 
-CMD ["/apiserver"]
+COPY --from=builder ["/build/config", "/config"]
+COPY --from=builder ["/build/.env", "/"]
+COPY --from=builder ["/build/airneis", "/"]
+CMD ["/airneis"]

@@ -1,0 +1,12 @@
+env:
+  build_production: false
+  text:
+    vault:
+      authentication-url: https://auth.hashicorp.com
+      base_url: https://api.cloud.hashicorp.com
+      app_name: Airneis
+  secrets:
+    STRIPE_ID: stripe_id
+    STRIPE_TOKEN: stripe_token
+    SENGDRID_ID: sendgrid_id
+    SENDGRID_TOKEN: sendgrid_token
