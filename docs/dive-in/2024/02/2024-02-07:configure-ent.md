@@ -3,6 +3,7 @@
 # Configure ent and atlas dive-in
 
 Author : Barnabé PILLIAUDIN  
+Helped by: Cédric Gautier
 Date : 2024-02-07
 
 ## SUMMARY:
@@ -84,12 +85,8 @@ To apply the migration run
 atlas migrate apply --env gorm
 ```
 
-## Useful links
-- Atlas documentation: https://atlasgo.io/
-- Gorm documentation: https://gorm.io/docs/
 
-
-# PROBLEMS
+### PROBLEMS with atlas
 
 When trying to rollback a migration or trying to create a second migration I have this error
 
@@ -100,3 +97,22 @@ The best I was able to do was to clear all the database  by running this command
 ```shell 
 atlas schema clean -u "dburi"
 ```
+
+### Solution 
+
+After some discutions with a teacher and go developers it seems that's gorm automigrate would be 
+enough for our project. If needed we can still create SQL script to correct things that automigrate would have done wrong.
+It has the advantage that the migrations will be applied each time that the api is started so we won't need to modify 
+the docker fiel
+
+
+## Useful links
+- Atlas documentation: https://atlasgo.io/
+- Gorm documentation: https://gorm.io/docs/
+
+
+# Conclusion
+
+We will be using GORM as our orm and query builder and migration engine. 
+We won't have versioned migrations as we planed to have but automatic migrations.
+It will be easier for us to work with and is enough for ou usage.
