@@ -8,11 +8,11 @@ title: Airneis database model
 classDiagram
 
 Categories "*" <|-- "1" Products
-Carts <|-- Status
-Products <|-- Carts
+Orders <|-- Status
+Products <|-- Orders
 Users <|-- Addresses
-Users <|-- Carts
-Carts <|-- CartsProducts
+Users <|-- Orders
+Orders <|-- CartsProducts
 Products <|-- CartsProducts
 Products <|-- ProductImages
 Materials <|-- ProductsMaterials
@@ -42,7 +42,8 @@ class Products {
     name text notNull
     slug unique notNull
     categoryId number notNull
-    price number notNull
+    priceWithoutTaxes number notNull
+    priceWithTaxes number notNull
     description text notNull
     thumbnailUrl text notNull
     outOfStock boolean default false notNull
@@ -81,13 +82,14 @@ class Addresses {
     comment text
 }
 
-class Carts {
+class Orders {
     id increments notNull
     userId number notNull
     statusId number notNull
     shippingAddressId number notNull
     billingAddressId number notNull
     finalized_at date notNull
+    isActive boolean notNull default true
 }
 
 class Status {
@@ -147,7 +149,7 @@ As we have to be able to filter products per material we store it into database 
 
 As it's a many relation we have to create a link table between products and materials
 
-## Carts
+## Orders
 
 This table will represent both carts and orders.
 The `status` will differentiate between the two.
@@ -169,6 +171,8 @@ If it's an order it means that it has been paid and that it will be delivered.
 Can be both shipping or billing address.
 The `comment` is optional and can be used to give more information about the address for the delivery person.
 The `zipCode` is a string because some countries have letters in their zipCode.
+The `isActive` field is for history purpose. When an address is updated a new row should be created in the database. 
+This row should be a "clone" with the new information. This will avoid to affect the addresses used in past Orders.
 
 # Contact
 
