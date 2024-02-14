@@ -30,8 +30,11 @@ func main() {
 	}
 
 	fmt.Println(secret)
-	
-	neon.CheckVersion()
+
+	_, err = neon.InitDB(config.Handler.VaultClient)
+	if err != nil {
+		println(err)
+	}
 
 	log.Info("Routes defined")
 	log.Fatal(app.Listen(":3000"))

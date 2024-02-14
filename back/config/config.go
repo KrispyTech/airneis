@@ -6,8 +6,9 @@ import (
 
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-	"github.com/joho/godotenv"
+	"github.com/KrispyTech/airneis/lib/shared/neon"
 
+	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
@@ -19,7 +20,7 @@ const (
 )
 
 type Config struct {
-    Database   neon.DB
+    neon   	   neon.Database
     Env        Env `yaml:"env"`
     Handler    ClientHandler
     Production ProductionConfig
