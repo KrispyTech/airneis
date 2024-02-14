@@ -14,34 +14,44 @@ type Database struct {
     Neon *sql.DB
 }
 
-func GetNeonCreds(vc vault.VaultClient)(username string, secret string, server string, err error) {
-  username, err = vc.ReadSecret("neon_username")
+type NeonCred struct {
+  Username string
+  Secret string
+  Server string
+}
+
+func GetNeonCreds(vc vault.VaultClient)(NeonCred, error) {
+  username, err := vc.ReadSecret("neon_username")
   if err != nil {
-    return "", "", "", errors.Wrapf(err, "GetNeonCreds, unable to get username")
+    return NeonCred{}, errors.Wrapf(err, "GetNeonCreds, unable to get username")
   }
-  secret, err = vc.ReadSecret("neon_secret")
+  secret, err := vc.ReadSecret("neon_secret")
   if err != nil {
-    return "", "", "", errors.Wrapf(err, "GetNeonCreds, unable to get secret")
+    return NeonCred{}, errors.Wrapf(err, "GetNeonCreds, unable to get secret")
   }
-  server, err = vc.ReadSecret("neon_server")
+  server, err := vc.ReadSecret("neon_server")
   if err != nil {
-    return "", "", "", errors.Wrapf(err, "GetNeonCreds, unable to get server")
+    return NeonCred{}, errors.Wrapf(err, "GetNeonCreds, unable to get server")
   }
-  return 
+
+  return NeonCred{
+    Username: username, 
+    Secret: secret, 
+    Server: server,
+    }, nil
 }
 
 func InitDB(vc vault.VaultClient) (Database, error) {
-  username, secret, server, err := GetNeonCreds(vc)
+  neonCred, err := GetNeonCreds(vc)
   if err != nil {
     return Database{}, errors.Wrapf(err, "InitDB, unable to get credentials")
   }
-  connStr := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require", username, secret, server)
+  connStr := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require", neonCred.Username, neonCred.Secret, neonCred.Server)
   db, err := sql.Open("postgres", connStr)
   if err != nil {
     return Database{}, errors.Wrapf(err, "InitDB, unable to open the DB")
   }
-  defer db.Close()
-  CheckVersion(Database{Neon: db})
+
   return Database{Neon: db}, nil
 }
 
@@ -50,6 +60,7 @@ func CheckVersion(db Database) (version string, err error) {
   if err != nil {
     return "", errors.Wrapf(err, "CheckVersion, unable to query the version")
   }
+
   defer rows.Close()
 
   for rows.Next() {

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/KrispyTech/airneis/config"
 	"github.com/KrispyTech/airneis/lib/shared/neon"
 
@@ -24,17 +22,11 @@ func main() {
 		return c.SendString("Hello World!")
 	})
 
-	secret, err := config.Handler.VaultClient.ReadSecret("appname_secret_version")
+	db, err := neon.InitDB(config.Handler.VaultClient)
 	if err != nil {
-		println(err)
+		log.Fatal("Unable to connect to DB", err.Error())
 	}
-
-	fmt.Println(secret)
-
-	_, err = neon.InitDB(config.Handler.VaultClient)
-	if err != nil {
-		println(err)
-	}
+	log.Info(neon.CheckVersion(db))
 
 	log.Info("Routes defined")
 	log.Fatal(app.Listen(":3000"))
