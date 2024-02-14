@@ -1,6 +1,6 @@
 # WIP NOT FINISHED
 
-# Configure ent and atlas dive-in
+# Configure gorm dive-in
 
 Author : Barnabé PILLIAUDIN  
 Helped by: Cédric Gautier
