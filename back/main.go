@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/KrispyTech/airneis/config"
-	"github.com/KrispyTech/airneis/lib/shared/neon"
+	neon "github.com/KrispyTech/airneis/db"
 
 	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"

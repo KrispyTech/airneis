@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	neon "github.com/KrispyTech/airneis/db"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-	"github.com/KrispyTech/airneis/lib/shared/neon"
 
 	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
