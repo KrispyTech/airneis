@@ -103,7 +103,7 @@ atlas schema clean -u "dburi"
 After some discutions with a teacher and go developers it seems that's gorm automigrate would be 
 enough for our project. If needed we can still create SQL script to correct things that automigrate would have done wrong.
 It has the advantage that the migrations will be applied each time that the api is started so we won't need to modify 
-the docker fiel
+the Dockerfile
 
 
 ## Useful links
