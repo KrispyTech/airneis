@@ -4,7 +4,7 @@ This project is configured to run with Docker. You should usually not run the ba
 
 ## Getting Started
 
-### Local machine
+### Local machine (Option 1)
 
 First, create a `.env` file such as:
 
@@ -25,7 +25,7 @@ air -c .air.toml
 
 Open [http://localhost:3001](http://localhost:3001) with your browser to see the result.
 
-### Dockerfile
+### Dockerfile (Option 2)
 
 You can build and run the image as a standalone container.
 

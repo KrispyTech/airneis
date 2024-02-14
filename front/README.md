@@ -4,7 +4,7 @@ This project is configured to run with Docker. You should usually not run the fr
 
 ## Getting Started
 
-### Local machine
+### Local machine (Option 1)
 
 First, run the development server:
 
@@ -20,7 +20,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Dockerfile
+### Dockerfile (Option 2)
 
 You can build and run the image as a standalone container.
 
