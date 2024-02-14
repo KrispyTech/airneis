@@ -1,0 +1,2 @@
+# This folder makes the CI fail
+.next/*
