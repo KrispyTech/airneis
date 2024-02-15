@@ -1,6 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+This project is configured to run with Docker. You should usually not run the frontend alone, but rather use the `make` command to run all containers at once.
+
 ## Getting Started
+
+### Local machine (Option 1)
 
 First, run the development server:
 
@@ -15,6 +19,28 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Dockerfile (Option 2)
+
+You can build and run the image as a standalone container.
+
+In airneis/front/:
+
+#### Prod
+
+```
+docker build --tag airneis-front .
+docker run -d -p 3000:3000 airneis-front
+```
+
+#### Dev
+
+```
+docker build --tag airneis-front-dev --target dev .
+docker run -d -p 3000:3000 --mount type=bind,source=./src,target=/app/src airneis-front-dev
+```
+
+Dev mode allow for hot reloading.
 
 ## Linter
 
