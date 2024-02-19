@@ -34,7 +34,6 @@ To shut down the application:
 ```
 make down
 ``` 
-
 ## What does our app contain ?
 
 ### The Home Page

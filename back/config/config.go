@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"os"
 
+	neon "github.com/KrispyTech/airneis/db"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-	"github.com/joho/godotenv"
 
+	"gorm.io/gorm"
+
+	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
@@ -19,6 +22,8 @@ const (
 )
 
 type Config struct {
+	DB         *gorm.DB
+	Neon       neon.Database
 	Env        Env `yaml:"env"`
 	Handler    ClientHandler
 	Production ProductionConfig
@@ -138,6 +143,12 @@ func loadConfig(config Config, envName string) (Config, error) {
 			return Config{}, errors.Wrapf(err, "loadConfig, unable to unmarshal")
 		}
 		config.Production = productionConfig
+	}
+
+	config, err = InitDatabase(config)
+
+	if err != nil {
+		return Config{}, errors.Wrapf(err, "loadConfig, Unable to Init database")
 	}
 
 	return config, nil
