@@ -8,9 +8,7 @@ import (
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 
-	"github.com/joho/godotenv"
 	"gorm.io/gorm"
-
 
 	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
@@ -24,12 +22,12 @@ const (
 )
 
 type Config struct {
-    DB         *gorm.DB
-    Neon   	   neon.Database
-    Env        Env `yaml:"env"`
-    Handler    ClientHandler
-    Production ProductionConfig
-    Staging    StagingConfig
+	DB         *gorm.DB
+	Neon       neon.Database
+	Env        Env `yaml:"env"`
+	Handler    ClientHandler
+	Production ProductionConfig
+	Staging    StagingConfig
 }
 
 type StagingConfig struct {
@@ -146,10 +144,12 @@ func loadConfig(config Config, envName string) (Config, error) {
 		}
 		config.Production = productionConfig
 	}
-	database, err := InitDatabase()
+
+	database, err := InitDatabase(config)
 	if err != nil {
-		return Config{}, errors.Wrapf(err, "Unable to Init database")
+		return Config{}, errors.Wrapf(err, "loadConfig, Unable to Init database")
 	}
 	config.DB = database
+
 	return config, nil
 }

@@ -1,20 +1,29 @@
 package config
 
 import (
+	"os"
+
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"os"
 )
 
-func InitDatabase() (db *gorm.DB, err error) {
-	db, err = gorm.Open(postgres.Open(os.Getenv("DB_URI")), &gorm.Config{})
-	if err != nil {
-		return &gorm.DB{}, errors.Wrapf(err, "InitDatabase, unable to load database")
+func InitDatabase(config Config) (Config, error) {
+	var err error
+	
+	databaseURI := os.Getenv("DB_URI")
+	if databaseURI == "" {
+		return Config{}, errors.Wrapf(err, "InitDatabase, unable to get database URI")
 	}
 
-	logrus.Info("Database has been loaded")
+	db, err := gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
+	if err != nil {
+		return Config{}, errors.Wrapf(err, "InitDatabase, unable to load database")
+	}
 
-	return db, nil
+	log.Info("Database has been loaded")
+	config.DB = db
+
+	return config, nil
 }
