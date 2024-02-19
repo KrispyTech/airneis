@@ -31,9 +31,7 @@ func main() {
 		log.Fatal("Unable to run automigrate", err.Error())
 	}
 
-	fmt.Println(secret)
 	log.Info(neon.CheckVersion(db))
-
 
 	log.Info("Routes defined")
 	log.Fatal(app.Listen(":3000"))

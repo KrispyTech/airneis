@@ -145,11 +145,11 @@ func loadConfig(config Config, envName string) (Config, error) {
 		config.Production = productionConfig
 	}
 
-	database, err := InitDatabase(config)
+	config, err = InitDatabase(config)
+
 	if err != nil {
 		return Config{}, errors.Wrapf(err, "loadConfig, Unable to Init database")
 	}
-	config.DB = database
 
 	return config, nil
 }

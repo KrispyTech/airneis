@@ -11,7 +11,7 @@ import (
 
 func InitDatabase(config Config) (Config, error) {
 	var err error
-	
+
 	databaseURI := os.Getenv("DB_URI")
 	if databaseURI == "" {
 		return Config{}, errors.Wrapf(err, "InitDatabase, unable to get database URI")
