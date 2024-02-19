@@ -5,9 +5,9 @@ Co-Assignee: Cédric Gautier
 Date : 2024-02-07
 
 ## SUMMARY:
-We want to declare a schema of our database and this schema to be applied to the database.
+We want to declare a schema of our data models that will be applied to our database.
 But we don't want it to be like dark magic. We want to have some control over it.
-As we are using golang for our backend we think about using gorm and atlas to achieve that.
+As we are using Golang for our backend we are thinking about using GORM and Atlas to achieve that.
 
 ## RESEARCH AND TESTS:
 
