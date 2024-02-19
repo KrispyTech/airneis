@@ -39,7 +39,7 @@ ModelName   string `json:"modelName"`
 }
 ```
 
-To make the migrations could use Atlas.It offers a clean to do versioned migrations.
+To make the migrations we could use Atlas. It offers a clean way to do versioned migrations.
 
 If we want to use Atlas we would need  to install it. 
 To do so you can use homebrew for macOS or your favorite package manager if you are using linux
