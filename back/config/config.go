@@ -4,11 +4,15 @@ import (
 	"fmt"
 	"os"
 
+	neon "github.com/KrispyTech/airneis/db"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
+
 	"github.com/joho/godotenv"
 	"gorm.io/gorm"
 
+
+	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
@@ -20,11 +24,12 @@ const (
 )
 
 type Config struct {
-	DB         *gorm.DB
-	Env        Env `yaml:"env"`
-	Handler    ClientHandler
-	Production ProductionConfig
-	Staging    StagingConfig
+    DB         *gorm.DB
+    Neon   	   neon.Database
+    Env        Env `yaml:"env"`
+    Handler    ClientHandler
+    Production ProductionConfig
+    Staging    StagingConfig
 }
 
 type StagingConfig struct {

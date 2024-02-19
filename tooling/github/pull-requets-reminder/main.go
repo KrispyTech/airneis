@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	dw "github.com/bensch777/discord-webhook-golang"
@@ -75,8 +76,13 @@ func getPullRequests() ([]*github.PullRequest, error) {
 
 func prepareMessage(prs []*github.PullRequest) (fields []dw.Field) {
 	for _, pr := range prs {
+		title := strings.ToLower(pr.GetTitle())
+		if strings.Contains(title, "draft") || strings.Contains(title, "wip") {
+			continue
+		}
+
 		field := dw.Field{
-			Value: fmt.Sprintf("%d: %s - %s\n", pr.GetNumber(), pr.GetTitle(), pr.GetURL()),
+			Value: fmt.Sprintf("%d: %s - %s\n", pr.GetNumber(), pr.GetTitle(), pr.GetHTMLURL()),
 		}
 
 		fields = append(fields, field)

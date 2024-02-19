@@ -1,9 +1,8 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/KrispyTech/airneis/config"
+	neon "github.com/KrispyTech/airneis/db"
 
 	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
@@ -23,9 +22,9 @@ func main() {
 		return c.SendString("Hello World!")
 	})
 
-	secret, err := config.Handler.VaultClient.ReadSecret("appname_secret_version")
+	db, err := neon.InitDB(config.Handler.VaultClient)
 	if err != nil {
-		println(err)
+		log.Fatal("Unable to connect to DB", err.Error())
 	}
 
 	if err := config.DB.AutoMigrate( /* PLACE HERE THE STRUCTS OF THE MODEL*/ ); err != nil {
@@ -33,6 +32,8 @@ func main() {
 	}
 
 	fmt.Println(secret)
+	log.Info(neon.CheckVersion(db))
+
 
 	log.Info("Routes defined")
 	log.Fatal(app.Listen(":3000"))
