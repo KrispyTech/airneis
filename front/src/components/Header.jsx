@@ -1,6 +1,5 @@
-import SearchIcon from "@/components/icons/SearchIcon"
-import ShoppingCartIcon from "@/components/icons/ShoppingCartIcon"
-import BurgerMenuIcon from "@/components/icons/BurgerMenuIcon"
+import { MagnifyingGlassIcon, ShoppingCartIcon, Bars3Icon } from "@heroicons/react/24/outline"
+import webConfig from "@@/webConfig"
 
 const Header = () => (
   <header className="bg-secondary text-primary px-4 flex justify-between items-center">
@@ -8,13 +7,14 @@ const Header = () => (
     <nav>
       <ul className="flex flex-row items-center gap-5">
         <li>
-          <SearchIcon />
+          <MagnifyingGlassIcon {...webConfig.icons.lgIcon} />
         </li>
         <li>
-          <ShoppingCartIcon />
+          <ShoppingCartIcon {...webConfig.icons.lgIcon} />
         </li>
         <li>
-          <BurgerMenuIcon />
+          {/* As this icon is smaller that the other we need it to have a bigger size */}
+          <Bars3Icon {...webConfig.icons.xlIcon} />
         </li>
       </ul>
     </nav>
