@@ -45,13 +45,14 @@ func GetNeonCreds(vc vault.VaultClient) (NeonCreds, error) {
 func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 	neonCred, err := GetNeonCreds(vc)
 	if err != nil {
-		return &gorm.DB{}, errors.Wrapf(err, "InitDB, unable to get credentials")
+		return &gorm.DB{}, errors.Wrapf(err, "InitNeonDatabase, unable to get neon credentials")
 	}
+
 	databaseURI := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require", neonCred.Username, neonCred.Secret, neonCred.Server)
 
 	database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
 	if err != nil {
-		return &gorm.DB{}, errors.Wrapf(err, "InitDatabase, unable to load database")
+		return &gorm.DB{}, errors.Errorf(err, "InitDatabase, unable to load database")
 	}
 
 	return database, nil
@@ -62,12 +63,12 @@ func InitDatabase(config Config, env string) (err error) {
 	case stagingEnv:
 		databaseURI := os.Getenv("DB_URI")
 		if databaseURI == "" {
-			return errors.Wrapf(err, "InitDatabase, unable to get database URI")
+			return errors.Errorf("DB_URI missing")
 		}
 
-		database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
+		database, err = gorm.Open(postgres.Open())
 		if err != nil {
-			return errors.Wrapf(err, "InitDatabase, unable to load database")
+			return errors.Errorf("InitDatabase, unable to load database %s", err)
 		}
 
 	default:
@@ -78,28 +79,16 @@ func InitDatabase(config Config, env string) (err error) {
 
 	}
 
-	log.Info("Database has been loaded")
+	log.Info("Database has been loadedddd")
 
-	if err = database.AutoMigrate(); err != nil {
-		return errors.Wrapf(err, "InitDatabase, unable to do auto migration")
-	}
-
-	return
-}
-
-func AutoMigrate(database *gorm.DB) (err error) {
 	if err := database.AutoMigrate(
-		&model.Address{},
-		&model.Category{},
-		&model.Contact{},
-		&model.Material{},
-		&model.Order{},
-		&model.Product{},
-		&model.Status{},
-		&model.User{},
-	); err != nil {
-		return err
+		&model.Address{}, &model.Category{}, &model.Contact{},
+		&model.Material{}, &model.Order{}, &model.Product{},
+		&model.Status{}, &model.User{}); err != nil {
+		return errors.Errorf("InitDatabase, unable to auto migrate")
 	}
+
+	log.Info("Automigrations have been started")
 
 	return
 }

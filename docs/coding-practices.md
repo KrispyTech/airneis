@@ -114,7 +114,17 @@ func main() {
 
 #### Back-End
 
-- Always add context to errors. This makes it easier to know where your code has crashed and debug the current issue.
+We'll be using the errors package in Go to be able to get clearer information when debugging our code.
+
+There are two types of errors that we should use.
+
+- When you're inside a child function, always return
+
+```go
+return errors.Errorf("Function name, unable to do whatever blabla ... %s", err)
+```
+
+- When you're the parent functions, always return wrap errors with a context.
 
 Context can be : "Unable to marshall, unable to connect, unable to find, ..."
 
