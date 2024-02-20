@@ -21,3 +21,7 @@ services:
       - .env.local
     ports:
       - "5432:5432"
+    environment:
+      - POSTGRES_USER=airneis
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=airneis
