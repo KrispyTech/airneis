@@ -58,7 +58,7 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 	return database, nil
 }
 
-func InitDatabase(config Config, env string) (err error) {
+func initDatabase(config Config, env string) (err error) {
 	switch env {
 	case stagingEnv:
 		databaseURI := os.Getenv("DB_URI")
@@ -68,15 +68,14 @@ func InitDatabase(config Config, env string) (err error) {
 
 		database, err = gorm.Open(postgres.Open(databaseURI))
 		if err != nil {
-			return errors.Errorf("InitDatabase, unable to load database %s", err)
+			return errors.Errorf("initDatabase, unable to load database %s", err)
 		}
 
 	default:
 		database, err = InitNeonDatabase(config.Handler.VaultClient)
 		if err != nil {
-			return errors.Wrapf(err, "InitDatabase, unable to load database")
+			return errors.Wrapf(err, "initDatabase, unable to load database")
 		}
-
 	}
 
 	log.Info("Database has been loadedddd")
@@ -85,7 +84,7 @@ func InitDatabase(config Config, env string) (err error) {
 		&model.Address{}, &model.Category{}, &model.Contact{},
 		&model.Material{}, &model.Order{}, &model.Product{},
 		&model.Status{}, &model.User{}); err != nil {
-		return errors.Errorf("InitDatabase, unable to auto migrate")
+		return errors.Errorf("initDatabase, unable to auto migrate")
 	}
 
 	log.Info("Automigrations have been started")
