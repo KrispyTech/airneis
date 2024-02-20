@@ -79,7 +79,7 @@ func InitDatabase(config Config, env string) (err error) {
 
 	}
 
-	log.Info("Database has been loadedddd")
+	log.Info("Database has been loaded")
 
 	if err := database.AutoMigrate(
 		&model.Address{}, &model.Category{}, &model.Contact{},
