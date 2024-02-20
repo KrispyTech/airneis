@@ -1,10 +1,6 @@
 import React from "react"
-import { Text, View } from "react-native"
+import Page from "./src/components/Page"
 
-const App = () => (
-  <View className="flex-1 items-center justify-center bg-white">
-    <Text className="text-blue-600">Hello World</Text>
-  </View>
-)
+const App = () => <Page></Page>
 
 export default App
