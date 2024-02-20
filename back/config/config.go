@@ -14,8 +14,12 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+<<<<<<< HEAD
 func InitializeConfig() (Config, error) {
 	var config Config
+=======
+func InitializeConfig() (config Config, err error) {
+>>>>>>> 0cb0e09 (Refactor the way we build our configuration)
 
 	envFile, err := os.ReadFile("config/default.yaml")
 	if err != nil {
@@ -35,7 +39,11 @@ func InitializeConfig() (Config, error) {
 		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load client handler")
 	}
 
+<<<<<<< HEAD
 	initializedConfig, err := selectConfigProcessor[config.Env.BuildProduction](config)
+=======
+	config, err = selectConfigProcessor[config.Env.BuildProduction](config)
+>>>>>>> 0cb0e09 (Refactor the way we build our configuration)
 	if err != nil {
 		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to build")
 	}
@@ -59,7 +67,11 @@ func buildEnvironmentConfig(config Config, env string, configProcessor any) (Con
 		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize database")
 	}
 
+<<<<<<< HEAD
 	log.Infof("%s environment has been loaded", helpers.Capitalize(env))
+=======
+	log.Info("Which Environment has been loaded")
+>>>>>>> 0cb0e09 (Refactor the way we build our configuration)
 
 	return config, nil
 }
