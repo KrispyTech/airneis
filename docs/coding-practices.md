@@ -30,6 +30,7 @@ In the back-end we'll be using golang-ci-lint that has a respected standard. We'
 - [staticcheck ⚙️](https://golangci-lint.run/usage/linters/#:~:text=v1.0.0-,staticcheck,-%E2%9A%99%EF%B8%8F) : It's a set of rules from staticcheck. It's not the same thing as the staticcheck binary. The author of staticcheck doesn't support or approve the use of staticcheck as a library inside golangci-lint.
 - [unused ⚙️](https://github.com/dominikh/go-tools/tree/master/unused) : Checks Go code for unused constants, variables, functions and types.
 
+
 ### Case type & practices
 
 #### Global
@@ -100,6 +101,7 @@ func main() {
 	fmt.Println(song.Name)
 
 }
+
 ```
 
 ### Code reusability
@@ -121,3 +123,19 @@ Context can be : "Unable to marshall, unable to connect, unable to find, ..."
 ```go
 return errors.Wrapf(err, "parentFunction, context %s", childVariable)
 ```
+
+## File naming
+
+### Backend
+
+- For template files:
+  - If the file is a template, add ```Template``` to the end of your filename. eg: ```filenameTemplate.go```
+
+- For test files
+  - The file name should end by ```_test.go``` and should be in the same directory as the file of the function it tests. 
+
+- For controllers:
+  - Create a subdirectory with the name of the resource the controller act on
+  - The file name should be the same as the function in it. It should start with a verb (create, get, edit, etc ...) followed by the name of the resource.
+  
+eg: ```controllers/users/CreateUser.go```, ```controllers/categories/GetCategories.go```
