@@ -4,15 +4,12 @@ import (
 	"fmt"
 	"os"
 
-	neon "github.com/KrispyTech/airneis/db"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-
-	"gorm.io/gorm"
+	log "github.com/sirupsen/logrus"
 
 	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
-	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v3"
 )
 
@@ -22,8 +19,6 @@ const (
 )
 
 type Config struct {
-	DB         *gorm.DB
-	Neon       neon.Database
 	Env        Env `yaml:"env"`
 	Handler    ClientHandler
 	Production ProductionConfig
@@ -91,21 +86,43 @@ func InitializeConfig() (config Config, err error) {
 		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load client handler")
 	}
 
-	if !config.Env.BuildProduction {
-		config, err = loadConfig(config, stagingEnv)
-		if err != nil {
-			return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load staging config")
-		}
-		logrus.Info("Staging Environment has been loaded")
-	} else {
-		config, err = loadConfig(config, productionEnv)
-		if err != nil {
-			return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load config")
-		}
-		logrus.Info("Production Environment has been loaded")
+	config, err = buildEnvironmentConfig(config)
+	if err != nil {
+		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to build environment config")
 	}
 
 	return
+}
+
+func buildEnvironmentConfig(config Config) (Config, error) {
+
+	if !config.Env.BuildProduction {
+		config, err := loadConfig(config, stagingEnv)
+		if err != nil {
+			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to load staging config")
+		}
+
+		err = InitDatabase(config, stagingEnv)
+		if err != nil {
+			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize staging database")
+		}
+
+		log.Info("Staging Environment has been loaded")
+
+	} else {
+		config, err := loadConfig(config, productionEnv)
+		if err != nil {
+			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to load config")
+		}
+
+		if err = InitDatabase(config, productionEnv); err != nil {
+			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize production database")
+		}
+
+		log.Info("Production Environment has been loaded")
+	}
+
+	return config, nil
 }
 
 func loadClientHandler(config Config) (ClientHandler, error) {
@@ -143,12 +160,6 @@ func loadConfig(config Config, envName string) (Config, error) {
 			return Config{}, errors.Wrapf(err, "loadConfig, unable to unmarshal")
 		}
 		config.Production = productionConfig
-	}
-
-	config, err = InitDatabase(config)
-
-	if err != nil {
-		return Config{}, errors.Wrapf(err, "loadConfig, Unable to Init database")
 	}
 
 	return config, nil
