@@ -170,11 +170,11 @@ func (vc *VaultClient) ReadSecret(secretName string) (secret string, err error) 
 	url := fmt.Sprintf("%s/secrets/2023-06-13/organizations/%s/projects/%s/apps/%s/open/%s", vc.Vault.BaseURL, vc.Vault.OrganizationID, vc.Vault.ProjectID, vc.Vault.AppName, secretName)
 	res, status, err := vc.HttpApi.Get(url, headers)
 	if err != nil || status != http.StatusOK {
-		return "", errors.Errorf(err, "ReadSecret, request impossible")
+		return "", errors.Errorf("ReadSecret, request impossible %s", err)
 	}
 
 	if err = json.Unmarshal(res, &appSecret); err != nil {
-		return "", errors.Errorf(err, "ReadSecret, unable to unmarshal")
+		return "", errors.Errorf("ReadSecret, unable to marshall %s", err)
 	}
 
 	return appSecret.Secret.Version.Value, nil

@@ -52,7 +52,7 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 
 	database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
 	if err != nil {
-		return &gorm.DB{}, errors.Errorf(err, "InitDatabase, unable to load database")
+		return &gorm.DB{}, errors.Errorf("InitNeonDatabase, unable to load database %s", err)
 	}
 
 	return database, nil
@@ -66,7 +66,7 @@ func InitDatabase(config Config, env string) (err error) {
 			return errors.Errorf("DB_URI missing")
 		}
 
-		database, err = gorm.Open(postgres.Open())
+		database, err = gorm.Open(postgres.Open(databaseURI))
 		if err != nil {
 			return errors.Errorf("InitDatabase, unable to load database %s", err)
 		}
