@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/KrispyTech/airneis/lib/shared/airror"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
@@ -17,27 +18,27 @@ import (
 func InitializeConfig() (Config, error) {
 	var config Config
 
-	envFile, err := os.ReadFile("config/default.yaml")
+	envFile, err := os.ReadFile("config/defslt.yaml")
 	if err != nil {
-		return Config{}, errors.Errorf("InitializeConfig, unable to read config file %s", err)
+		return Config{}, airror.ReadError("os.ReadFile", err)
 	}
 
 	if err = yaml.Unmarshal(envFile, &config); err != nil {
-		return Config{}, errors.Errorf("InitializeConfig, unable to unmarshall %s", err)
+		return Config{}, airror.UnmarshallError("yaml.UnMarshal", err)
 	}
 
 	if err := godotenv.Load(); err != nil {
-		return Config{}, errors.Errorf("Couldn't load .env file %s", err)
+		return Config{}, airror.LoadError("godotenv.Load", err)
 	}
 
 	config.Handler, err = loadClientHandler(config)
 	if err != nil {
-		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load client handler")
+		return Config{}, airror.WrapLoadError("loadClientHandler", err)
 	}
 
 	initializedConfig, err := selectConfigProcessor[config.Env.BuildProduction](config)
 	if err != nil {
-		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to build")
+		return Config{}, airror.WrapBuildError("buildEnvironmentConfig", err)
 	}
 
 	return initializedConfig, nil

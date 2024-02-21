@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/KrispyTech/airneis/config"
+	"github.com/KrispyTech/airneis/lib/shared/airror"
 	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
@@ -11,7 +12,7 @@ func main() {
 	log.Info(c.BackAppStarted)
 	_, err := config.InitializeConfig()
 	if err != nil {
-		log.Fatal("Unable to load config - ", err.Error())
+		log.Fatal(airror.WrapInitializeError("InitializeConfig", err))
 	}
 
 	app := fiber.New()
