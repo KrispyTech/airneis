@@ -8,8 +8,7 @@
 
 # Jira link
 
-[Tracker - Kanban board](https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2)
-
+![Tracker - Kanban board](https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2)
 
 ## Introduction
 
@@ -29,11 +28,11 @@ make dev
 To deploy the project in prod mode:
 ```
 make up
-``` 
+```
 To shut down the application:
 ```
 make down
-``` 
+```
 ## What does our app contain ?
 
 ### The Home Page
