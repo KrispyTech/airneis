@@ -82,29 +82,15 @@ func InitializeVaultApi(httpApi httpclient.HttpApi, vaultConfig Vault) (VaultCli
 	}, HttpApi: httpApi}, nil
 }
 
-func getClientVariables() (clientID string, secret string, err error) {
-	clientID = os.Getenv("HCP_CLIENT_ID")
-	if clientID == "" {
-		return "", "", errors.Wrapf(err, "getClientVariables, unable to get env variables")
-	}
-
-	secret = os.Getenv("HCP_CLIENT_SECRET")
-	if secret == "" {
-		return "", "", errors.Wrapf(err, "getClientVariables, unable to get env variables")
-	}
-
-	return
-}
-
 func getAppVariables() (vault Vault, err error) {
 	organisationID := os.Getenv("HCP_ORG_ID")
 	if organisationID == "" {
-		return Vault{}, errors.Wrapf(err, "getAppVariables, unable to get env variables")
+		return Vault{}, errors.Errorf("getAppVariables, unable to get HCP_ORG_ID %s", err)
 	}
 
 	projectID := os.Getenv("HCP_PROJECT_ID")
 	if projectID == "" {
-		return Vault{}, errors.Wrapf(err, "getAppVariables, unable to get env variables")
+		return Vault{}, errors.Errorf("getAppVariables, unable to get HCP_PROJECT_ID %s", err)
 	}
 
 	return Vault{
@@ -113,54 +99,11 @@ func getAppVariables() (vault Vault, err error) {
 	}, nil
 }
 
-func (c *VaultClient) requestAccessKey() (token VaultToken, err error) {
-	url := fmt.Sprintf("%s/oauth/token", c.Vault.AuthURL)
-	headers := make(map[string]string)
-	headers["content-type"] = "application/json"
-
-	clientID, secret, err := getClientVariables()
-	if err != nil {
-		return VaultToken{}, errors.Wrapf(err, "requestAccessKey, unable to get client variables")
-	}
-
-	reqBody := TokenRequestBody{
-		Audience:     "https://api.hashicorp.cloud",
-		GrantType:    "client_credentials",
-		ClientID:     clientID,
-		ClientSecret: secret,
-	}
-
-	token, err = getToken(c, url, headers, reqBody)
-	if err != nil {
-		return VaultToken{}, errors.Wrapf(err, "requestAccessKey, unable to get token")
-	}
-
-	return
-}
-
-func getToken(vc *VaultClient, url string, headers map[string]string, reqBody TokenRequestBody) (token VaultToken, err error) {
-	jsonBody, err := vc.HttpApi.PrepareBody(reqBody)
-	if err != nil {
-		return VaultToken{}, errors.Wrapf(err, "getToken, unable to prepare body")
-	}
-
-	res, status, err := vc.HttpApi.Post(url, headers, jsonBody)
-	if err != nil || status != http.StatusOK {
-		return VaultToken{}, errors.Wrapf(err, "getToken, request impossible")
-	}
-
-	if err = json.Unmarshal(res, &token); err != nil {
-		return VaultToken{}, errors.Wrapf(err, "getToken, unable to unmarshal")
-	}
-
-	return
-}
-
 func (vc *VaultClient) ReadSecret(secretName string) (secret string, err error) {
 	var appSecret AppSecret
 	token, err := vc.requestAccessKey()
 	if err != nil {
-		return "", errors.Errorf("%s, ReadSecret, unable to get request access key", err)
+		return "", errors.Wrapf(err, "ReadSecret, unable to get request access key")
 	}
 
 	headers := make(map[string]string, 2)
@@ -178,4 +121,61 @@ func (vc *VaultClient) ReadSecret(secretName string) (secret string, err error) 
 	}
 
 	return appSecret.Secret.Version.Value, nil
+}
+
+func (c *VaultClient) requestAccessKey() (token VaultToken, err error) {
+	url := fmt.Sprintf("%s/oauth/token", c.Vault.AuthURL)
+	headers := make(map[string]string)
+	headers["content-type"] = "application/json"
+
+	clientID, secret, err := getClientVariables()
+	if err != nil {
+		return VaultToken{}, errors.Wrapf(err, "requestAccessKey, unable to get vault client variables")
+	}
+
+	reqBody := TokenRequestBody{
+		Audience:     "https://api.hashicorp.cloud",
+		GrantType:    "client_credentials",
+		ClientID:     clientID,
+		ClientSecret: secret,
+	}
+
+	token, err = getToken(c, url, headers, reqBody)
+	if err != nil {
+		return VaultToken{}, errors.Wrapf(err, "requestAccessKey, unable to get token")
+	}
+
+	return
+}
+
+func getClientVariables() (clientID string, secret string, err error) {
+	clientID = os.Getenv("HCP_CLIENT_ID")
+	if clientID == "" {
+		return "", "", errors.Wrapf(err, "getClientVariables, unable to get HCP_CLIENT_ID")
+	}
+
+	secret = os.Getenv("HCP_CLIENT_SECRET")
+	if secret == "" {
+		return "", "", errors.Wrapf(err, "getClientVariables, unable to get HCP_CLIENT_SECRET")
+	}
+
+	return
+}
+
+func getToken(vc *VaultClient, url string, headers map[string]string, reqBody TokenRequestBody) (token VaultToken, err error) {
+	jsonBody, err := vc.HttpApi.PrepareBody(reqBody)
+	if err != nil {
+		return VaultToken{}, errors.Errorf("getToken, unable to prepare body, %s", err)
+	}
+
+	res, status, err := vc.HttpApi.Post(url, headers, jsonBody)
+	if err != nil || status != http.StatusOK {
+		return VaultToken{}, errors.Errorf("getToken, request impossible, %s", err)
+	}
+
+	if err = json.Unmarshal(res, &token); err != nil {
+		return VaultToken{}, errors.Errorf("getToken, unable to Unmarshal, %s", err)
+	}
+
+	return
 }
