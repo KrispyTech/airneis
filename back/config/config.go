@@ -14,7 +14,8 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func InitializeConfig() (config Config, err error) {
+func InitializeConfig() (Config, error) {
+	var config Config
 
 	envFile, err := os.ReadFile("config/default.yaml")
 	if err != nil {
@@ -34,12 +35,12 @@ func InitializeConfig() (config Config, err error) {
 		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load client handler")
 	}
 
-	config, err = selectConfigProcessor[config.Env.BuildProduction](config)
+	initializedConfig, err := selectConfigProcessor[config.Env.BuildProduction](config)
 	if err != nil {
 		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to build")
 	}
 
-	return
+	return initializedConfig, nil
 }
 
 func buildEnvironmentConfig(config Config, env string, configProcessor any) (Config, error) {
