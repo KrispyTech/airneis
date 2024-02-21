@@ -13,6 +13,6 @@ The first part of the lateral bar is for "Product Management":
 - Higlanders, to manage "The Highlanders of the moment" in a table and choose the order in which they appear.
 - Orders, to manage the orders in a table and manage them
 
-The second part of the lateral bar is the "User Management":
+The second part of the lateral bar is for "User Management":
 - Users, to manage all users in a table that have a connection on the web or mobile.
 - Contacts, to manage forms written by the users.
