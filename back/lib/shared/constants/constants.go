@@ -8,6 +8,7 @@ const (
 	Boot          string = "boot"
 	Booted        string = "booted"
 	Build         string = "build"
+	Blankspace    string = " "
 	Format        string = "format"
 	Get           string = "get"
 	has           string = "has " // with blankspace
@@ -24,6 +25,7 @@ const (
 	Start         string = "start"
 	Started       string = "started"
 	Unmarshall    string = "unmarshall"
+	Upon          string = "upon"
 )
 
 // Phrases
@@ -34,7 +36,6 @@ const (
 	Listen3000         string = ":3000"
 	RoutesDefined      string = "Routes defined"
 	unableToBlankSpace string = "unable to " // with blankspace
-	UponBlankSpace     string = "upon "
 )
 
 var SelectTextUnableTo = map[string]string{
@@ -53,18 +54,18 @@ var SelectTextUnableTo = map[string]string{
 }
 
 var SelectUnableToUpon = map[string]string{
-	AutoMigrate: fmt.Sprint(unableToBlankSpace, UponBlankSpace, AutoMigrate),
-	Boot:        fmt.Sprint(unableToBlankSpace, UponBlankSpace, Boot),
-	Build:       fmt.Sprint(unableToBlankSpace, UponBlankSpace, Build),
-	Format:      fmt.Sprint(unableToBlankSpace, UponBlankSpace, Format),
-	Get:         fmt.Sprint(unableToBlankSpace, UponBlankSpace, Get),
-	Initialize:  fmt.Sprint(unableToBlankSpace, UponBlankSpace, Initialize),
-	Load:        fmt.Sprint(unableToBlankSpace, UponBlankSpace, Load),
-	Marshall:    fmt.Sprint(unableToBlankSpace, UponBlankSpace, Marshall),
-	Migrate:     fmt.Sprint(unableToBlankSpace, UponBlankSpace, Migrate),
-	Prepare:     fmt.Sprint(unableToBlankSpace, UponBlankSpace, Prepare),
-	Read:        fmt.Sprint(unableToBlankSpace, UponBlankSpace, Read),
-	Unmarshall:  fmt.Sprint(unableToBlankSpace, UponBlankSpace, Unmarshall),
+	AutoMigrate: fmt.Sprint(unableToBlankSpace, AutoMigrate, Blankspace, Upon),
+	Boot:        fmt.Sprint(unableToBlankSpace, Boot, Blankspace, Upon),
+	Build:       fmt.Sprint(unableToBlankSpace, Build, Blankspace, Upon),
+	Format:      fmt.Sprint(unableToBlankSpace, Format, Blankspace, Upon),
+	Get:         fmt.Sprint(unableToBlankSpace, Get, Blankspace, Upon),
+	Initialize:  fmt.Sprint(unableToBlankSpace, Initialize, Blankspace, Upon),
+	Load:        fmt.Sprint(unableToBlankSpace, Load, Blankspace, Upon),
+	Marshall:    fmt.Sprint(unableToBlankSpace, Marshall, Blankspace, Upon),
+	Migrate:     fmt.Sprint(unableToBlankSpace, Migrate, Blankspace, Upon),
+	Prepare:     fmt.Sprint(unableToBlankSpace, Prepare, Blankspace, Upon),
+	Read:        fmt.Sprint(unableToBlankSpace, Read, Blankspace, Upon),
+	Unmarshall:  fmt.Sprint(unableToBlankSpace, Unmarshall, Blankspace, Upon),
 }
 
 var SelectTextHas = map[string]string{
