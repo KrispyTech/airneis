@@ -1,6 +1,6 @@
 # Category Page Mockup
 
-![Category Page Mockup](./images/categorypage.png)
+![Category Page Mockup](./images/category_page.png)
 
 The category page is the first page containing the products you want to see or buy on the website or your mobile phone.
 

@@ -24,4 +24,5 @@ A page containing all the components needed to create a page.
 ![Pages](./images/pages.png)
 
 A page containing the website and mobile mock-ups.
-We provide a visual of each page for both displays: web & mobile
+We provide a visual of each page for both displays: web & mobile.
+This page contains all the design elements for our website.
