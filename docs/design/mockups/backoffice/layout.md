@@ -3,7 +3,7 @@
 ![Layout Mockup](./images/layout.png)
 
 This is the main layout that will be used for all other pages in our back-office.
-We can see the header, which contains "ÀIRNEIS" and "BACKOFFICE".
+We can see the header, which contains "ÀIRNEIS" and "Back Office".
 
 There is also a lateral bar which contains all the Backoffice navigations
 
