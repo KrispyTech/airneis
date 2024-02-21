@@ -5,7 +5,7 @@
 This is the main layout that will be used for all other pages in our back-office.
 We can see the header, which contains "ÀIRNEIS" and "Back Office".
 
-There is also a lateral bar which contains all the Backoffice navigations
+There is also a lateral bar which contains all back office navigations
 
 The first part of the lateral bar is the "Product Management":
 - Products, to see all products in a table and manage them.
