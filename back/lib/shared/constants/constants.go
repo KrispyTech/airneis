@@ -30,12 +30,14 @@ const (
 
 // Phrases
 const (
-	BackConfigBooting  string = "Backend configuration booting"
-	BackAppStarted     string = "Backend application, fiber started"
-	HelloWorld         string = "Hello World!"
-	Listen3000         string = ":3000"
-	RoutesDefined      string = "Routes defined"
-	unableToBlankSpace string = "unable to " // with blankspace
+	AutomigrationsCompleted string = "Automigrations completed" // with blankspace
+	BackConfigBooting       string = "Backend configuration booting"
+	BackAppStarted          string = "Backend application, fiber started"
+	DatabaseLoaded          string = "Database has been loaded"
+	HelloWorld              string = "Hello World!"
+	Listen3000              string = ":3000"
+	RoutesDefined           string = "Routes defined"
+	unableToBlankSpace      string = "unable to " // with blankspace
 )
 
 var SelectTextUnableTo = map[string]string{

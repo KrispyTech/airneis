@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/KrispyTech/airneis/lib/shared/airror"
 	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	model "github.com/KrispyTech/airneis/src/db/models"
@@ -22,64 +23,27 @@ type NeonCreds struct {
 	Server   string
 }
 
-func GetNeonCreds(vc vault.VaultClient) (NeonCreds, error) {
-	username, err := vc.ReadSecret("neon_username")
-	if err != nil {
-		return NeonCreds{}, errors.Wrapf(err, "GetNeonCreds, unable to get username")
-	}
-	secret, err := vc.ReadSecret("neon_secret")
-	if err != nil {
-		return NeonCreds{}, errors.Wrapf(err, "GetNeonCreds, unable to get secret")
-	}
-	server, err := vc.ReadSecret("neon_server")
-	if err != nil {
-		return NeonCreds{}, errors.Wrapf(err, "GetNeonCreds, unable to get server")
-	}
-
-	return NeonCreds{
-		Username: username,
-		Secret:   secret,
-		Server:   server,
-	}, nil
-}
-
-func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
-	neonCred, err := GetNeonCreds(vc)
-	if err != nil {
-		return &gorm.DB{}, errors.Wrapf(err, "InitNeonDatabase, unable to get neon credentials")
-	}
-
-	databaseURI := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require", neonCred.Username, neonCred.Secret, neonCred.Server)
-
-	database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
-	if err != nil {
-		return &gorm.DB{}, errors.Errorf("InitNeonDatabase, unable to load database %s", err)
-	}
-
-	return database, nil
-}
-
 func initializeDatabase(config Config, env string) (err error) {
 	switch env {
 	case c.StagingEnv:
 		databaseURI := os.Getenv("DB_URI")
 		if databaseURI == "" {
-			return errors.Errorf("DB_URI missing")
+			return airror.GetError("os.Getenv", errors.Errorf("DB_URI missing"))
 		}
 
 		database, err = gorm.Open(postgres.Open(databaseURI))
 		if err != nil {
-			return errors.Errorf("initDatabase, unable to load database %s", err)
+			return airror.InitializeError("gorm.Open", err)
 		}
 
 	default:
-		database, err = InitNeonDatabase(config.Handler.VaultClient)
+		database, err = initializeNeonDatabase(config.Handler.VaultClient)
 		if err != nil {
-			return errors.Wrapf(err, "initDatabase, unable to load database")
+			return airror.WrapInitializeError("initializeNeonDatabase", err)
 		}
 	}
 
-	log.Info("Database has been loaded")
+	log.Info(c.DatabaseLoaded)
 
 	if err := database.AutoMigrate(&model.Product{},
 		&model.Address{}, &model.Category{}, &model.Contact{},
@@ -88,7 +52,44 @@ func initializeDatabase(config Config, env string) (err error) {
 		return errors.Errorf("initDatabase, unable to auto migrate")
 	}
 
-	log.Info("Automigrations have been started")
+	log.Info(c.AutomigrationsCompleted)
 
 	return
+}
+
+func initializeNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
+	neonCred, err := GetNeonCreds(vc)
+	if err != nil {
+		return &gorm.DB{}, airror.WrapGetError("GetNeonCreds", err)
+	}
+
+	databaseURI := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require", neonCred.Username, neonCred.Secret, neonCred.Server)
+
+	database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
+	if err != nil {
+		return &gorm.DB{}, airror.LoadError("gorm.Open", err)
+	}
+
+	return database, nil
+}
+
+func GetNeonCreds(vc vault.VaultClient) (NeonCreds, error) {
+	username, err := vc.ReadSecret("neon_username")
+	if err != nil {
+		return NeonCreds{}, airror.WrapGetError("vc.ReadSecret", err)
+	}
+	secret, err := vc.ReadSecret("neon_secret")
+	if err != nil {
+		return NeonCreds{}, airror.WrapGetError("vc.ReadSecret", err)
+	}
+	server, err := vc.ReadSecret("neon_server")
+	if err != nil {
+		return NeonCreds{}, airror.WrapGetError("vc.ReadSecret", err)
+	}
+
+	return NeonCreds{
+		Username: username,
+		Secret:   secret,
+		Server:   server,
+	}, nil
 }
