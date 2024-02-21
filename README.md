@@ -8,7 +8,7 @@
 
 # Jira link
 
-![Tracker - Kanban board](https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2)
+[Tracker - Kanban board](https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2)
 
 ## Introduction
 
@@ -121,7 +121,7 @@ Because if the site evolves, it is possible that the design evolves too.
 
 ### i18n
 
-[!image](./docs/functional/i18n_Schema.png)
+![i18n](./docs/functional/i18n_Schema.png)
 
 We use the i18n.
 i18n makes it possible to adapt computer software to the different languages, regional peculiarities, and technical requirements of a target local.
