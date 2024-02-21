@@ -4,7 +4,7 @@
 
 The category page is the first page containing the products you want to see or buy on the website or your mobile phone.
 
-The first part of the mackup is an image containing the category title:
+The first part of the mock-up is an image containing the category title:
 - To check that we are in the category we want.
 
 The second part of the mackup represents the product sheets:
