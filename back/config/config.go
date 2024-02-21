@@ -11,14 +11,13 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/joho/godotenv"
-	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 )
 
 func InitializeConfig() (Config, error) {
 	var config Config
 
-	envFile, err := os.ReadFile("config/defslt.yaml")
+	envFile, err := os.ReadFile("config/default.yaml")
 	if err != nil {
 		return Config{}, airror.ReadError("os.ReadFile", err)
 	}
@@ -47,17 +46,17 @@ func InitializeConfig() (Config, error) {
 func buildEnvironmentConfig(config Config, env string, configProcessor any) (Config, error) {
 	configFile, err := os.ReadFile(fmt.Sprintf("config/%s.yaml", env))
 	if err != nil {
-		return Config{}, errors.Errorf("loadConfig, unable to read config file %s", err)
+		return Config{}, airror.ReadError("os.ReadFile", err)
 	}
 
 	if err = yaml.Unmarshal(configFile, &configProcessor); err != nil {
-		return Config{}, errors.Errorf("loadConfig, unable to unmarshall config file %s", err)
+		return Config{}, airror.UnmarshallError("yaml.Unmarshal", err)
 	}
 
 	config.Processor = configProcessor
 
-	if err = initDatabase(config, env); err != nil {
-		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize database")
+	if err = initializeDatabase(config, env); err != nil {
+		return Config{}, airror.WrapBuildError("initializeDatabase", err)
 	}
 
 	log.Infof("%s environment has loaded", helpers.Capitalize(env))
@@ -69,12 +68,11 @@ func loadClientHandler(config Config) (ClientHandler, error) {
 	httpClient := httpclient.InitializeHttpApi()
 	vc, err := vault.InitializeVaultApi(httpClient, vault.Vault(config.Env.Text.HashicorpVault))
 	if err != nil {
-		return ClientHandler{}, errors.Wrapf(err, "loadClientHandler, unable to create vault client")
+		return ClientHandler{}, airror.WrapLoadError("loadClientHandler", err)
 	}
 
-	ch := ClientHandler{
+	return ClientHandler{
 		httpClient:  httpClient,
 		VaultClient: vc,
-	}
-	return ch, nil
+	}, nil
 }

@@ -59,7 +59,7 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 	return database, nil
 }
 
-func initDatabase(config Config, env string) (err error) {
+func initializeDatabase(config Config, env string) (err error) {
 	switch env {
 	case c.StagingEnv:
 		databaseURI := os.Getenv("DB_URI")
