@@ -2,7 +2,7 @@
 
 ![Category Page Mockup](./images/categorypage.png)
 
-The category page is the first page containing the products you want to see or buy on the site or on your mobile phone.
+The category page is the first page containing the products you want to see or buy on the website or your mobile phone.
 
 The first part of the mackup is an image containing the category title:
 - To check that we are in the category we want.
