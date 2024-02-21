@@ -6,7 +6,7 @@ Category management contains a table of all the categories present on the web or
 
 We can perform an advanced search to find a category, with the option of filtering it.
 
-If we want to see all the information for a category, we can click on the clickable text.
+If we want to see more information about a category, we can click on the clickable text.
 
 Once we've clicked on it, another page opens:
 
