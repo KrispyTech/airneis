@@ -12,7 +12,7 @@ Once we've clicked on it, another page opens:
 
 ![Category Details](./images/category_details.png)
 
-The category details page contains all information on the category we have selected.
+The category details page contains all the information about the category we have selected.
 
 On this page, we can perform two actions:
 - Update the category.
