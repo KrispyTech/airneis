@@ -33,7 +33,7 @@ Actions pop-up:
 
 ![Actions](./images/actions.png)
 
-Delete popup:
+Delete pop-up:
 
 ![Delete Category](./images/category_delete.png)
 
