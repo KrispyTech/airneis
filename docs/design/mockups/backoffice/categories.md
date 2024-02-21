@@ -29,7 +29,7 @@ We also have another way of updating or deleting one or more categories. If we p
 - If we click on the "Update" button, the page(s) for updating the information in one or more categories will open.
 - If we click on the "Delete" button, the popup changes to give way to another popup where we can choose whether we want to delete the category or categories we have selected.
 
-Actions popup:
+Actions pop-up:
 
 ![Actions](./images/actions.png)
 
