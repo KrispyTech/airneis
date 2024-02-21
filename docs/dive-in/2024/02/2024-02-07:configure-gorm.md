@@ -20,7 +20,7 @@ What we're looking for :
 
 - A migration system
 - A ORM to handle the logic required to interact with databases.
-- A query builder that will build SQL statements from defining our models our backend langauge.
+- A query builder that will build SQL statements from defining our models our backend language.
 
 ### Atlas
 
