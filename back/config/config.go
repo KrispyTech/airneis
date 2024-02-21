@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	log "github.com/sirupsen/logrus"
@@ -57,7 +58,7 @@ func buildEnvironmentConfig(config Config, env string, configProcessor any) (Con
 		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize database")
 	}
 
-	log.Info("Which Environment has been loaded")
+	log.Infof("%s environment has been loaded", helpers.Capitalize(env))
 
 	return config, nil
 }

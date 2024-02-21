@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-	"github.com/KrispyTech/airneis/model"
+	model "github.com/KrispyTech/airneis/src/db/models"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 
@@ -78,9 +78,9 @@ func initDatabase(config Config, env string) (err error) {
 		}
 	}
 
-	log.Info("Database has been loadedddd")
+	log.Info("Database has been loaded")
 
-	if err := database.AutoMigrate(
+	if err := database.AutoMigrate(&model.Product{},
 		&model.Address{}, &model.Category{}, &model.Contact{},
 		&model.Material{}, &model.Order{}, &model.Product{},
 		&model.Status{}, &model.User{}); err != nil {
