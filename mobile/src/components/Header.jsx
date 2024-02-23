@@ -5,17 +5,17 @@ import mobileConfig from "../../mobileConfig"
 import { colors } from "../styles"
 
 const Header = () => (
-  <View className="bg-brown-100 py-1 flex items-center flex-row justify-between px-4">
-    <Text className="text-lightPink-100 text-4xl font-extrabold">ÀIRNEIS</Text>
+  <View className="bg-secondary py-1 flex items-center flex-row justify-between px-4">
+    <Text className="text-primary text-4xl font-extrabold">ÀIRNEIS</Text>
     <View className="flex flex-row items-center">
       <ButtonWithSvg>
-        <MagnifyingGlassIcon {...mobileConfig.icons.lgIcon} color={colors.lightPink[100]} />
+        <MagnifyingGlassIcon {...mobileConfig.icons.lgIcon} color={colors.primary} />
       </ButtonWithSvg>
       <ButtonWithSvg>
-        <ShoppingCartIcon {...mobileConfig.icons.lgIcon} color={colors.lightPink[100]} style={{ marginLeft: 8 }} />
+        <ShoppingCartIcon {...mobileConfig.icons.lgIcon} color={colors.primary} style={{ marginLeft: 8 }} />
       </ButtonWithSvg>
       <ButtonWithSvg>
-        <Bars3Icon {...mobileConfig.icons.xlIcon} color={colors.lightPink[100]} style={{ marginLeft: 8 }} />
+        <Bars3Icon {...mobileConfig.icons.xlIcon} color={colors.primary} style={{ marginLeft: 8 }} />
       </ButtonWithSvg>
     </View>
   </View>

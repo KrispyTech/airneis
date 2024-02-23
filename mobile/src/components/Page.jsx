@@ -6,9 +6,9 @@ const Page = props => {
 
   return (
     <View className="h-screen flex flex-col w-full">
-      <SafeAreaView className="bg-[#382E2B]"></SafeAreaView>
+      <SafeAreaView className="bg-secondary"></SafeAreaView>
       <Header />
-      <ScrollView className="grow overflow-y-auto flex flex-col w-full bg-[#FFEDE6]">{children}</ScrollView>
+      <ScrollView className="grow overflow-y-auto flex flex-col w-full bg-primary">{children}</ScrollView>
     </View>
   )
 }

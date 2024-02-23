@@ -3,8 +3,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        lightPink: { 100: "#FFEDE6" },
-        brown: { 100: "#382E2B" }
+        primary: "#FFEDE6",
+        secondary: "#382E2B"
       }
     }
   },
