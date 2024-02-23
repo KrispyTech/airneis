@@ -30,7 +30,7 @@ const (
 	BackConfigBooting string = "Backend configuration booting"
 	BackAppStarted    string = "Backend application, fiber started"
 	HelloWorld        string = "Hello World!"
-	Listen3000        string = ":3000"
+	Port        string = ":3000"
 	RoutesDefined     string = "Routes defined"
 	unableTo          string = "unable to " // with blankspace
 )
