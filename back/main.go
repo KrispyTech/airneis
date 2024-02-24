@@ -17,9 +17,7 @@ func main() {
 	app := fiber.New()
 	log.Info("Backend application, fiber started")
 
-	app.Get(c.HomeRoute, func(ctx *fiber.Ctx) error {
-		return ctx.SendString(c.HelloWorld)
-	})
+	SetupRoutes(app)
 
 	log.Info("Routes defined")
 	log.Fatal(app.Listen(c.Port))
