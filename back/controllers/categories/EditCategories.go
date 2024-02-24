@@ -10,24 +10,30 @@ import (
 )
 
 func EditCategory(ctx *fiber.Ctx) error {
-	categoryID, err := strconv.Atoi(ctx.Params("categoryID"))
-	if err != nil {
+	categoryID, errConvertToString := strconv.Atoi(ctx.Params("categoryID"))
+	if errConvertToString != nil {
 		ctx.Status(constants.BadRequestStatus)
 		return ctx.SendString(constants.BadRequestMessage)
 	}
 
 	var category model.Category
-	config.Database.First(&category, categoryID)
+	if errGet := config.Database.First(&category, categoryID).Error; errGet != nil {
+		ctx.Status(constants.NotFoundStatus)
+		return ctx.SendString(constants.NotFoundMessage)
+	}
 
 	if errParsing := ctx.BodyParser(&category); errParsing != nil {
 		ctx.Status(constants.BadRequestStatus)
 		return ctx.SendString(constants.BadRequestMessage)
 	}
 
-	config.Database.Save(&category)
+	if err := config.Database.Save(&category).Error; err != nil {
+		ctx.Status(constants.InternalServerErrorStatus)
+		return ctx.SendString(constants.InternalServerErrorMessage)
+	}
 
-	jsonCategory, err := json.Marshal(category)
-	if err != nil {
+	jsonCategory, errMarshal := json.Marshal(category)
+	if errMarshal != nil {
 		ctx.Status(constants.InternalServerErrorStatus)
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}

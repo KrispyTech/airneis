@@ -12,7 +12,10 @@ func GetCategoryByID(ctx *fiber.Ctx) error {
 	var category model.Category
 	categoryID := ctx.Params("categoryID")
 
-	config.Database.First(&category, categoryID)
+	if err := config.Database.First(&category, categoryID); err != nil {
+		ctx.Status(constants.NotFoundStatus)
+		return ctx.SendString(constants.NotFoundMessage)
+	}
 
 	jsoncCategory, err := json.Marshal(category)
 	if err != nil {

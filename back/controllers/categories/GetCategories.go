@@ -10,17 +10,21 @@ import (
 )
 
 func GetCategories(ctx *fiber.Ctx) error {
-	page, err := strconv.Atoi(ctx.Query(constants.Page, constants.DefaultPageValue))
-	if err != nil {
+	page, errParsing := strconv.Atoi(ctx.Query(constants.Page, constants.DefaultPageValue))
+	if errParsing != nil {
 		ctx.Status(constants.BadRequestStatus)
 		return ctx.SendString(constants.BadRequestMessage)
 	}
 
 	var categories []model.Category
-	config.Database.Limit(constants.PaginationLimit).Offset((page - 1) * constants.PaginationLimit).Find(&categories)
+	errQuery := config.Database.Limit(constants.PaginationLimit).Offset((page - 1) * constants.PaginationLimit).Find(&categories).Error
+	if errQuery != nil {
+		ctx.Status(constants.BadRequestStatus)
+		return ctx.SendString(constants.BadRequestMessage)
+	}
 
-	jsonCategories, err := json.Marshal(categories)
-	if err != nil {
+	jsonCategories, errMarshal := json.Marshal(categories)
+	if errMarshal != nil {
 		ctx.Status(constants.InternalServerErrorStatus)
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}

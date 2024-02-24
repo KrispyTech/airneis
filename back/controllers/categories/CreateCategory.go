@@ -16,10 +16,13 @@ func CreateCategory(ctx *fiber.Ctx) error {
 		return ctx.SendString(constants.BadRequestMessage)
 	}
 
-	config.Database.Create(&category)
+	if err := config.Database.Create(&category).Error; err != nil {
+		ctx.Status(constants.InternalServerErrorStatus)
+		return ctx.SendString(constants.InternalServerErrorMessage)
+	}
 
-	categoryJson, marshallError := json.Marshal(category)
-	if marshallError != nil {
+	categoryJson, err := json.Marshal(category)
+	if err != nil {
 		ctx.Status(constants.InternalServerErrorStatus)
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}
