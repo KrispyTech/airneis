@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	model "github.com/KrispyTech/airneis/src/db/models"
 	"github.com/pkg/errors"
@@ -60,7 +61,7 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 
 func initDatabase(config Config, env string) (err error) {
 	switch env {
-	case stagingEnv:
+	case c.StagingEnv:
 		databaseURI := os.Getenv("DB_URI")
 		if databaseURI == "" {
 			return errors.Errorf("DB_URI missing")

@@ -30,7 +30,6 @@ In the back-end we'll be using golang-ci-lint that has a respected standard. We'
 - [staticcheck ⚙️](https://golangci-lint.run/usage/linters/#:~:text=v1.0.0-,staticcheck,-%E2%9A%99%EF%B8%8F) : It's a set of rules from staticcheck. It's not the same thing as the staticcheck binary. The author of staticcheck doesn't support or approve the use of staticcheck as a library inside golangci-lint.
 - [unused ⚙️](https://github.com/dominikh/go-tools/tree/master/unused) : Checks Go code for unused constants, variables, functions and types.
 
-
 ### Case type & practices
 
 #### Global
@@ -41,7 +40,9 @@ In the back-end we'll be using golang-ci-lint that has a respected standard. We'
 
 #### Back-End
 
-- If needed for constants, declare them like and where it's used :
+##### Constants
+
+- If needed for constants, declare them like this :
 
 ```go
 const (
@@ -49,6 +50,9 @@ const (
 	productionEnv string = "production"
 )
 ```
+
+We have introduce a new directory in our scaffolding : `lib/shared/constants/`
+When you need to need to import a constant, just do `contants.constantVarName` and you should be able to import them.
 
 - If there are more than 2 possibilities of a result, use a switch case. Having a default value is also recommended if you're awaiting a default task.
 
@@ -139,13 +143,15 @@ return errors.Wrapf(err, "parentFunction, context %s", childVariable)
 ### Backend
 
 - For template files:
-  - If the file is a template, add ```Template``` to the end of your filename. eg: ```filenameTemplate.go```
+
+  - If the file is a template, add `Template` to the end of your filename. eg: `filenameTemplate.go`
 
 - For test files
-  - The file name should end by ```_test.go``` and should be in the same directory as the file of the function it tests. 
+
+  - The file name should end by `_test.go` and should be in the same directory as the file of the function it tests.
 
 - For controllers:
   - Create a subdirectory with the name of the resource the controller act on
   - The file name should be the same as the function in it. It should start with a verb (create, get, edit, etc ...) followed by the name of the resource.
-  
-eg: ```controllers/users/CreateUser.go```, ```controllers/categories/GetCategories.go```
+
+eg: `controllers/users/CreateUser.go`, `controllers/categories/GetCategories.go`
