@@ -3,7 +3,7 @@ If a PR should be merged before this one you must indicate it here.
 
 # DONE 
 
-Tell everyone what you have. You may include screenshots if it will help the team 
+Tell everyone what you have done. You may include screenshots if it will help the team 
 to understand what you have dine
 
 
