@@ -8,10 +8,19 @@ on:
     branches: ["staging", "main"]
 
 jobs:
+  # Check that pr doesn't have WIP in title
+  # Allows not to waste GH action time
+  wip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wip/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   # Check that the code is clean
   # It's done in a separate job as advised by the doc
   # https://github.com/marketplace/actions/run-golangci-lint
   golangci:
+    needs: ["wip"]
     name: lint
     runs-on: ubuntu-latest
     # With the 3 following lines the commands will be executed in the back directory
@@ -34,6 +43,7 @@ jobs:
           version: v1.54
 
   build:
+    needs: ["wip"]
     # With the 3 following lines the commands will be executed in the back directory
     defaults:
       run:
