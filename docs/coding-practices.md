@@ -40,7 +40,9 @@ In the back-end we'll be using golang-ci-lint that has a respected standard. We'
 
 #### Back-End
 
-- If needed for constants, declare them like and where it's used :
+##### Constants
+
+- If needed for constants, declare them like this :
 
 ```go
 const (
@@ -48,6 +50,9 @@ const (
 	productionEnv string = "production"
 )
 ```
+
+We have introduce a new directory in our scaffolding : `lib/shared/constants/`
+When you need to need to import a constant, just do `contants.constantVarName` and you should be able to import them.
 
 - If there are more than 2 possibilities of a result, use a switch case. Having a default value is also recommended if you're awaiting a default task.
 
@@ -100,6 +105,7 @@ func main() {
 	fmt.Println(song.Name)
 
 }
+
 ```
 
 ### Code reusability
@@ -114,10 +120,38 @@ func main() {
 
 #### Back-End
 
-- Always add context to errors. This makes it easier to know where your code has crashed and debug the current issue.
+We'll be using the errors package in Go to be able to get clearer information when debugging our code.
+
+There are two types of errors that we should use.
+
+- When you're inside a child function, always return
+
+```go
+return errors.Errorf("Function name, unable to do whatever blabla ... %s", err)
+```
+
+- When you're the parent functions, always return wrap errors with a context.
 
 Context can be : "Unable to marshall, unable to connect, unable to find, ..."
 
 ```go
 return errors.Wrapf(err, "parentFunction, context %s", childVariable)
 ```
+
+## File naming
+
+### Backend
+
+- For template files:
+
+  - If the file is a template, add `Template` to the end of your filename. eg: `filenameTemplate.go`
+
+- For test files
+
+  - The file name should end by `_test.go` and should be in the same directory as the file of the function it tests.
+
+- For controllers:
+  - Create a subdirectory with the name of the resource the controller act on
+  - The file name should be the same as the function in it. It should start with a verb (create, get, edit, etc ...) followed by the name of the resource.
+
+eg: `controllers/users/CreateUser.go`, `controllers/categories/GetCategories.go`
