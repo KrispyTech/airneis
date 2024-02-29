@@ -14,7 +14,7 @@ const Header = props => {
   return (
     <View className="bg-secondary py-1 flex items-center flex-row justify-between px-4">
       <Pressable onPress={goToHomePage}>
-        <Text className="text-primary text-4xl font-extrabold"> Airneis </Text>
+        <Text className="text-primary text-4xl font-extrabold"> ÀIRNEIS </Text>
       </Pressable>
       <View className="flex flex-row items-center">
         <ButtonWithSvg>
