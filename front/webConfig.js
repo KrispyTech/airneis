@@ -1,6 +1,5 @@
 const webConfig = {
   icons: {
-    defaultColor: "#FFEDE6",
     lgIcon: {
       with: 30,
       height: 30,
