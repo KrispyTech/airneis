@@ -10,7 +10,6 @@
 
 [Tracker - Kanban board](https://kylianbarthelemy.atlassian.net/jira/software/projects/AIRNEIS/boards/2)
 
-
 ## Introduction
 
 _ÀIRNEIS is a Scottish company and they are resellers of furniture designed by Scottish designers._
@@ -29,11 +28,11 @@ make dev
 To deploy the project in prod mode:
 ```
 make up
-``` 
+```
 To shut down the application:
 ```
 make down
-``` 
+```
 ## What does our app contain ?
 
 ### The Home Page
@@ -122,7 +121,7 @@ Because if the site evolves, it is possible that the design evolves too.
 
 ### i18n
 
-[!image](./docs/functional/i18n_Schema.png)
+![i18n](./docs/functional/i18n_Schema.png)
 
 We use the i18n.
 i18n makes it possible to adapt computer software to the different languages, regional peculiarities, and technical requirements of a target local.

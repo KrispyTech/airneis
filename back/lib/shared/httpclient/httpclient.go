@@ -6,7 +6,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/sirupsen/logrus"
+	"github.com/pkg/errors"
 )
 
 const methodGet string = "GET"
@@ -37,7 +37,7 @@ func InitializeHttpApi() HttpApi {
 func (c *HttpClient) PrepareBody(reqBody interface{}) (body []byte, err error) {
 	body, err = json.Marshal(reqBody)
 	if err != nil {
-		return nil, err
+		return nil, errors.Errorf("PrepareBody, Unable to marshall body:  %s", err)
 	}
 
 	return
@@ -62,7 +62,7 @@ func addHeaders(req *http.Request, headers map[string]string) *http.Request {
 func (c *HttpClient) makeRequest(r Request) (body []byte, statusCode int, err error) {
 	req, err := http.NewRequest(r.Method, r.Url, bytes.NewReader(r.Body))
 	if err != nil {
-		return nil, 0, err
+		return nil, 0, errors.Errorf("makeRequest,unable to make new request:  %s", err)
 	}
 
 	if r.Headers != nil {
@@ -79,13 +79,13 @@ func (c *HttpClient) makeRequest(r Request) (body []byte, statusCode int, err er
 
 func showResponse(resp *http.Response) ([]byte, int, error) {
 	if resp.StatusCode != http.StatusOK {
-		logrus.Errorf("Error %v: %s", resp.StatusCode, resp.Request.URL)
+		return nil, 0, errors.Errorf("Error %v: %s", resp.StatusCode, resp.Request.URL)
 	}
 
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, 0, err
+		return nil, 0, errors.Errorf("showResponse,unable to ReadAll body:  %s", err)
 	}
 
 	return body, resp.StatusCode, nil
