@@ -49,11 +49,11 @@ _Start of the project to manage products and categories on the website and appli
 
 - Review 2
 
-  - Description: Many pool request are open for too long.
+  - Description: Many pull request are open for too long.
   - Consequences: Blocking progress on the project.
   - Commitment:
     - Said by: Barnabé
-    - What: Be more attentive to pool requests. Sometimes during the week, to check whether there are requests for open pools.
+    - What: Be more attentive to pull requests. Sometimes during the week, to check whether there are requests for open pull requests.
     - When: During the next Sprint (#3).
 
 - Review 3
@@ -75,7 +75,7 @@ _Start of the project to manage products and categories on the website and appli
 
 - Question 2
 
-  - Description: Is it possible to find another way of changing the rules for the 2 reviewers when the pool request is open for too long?
+  - Description: Is it possible to find another way of changing the rules for the 2 reviewers when the pull request is open for too long?
   - Details: To avoid wasting too much time.
   - Said by: Barnabé
 
