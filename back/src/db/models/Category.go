@@ -5,6 +5,7 @@ import (
 )
 
 type Category struct {
+	gorm.Model
 	Name           string    `json:"name"`
 	ThumbnailUrl   string    `json:"thumbnailUrl"`
 	Slug           string    `json:"slug" gorm:"unique"`
