@@ -6,7 +6,7 @@ _Start of the project to manage products and categories on the website and appli
 
 - Review 1
 
-  - Description: The code has progressed well, and the first presentation of the site and application is very positive.
+  - Description: The code has progressed well, and the firsts pages of the site and application is very positive.
   - Commitment:
     - Said by: Kylian
     - What: Continuing in this direction.
@@ -22,10 +22,10 @@ _Start of the project to manage products and categories on the website and appli
 
 - Review 3
 
-  - Description: Clear code to help the team progress.
+  - Description: Clean code helped the team to progress.
   - Commitment:
     - Said by: Barnabé
-    - What: Continue to produce clear, serious code.
+    - What: Continue to produce clear, clean, serious code.
     - When: Until the end of the project.
 
 - Review 4
@@ -53,7 +53,7 @@ _Start of the project to manage products and categories on the website and appli
   - Consequences: Blocking progress on the project.
   - Commitment:
     - Said by: Barnabé
-    - What: Be more attentive to pull requests. Sometimes during the week, to check whether there are requests for open pull requests.
+    - What: Be more attentive to pull requests. Sometimes during the week, to check if there are requests for open pull requests.
     - When: During the next Sprint (#3).
 
 - Review 3
@@ -76,7 +76,7 @@ _Start of the project to manage products and categories on the website and appli
 - Question 2
 
   - Description: Is it possible to find another way of changing the rules for the 2 reviewers when the pull request is open for too long?
-  - Details: To avoid wasting too much time.
+  - Details: Maybe just adding the possibility to merge despite the fact there are not enough reviewer, because currently we can't.
   - Said by: Barnabé
 
 ## Ideas
