@@ -1,5 +1,6 @@
 package constants
 
 const (
-	HomeRoute = "/"
+	CategoriesRoute       = "/api/categories"
+	CategoriesRouteWithID = "/api/categories/:categoryID"
 )
