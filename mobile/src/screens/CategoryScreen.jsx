@@ -37,19 +37,23 @@ const CategoryScreen = props => {
 
   return (
     <Page navigation={navigation}>
-      <ScrollView>
-        <Image
-          style={mobileConfig.images.fullScreenImageXl}
-          source={{
-            uri: category.thumbnailUrl
-          }}
-        ></Image>
-        <View className="px-3">
-          <Text className="text-4xl text-center font-bold py-5">{category.name}</Text>
+      <ScrollView className="relative">
+        <View>
+          <Image
+            style={mobileConfig.images.fullScreenImageXl}
+            source={{
+              uri: category.thumbnailUrl
+            }}
+          ></Image>
+          <Text className="text-4xl text-center font-bold absolute top-1/2 left-0 right-0 text-white ">{category.name}</Text>
+        </View>
+        <View className="px-3 py-8">
           <Text className="text-lg font-medium uppercase">{category.description}</Text>
-          <View className="py-8 ">
+          <View className="py-8 gap-5">
             {category.products.map(product => (
-              <ProductCard product={product} key={product.id} />
+              <View key={`product${product.ID}`}>
+                <ProductCard product={product} />
+              </View>
             ))}
           </View>
         </View>

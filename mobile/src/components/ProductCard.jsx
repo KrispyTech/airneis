@@ -10,12 +10,12 @@ const ProductCard = props => {
     <View>
       <Image
         style={mobileConfig.images.fullScreenImageMd}
-        className="rounded"
+        className="rounded box-shadow-xl border "
         source={{
           uri: thumbnailUrl
         }}
       />
-      <View className="flex flex-row justify-between py-1">
+      <View className="flex flex-row justify-between">
         <Text className="text-lg font-light">{name} </Text>
         <Text className="text-lg font-light">{priceWithTaxes} €</Text>
       </View>
