@@ -8,8 +8,8 @@ type Product struct {
 	Slug                    string         `json:"slug" gorm:"unique"`
 	CategoryID              uint           `json:"categoryID"`
 	Category                Category       `json:"category"`
-	PriceWithoutTaxes       int            `json:"PriceWithoutTaxes"`
-	PriceWithTaxes          int            `json:"priceWithTaxes"`
+	PriceWithoutTaxes       float32        `json:"PriceWithoutTaxes"`
+	PriceWithTaxes          float32        `json:"priceWithTaxes"`
 	Description             string         `json:"description"`
 	ThumbnailUrl            string         `json:"thumbnailUrl"`
 	OutOfStock              string         `json:"outOfStock" gorm:"default:false"`
