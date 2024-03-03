@@ -6,7 +6,7 @@ _Start of the project to manage products and categories on the website and appli
 
 - Review 1
 
-  - Description: The code has progressed well, and the first presentation of the site and application is very positive.
+  - Description: The code has progressed well, and the firsts presentations of the site and application is very positive.
   - Commitment:
     - Said by: Kylian
     - What: Continuing in this direction.
