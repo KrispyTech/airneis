@@ -22,7 +22,7 @@ _Start of the project to manage products and categories on the website and appli
 
 - Review 3
 
-  - Description: Clear code to help the team progress.
+  - Description: Clean code helped the team to progress.
   - Commitment:
     - Said by: Barnabé
     - What: Continue to produce clear, serious code.
