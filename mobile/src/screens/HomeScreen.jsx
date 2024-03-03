@@ -37,6 +37,7 @@ const HomeScreen = props => {
             </ScrollView>
         </Page>
     )
+
 }
 
 export default HomeScreen

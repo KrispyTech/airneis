@@ -18,6 +18,7 @@ func GetCategories(ctx *fiber.Ctx) error {
 
 	var categories []model.Category
 	errQuery := config.Database.Limit(constants.PaginationLimit).Offset((page - 1) * constants.PaginationLimit).Preload("Products").Order("order_of_display asc").Find(&categories).Error
+
 	if errQuery != nil {
 		ctx.Status(constants.BadRequestStatus)
 		return ctx.SendString(constants.BadRequestMessage)
