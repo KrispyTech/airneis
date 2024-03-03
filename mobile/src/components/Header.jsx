@@ -7,9 +7,7 @@ import screens from "../utils/constants/screens"
 
 const Header = props => {
   const { navigation } = props
-  const goToHomePage = () => {
-    navigation.navigate(screens.homePage)
-  }
+  const goToHomePage = () => navigation.navigate(screens.homePage)
 
   return (
     <View className="bg-secondary py-1 flex items-center flex-row justify-between px-4">
