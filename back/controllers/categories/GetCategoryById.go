@@ -12,7 +12,7 @@ func GetCategoryByID(ctx *fiber.Ctx) error {
 	var category model.Category
 	categoryID := ctx.Params("categoryID")
 
-	if err := config.Database.First(&category, categoryID); err != nil {
+	if err := config.Database.Preload("Products").First(&category, categoryID).Error; err != nil {
 		ctx.Status(constants.NotFoundStatus)
 		return ctx.SendString(constants.NotFoundMessage)
 	}
