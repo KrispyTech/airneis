@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	model "github.com/KrispyTech/airneis/src/db/models"
 	"github.com/pkg/errors"
@@ -13,7 +14,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var database *gorm.DB
+var Database *gorm.DB
 
 type NeonCreds struct {
 	Username string
@@ -50,29 +51,29 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 
 	databaseURI := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require", neonCred.Username, neonCred.Secret, neonCred.Server)
 
-	database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
+	Database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
 	if err != nil {
 		return &gorm.DB{}, errors.Errorf("InitNeonDatabase, unable to load database %s", err)
 	}
 
-	return database, nil
+	return Database, nil
 }
 
 func initDatabase(config Config, env string) (err error) {
 	switch env {
-	case stagingEnv:
+	case c.StagingEnv:
 		databaseURI := os.Getenv("DB_URI")
 		if databaseURI == "" {
 			return errors.Errorf("DB_URI missing")
 		}
 
-		database, err = gorm.Open(postgres.Open(databaseURI))
+		Database, err = gorm.Open(postgres.Open(databaseURI))
 		if err != nil {
 			return errors.Errorf("initDatabase, unable to load database %s", err)
 		}
 
 	default:
-		database, err = InitNeonDatabase(config.Handler.VaultClient)
+		Database, err = InitNeonDatabase(config.Handler.VaultClient)
 		if err != nil {
 			return errors.Wrapf(err, "initDatabase, unable to load database")
 		}
@@ -80,7 +81,7 @@ func initDatabase(config Config, env string) (err error) {
 
 	log.Info("Database has been loaded")
 
-	if err := database.AutoMigrate(&model.Product{},
+	if err := Database.AutoMigrate(&model.Product{},
 		&model.Address{}, &model.Category{}, &model.Contact{},
 		&model.Material{}, &model.Order{}, &model.Product{},
 		&model.Status{}, &model.User{}); err != nil {
