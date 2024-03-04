@@ -59,7 +59,7 @@ func buildEnvironmentConfig(config Config, env string, configProcessor any) (Con
 		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize database")
 	}
 
-	log.Infof("%s environment has been loaded", helpers.Capitalize(env))
+	log.Infof("%s environment has loaded", helpers.Capitalize(env))
 
 	return config, nil
 }
