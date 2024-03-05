@@ -3,6 +3,8 @@ import BackOfficeNav from "@/components/BackOfficeNav"
 import BackOfficeTableHead from "@/components/BackOfficeTableHead"
 import Page from "@/components/Page"
 import ProductListItem from "@/components/ProductListItem"
+import { backoffice } from "@/constants"
+import routes from "@/routes"
 import { Bars3Icon, PlusCircleIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { useState } from "react"
@@ -58,7 +60,7 @@ const ProductsBoard = () => {
   }
 
   return (
-    <Page page="backoffice">
+    <Page page={backoffice}>
       <div className="flex h-full">
         <BackOfficeNav isOpen={isOpen} handleOpen={handleOpen} />
         <section className="flex flex-col w-full px-4 pt-3 overflow-y-scroll">
@@ -71,7 +73,7 @@ const ProductsBoard = () => {
             </button>
             <input placeholder="Search..." className="rounded-md drop-shadow-lg pl-2 w-40 md:w-72" onChange={handleInput} />
           </div>
-          <Link href="/backoffice/add-product" className="mt-4 py-0.5 px-1.5 bg-gray w-fit rounded-full border flex gap-1 items-center">
+          <Link href={routes.backoffice.addProduct} className="mt-4 py-0.5 px-1.5 bg-gray w-fit rounded-full border flex gap-1 items-center">
             <PlusCircleIcon className="w-6 h-6" />
             Add
           </Link>

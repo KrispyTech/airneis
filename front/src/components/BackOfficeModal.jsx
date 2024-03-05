@@ -1,3 +1,4 @@
+import routes from "@/routes"
 import { CheckCircleIcon, PencilIcon, TrashIcon, XCircleIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { useState } from "react"
@@ -31,7 +32,7 @@ const BackOfficeModal = ({ handleOpenModal, id }) => {
         ) : (
           <>
             <h1 className="border-b w-5/6 text-center text-2xl md:text-4xl">ACTIONS</h1>
-            <Link href="/" className="flex text-green-800 bg-gray border rounded-full w-fit px-2 py-1 gap-1">
+            <Link href={routes.home} className="flex text-green-800 bg-gray border rounded-full w-fit px-2 py-1 gap-1">
               <PencilIcon className="h-6 w-6 text-green-400" />
               Update
             </Link>
