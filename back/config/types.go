@@ -1,13 +1,9 @@
 package config
 
 import (
+	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-)
-
-const (
-	stagingEnv    string = "staging"
-	productionEnv string = "production"
 )
 
 var (
@@ -16,12 +12,15 @@ var (
 )
 
 var selectConfigProcessor = map[bool]func(Config) (Config, error){
-	true: func(c Config) (Config, error) {
-		return buildEnvironmentConfig(c, productionEnv, productionConfig)
-	}, //Returns the Production Config
-	false: func(c Config) (Config, error) {
-		return buildEnvironmentConfig(c, stagingEnv, stagingConfig)
-	}, //Returns  Staging Config
+	//Returns Production Config
+	true: func(config Config) (Config, error) {
+		return buildEnvironmentConfig(config, c.ProductionEnv, productionConfig)
+	},
+
+	//Returns Staging Config
+	false: func(config Config) (Config, error) {
+		return buildEnvironmentConfig(config, c.StagingEnv, stagingConfig)
+	},
 }
 
 type Config struct {
