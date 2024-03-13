@@ -1,10 +1,18 @@
 import React from "react"
-import { Text, View } from "react-native"
+import { NavigationContainer } from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import HomeScreen from "./src/screens/HomeScreen"
+import CategoriesScreen from "./src/screens/CategoriesScreen"
+import screens from "./src/utils/constants/screens"
 
+const { Navigator, Screen } = createNativeStackNavigator()
 const App = () => (
-  <View className="flex-1 items-center justify-center bg-white">
-    <Text className="text-blue-600">Hello World</Text>
-  </View>
+  <NavigationContainer>
+    <Navigator screenOptions={{ headerShown: false }}>
+      <Screen name={screens.homePage} component={HomeScreen} />
+      <Screen name={screens.categoryPage} component={CategoriesScreen} />
+    </Navigator>
+  </NavigationContainer>
 )
 
 export default App

@@ -78,6 +78,25 @@ restart-db:
 	@docker compose restart $(DATABASE_CONTAINER_NAME)
 	@echo "Restarted database"
 
+# You need to have bun installed to make it worked
+ci:
+	@echo "Running the same commands as the CI. Let's check the backend first"
+	@cd back && golangci-lint run && go build && rm airneis
+	@echo "Everything is fine for the backend. Let's test the frontend"
+	@cd front && bunx prettier . -c && bunx eslint .
+	@echo "Everything is fine for the frontend. Let's check the mobile"
+	@cd mobile && bunx prettier . -c && bunx eslint .
+	@echo "Everything you can commit now"
+
+prettier-fix:
+	@echo "You had some prettier issues let's fix it!"
+	@cd front && bunx prettier . -w
+	@cd mobile && bunx prettier . -w
+	@echo "Your prettier issues are fixed!"
+
+pf:
+	@make prettier-fix
+
 commands:
 	@echo " List of every command"
 	@echo "	- commands: shows this messages"

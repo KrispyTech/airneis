@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	log "github.com/sirupsen/logrus"
@@ -13,72 +14,20 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const (
-	stagingEnv    string = "staging"
-	productionEnv string = "production"
-)
+func InitializeConfig() (Config, error) {
+	var config Config
 
-type Config struct {
-	Env        Env `yaml:"env"`
-	Handler    ClientHandler
-	Production ProductionConfig
-	Staging    StagingConfig
-}
-
-type StagingConfig struct {
-	Env struct {
-		Name string `yaml:"name"`
-	} `yaml:"staging"`
-}
-
-type ProductionConfig struct {
-	Env struct {
-		Name string `yaml:"name"`
-	} `yaml:"production"`
-}
-
-type Env struct {
-	BuildProduction bool    `yaml:"build_production"`
-	Text            Text    `yaml:"text"`
-	Secrets         Secrets `yaml:"secrets"`
-}
-
-type ClientHandler struct {
-	httpClient  httpclient.HttpApi
-	VaultClient vault.VaultClient
-}
-
-type HashicorpVault struct {
-	AppName        string `yaml:"app_name"`
-	AuthURL        string `yaml:"authentication-url"`
-	BaseURL        string `yaml:"base_url"`
-	OrganizationID string
-	ProjectID      string
-}
-
-type Text struct {
-	HashicorpVault HashicorpVault `yaml:"vault"`
-}
-
-type Secrets struct {
-	StripeId      string `yaml:"STRIPE_ID"`
-	StripeToken   string `yaml:"STRIPE_TOKEN"`
-	SendgridId    string `yaml:"SENGDRID_ID"`
-	SendgridToken string `yaml:"SENDGRID_TOKEN"`
-}
-
-func InitializeConfig() (config Config, err error) {
 	envFile, err := os.ReadFile("config/default.yaml")
 	if err != nil {
-		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to read config file")
+		return Config{}, errors.Errorf("InitializeConfig, unable to read config file %s", err)
 	}
 
 	if err = yaml.Unmarshal(envFile, &config); err != nil {
-		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to unmarshal")
+		return Config{}, errors.Errorf("InitializeConfig, unable to unmarshall %s", err)
 	}
 
 	if err := godotenv.Load(); err != nil {
-		return Config{}, errors.Wrapf(err, "Couldn't load .env file")
+		return Config{}, errors.Errorf("Couldn't load .env file %s", err)
 	}
 
 	config.Handler, err = loadClientHandler(config)
@@ -86,41 +35,31 @@ func InitializeConfig() (config Config, err error) {
 		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load client handler")
 	}
 
-	config, err = buildEnvironmentConfig(config)
+	initializedConfig, err := selectConfigProcessor[config.Env.BuildProduction](config)
 	if err != nil {
-		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to build environment config")
+		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to build")
 	}
 
-	return
+	return initializedConfig, nil
 }
 
-func buildEnvironmentConfig(config Config) (Config, error) {
-
-	if !config.Env.BuildProduction {
-		config, err := loadConfig(config, stagingEnv)
-		if err != nil {
-			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to load staging config")
-		}
-
-		err = InitDatabase(config, stagingEnv)
-		if err != nil {
-			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize staging database")
-		}
-
-		log.Info("Staging Environment has been loaded")
-
-	} else {
-		config, err := loadConfig(config, productionEnv)
-		if err != nil {
-			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to load config")
-		}
-
-		if err = InitDatabase(config, productionEnv); err != nil {
-			return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize production database")
-		}
-
-		log.Info("Production Environment has been loaded")
+func buildEnvironmentConfig(config Config, env string, configProcessor any) (Config, error) {
+	configFile, err := os.ReadFile(fmt.Sprintf("config/%s.yaml", env))
+	if err != nil {
+		return Config{}, errors.Errorf("loadConfig, unable to read config file %s", err)
 	}
+
+	if err = yaml.Unmarshal(configFile, &configProcessor); err != nil {
+		return Config{}, errors.Errorf("loadConfig, unable to unmarshall config file %s", err)
+	}
+
+	config.Processor = configProcessor
+
+	if err = initDatabase(config, env); err != nil {
+		return Config{}, errors.Wrapf(err, "buildEnvironmentConfig, unable to initialize database")
+	}
+
+	log.Infof("%s environment has loaded", helpers.Capitalize(env))
 
 	return config, nil
 }
@@ -137,30 +76,4 @@ func loadClientHandler(config Config) (ClientHandler, error) {
 		VaultClient: vc,
 	}
 	return ch, nil
-}
-
-func loadConfig(config Config, envName string) (Config, error) {
-	var stagingConfig StagingConfig
-	var productionConfig ProductionConfig
-
-	configFile, err := os.ReadFile(fmt.Sprintf("config/%s.yaml", envName))
-	if err != nil {
-		return Config{}, errors.Wrapf(err, "loadConfig, unable to read config file")
-	}
-
-	switch envName {
-	case stagingEnv:
-		if err = yaml.Unmarshal(configFile, &stagingConfig); err != nil {
-			return Config{}, errors.Wrapf(err, "loadConfig, unable to unmarshal")
-		}
-		config.Staging = stagingConfig
-
-	default:
-		if err = yaml.Unmarshal(configFile, &productionConfig); err != nil {
-			return Config{}, errors.Wrapf(err, "loadConfig, unable to unmarshal")
-		}
-		config.Production = productionConfig
-	}
-
-	return config, nil
 }
