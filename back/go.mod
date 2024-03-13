@@ -3,7 +3,7 @@ module github.com/KrispyTech/airneis
 go 1.21.3
 
 require (
-	github.com/gofiber/fiber/v2 v2.52.0
+	github.com/gofiber/fiber/v2 v2.52.1
 	github.com/joho/godotenv v1.5.1
 	github.com/onsi/ginkgo/v2 v2.15.0
 	github.com/onsi/gomega v1.31.1
