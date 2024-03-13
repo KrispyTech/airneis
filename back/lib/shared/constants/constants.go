@@ -23,6 +23,7 @@ const (
 	ProductionEnv string = "production"
 	Started       string = "started"
 	Unmarshall    string = "unmarshall"
+	Page          string = "page"
 )
 
 // Phrases
@@ -51,3 +52,8 @@ var SelectHas = map[string]string{
 	Started: fmt.Sprint(has, Started),
 	Loaded:  fmt.Sprint(has, Loaded),
 }
+
+// Values
+const (
+	PaginationLimit int = 10
+)
