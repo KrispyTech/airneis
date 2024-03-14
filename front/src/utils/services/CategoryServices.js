@@ -1,8 +1,8 @@
-import { deleteRequest, getRequest, patchRequest, postRequest } from "@/utils/api"
 import { apiRoutes } from "@/utils/constants"
+import { del, get, patch, post } from "@/utils/httpClient"
 
-export const getCategories = async () => await getRequest(apiRoutes.categories)
-export const getCategoryById = async id => await getRequest(apiRoutes.categoryId(id))
-export const createCategory = async (category, token) => await postRequest(apiRoutes.categories, token, category)
-export const deleteCategory = async (id, token) => await deleteRequest(apiRoutes.categoryId(id), token)
-export const updateCategory = async (token, id, updatedCategory) => await patchRequest(apiRoutes.categoryId(id), token, updatedCategory)
+export const getCategories = async () => await get(apiRoutes.categories)
+export const getCategoryById = async id => await get(apiRoutes.categoryId(id))
+export const createCategory = async (category, token) => await post(apiRoutes.categories, token, category)
+export const deleteCategory = async (id, token) => await del(apiRoutes.categoryId(id), token)
+export const updateCategory = async (token, id, updatedCategory) => await patch(apiRoutes.categoryId(id), token, updatedCategory)

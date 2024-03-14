@@ -1,6 +1,6 @@
 const config = {
   api: {
-    url: process.env.api_url
+    url: "https://back.airneis.orb.local"
   }
 }
 
