@@ -20,8 +20,8 @@ const handler = async (req, res) => {
     const category = await createCategory(SAMPLE_CATEGORY)
     console.log("Result of post category", category)
   } catch (e) {
+    // As it is a test endpoint we need to have some debug logs
     console.log("Post category failed", e.message, e.path)
-
     res.status(500).send("Failed at POST")
 
     return
@@ -58,7 +58,7 @@ const handler = async (req, res) => {
       name: "Updated category"
     }
 
-    const updateCategoryResult = updateCategory(SAMPLE_CATEGORY.ID, updateCategoryInput)
+    const updateCategoryResult = await updateCategory(SAMPLE_CATEGORY.ID, updateCategoryInput)
     console.log("Result of get categories", updateCategoryResult)
   } catch (e) {
     console.log("Get categories failed", e)
@@ -71,7 +71,7 @@ const handler = async (req, res) => {
   console.log("_____Testing DELETE_____")
 
   try {
-    const deletedCategory = deleteCategory(SAMPLE_CATEGORY.ID)
+    const deletedCategory = await deleteCategory(SAMPLE_CATEGORY.ID)
     console.log("Result of get categories", deletedCategory)
   } catch (e) {
     console.log("Get categories failed", e)
