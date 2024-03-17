@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/KrispyTech/airneis/config"
 	c "github.com/KrispyTech/airneis/lib/shared/constants"
+	"github.com/KrispyTech/airneis/pkg/config"
 	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
 )
