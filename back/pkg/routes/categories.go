@@ -6,11 +6,11 @@ import (
 )
 
 const (
-	categoriesRoute       = "/categories"
-	categoriesRouteWithID = "/categories/:categoryID"
+	categoriesRoute       = "categories"
+	categoriesRouteWithID = "categories/:categoryID"
 )
 
-func setCategoriesRoutes(app *fiber.App) {
+func setCategoriesRoutes(app fiber.Router) {
 	app.Get(categoriesRoute, controllers.GetCategories)
 	app.Get(categoriesRouteWithID, controllers.GetCategoryByID)
 	app.Post(categoriesRoute, controllers.CreateCategory)
