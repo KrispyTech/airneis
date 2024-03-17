@@ -66,56 +66,9 @@ linters-settings:
         show-ignored: true
         # Audit mode enables addition checks that for normal code analysis might be too nosy.
         audit: true
-      G101:
-        # Regexp pattern for variables and constants to find.
-        # Default: "(?i)passwd|pass|password|pwd|secret|token|pw|apiKey|bearer|cred"
-        pattern: "(?i)example"
-        # If true, complain about all cases (even with low entropy).
-        # Default: false
-        ignore_entropy: false
-        # Maximum allowed entropy of the string.
-        # Default: "80.0"
-        entropy_threshold: "80.0"
-        # Maximum allowed value of entropy/string length.
-        # Is taken into account if entropy >= entropy_threshold/2.
-        # Default: "3.0"
-        per_char_threshold: "3.0"
-        # Calculate entropy for first N chars of the string.
-        # Default: "16"
-        truncate: "32"
-      # Additional functions to ignore while checking unhandled errors.
-      # Following functions always ignored:
-      #   bytes.Buffer:
-      #     - Write
-      #     - WriteByte
-      #     - WriteRune
-      #     - WriteString
-      #   fmt:
-      #     - Print
-      #     - Printf
-      #     - Println
-      #     - Fprint
-      #     - Fprintf
-      #     - Fprintln
-      #   strings.Builder:
-      #     - Write
-      #     - WriteByte
-      #     - WriteRune
-      #     - WriteString
-      #   io.PipeWriter:
-      #     - CloseWithError
-      #   hash.Hash:
-      #     - Write
-      #   os:
-      #     - Unsetenv
-      # Default: {}
       G104:
         fmt:
           - Fscanf
-      G111:
-        # Regexp pattern to find potential directory traversal.
-        # Default: "http\\.Dir\\(\"\\/\"\\)|http\\.Dir\\('\\/'\\)"
-        pattern: "custom\\.Dir\\(\\)"
       # Maximum allowed permissions mode for os.Mkdir and os.MkdirAll
       # Default: "0750"
       G301: "0750"
