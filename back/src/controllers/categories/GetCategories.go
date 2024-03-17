@@ -2,11 +2,13 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/KrispyTech/airneis/config"
-	"github.com/KrispyTech/airneis/lib/shared/constants"
-	model "github.com/KrispyTech/airneis/src/db/models"
-	"github.com/gofiber/fiber/v2"
+
 	"strconv"
+
+	"github.com/KrispyTech/airneis/lib/shared/constants"
+	"github.com/KrispyTech/airneis/pkg/config"
+	model "github.com/KrispyTech/airneis/src/models"
+	"github.com/gofiber/fiber/v2"
 )
 
 func GetCategories(ctx *fiber.Ctx) error {
