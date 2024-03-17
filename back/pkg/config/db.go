@@ -6,7 +6,7 @@ import (
 
 	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-	model "github.com/KrispyTech/airneis/src/db/models"
+	model "github.com/KrispyTech/airneis/src/models"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 

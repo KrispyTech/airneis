@@ -3,6 +3,7 @@ package main
 import (
 	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/pkg/config"
+	"github.com/KrispyTech/airneis/pkg/routes"
 	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
 )
@@ -17,8 +18,7 @@ func main() {
 	app := fiber.New()
 	log.Info("Backend application, fiber started")
 
-	SetupRoutes(app)
-
+	routes.SetRoutes(app)
 	log.Info("Routes defined")
 	log.Fatal(app.Listen(c.Port))
 }
