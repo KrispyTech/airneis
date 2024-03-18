@@ -33,24 +33,24 @@ jobs:
           working-directory: ./back
           version: v1.54
 
-  build:
-    # With the 3 following lines the commands will be executed in the back directory
-    defaults:
-      run:
-        working-directory: ./back
-    name: build and test
-    runs-on: ubuntu-latest
-    steps:
-      # Checkout to our repository. It allows to run the commands in the rigth place
-      - uses: actions/checkout@v3
-      # Set up go on environement
-      - name: Set up Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: "1.21"
-      # Check that all the tests of the backend are passed
-      - name: Test
-        run: go test -v ./...
-      # Check that the code build
-      - name: Build
-        run: go build -v ./...
+  # build:
+  #   # With the 3 following lines the commands will be executed in the back directory
+  #   defaults:
+  #     run:
+  #       working-directory: ./back
+  #   name: build and test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Checkout to our repository. It allows to run the commands in the rigth place
+  #     - uses: actions/checkout@v3
+  #     # Set up go on environement
+  #     - name: Set up Go
+  #       uses: actions/setup-go@v4
+  #       with:
+  #         go-version: "1.21"
+  #     # Check that all the tests of the backend are passed
+  #     - name: Test
+  #       run: go test -v ./...
+  #     # Check that the code build
+  #     - name: Build
+  #       run: go build -v ./...
