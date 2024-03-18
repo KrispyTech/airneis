@@ -5,7 +5,6 @@ import "gorm.io/gorm"
 type Product struct {
 	gorm.Model
 	Name                    string         `json:"name"`
-	Slug                    string         `json:"slug"                    gorm:"unique"`
 	CategoryID              uint           `json:"categoryID"`
 	Category                Category       `json:"category"`
 	PriceWithoutTaxes       int            `json:"PriceWithoutTaxes"`
