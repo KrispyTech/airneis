@@ -30,14 +30,15 @@ func GetCategories(ctx *fiber.Ctx) error {
 func queryCategories(page int, ctx *fiber.Ctx) ([]model.Category, error) {
 	pagLimit := constants.PaginationLimit
 	offset := (page - 1) * pagLimit
+	db := config.Database
 
-	categories := make([]model.Category, pagLimit)
-	errQuery := config.Database.Limit(pagLimit).Offset(offset).Order("order_of_display asc").Find(&categories)
-	if errQuery.Error != nil {
+	cats := make([]model.Category, pagLimit)
+	err := db.Limit(pagLimit).Preload("Products").Offset(offset).Order("order_of_display asc").Find(&cats)
+	if err.Error != nil {
 		ctx.Status(constants.BadRequestStatus)
 
-		return categories, ctx.SendString(constants.BadRequestMessage)
+		return cats, ctx.SendString(constants.BadRequestMessage)
 	}
 
-	return categories, nil
+	return cats, nil
 }
