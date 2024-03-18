@@ -28,7 +28,7 @@ jobs:
           cache: true
       # Check that the code is clean
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v4
         with:
           working-directory: ./back
           version: v1.54
