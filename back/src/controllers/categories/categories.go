@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+
 	"github.com/KrispyTech/airneis/pkg/config"
 
 	"github.com/KrispyTech/airneis/lib/shared/helpers"

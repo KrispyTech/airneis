@@ -14,6 +14,6 @@ func SetupProductsRoutes(app fiber.Router) {
 	app.Get(productsRoute, controllers.GetProducts)
 	app.Get(productsRouteWithID, controllers.GetProductById)
 	app.Post(productsRoute, controllers.CreateProduct)
-	app.Patch(productsRouteWithID, controllers.UpdateProduct)
+	app.Patch(productsRouteWithID, controllers.EditProduct)
 	app.Delete(productsRouteWithID, controllers.DeleteProduct)
 }

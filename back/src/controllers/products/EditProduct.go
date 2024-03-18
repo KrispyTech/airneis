@@ -1,16 +1,15 @@
 package controllers
 
 import (
-	"gorm.io/gorm/clause"
-
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/pkg/config"
+	"github.com/KrispyTech/airneis/pkg/validator"
 	model "github.com/KrispyTech/airneis/src/models"
 	"github.com/gofiber/fiber/v2"
 )
 
-func DeleteProduct(ctx *fiber.Ctx) error {
+func EditProduct(ctx *fiber.Ctx) error {
 	var product model.Product
 
 	if err := selectProductByID(&product, ctx); err != nil {
@@ -20,22 +19,24 @@ func DeleteProduct(ctx *fiber.Ctx) error {
 			ctx)
 	}
 
-	// Set the order of priority to nil, so it become available for another as there is a unique constraint
-	product.OrderOfPriority = nil
-
-	if err := config.Database.Save(&product).Error; err != nil {
+	if err := ctx.BodyParser(&product); err != nil {
 		return helpers.SetStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)
 	}
 
-	productID := ctx.Params("productID")
-
-	if err := config.Database.Clauses(clause.Returning{}).Delete(&product, productID).Error; err != nil {
+	if err := validator.ValidateInput(product); err != nil {
 		return helpers.SetStatusAndMessages(
 			constants.BadRequestStatus,
-			constants.BadRequestMessage,
+			err.Error(),
+			ctx)
+	}
+
+	if err := config.Database.Save(&product).Error; err != nil {
+		return helpers.SetStatusAndMessages(
+			constants.InternalServerErrorStatus,
+			constants.InternalServerErrorMessage,
 			ctx)
 	}
 
