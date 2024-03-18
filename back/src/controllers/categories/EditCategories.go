@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"strconv"
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/pkg/config"
@@ -12,29 +12,27 @@ import (
 func EditCategory(ctx *fiber.Ctx) error {
 	var category model.Category
 
-	categoryID, errConvertToString := strconv.Atoi(ctx.Params("categoryID"))
-	if errConvertToString != nil {
-		ctx.Status(constants.BadRequestStatus)
-
-		return ctx.SendString(constants.BadRequestMessage)
-	}
+	categoryID := ctx.Params("categoryID")
 
 	if errGet := config.Database.First(&category, categoryID).Error; errGet != nil {
-		ctx.Status(constants.NotFoundStatus)
-
-		return ctx.SendString(constants.NotFoundMessage)
+		return helpers.SetStatusAndMessages(
+			constants.NotFoundStatus,
+			constants.NotFoundMessage,
+			ctx)
 	}
 
 	if errParsing := ctx.BodyParser(&category); errParsing != nil {
-		ctx.Status(constants.BadRequestStatus)
-
-		return ctx.SendString(constants.BadRequestMessage)
+		return helpers.SetStatusAndMessages(
+			constants.BadRequestStatus,
+			constants.BadRequestMessage,
+			ctx)
 	}
 
 	if err := config.Database.Save(&category).Error; err != nil {
-		ctx.Status(constants.InternalServerErrorStatus)
-
-		return ctx.SendString(constants.InternalServerErrorMessage)
+		return helpers.SetStatusAndMessages(
+			constants.InternalServerErrorStatus,
+			constants.InternalServerErrorMessage,
+			ctx)
 	}
 
 	return sendCategory(ctx, category)

@@ -3,6 +3,8 @@ package controllers
 import (
 	"gorm.io/gorm/clause"
 
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
+
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/pkg/config"
 	model "github.com/KrispyTech/airneis/src/models"
@@ -14,24 +16,27 @@ func DeleteCategory(ctx *fiber.Ctx) error {
 	categoryId := ctx.Params("categoryID")
 
 	if err := config.Database.First(&category, categoryId).Error; err != nil {
-		ctx.Status(constants.NotFoundStatus)
-
-		return ctx.SendString(constants.NotFoundMessage)
+		return helpers.SetStatusAndMessages(
+			constants.NotFoundStatus,
+			constants.NotFoundMessage,
+			ctx)
 	}
 
 	// Set the order of display to nil, so it become available for another as there is a unique constraint
 	category.OrderOfDisplay = nil
 
 	if err := config.Database.Save(&category).Error; err != nil {
-		ctx.Status(constants.BadRequestStatus)
-
-		return ctx.SendString(constants.BadRequestMessage)
+		return helpers.SetStatusAndMessages(
+			constants.BadRequestStatus,
+			constants.BadRequestMessage,
+			ctx)
 	}
 
 	if err := config.Database.Clauses(clause.Returning{}).Delete(&category, categoryId).Error; err != nil {
-		ctx.Status(constants.BadRequestStatus)
-
-		return ctx.SendString(constants.BadRequestMessage)
+		return helpers.SetStatusAndMessages(
+			constants.BadRequestStatus,
+			constants.BadRequestMessage,
+			ctx)
 	}
 
 	return sendCategory(ctx, category)

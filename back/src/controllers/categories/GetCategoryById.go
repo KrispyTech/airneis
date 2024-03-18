@@ -3,6 +3,8 @@ package controllers
 import (
 	"encoding/json"
 
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
+
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/pkg/config"
 	model "github.com/KrispyTech/airneis/src/models"
@@ -14,16 +16,18 @@ func GetCategoryByID(ctx *fiber.Ctx) error {
 	categoryID := ctx.Params("categoryID")
 
 	if err := config.Database.First(&category, categoryID).Error; err != nil {
-		ctx.Status(constants.NotFoundStatus)
-
-		return ctx.SendString(constants.NotFoundMessage)
+		return helpers.SetStatusAndMessages(
+			constants.InternalServerErrorStatus,
+			constants.InternalServerErrorMessage,
+			ctx)
 	}
 
 	jsoncCategory, err := json.Marshal(category)
 	if err != nil {
-		ctx.Status(constants.InternalServerErrorStatus)
-
-		return ctx.SendString(constants.InternalServerErrorMessage)
+		return helpers.SetStatusAndMessages(
+			constants.InternalServerErrorStatus,
+			constants.InternalServerErrorMessage,
+			ctx)
 	}
 
 	return ctx.Send(jsoncCategory)
