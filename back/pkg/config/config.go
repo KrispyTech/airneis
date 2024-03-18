@@ -14,10 +14,15 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+const (
+	defaultConfig = "pkg/config/default.yaml"
+	configPath    = "pkg/config"
+)
+
 func InitializeConfig() (Config, error) {
 	var config Config
 
-	envFile, err := os.ReadFile("config/default.yaml")
+	envFile, err := os.ReadFile(defaultConfig)
 	if err != nil {
 		return Config{}, errors.Errorf("InitializeConfig, unable to read config file %s", err)
 	}
@@ -44,7 +49,7 @@ func InitializeConfig() (Config, error) {
 }
 
 func buildEnvironmentConfig(config Config, env string, configProcessor any) (Config, error) {
-	configFile, err := os.ReadFile(fmt.Sprintf("config/%s.yaml", env))
+	configFile, err := os.ReadFile(fmt.Sprintf("%s/%s.yaml", configPath, env))
 	if err != nil {
 		return Config{}, errors.Errorf("loadConfig, unable to read config file %s", err)
 	}

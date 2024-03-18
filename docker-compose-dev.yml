@@ -1,5 +1,17 @@
 version: "3.8"
 services:
+  db:
+    image: postgres:16.1
+    restart: always
+    env_file:
+      - .env.local
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=airneis
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=airneis
+
   front:
     build:
       target: dev
@@ -12,15 +24,3 @@ services:
       target: dev
     volumes:
       - ./back:/build
-
-  db:
-    image: postgres:16.1
-    restart: always
-    env_file:
-      - .env.local
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=airneis
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=airneis
