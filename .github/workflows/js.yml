@@ -1,38 +1,38 @@
-# name: "js"
+name: "js"
 
-# on:
-#   # If a code is pushed straight into staging we need it to have the same tests as the code pushed via a pr
-#   push:
-#     branches: ["staging", "main"]
-#   pull_request:
-#     branches: ["staging", "main"]
+on:
+  # If a code is pushed straight into staging we need it to have the same tests as the code pushed via a pr
+  push:
+    branches: ["staging", "main"]
+  pull_request:
+    branches: ["staging", "main"]
 
-# jobs:
-#   es-lint-front:
-#     # With the 3 following lines the commands will be executed in the front directory
-#     defaults:
-#       run:
-#         working-directory: ./front
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: oven-sh/setup-bun@v1
-#       - run: bun install
-#       # Run the linter
-#       - run: bun run lint
-#       # Run prettier
-#       - run: bun run prettier -c .
-#   es-lint-mobile:
-#     # With the 3 following lines the commands will be executed in the front directory
-#     defaults:
-#       run:
-#         working-directory: ./mobile
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v3
-#       - uses: oven-sh/setup-bun@v1
-#       - run: bun install
-#       # Run the linter
-#       - run: bunx eslint .
-#       # Run prettier
-#       - run:  bun run prettier -c .
+jobs:
+  es-lint-front:
+    # With the 3 following lines the commands will be executed in the front directory
+    defaults:
+      run:
+        working-directory: ./front
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      # Run the linter
+      - run: bun run lint
+      # Run prettier
+      - run: bun run prettier -c .
+  es-lint-mobile:
+    # With the 3 following lines the commands will be executed in the front directory
+    defaults:
+      run:
+        working-directory: ./mobile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      # Run the linter
+      - run: bunx eslint .
+      # Run prettier
+      - run:  bun run prettier -c .
