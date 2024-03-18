@@ -7,27 +7,23 @@ import (
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
+	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
 
-	"github.com/joho/godotenv"
-	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
+
+	"github.com/pkg/errors"
+)
+
+const (
+	defaultConfig = "pkg/config/default.yaml"
+	configPath    = "pkg/config"
 )
 
 func InitializeConfig() (Config, error) {
-	var config Config
-
-	envFile, err := os.ReadFile("config/default.yaml")
+	config, err := loadConfig()
 	if err != nil {
-		return Config{}, errors.Errorf("InitializeConfig, unable to read config file %s", err)
-	}
-
-	if err = yaml.Unmarshal(envFile, &config); err != nil {
-		return Config{}, errors.Errorf("InitializeConfig, unable to unmarshall %s", err)
-	}
-
-	if err := godotenv.Load(); err != nil {
-		return Config{}, errors.Errorf("Couldn't load .env file %s", err)
+		return Config{}, errors.Wrapf(err, "InitializeConfig, unable to load config")
 	}
 
 	config.Handler, err = loadClientHandler(config)
@@ -43,8 +39,27 @@ func InitializeConfig() (Config, error) {
 	return initializedConfig, nil
 }
 
+func loadConfig() (Config, error) {
+	var config Config
+
+	envFile, err := os.ReadFile(defaultConfig)
+	if err != nil {
+		return Config{}, errors.Errorf("InitializeConfig, unable to read config file %s", err)
+	}
+
+	if err = yaml.Unmarshal(envFile, &config); err != nil {
+		return Config{}, errors.Errorf("InitializeConfig, unable to unmarshall %s", err)
+	}
+
+	if err := godotenv.Load(); err != nil {
+		return Config{}, errors.Errorf("Couldn't load .env file %s", err)
+	}
+
+	return config, nil
+}
+
 func buildEnvironmentConfig(config Config, env string, configProcessor any) (Config, error) {
-	configFile, err := os.ReadFile(fmt.Sprintf("config/%s.yaml", env))
+	configFile, err := os.ReadFile(fmt.Sprintf("%s/%s.yaml", configPath, env))
 	if err != nil {
 		return Config{}, errors.Errorf("loadConfig, unable to read config file %s", err)
 	}
@@ -65,8 +80,8 @@ func buildEnvironmentConfig(config Config, env string, configProcessor any) (Con
 }
 
 func loadClientHandler(config Config) (ClientHandler, error) {
-	httpClient := httpclient.InitializeHttpApi()
-	vc, err := vault.InitializeVaultApi(httpClient, vault.Vault(config.Env.Text.HashicorpVault))
+	httpClient := httpclient.InitializeHTTPClient()
+	vc, err := vault.InitializeVaultAPI(httpClient, vault.Vault(config.Env.Text.HashicorpVault))
 	if err != nil {
 		return ClientHandler{}, errors.Wrapf(err, "loadClientHandler, unable to create vault client")
 	}
@@ -75,5 +90,6 @@ func loadClientHandler(config Config) (ClientHandler, error) {
 		httpClient:  httpClient,
 		VaultClient: vc,
 	}
+
 	return ch, nil
 }

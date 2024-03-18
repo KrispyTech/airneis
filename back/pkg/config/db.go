@@ -6,7 +6,7 @@ import (
 
 	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-	model "github.com/KrispyTech/airneis/src/db/models"
+	model "github.com/KrispyTech/airneis/src/models"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 
@@ -49,7 +49,8 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 		return &gorm.DB{}, errors.Wrapf(err, "InitNeonDatabase, unable to get neon credentials")
 	}
 
-	databaseURI := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require", neonCred.Username, neonCred.Secret, neonCred.Server)
+	databaseURI := fmt.Sprintf("postgresql://%s:%s@%s?sslmode=require",
+		neonCred.Username, neonCred.Secret, neonCred.Server)
 
 	Database, err = gorm.Open(postgres.Open(databaseURI), &gorm.Config{})
 	if err != nil {
@@ -60,9 +61,27 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 }
 
 func initDatabase(config Config, env string) (err error) {
+	databaseURI := os.Getenv("DB_URI")
+	err = loadDatabase(config, databaseURI, env)
+	if err != nil {
+		return errors.Errorf("initDatabase, unable pick")
+	}
+
+	if err := Database.AutoMigrate(&model.Product{},
+		&model.Address{}, &model.Category{}, &model.Contact{},
+		&model.Material{}, &model.Order{}, &model.Product{},
+		&model.Status{}, &model.User{}); err != nil {
+		return errors.Errorf("initDatabase, unable to auto migrate")
+	}
+
+	log.Info("Automigrations have been started")
+
+	return nil
+}
+
+func loadDatabase(config Config, databaseURI, env string) (err error) {
 	switch env {
 	case c.StagingEnv:
-		databaseURI := os.Getenv("DB_URI")
 		if databaseURI == "" {
 			return errors.Errorf("DB_URI missing")
 		}
@@ -79,16 +98,5 @@ func initDatabase(config Config, env string) (err error) {
 		}
 	}
 
-	log.Info("Database has been loaded")
-
-	if err := Database.AutoMigrate(&model.Product{},
-		&model.Address{}, &model.Category{}, &model.Contact{},
-		&model.Material{}, &model.Order{}, &model.Product{},
-		&model.Status{}, &model.User{}); err != nil {
-		return errors.Errorf("initDatabase, unable to auto migrate")
-	}
-
-	log.Info("Automigrations have been started")
-
-	return
+	return nil
 }
