@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"encoding/json"
-
 	"strconv"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
@@ -19,20 +17,25 @@ func GetCategories(ctx *fiber.Ctx) error {
 		return ctx.SendString(constants.BadRequestMessage)
 	}
 
-	var categories []model.Category
-	errQuery := config.Database.Limit(constants.PaginationLimit).Offset((page - 1) * constants.PaginationLimit).Order("order_of_display asc").Find(&categories).Error
-	if errQuery != nil {
-		ctx.Status(constants.BadRequestStatus)
-
-		return ctx.SendString(constants.BadRequestMessage)
-	}
-
-	jsonCategories, errMarshal := json.Marshal(categories)
-	if errMarshal != nil {
-		ctx.Status(constants.InternalServerErrorStatus)
-
+	categories, err := queryCategories(page, ctx)
+	if err != nil {
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}
 
-	return ctx.Send(jsonCategories)
+	return sendCategories(ctx, categories)
+}
+
+func queryCategories(page int, ctx *fiber.Ctx) ([]model.Category, error) {
+	pagLimit := constants.PaginationLimit
+	offset := (page - 1) * pagLimit
+
+	categories := make([]model.Category, pagLimit)
+	errQuery := config.Database.Limit(pagLimit).Offset(offset).Order("order_of_display asc").Find(&categories).Error
+	if errQuery != nil {
+		ctx.Status(constants.BadRequestStatus)
+
+		return categories, ctx.SendString(constants.BadRequestMessage)
+	}
+
+	return categories, nil
 }

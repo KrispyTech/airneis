@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"encoding/json"
-
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/pkg/config"
 	model "github.com/KrispyTech/airneis/src/models"
@@ -24,12 +22,5 @@ func CreateCategory(ctx *fiber.Ctx) error {
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}
 
-	categoryJSON, err := json.Marshal(category)
-	if err != nil {
-		ctx.Status(constants.InternalServerErrorStatus)
-
-		return ctx.SendString(constants.InternalServerErrorMessage)
-	}
-
-	return ctx.Send(categoryJSON)
+	return sendCategory(ctx, category)
 }
