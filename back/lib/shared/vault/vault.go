@@ -163,7 +163,8 @@ func (vc *VaultClient) ReadSecret(secretName string) (secret string, err error) 
 		return "", errors.Errorf("%s, ReadSecret, unable to get request access key", err)
 	}
 
-	headers := make(map[string]string, 2)
+	headerLength := 2
+	headers := make(map[string]string, headerLength)
 	headers["content-type"] = "application/json"
 	headers["Authorization"] = fmt.Sprintf("Bearer %s", token.AccessToken)
 

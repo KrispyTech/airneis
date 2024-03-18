@@ -18,5 +18,5 @@ type Address struct {
 	LastName    string  `json:"lastName"`
 	PhoneNumber string  `json:"phoneNumber"`
 	Comment     *string `json:"comment"`
-	IsActive    bool    `json:"isActive" gorm:"default:true"`
+	IsActive    bool    `json:"isActive"    gorm:"default:true"`
 }

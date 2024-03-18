@@ -2,6 +2,8 @@ package httpclient
 
 import (
 	"errors"
+
+	"github.com/KrispyTech/airneis/lib/shared/constants"
 )
 
 type MockResponse struct {
@@ -16,14 +18,14 @@ type HttpClientMock struct {
 
 func FailedResponse() MockResponse {
 	return MockResponse{
-		Status: 400,
+		Status: constants.BadRequestStatus,
 		Data:   []byte(""),
 	}
 }
 
 func OKResp(payload []byte) MockResponse {
 	return MockResponse{
-		Status: 400,
+		Status: constants.BadRequestStatus,
 		Data:   payload,
 	}
 }

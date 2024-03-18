@@ -9,9 +9,10 @@ import (
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	log "github.com/sirupsen/logrus"
 
+	"gopkg.in/yaml.v3"
+
 	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
-	"gopkg.in/yaml.v3"
 )
 
 const (
@@ -80,5 +81,6 @@ func loadClientHandler(config Config) (ClientHandler, error) {
 		httpClient:  httpClient,
 		VaultClient: vc,
 	}
+
 	return ch, nil
 }

@@ -15,12 +15,14 @@ func GetCategoryByID(ctx *fiber.Ctx) error {
 
 	if err := config.Database.First(&category, categoryID).Error; err != nil {
 		ctx.Status(constants.NotFoundStatus)
+
 		return ctx.SendString(constants.NotFoundMessage)
 	}
 
 	jsoncCategory, err := json.Marshal(category)
 	if err != nil {
 		ctx.Status(constants.InternalServerErrorStatus)
+
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}
 
