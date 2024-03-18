@@ -16,16 +16,22 @@ type Category struct {
 }
 
 func CreateCategories(hc httpclient.HttpApi) error {
-	for i := 0; i < 100; i++ {
-		categoryID := uint(i)
+	amountToAdd := 30
+
+	for count := 0; count < amountToAdd; count++ {
+		categoryID := uint(count)
 		category := Category{
-			Name:           fmt.Sprintf("Category Name %d", i),
-			ThumbnailUrl:   fmt.Sprintf("CategoryURL%d.com", i),
-			Slug:           fmt.Sprintf("Category Slug %d", i),
+			Name:           fmt.Sprintf("Category Name %d", count),
+			ThumbnailUrl:   fmt.Sprintf("CategoryURL%d.com", count),
+			Slug:           fmt.Sprintf("Category Slug %d", count),
 			OrderOfDisplay: &categoryID,
 		}
 
 		bodyToSend, err := json.Marshal(category)
+		if err != nil {
+			return fmt.Errorf("CreateCategories, Unable to marshall")
+		}
+
 		headers := make(map[string]string)
 		headers["content-type"] = "application/json"
 
