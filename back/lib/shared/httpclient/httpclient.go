@@ -12,12 +12,12 @@ import (
 const methodGet string = "GET"
 const methodPost string = "POST"
 
-type HttpApi interface {
+type Req interface {
 	Get(url string, headers map[string]string) ([]byte, int, error)
 	Post(url string, headers map[string]string, jsonBody []byte) ([]byte, int, error)
 }
 
-type HttpClient struct {
+type HTTPClient struct {
 	api *http.Client
 }
 
@@ -29,8 +29,8 @@ type Request struct {
 	URL        string
 }
 
-func InitializeHTTPClient() HttpApi {
-	return &HttpClient{api: &http.Client{}}
+func InitializeHTTPClient() Req {
+	return &HTTPClient{api: &http.Client{}}
 }
 
 func PrepareBody(reqBody interface{}) (body []byte, err error) {
@@ -42,11 +42,11 @@ func PrepareBody(reqBody interface{}) (body []byte, err error) {
 	return body, nil
 }
 
-func (c *HttpClient) Get(url string, headers map[string]string) (body []byte, status int, err error) {
+func (c *HTTPClient) Get(url string, headers map[string]string) (body []byte, status int, err error) {
 	return c.makeRequest(Request{URL: url, Method: methodGet, Headers: headers})
 }
 
-func (c *HttpClient) Post(url string, headers map[string]string, jsonBody []byte) (body []byte, status int, err error) {
+func (c *HTTPClient) Post(url string, headers map[string]string, jsonBody []byte) (body []byte, status int, err error) {
 	return c.makeRequest(Request{URL: url, Method: methodPost, Headers: headers, Body: jsonBody})
 }
 
@@ -58,7 +58,7 @@ func addHeaders(req *http.Request, headers map[string]string) *http.Request {
 	return req
 }
 
-func (c *HttpClient) makeRequest(r Request) (body []byte, statusCode int, err error) {
+func (c *HTTPClient) makeRequest(r Request) (body []byte, statusCode int, err error) {
 	req, err := http.NewRequest(r.Method, r.URL, bytes.NewReader(r.Body))
 	if err != nil {
 		return nil, 0, errors.Errorf("makeRequest,unable to make new request:  %s", err)

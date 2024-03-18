@@ -24,7 +24,7 @@ type Vault struct {
 }
 
 type VaultClient struct {
-	HTTPAPI httpclient.HttpApi
+	HTTPAPI httpclient.Req
 	Vault   Vault
 }
 
@@ -66,7 +66,7 @@ type Version struct {
 	CreatedBy CreatedBy `json:"created_by"`
 }
 
-func InitializeVaultAPI(myHTTPAPI httpclient.HttpApi, vaultConfig Vault) (VaultClient, error) {
+func InitializeVaultAPI(myHTTPAPI httpclient.Req, vaultConfig Vault) (VaultClient, error) {
 	vault, err := getAppVariables()
 	if err != nil {
 		return VaultClient{}, errors.Wrapf(err, "InitializeVaultAPI, unable to get app variables")

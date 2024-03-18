@@ -47,7 +47,7 @@ type Env struct {
 }
 
 type ClientHandler struct {
-	httpClient  httpclient.HttpApi
+	httpClient  httpclient.Req
 	VaultClient vault.VaultClient
 }
 
