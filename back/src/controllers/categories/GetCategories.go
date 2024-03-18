@@ -32,7 +32,7 @@ func queryCategories(page int, ctx *fiber.Ctx) ([]model.Category, error) {
 	offset := (page - 1) * pagLimit
 
 	categories := make([]model.Category, pagLimit)
-	errQuery := config.Database.Limit(pagLimit).Offset(offset).Order("order_of_display asc").Find(&categories)
+	errQuery := config.Database.Limit(pagLimit).Preload("Products").Offset(offset).Order("order_of_display asc").Find(&categories)
 	if errQuery.Error != nil {
 		ctx.Status(constants.BadRequestStatus)
 

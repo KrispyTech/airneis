@@ -38,5 +38,5 @@ func sendCategories(ctx *fiber.Ctx, categories []model.Category) error {
 func SelectCategoryByID(category *model.Category, ctx *fiber.Ctx) error {
 	categoryID := ctx.Params("categoryID")
 
-	return config.Database.First(&category, categoryID).Error
+	return config.Database.Preload("Products").First(&category, categoryID).Error
 }

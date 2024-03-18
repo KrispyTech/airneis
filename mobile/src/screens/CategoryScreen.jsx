@@ -32,7 +32,7 @@ const CategoryScreen = props => {
   }, [id])
 
   if (hadError) {
-    return <ErrorScreen navigation={navigation} text={errors.categories.unableToLoad} />
+    return <ErrorScreen navigation={navigation} text={errors.category.unableToLoad} />
   }
 
   return (
@@ -50,11 +50,12 @@ const CategoryScreen = props => {
         <View className="px-3 py-8">
           <Text className="text-lg font-medium uppercase">{category.description}</Text>
           <View className="py-8 gap-5">
-            {category.products.map(product => (
-              <View key={`product${product.ID}`}>
-                <ProductCard product={product} />
-              </View>
-            ))}
+            {category.products &&
+              category.products.map(product => (
+                <View key={`product${product.ID}`}>
+                  <ProductCard product={product} />
+                </View>
+              ))}
           </View>
         </View>
       </ScrollView>

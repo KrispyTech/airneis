@@ -1,5 +1,6 @@
 const apiRoutes = {
-  categories: "/categories"
+  categories: "categories",
+  categoryId: id => `${apiRoutes.categories}/${id}`
 }
 
 export default apiRoutes

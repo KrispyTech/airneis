@@ -3,7 +3,7 @@ import mobileConfig from "../../mobileConfig"
 
 const ProductCard = props => {
   const {
-    product: { name, thumbnailUrl, priceWithTaxes }
+    product: { name, thumbnailURL, priceWithTaxes }
   } = props
 
   return (
@@ -12,7 +12,7 @@ const ProductCard = props => {
         style={mobileConfig.images.fullScreenImageMd}
         className="rounded box-shadow-xl border "
         source={{
-          uri: thumbnailUrl
+          uri: thumbnailURL
         }}
       />
       <View className="flex flex-row justify-between">
