@@ -24,12 +24,12 @@ func CreateCategory(ctx *fiber.Ctx) error {
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}
 
-	categoryJson, err := json.Marshal(category)
+	categoryJSON, err := json.Marshal(category)
 	if err != nil {
 		ctx.Status(constants.InternalServerErrorStatus)
 
 		return ctx.SendString(constants.InternalServerErrorMessage)
 	}
 
-	return ctx.Send(categoryJson)
+	return ctx.Send(categoryJSON)
 }

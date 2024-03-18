@@ -11,7 +11,7 @@ type Product struct {
 	PriceWithoutTaxes       int            `json:"PriceWithoutTaxes"`
 	PriceWithTaxes          int            `json:"priceWithTaxes"`
 	Description             string         `json:"description"`
-	ThumbnailUrl            string         `json:"thumbnailUrl"`
+	ThumbnailURL            string         `json:"thumbnailURL"`
 	OutOfStock              string         `json:"outOfStock"              gorm:"default:false"`
 	Materials               []Material     `json:"materials"               gorm:"many2many:materials_of_products"`
 	IsHighlanderOfTheMoment bool           `json:"isHighlanderOfTheMoment" gorm:"default:false"`

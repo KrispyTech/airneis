@@ -11,7 +11,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-type VaultApi interface {
+type VaultAPI interface {
 	ReadSecret(secretName string) (secret string, err error)
 }
 
@@ -24,7 +24,7 @@ type Vault struct {
 }
 
 type VaultClient struct {
-	HttpApi httpclient.HttpApi
+	HTTPAPI httpclient.HttpApi
 	Vault   Vault
 }
 
@@ -42,35 +42,34 @@ type TokenRequestBody struct {
 }
 
 type AppSecret struct {
-	Secret struct {
-		CreatedAt time.Time `json:"created_at"`
-		CreatedBy struct {
-			Email string `json:"email"`
-			Name  string `json:"name"`
-			Type  string `json:"type"`
-		} `json:"created_by"`
-		LatestVersion string `json:"latest_version"`
-		Name          string `json:"name"`
-		Version       struct {
-			Version   string    `json:"version"`
-			Type      string    `json:"type"`
-			CreatedAt time.Time `json:"created_at"`
-			Value     string    `json:"value"`
-			CreatedBy struct {
-				Email string `json:"email"`
-				Name  string `json:"name"`
-				Type  string `json:"type"`
-			} `json:"created_by"`
-		} `json:"version"`
-		SyncStatus struct {
-		} `json:"sync_status"`
-	} `json:"secret"`
+	Secret Secret `json:"secret"`
 }
 
-func InitializeVaultApi(httpApi httpclient.HttpApi, vaultConfig Vault) (VaultClient, error) {
+type Secret struct {
+	CreatedAt     time.Time `json:"created_at"`
+	CreatedBy     CreatedBy `json:"created_by"`
+	LatestVersion string    `json:"latest_version"`
+	Name          string    `json:"name"`
+	Version       Version   `json:"version"`
+}
+type CreatedBy struct {
+	Email string `json:"email"`
+	Name  string `json:"name"`
+	Type  string `json:"type"`
+}
+
+type Version struct {
+	Version   string    `json:"version"`
+	Type      string    `json:"type"`
+	CreatedAt time.Time `json:"created_at"`
+	Value     string    `json:"value"`
+	CreatedBy CreatedBy `json:"created_by"`
+}
+
+func InitializeVaultAPI(myHTTPAPI httpclient.HttpApi, vaultConfig Vault) (VaultClient, error) {
 	vault, err := getAppVariables()
 	if err != nil {
-		return VaultClient{}, errors.Wrapf(err, "InitializeVaultApi, unable to get app variables")
+		return VaultClient{}, errors.Wrapf(err, "InitializeVaultAPI, unable to get app variables")
 	}
 
 	return VaultClient{Vault: Vault{
@@ -79,10 +78,10 @@ func InitializeVaultApi(httpApi httpclient.HttpApi, vaultConfig Vault) (VaultCli
 		BaseURL:        vaultConfig.BaseURL,
 		OrganizationID: vault.OrganizationID,
 		ProjectID:      vault.ProjectID,
-	}, HttpApi: httpApi}, nil
+	}, HTTPAPI: myHTTPAPI}, nil
 }
 
-func getClientVariables() (clientID string, secret string, err error) {
+func getClientVariables() (clientID, secret string, err error) {
 	clientID = os.Getenv("HCP_CLIENT_ID")
 	if clientID == "" {
 		return "", "", errors.Wrapf(err, "getClientVariables, unable to get env variables")
@@ -93,7 +92,7 @@ func getClientVariables() (clientID string, secret string, err error) {
 		return "", "", errors.Wrapf(err, "getClientVariables, unable to get env variables")
 	}
 
-	return
+	return clientID, secret, nil
 }
 
 func getAppVariables() (vault Vault, err error) {
@@ -113,8 +112,7 @@ func getAppVariables() (vault Vault, err error) {
 	}, nil
 }
 
-func (c *VaultClient) requestAccessKey() (token VaultToken, err error) {
-	url := fmt.Sprintf("%s/oauth/token", c.Vault.AuthURL)
+func (vc *VaultClient) requestAccessKey() (VaultToken, error) {
 	headers := make(map[string]string)
 	headers["content-type"] = "application/json"
 
@@ -130,21 +128,23 @@ func (c *VaultClient) requestAccessKey() (token VaultToken, err error) {
 		ClientSecret: secret,
 	}
 
-	token, err = getToken(c, url, headers, reqBody)
+	token, err := vc.getToken(fmt.Sprintf("%s/oauth/token", vc.Vault.AuthURL), headers, reqBody)
 	if err != nil {
 		return VaultToken{}, errors.Wrapf(err, "requestAccessKey, unable to get token")
 	}
 
-	return
+	return token, nil
 }
 
-func getToken(vc *VaultClient, url string, headers map[string]string, reqBody TokenRequestBody) (token VaultToken, err error) {
-	jsonBody, err := vc.HttpApi.PrepareBody(reqBody)
+func (vc *VaultClient) getToken(url string, headers map[string]string, reqBody TokenRequestBody) (VaultToken, error) {
+	var token VaultToken
+
+	jsonBody, err := httpclient.PrepareBody(reqBody)
 	if err != nil {
 		return VaultToken{}, errors.Wrapf(err, "getToken, unable to prepare body")
 	}
 
-	res, status, err := vc.HttpApi.Post(url, headers, jsonBody)
+	res, status, err := vc.HTTPAPI.Post(url, headers, jsonBody)
 	if err != nil || status != http.StatusOK {
 		return VaultToken{}, errors.Wrapf(err, "getToken, request impossible")
 	}
@@ -153,14 +153,31 @@ func getToken(vc *VaultClient, url string, headers map[string]string, reqBody To
 		return VaultToken{}, errors.Wrapf(err, "getToken, unable to unmarshal")
 	}
 
-	return
+	return token, nil
 }
 
-func (vc *VaultClient) ReadSecret(secretName string) (secret string, err error) {
+func (vc *VaultClient) ReadSecret(secretName string) (string, error) {
 	var appSecret AppSecret
+	headers, err := vc.prepareReadSecretHeaders()
+	if err != nil {
+		return "", errors.Errorf("%s, ReadSecret, unable to get prepare headers to read secret", err)
+	}
+
+	url := fmt.Sprintf("%s/secrets/2023-06-13/organizations/%s/projects/%s/apps/%s/open/%s",
+		vc.Vault.BaseURL, vc.Vault.OrganizationID, vc.Vault.ProjectID, vc.Vault.AppName, secretName)
+
+	res, status, err := vc.HTTPAPI.Get(url, headers)
+	if err != nil || status != http.StatusOK {
+		return "", errors.Errorf("ReadSecret, request impossible %s", err)
+	}
+
+	return returnSecret(res, &appSecret)
+}
+
+func (vc *VaultClient) prepareReadSecretHeaders() (map[string]string, error) {
 	token, err := vc.requestAccessKey()
 	if err != nil {
-		return "", errors.Errorf("%s, ReadSecret, unable to get request access key", err)
+		return nil, errors.Errorf("%s, ReadSecret, unable to get request access key", err)
 	}
 
 	headerLength := 2
@@ -168,13 +185,11 @@ func (vc *VaultClient) ReadSecret(secretName string) (secret string, err error) 
 	headers["content-type"] = "application/json"
 	headers["Authorization"] = fmt.Sprintf("Bearer %s", token.AccessToken)
 
-	url := fmt.Sprintf("%s/secrets/2023-06-13/organizations/%s/projects/%s/apps/%s/open/%s", vc.Vault.BaseURL, vc.Vault.OrganizationID, vc.Vault.ProjectID, vc.Vault.AppName, secretName)
-	res, status, err := vc.HttpApi.Get(url, headers)
-	if err != nil || status != http.StatusOK {
-		return "", errors.Errorf("ReadSecret, request impossible %s", err)
-	}
+	return headers, nil
+}
 
-	if err = json.Unmarshal(res, &appSecret); err != nil {
+func returnSecret(res []byte, appSecret *AppSecret) (string, error) {
+	if err := json.Unmarshal(res, &appSecret); err != nil {
 		return "", errors.Errorf("ReadSecret, unable to marshall %s", err)
 	}
 
