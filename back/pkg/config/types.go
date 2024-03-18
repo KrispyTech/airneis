@@ -30,15 +30,14 @@ type Config struct {
 }
 
 type StagingConfig struct {
-	Env struct {
-		Name string `yaml:"name"`
-	} `yaml:"staging"`
+	Env VariableEnv `yaml:"staging"`
 }
 
 type ProductionConfig struct {
-	Env struct {
-		Name string `yaml:"name"`
-	} `yaml:"production"`
+	Env VariableEnv `yaml:"production"`
+}
+type VariableEnv struct {
+	Name string `yaml:"name"`
 }
 
 type Env struct {
@@ -48,7 +47,7 @@ type Env struct {
 }
 
 type ClientHandler struct {
-	httpClient  httpclient.HttpApi
+	httpClient  httpclient.Req
 	VaultClient vault.VaultClient
 }
 

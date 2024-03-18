@@ -81,7 +81,7 @@ restart-db:
 # You need to have bun installed to make it worked
 ci:
 	@echo "Running the same commands as the CI. Let's check the backend first"
-	@cd back && golangci-lint run && go build && rm airneis
+	@cd back && golangci-lint run --color always --sort-results && go build && rm airneis
 	@echo "Everything is fine for the backend. Let's test the frontend"
 	@cd front && bunx prettier . -c && bunx eslint .
 	@echo "Everything is fine for the frontend. Let's check the mobile"
