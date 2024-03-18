@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"github.com/KrispyTech/airneis/pkg/config"
 
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 
@@ -32,4 +33,10 @@ func sendCategories(ctx *fiber.Ctx, categories []model.Category) error {
 	}
 
 	return ctx.Send(jsonCategories)
+}
+
+func SelectCategoryByID(category *model.Category, ctx *fiber.Ctx) error {
+	categoryID := ctx.Params("categoryID")
+
+	return config.Database.First(&category, categoryID).Error
 }

@@ -12,9 +12,7 @@ import (
 func EditCategory(ctx *fiber.Ctx) error {
 	var category model.Category
 
-	categoryID := ctx.Params("categoryID")
-
-	if errGet := config.Database.First(&category, categoryID).Error; errGet != nil {
+	if errGet := SelectCategoryByID(&category, ctx); errGet != nil {
 		return helpers.SetStatusAndMessages(
 			constants.NotFoundStatus,
 			constants.NotFoundMessage,

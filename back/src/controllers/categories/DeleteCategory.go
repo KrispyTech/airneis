@@ -13,9 +13,8 @@ import (
 
 func DeleteCategory(ctx *fiber.Ctx) error {
 	var category model.Category
-	categoryId := ctx.Params("categoryID")
 
-	if err := config.Database.First(&category, categoryId).Error; err != nil {
+	if err := SelectCategoryByID(&category, ctx); err != nil {
 		return helpers.SetStatusAndMessages(
 			constants.NotFoundStatus,
 			constants.NotFoundMessage,
@@ -32,7 +31,9 @@ func DeleteCategory(ctx *fiber.Ctx) error {
 			ctx)
 	}
 
-	if err := config.Database.Clauses(clause.Returning{}).Delete(&category, categoryId).Error; err != nil {
+	categoryID := ctx.Params("categoryID")
+
+	if err := config.Database.Clauses(clause.Returning{}).Delete(&category, categoryID).Error; err != nil {
 		return helpers.SetStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
