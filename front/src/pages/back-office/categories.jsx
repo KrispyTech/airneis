@@ -1,12 +1,7 @@
-import BackOfficeModal from "@/components/BackOfficeModal"
+import BackOfficeBoard from "@/components/BackOfficeBoard"
 import BackOfficeNav from "@/components/BackOfficeNav"
-import BackOfficeTableHead from "@/components/BackOfficeTableHead"
-import CategoryListItem from "@/components/CategoryListItem"
 import Page from "@/components/Page"
 import { backoffice } from "@/constants"
-import routes from "@/routes"
-import { Bars3Icon, PlusCircleIcon } from "@heroicons/react/24/outline"
-import Link from "next/link"
 import { useState } from "react"
 
 const categories = [
@@ -52,36 +47,19 @@ const CategoriesBoard = () => {
   return (
     <Page page={backoffice}>
       <div className="flex h-full">
-        <BackOfficeNav isOpen={isOpen} handleOpen={handleOpen} />
-        <section className="flex flex-col w-full px-4 pt-3 overflow-y-scroll">
-          {isModalOpen ? <BackOfficeModal handleOpenModal={handleOpenModal} id={itemId} /> : ""}
-          <div className="flex justify-between">
-            <h1 className="font-bold text-2xl hidden md:block">Categories</h1>
-            <button onClick={handleOpen} className="md:hidden font-bold text-2xl flex items-center gap-2">
-              <Bars3Icon className="h-8 w-8" strokeWidth="2" />
-              Categories
-            </button>
-            <input placeholder="Search..." className="rounded-md drop-shadow-lg pl-2 w-40 md:w-72" onChange={handleInput} />
-          </div>
-          <Link href={routes.backoffice.addCategory} className="mt-4 py-0.5 px-1.5 bg-gray w-fit rounded-full border flex gap-1 items-center">
-            <PlusCircleIcon className="w-6 h-6" />
-            Add
-          </Link>
-          <table className="mt-4">
-            <BackOfficeTableHead handleChange={handleChange} page="categories" />
-            <tbody>
-              {categories.map(category => (
-                <CategoryListItem
-                  key={category.id}
-                  category={category}
-                  selected={selected[category.id]}
-                  handleOpenModal={handleOpenModal}
-                  handleChange={handleChange}
-                />
-              ))}
-            </tbody>
-          </table>
-        </section>
+        <BackOfficeNav isOpen={isOpen} handleOpen={handleOpen} columns={["image", "name"]} />
+        <BackOfficeBoard
+          items={categories}
+          handleOpenModal={handleOpenModal}
+          handleOpen={handleOpen}
+          itemId={itemId}
+          isModalOpen={isModalOpen}
+          handleInput={handleInput}
+          handleChange={handleChange}
+          selected={selected}
+          columns={["image", "name"]}
+          pageName={"Categories"}
+        />
       </div>
     </Page>
   )

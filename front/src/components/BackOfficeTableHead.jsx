@@ -1,6 +1,6 @@
 import { StopIcon } from "@heroicons/react/24/outline"
 
-const BackOfficeTableHead = ({ handleChange, page }) => (
+const BackOfficeTableHead = ({ handleChange, columns }) => (
   <thead className="bg-clay">
     <tr>
       <th className="w-12 pl-2">
@@ -8,9 +8,16 @@ const BackOfficeTableHead = ({ handleChange, page }) => (
           <StopIcon className="w-6 h-6" />
         </button>
       </th>
-      <th className="text-start">IMAGES</th>
-      <th className="text-start">NAME</th>
-      {page === "categories" ? null : <th className="text-end w-20">PRICE</th>}
+      {columns.map((column, i) => (
+        <td
+          key={`th-${i}`}
+          className={`text-sm sm:text-md ${column === "image" ? "hidden md:block md:w-24" : "text-center"} ${
+            column === "HTPrice" ? "text-end w-16 sm:w-20 md:w-24 lg:w-28" : ""
+          } ${column === "name" ? "text-start" : ""}  uppercase font-bold `}
+        >
+          {column}
+        </td>
+      ))}
       <th></th>
     </tr>
   </thead>

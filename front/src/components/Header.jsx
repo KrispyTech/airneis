@@ -2,10 +2,11 @@ import { MagnifyingGlassIcon, ShoppingCartIcon, Bars3Icon } from "@heroicons/rea
 import webConfig from "@@/webConfig"
 import Link from "next/link"
 import { backoffice } from "@/constants"
+import routes from "@/routes"
 
 const Header = ({ page }) => (
   <header className="bg-secondary text-primary px-4 flex justify-between items-center sticky top-0 z-30">
-    <Link href="/" className="text-xl md:text-4xl py-3 font-extrabold">
+    <Link href={routes.home} className="text-xl md:text-4xl py-3 font-extrabold">
       ÀIRNEIS
     </Link>
     {page !== backoffice ? (
