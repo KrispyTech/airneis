@@ -6,7 +6,7 @@ type Product struct {
 	gorm.Model
 	IsHighlanderOfTheMoment bool           `json:"isHighlanderOfTheMoment"                                  gorm:"default:false"`
 	Name                    string         `json:"name"                    validate:"required,min=2,max=50"`
-	CategoryID              uint           `json:"categoryID"              validate:"required,min=1"`
+	CategoryID              uint           `json:"categoryID"              validate:"required,min=1"        gorm:"uniqueIndex:idx_order_priority_category"`
 	Category                Category       `json:"category"`
 	PriceWithoutTaxes       int            `json:"PriceWithoutTaxes"       validate:"required,min=1"`
 	PriceWithTaxes          int            `json:"priceWithTaxes"          validate:"required,min=1"`
@@ -14,6 +14,6 @@ type Product struct {
 	ThumbnailURL            string         `json:"thumbnailURL"            validate:"required"`
 	OutOfStock              string         `json:"outOfStock"                                               gorm:"default:false"`
 	Materials               []Material     `json:"materials"                                                gorm:"many2many:materials_of_products"`
-	OrderOfPriority         *uint          `json:"orderOfPriority"         validate:"required"`
+	OrderOfPriority         *uint          `json:"orderOfPriority"         validate:"required"              gorm:"uniqueIndex:idx_order_priority_category"`
 	ProductImages           []ProductImage `json:"productImages"                                            gorm:"many2many:images_of_products"`
 }

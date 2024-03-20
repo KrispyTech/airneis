@@ -36,7 +36,7 @@ var Validator = &XValidator{
 }
 
 func ValidateInput(input interface{}) error {
-	if errs := Validator.validate(input); errs[0].Error && len(errs) > 0 {
+	if errs := Validator.validate(input); len(errs) > 0 && errs[0].Error {
 		errMessages := make([]string, 0)
 
 		for _, err := range errs {
