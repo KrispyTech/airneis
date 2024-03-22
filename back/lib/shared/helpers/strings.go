@@ -1,9 +1,10 @@
 package helpers
 
 import (
+	"strconv"
+
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
-	"strconv"
 )
 
 func Capitalize(text string) string {

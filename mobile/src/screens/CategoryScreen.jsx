@@ -19,7 +19,7 @@ const CategoryScreen = props => {
     products: []
   })
 
-  const [hadError, setHadError] = useState(false)
+  const [hasError, setError] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -27,12 +27,12 @@ const CategoryScreen = props => {
         const result = await getCategoryById(id)
         setCategory(result.data)
       } catch (e) {
-        setHadError(true)
+        setError(true)
       }
     })()
   }, [id])
 
-  if (hadError) {
+  if (hasError) {
     return <ErrorScreen navigation={navigation} text={errors.category.unableToLoad} />
   }
 
@@ -41,7 +41,7 @@ const CategoryScreen = props => {
       <ScrollView className="relative">
         <View>
           <Image
-            style={mobileConfig.images.fullScreenImageXl}
+            style={mobileConfig.images.fullScreenImageXL}
             source={{
               uri: category.thumbnailUrl
             }}

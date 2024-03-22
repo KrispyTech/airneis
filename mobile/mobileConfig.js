@@ -3,11 +3,11 @@ const mobileConfig = {
     url: process.env.EXPO_PUBLIC_API_URL
   },
   images: {
-    fullScreenImageXl: {
+    fullScreenImageXL: {
       width: "100%",
       height: 300
     },
-    fullScreenImageMd: {
+    fullScreenImageMD: {
       width: "100%",
       height: 200
     }

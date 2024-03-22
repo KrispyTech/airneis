@@ -9,7 +9,7 @@ const ProductCard = props => {
   return (
     <View>
       <Image
-        style={mobileConfig.images.fullScreenImageMd}
+        style={mobileConfig.images.fullScreenImageMD}
         className="rounded box-shadow-xl border "
         source={{
           uri: thumbnailURL
