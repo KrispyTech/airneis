@@ -45,7 +45,8 @@ func queryProducts(page int, ctx *fiber.Ctx) ([]model.Product, error) {
 	offset := (page - 1) * pagLimit
 
 	products := make([]model.Product, pagLimit)
-	query := config.Database.Preload("Category").Limit(pagLimit).Offset(offset).Order("order_of_priority asc").Find(&products)
+	query := config.Database.
+		Preload("Category").Limit(pagLimit).Offset(offset).Order("order_of_priority asc").Find(&products)
 	if query.Error != nil {
 		ctx.Status(constants.BadRequestStatus)
 
