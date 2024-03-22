@@ -2,22 +2,14 @@ import BackOfficeBoard from "@/components/BackOfficeBoard"
 import BackOfficeNav from "@/components/BackOfficeNav"
 import Page from "@/components/Page"
 import { backoffice } from "@/constants"
-import { useState } from "react"
-
-const categories = [
-  { id: 1, name: "Salon", image: "https://picsum.photos/90/70" },
-  { id: 2, name: "Chambre", image: "https://picsum.photos/90/70" },
-  { id: 3, name: "Salle de bain", image: "https://picsum.photos/90/70" },
-  { id: 4, name: "Cuisine", image: "https://picsum.photos/90/70" },
-  { id: 5, name: "Bureau", image: "https://picsum.photos/90/70" },
-  { id: 6, name: "Buanderie", image: "https://picsum.photos/90/70" },
-  { id: 7, name: "Jardin", image: "https://picsum.photos/90/70" },
-  { id: 8, name: "Garage", image: "https://picsum.photos/90/70" }
-]
+import { getCategories } from "@/utils/services/CategoryServices"
+import api from "@/utils/services/api"
+import { useEffect, useState } from "react"
 
 const CategoriesBoard = () => {
   const [selected, setSelected] = useState({})
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [categories, setCategories] = useState([])
   const [itemId, setItemId] = useState(null)
   const handleOpenModal = event => {
     const id = event.currentTarget.getAttribute("data-id")
@@ -41,6 +33,17 @@ const CategoriesBoard = () => {
   const handleInput = () => {
     // To do
   }
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const { data } = await getCategories()
+        console.log("Result of get categories", data)
+      } catch (e) {
+        console.log(e)
+      }
+    })()
+  }, [setCategories])
 
   return (
     <Page page={backoffice}>
