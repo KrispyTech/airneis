@@ -16,8 +16,6 @@ const categories = [
 ]
 
 const CategoriesBoard = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const handleOpen = () => setIsOpen(!isOpen)
   const [selected, setSelected] = useState({})
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [itemId, setItemId] = useState(null)
@@ -47,17 +45,16 @@ const CategoriesBoard = () => {
   return (
     <Page page={backoffice}>
       <div className="flex h-full">
-        <BackOfficeNav isOpen={isOpen} handleOpen={handleOpen} columns={["image", "name"]} />
+        <BackOfficeNav />
         <BackOfficeBoard
           items={categories}
           handleOpenModal={handleOpenModal}
-          handleOpen={handleOpen}
           itemId={itemId}
           isModalOpen={isModalOpen}
           handleInput={handleInput}
           handleChange={handleChange}
           selected={selected}
-          columns={["image", "name"]}
+          columns={["name"]}
           pageName={"Categories"}
         />
       </div>
