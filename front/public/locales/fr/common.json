@@ -1,0 +1,14 @@
+{
+  "hello": "Bonjour",
+  "homePage": {
+    "wip": "Travail en cours, revenez plus tard !",
+    "linkExample": "Exemple de lien"
+  },
+  "header": {
+    "selectALanguage": "Séléctionnez une langue",
+    "locales": {
+      "en": "Anglais",
+      "fr": "Français"
+    }
+  }
+}
