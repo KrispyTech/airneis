@@ -33,14 +33,12 @@ class Categories {
     id increments notNull
     name text notNull
     thumbnailUrl text notNull
-    slug text unique notNull
     orderOfDisplay number notNull
 }
 
 class Products {
     id increments notNull
     name text notNull
-    slug unique notNull
     categoryId number notNull
     priceWithoutTaxes number notNull
     priceWithTaxes number notNull
@@ -124,16 +122,14 @@ We ask for his email and phone number to be able to contact him for commercials 
 The email will also be the logg in field
 For more safety we the password is hashed and we have one salt per user
 
-
 ## Categories
 
-Each category has a `name`, a `thumbnail` and a `slug` this slug should be the category's name in lowercase and if the category is in multiple words,each space should be replaced by a dash .
-The `slug` should be unique as we will use it in the urls to identify specific `category`.
-`orderOfDisplay` represents the order in which the categories will be displayed on home page as it must be configurable in back office
+Each category has a `name`, and a`thumbnail` .
+`orderOfDisplay` represents the order in which the categories will be displayed on home page as it must be configurable
+in back office
 
 ## Products
 
-As for the category each product will have a slug that follows the same rules as the category's slug.
 The `description` is mandatory as the risk to create confusion for the client is too high without description.
 `ThumbnailUrl` is the url of the image that will be displayed on the category page.
 
@@ -171,7 +167,7 @@ If it's an order it means that it has been paid and that it will be delivered.
 Can be both shipping or billing address.
 The `comment` is optional and can be used to give more information about the address for the delivery person.
 The `zipCode` is a string because some countries have letters in their zipCode.
-The `isActive` field is for history purpose. When an address is updated a new row should be created in the database. 
+The `isActive` field is for history purpose. When an address is updated a new row should be created in the database.
 This row should be a "clone" with the new information. This will avoid to affect the addresses used in past Orders.
 
 # Contact
@@ -179,4 +175,5 @@ This row should be a "clone" with the new information. This will avoid to affect
 This table represents the contact form.
 The content of this table will be displayed in backoffice.
 The `senderEmail` represent the email of the people who write to us
-The `recipientEmail` email represents the email of our company as we may send ourselves an email to keep another track of every contacts
+The `recipientEmail` email represents the email of our company as we may send ourselves an email to keep another track
+of every contacts
