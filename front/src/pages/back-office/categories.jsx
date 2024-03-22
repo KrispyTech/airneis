@@ -3,7 +3,6 @@ import BackOfficeNav from "@/components/BackOfficeNav"
 import Page from "@/components/Page"
 import { backoffice } from "@/constants"
 import { getCategories } from "@/utils/services/CategoryServices"
-import api from "@/utils/services/api"
 import { useEffect, useState } from "react"
 
 const CategoriesBoard = () => {
