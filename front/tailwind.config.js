@@ -2,11 +2,20 @@
 module.exports = {
   content: ["./src/**/*.{jsx,js}"],
   theme: {
-    colors: {
-      primary: "#FFEDE6",
-      secondary: "#382E2A"
-    },
     extend: {
+      colors: {
+        primary: "#FFEDE6",
+        secondary: "#382E2A",
+        tertiary: "#DBC1B8",
+        clay: "#C67955",
+        gray: "#E2E2E2",
+        listOdd: "#FFF8F6",
+        listEven: "#F4DED7",
+        modal: "#F5F0EF"
+      },
+      lineHeight: {
+        "extra-loose": "2.5"
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
