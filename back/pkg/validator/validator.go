@@ -2,6 +2,7 @@ package validator
 
 import (
 	"fmt"
+	"github.com/pkg/errors"
 	"strings"
 
 	"github.com/go-playground/validator/v10"
@@ -10,21 +11,19 @@ import (
 
 var validate = validator.New()
 
-func (_v XValidator) validate(data interface{}) []ErrorResponse {
-	validationErrors := []ErrorResponse{}
+func (v XValidator) validate(data interface{}) []ErrorResponse {
+	var validationErrors []ErrorResponse
 
-	errs := validate.Struct(data)
-	if errs != nil {
-		for _, err := range errs.(validator.ValidationErrors) {
-			// In this case data object is actually holding the User struct
-			var elem = ErrorResponse{
+	if err := v.validator.Struct(data); err != nil {
+		for _, err := range errors.As(err, data) {
+			element := ErrorResponse{
 				FailedField: err.Field(),
 				Tag:         err.Tag(),
 				Value:       err.Value(),
 				Error:       true,
 			}
 
-			validationErrors = append(validationErrors, elem)
+			validationErrors = append(validationErrors, element)
 		}
 	}
 
@@ -36,7 +35,7 @@ var Validator = &XValidator{
 }
 
 func ValidateInput(input interface{}) error {
-	if errs := Validator.validate(input); len(errs) > 0 && errs[0].Error {
+	if errs := Validator.validate(input); len(errs) > 0 {
 		errMessages := make([]string, 0)
 
 		for _, err := range errs {
