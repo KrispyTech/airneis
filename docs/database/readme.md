@@ -170,7 +170,7 @@ If it's an order it means that it has been paid and that it will be delivered.
 Can be both shipping or billing address.
 The `comment` is optional and can be used to give more information about the address for the delivery person.
 The `zipCode` is a string because some countries have letters in their zipCode.
-The `isActive` field is for history purpose. When an address is updated a new row should be created in the database.
+The `isActive` field is for history purpose. When an address is updated a new row should be created in the database. 
 This row should be a "clone" with the new information. This will avoid to affect the addresses used in past Orders.
 
 # Contact
