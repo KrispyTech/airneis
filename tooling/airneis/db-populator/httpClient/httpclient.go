@@ -12,12 +12,13 @@ import (
 const methodGet string = "GET"
 const methodPost string = "POST"
 
-type Req interface {
+type HttpApi interface {
 	Get(url string, headers map[string]string) ([]byte, int, error)
 	Post(url string, headers map[string]string, jsonBody []byte) ([]byte, int, error)
+	PrepareBody(reqBody interface{}) (body []byte, err error)
 }
 
-type HTTPClient struct {
+type HttpClient struct {
 	api *http.Client
 }
 
@@ -26,28 +27,28 @@ type Request struct {
 	Headers    map[string]string
 	Method     string
 	StatusCode int
-	URL        string
+	Url        string
 }
 
-func InitializeHTTPClient() Req {
-	return &HTTPClient{api: &http.Client{}}
+func InitializeHttpApi() HttpApi {
+	return &HttpClient{api: &http.Client{}}
 }
 
-func PrepareBody(reqBody interface{}) (body []byte, err error) {
+func (c *HttpClient) PrepareBody(reqBody interface{}) (body []byte, err error) {
 	body, err = json.Marshal(reqBody)
 	if err != nil {
 		return nil, errors.Errorf("PrepareBody, Unable to marshall body:  %s", err)
 	}
 
-	return body, nil
+	return
 }
 
-func (c *HTTPClient) Get(url string, headers map[string]string) (body []byte, status int, err error) {
-	return c.makeRequest(Request{URL: url, Method: methodGet, Headers: headers})
+func (c *HttpClient) Get(url string, headers map[string]string) (body []byte, statusCode int, err error) {
+	return c.makeRequest(Request{Url: url, Method: methodGet, Headers: headers})
 }
 
-func (c *HTTPClient) Post(url string, headers map[string]string, jsonBody []byte) (body []byte, status int, err error) {
-	return c.makeRequest(Request{URL: url, Method: methodPost, Headers: headers, Body: jsonBody})
+func (c *HttpClient) Post(url string, headers map[string]string, jsonBody []byte) (body []byte, statusCode int, err error) {
+	return c.makeRequest(Request{Url: url, Method: methodPost, Headers: headers, Body: jsonBody})
 }
 
 func addHeaders(req *http.Request, headers map[string]string) *http.Request {
@@ -58,8 +59,8 @@ func addHeaders(req *http.Request, headers map[string]string) *http.Request {
 	return req
 }
 
-func (c *HTTPClient) makeRequest(r Request) (body []byte, statusCode int, err error) {
-	req, err := http.NewRequest(r.Method, r.URL, bytes.NewReader(r.Body))
+func (c *HttpClient) makeRequest(r Request) (body []byte, statusCode int, err error) {
+	req, err := http.NewRequest(r.Method, r.Url, bytes.NewReader(r.Body))
 	if err != nil {
 		return nil, 0, errors.Errorf("makeRequest,unable to make new request:  %s", err)
 	}

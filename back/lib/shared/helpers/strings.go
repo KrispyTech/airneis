@@ -7,5 +7,6 @@ import (
 
 func Capitalize(text string) string {
 	caser := cases.Title(language.AmericanEnglish)
+
 	return caser.String(text)
 }
