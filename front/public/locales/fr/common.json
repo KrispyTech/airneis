@@ -5,7 +5,7 @@
     "linkExample": "Exemple de lien"
   },
   "header": {
-    "selectALanguage": "Séléctionnez une langue",
+    "selectLanguage": "Séléctionnez une langue",
     "locales": {
       "en": "Anglais",
       "fr": "Français"

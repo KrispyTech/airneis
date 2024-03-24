@@ -2,10 +2,10 @@
   "Hello": "Hello",
   "homePage": {
     "wip": "WIP come back later!",
-    "linkExample": "Exemple de lien"
+    "linkExample": "Link example"
   },
   "header": {
-    "selectALanguage": "Select language",
+    "selectLanguage": "Select language",
     "locales": {
       "en": "English",
       "fr": "French"
