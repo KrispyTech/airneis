@@ -37,8 +37,10 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-    </header>
-  )
-}
+    ) : (
+      <p className="text-xl md:text-4xl font-extrabold">BACKOFFICE</p>
+    )}
+  </header>
+)
 
 export default Header
