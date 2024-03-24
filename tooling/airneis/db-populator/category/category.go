@@ -6,23 +6,17 @@ import (
 	"net/http"
 
 	httpclient "github.com/krispyTech/airneis/tooling/db-populator/httpClient"
+	model "github.com/krispyTech/airneis/tooling/db-populator/models"
 )
-
-type Category struct {
-	Name           string `json:"name"`
-	ThumbnailUrl   string `json:"thumbnailUrl"`
-	Slug           string `json:"slug"`
-	OrderOfDisplay *uint  `json:"orderOfDisplay"`
-}
 
 func CreateCategories(hc httpclient.HttpApi) error {
 	amountToAdd := 30
 
 	for count := 0; count < amountToAdd; count++ {
 		categoryID := uint(count)
-		category := Category{
+		category := model.Category{
 			Name:           fmt.Sprintf("Category Name %d", count),
-			ThumbnailUrl:   fmt.Sprintf("CategoryURL%d.com", count),
+			ThumbnailURL:   fmt.Sprintf("CategoryURL%d.com", count),
 			Slug:           fmt.Sprintf("Category Slug %d", count),
 			OrderOfDisplay: &categoryID,
 		}
