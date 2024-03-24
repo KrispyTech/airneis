@@ -47,7 +47,7 @@ class Products {
     description text notNull
     thumbnailUrl text notNull
     outOfStock boolean default false notNull
-    isHighlanderOfTheMoment boolean default false notNull
+    highlanderOrder uint default 0 notNull
 }
 
 class ProductImages {
@@ -124,7 +124,6 @@ We ask for his email and phone number to be able to contact him for commercials 
 The email will also be the logg in field
 For more safety we the password is hashed and we have one salt per user
 
-
 ## Categories
 
 Each category has a `name`, a `thumbnail` and a `slug` this slug should be the category's name in lowercase and if the category is in multiple words,each space should be replaced by a dash .
@@ -171,7 +170,7 @@ If it's an order it means that it has been paid and that it will be delivered.
 Can be both shipping or billing address.
 The `comment` is optional and can be used to give more information about the address for the delivery person.
 The `zipCode` is a string because some countries have letters in their zipCode.
-The `isActive` field is for history purpose. When an address is updated a new row should be created in the database. 
+The `isActive` field is for history purpose. When an address is updated a new row should be created in the database.
 This row should be a "clone" with the new information. This will avoid to affect the addresses used in past Orders.
 
 # Contact
