@@ -43,7 +43,7 @@ const CategoryScreen = props => {
           <Image
             style={mobileConfig.images.fullScreenImageXL}
             source={{
-              uri: category.thumbnailURL
+              url: category.thumbnailURL
             }}
           ></Image>
           <Text className="text-4xl text-center font-bold absolute top-1/2 left-0 right-0 text-white ">{category.name}</Text>
