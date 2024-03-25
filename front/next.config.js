@@ -7,7 +7,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  i18n
+  i18n,
+  images: {
+    domains: ["picsum.photos"]
+  }
 }
 
 module.exports = nextConfig
