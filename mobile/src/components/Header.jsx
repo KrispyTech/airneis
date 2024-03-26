@@ -7,13 +7,11 @@ import screens from "../utils/constants/screens"
 
 const Header = props => {
   const { navigation } = props
-  const goToHomePage = () => {
-    navigation.navigate(screens.homePage)
-  }
+  const navigateToHomePage = () => navigation.navigate(screens.homePage)
 
   return (
     <View className="bg-secondary py-1 flex items-center flex-row justify-between px-4">
-      <Pressable onPress={goToHomePage}>
+      <Pressable onPress={navigateToHomePage}>
         <Text className="text-primary text-4xl font-extrabold"> ÀIRNEIS </Text>
       </Pressable>
       <View className="flex flex-row items-center">

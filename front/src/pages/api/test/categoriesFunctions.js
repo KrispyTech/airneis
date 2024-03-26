@@ -4,7 +4,7 @@ import { createCategory, deleteCategory, getCategories, getCategoryById, updateC
 const SAMPLE_CATEGORY = {
   ID: 127,
   name: "Test",
-  thumbnailUrl: "https://picsum.photos/id/48/200/300",
+  thumbnailURL: "https://picsum.photos/id/48/200/300",
   slug: "test",
   orderOfDisplay: 127,
   description:
