@@ -129,6 +129,3 @@ After that, we increased the number of tasks completed, while keeping the number
 - Magali
 - Cédric
 - Alix
-
-
-

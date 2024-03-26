@@ -35,4 +35,4 @@ jobs:
       # Run the linter
       - run: bunx eslint .
       # Run prettier
-      - run:  bun run prettier -c .
+      - run: bun run prettier -c .

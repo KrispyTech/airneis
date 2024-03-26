@@ -122,7 +122,6 @@ We ask for his email and phone number to be able to contact him for commercials 
 The email will also be the logg in field
 For more safety we the password is hashed and we have one salt per user
 
-
 ## Categories
 
 Each category has a `name`, a `thumbnail` and a `slug` this slug should be the category's name in lowercase and if the category is in multiple words,each space should be replaced by a dash .

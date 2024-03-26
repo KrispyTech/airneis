@@ -32,13 +32,17 @@ You can build and run the image as a standalone container.
 In airneis/back/:
 
 #### Prod
+
 ```
 docker build --tag airneis-back .
-docker run -d -p 3001:3000 airneis-back 
+docker run -d -p 3001:3000 airneis-back
 ```
+
 #### Dev
+
 ```
 docker build --tag airneis-back-dev --target dev .
 docker run -d -p 3001:3000 --mount type=bind,source=.,target=/build airneis-back-dev
 ```
+
 Dev mode allow for hot reloading.

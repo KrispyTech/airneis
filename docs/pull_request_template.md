@@ -1,16 +1,16 @@
 # DEPENDENCIES (optional)
+
 If your PR needs another PR to be merged before please specify here (we won't be able to guess it, so please don't forget).
 
-# DONE 
+# DONE
 
-Tell everyone what you have done. You may include screenshots if it will help the team 
+Tell everyone what you have done. You may include screenshots if it will help the team
 to understand what you have done.
 
-Answer to those questions if needed:   
-    - What have changed?  
-    - How did you do?  
-    - Why have you done that?  
-
+Answer to those questions if needed:  
+ - What have changed?  
+ - How did you do?  
+ - Why have you done that?
 
 # TEST
 
@@ -21,10 +21,8 @@ Try to cover as many possibilities as you can to prevent bugs.
 
 If you fix a bug you should explain how the bug occurred to help the reviewer to be sure the bug is fix.
 
-Answer those questions:
-    - What should I do before testing your PR ?
-    - How can I test you PR ?
-    - Which difficulties I could face ?
+Answer those questions: - What should I do before testing your PR ? - How can I test you PR ? - Which difficulties I could face ?
 
 # Others section
+
 If you have other information to share feel free to create others sections.
