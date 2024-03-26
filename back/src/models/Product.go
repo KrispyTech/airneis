@@ -12,9 +12,9 @@ type Product struct {
 	PriceWithTaxes          int            `json:"priceWithTaxes"`
 	Description             string         `json:"description"`
 	ThumbnailURL            string         `json:"thumbnailURL"`
-	OutOfStock              string         `json:"outOfStock"              gorm:"default:false"`
+	OutOfStock              bool         	 `json:"outOfStock"              gorm:"default:false"`
 	Materials               []Material     `json:"materials"               gorm:"many2many:materials_of_products"`
-	IsHighlanderOfTheMoment bool           `json:"isHighlanderOfTheMoment" gorm:"default:false"`
+	HighlanderOrder 				uint           `json:"highlanderOrder"         gorm:"default:0"`
 	OrderOfPriority         *uint          `json:"orderOfPriority"`
 	ProductImages           []ProductImage `json:"productImages"           gorm:"many2many:images_of_products"`
 }
