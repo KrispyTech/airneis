@@ -24,16 +24,23 @@ func CreateProducts(hc httpclient.HttpApi) error {
 															ThumbnailURL: fmt.Sprintf("CategoryURL%d.com", count),
 															Slug: fmt.Sprintf("Category Slug %d", count),
 															OrderOfDisplay: &productID,
-															},
+														},
 			PriceWithoutTaxes: 			rand.Intn(2500),
 			PriceWithTaxes: 				rand.Intn(2500),
 			Description:    				fmt.Sprintf("Product Description %d", count),
 			ThumbnailURL:   				fmt.Sprintf("ProductURL%d.com", count),
 			OutOfStock:         		false,
-			Materials:              []model.Material{},
+			Materials:              []model.Material{
+															{Name: "bois"},
+														},
 			HighlanderOrder: 				0,
 			OrderOfPriority: &productID,
-			ProductImages:          []model.ProductImage{},
+			ProductImages:          []model.ProductImage{
+															{
+																ProductID: productID,
+																ImageURL: fmt.Sprintf("ProductImageURL%d.com", count),
+															},
+														},	
 		}
 
 		bodyToSend, err := json.Marshal(product)
