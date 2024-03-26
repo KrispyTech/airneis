@@ -7,7 +7,7 @@ run:
   modules-download-mode: readonly
   allow-parallel-runners: true
   allow-serial-runners: true
-  go: "1.21"
+  go: '1.21'
 output:
   format: colored-line-number
   print-issued-lines: true
@@ -30,7 +30,7 @@ linters-settings:
     # Values always ignored: `.+_test.go`
     # Default: []
     ignored-files:
-      - ".+_test.go"
+      - '.+_test.go'
   gosec:
     # To select a subset of rules to run.
     # Available rules: https://github.com/securego/gosec#available-rules
@@ -352,10 +352,10 @@ linters-settings:
         severity: warning
         disabled: false
         arguments:
-          - - "core.WriteError[1].Message"
-            - "/^([^A-Z]|$)/"
+          - - 'core.WriteError[1].Message'
+            - '/^([^A-Z]|$)/'
             - must not start with a capital letter
-          - - "fmt.Errorf[0]"
+          - - 'fmt.Errorf[0]'
             - '/(^|[^\.!?])$/'
             - must not end in punctuation
           - - panic
@@ -515,39 +515,39 @@ linters-settings:
     constant-kind: true
     # DEPRECATED Suggest the use of syslog.Priority.
     # Default: false
-    syslog-priority: true
+    syslog-priority: true  
 linters:
   # See the dedicated "linters" documentation section.
   enable:
-    - asciicheck
-    - bidichk
-    - decorder
-    - dupl
-    - errcheck
-    - errorlint
-    - funlen
-    - goconst
-    - goimports
-    - gosec
-    - gomnd
-    - gosimple
-    - govet
-    - ineffassign
-    - makezero
-    - misspell
-    - nestif
-    - nilerr
-    - nlreturn
-    - reassign
-    - revive
-    - staticcheck
-    - tagalign
-    - unconvert
-    - unused
-    - usestdlibvars
-    - wastedassign
-    - whitespace
-
+  - asciicheck
+  - bidichk
+  - decorder
+  - dupl
+  - errcheck
+  - errorlint
+  - funlen
+  - goconst
+  - goimports
+  - gosec
+  - gomnd
+  - gosimple
+  - govet
+  - ineffassign
+  - makezero
+  - misspell
+  - nestif
+  - nilerr
+  - nlreturn
+  - reassign
+  - revive
+  - staticcheck
+  - tagalign
+  - unconvert
+  - unused
+  - usestdlibvars
+  - wastedassign
+  - whitespace
+  
 issues:
   # Maximum issues count per one linter.
   # Set to 0 to disable.
@@ -573,3 +573,4 @@ issues:
       text: "line-length-limit"
       linters:
         - revive
+  

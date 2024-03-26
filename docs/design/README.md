@@ -10,7 +10,7 @@ _In Figma project, the are three unique pages:_
 
 ![Templates](./images/templates.png)
 
-A page containing all the templates we need to use: fonts, logo, colors, and icons.
+A page containing all the templates we need to use:  fonts, logo, colors, and icons.
 This is the basis of the project, which introduces the main theme of our application and website.
 
 ## Components

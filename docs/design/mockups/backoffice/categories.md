@@ -15,7 +15,6 @@ Once we've clicked on it, another page opens:
 The category details page contains all the information about the category we have selected.
 
 On this page, we can perform two actions:
-
 - Update the category.
 - Delete the category.
 
@@ -27,7 +26,6 @@ As we can see in the mockup above, we can change the value of all the fields and
 We can click on the "Yes" or "No" button to complete the changes.
 
 We also have another way of updating or deleting one or more categories. If we press the three small dots in the table while selecting one or more categories, an "Actions" popup appears:
-
 - If we click on the "Update" button, the page(s) for updating the information in one or more categories will open.
 - If we click on the "Delete" button, the popup changes to give way to another popup where we can choose whether we want to delete the category or categories we have selected.
 

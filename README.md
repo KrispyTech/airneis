@@ -22,23 +22,17 @@ All with a secure and maintainable payment system over time.
 
 This project is configured to run with Docker through `make` command.<br>
 To deploy the project in dev mode:
-
 ```
 make dev
 ```
-
 To deploy the project in prod mode:
-
 ```
 make up
 ```
-
 To shut down the application:
-
 ```
 make down
 ```
-
 ## What does our app contain ?
 
 ### The Home Page
@@ -122,7 +116,7 @@ Users have different access to the burger menu if they are logged in or not.
 
 ### Design System
 
-We use a design system with a library of graphics component.
+We use a design system with a library of  graphics component.
 Because if the site evolves, it is possible that the design evolves too.
 
 ### i18n

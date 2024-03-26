@@ -8,6 +8,5 @@ import (
 func SetRoutes(app *fiber.App) {
 	apiRouter := app.Group("/api")
 	setCategoriesRoutes(apiRouter)
-	setProductsRoutes(apiRouter)
 	log.Info("Routes have been set")
 }
