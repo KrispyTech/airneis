@@ -1,20 +1,17 @@
 package model
 
-import "gorm.io/gorm"
-
 type Product struct {
-	gorm.Model
 	Name                    string         `json:"name"`
-	Slug                    string         `json:"slug"                    gorm:"unique"`
+	Slug                    string         `json:"slug"`
 	CategoryID              uint           `json:"categoryID"`
 	Category                Category       `json:"category"`
 	PriceWithoutTaxes       int            `json:"priceWithoutTaxes"`
 	PriceWithTaxes          int            `json:"priceWithTaxes"`
 	Description             string         `json:"description"`
 	ThumbnailURL            string         `json:"thumbnailURL"`
-	OutOfStock              bool         	 `json:"outOfStock"              gorm:"default:false"`
-	Materials               []Material     `json:"materials"               gorm:"many2many:materials_of_products"`
-	HighlanderOrder 				uint           `json:"highlanderOrder"         gorm:"default:0"`
+	OutOfStock              bool         	 `json:"outOfStock"`
+	Materials               []Material     `json:"materials"`
+	HighlanderOrder 				uint           `json:"highlanderOrder"`
 	OrderOfPriority         *uint          `json:"orderOfPriority"`
-	ProductImages           []ProductImage `json:"productImages"           gorm:"many2many:images_of_products"`
+	ProductImages           []ProductImage `json:"productImages"`
 }
