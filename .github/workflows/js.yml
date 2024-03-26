@@ -8,7 +8,16 @@ on:
     branches: ["staging", "main"]
 
 jobs:
+  # Check that pr doesn't have WIP in title
+  # Allows not to waste GH action time
+  wip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wip/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   es-lint-front:
+    needs: ["wip"]
     # With the 3 following lines the commands will be executed in the front directory
     defaults:
       run:
@@ -23,6 +32,7 @@ jobs:
       # Run prettier
       - run: bun run prettier -c .
   es-lint-mobile:
+    needs: ["wip"]
     # With the 3 following lines the commands will be executed in the front directory
     defaults:
       run:
