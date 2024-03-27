@@ -4,7 +4,7 @@ import { StopIcon as StopIconSolid } from "@heroicons/react/24/solid"
 const TableListItem = ({ item, handleOpenModal, selected, handleChange, columns }) => (
   <tr className="odd:bg-listOdd even:bg-listEven">
     <td className="pl-2">
-      <button className="flex" onClick={handleChange} data-id={item.id}>
+      <button className="flex" onClick={handleChange} data-id={item.ID}>
         {selected ? <StopIconSolid className="h-6 w-6" /> : <StopIcon className="w-6 h-6" />}
       </button>
     </td>
@@ -20,7 +20,7 @@ const TableListItem = ({ item, handleOpenModal, selected, handleChange, columns 
       }
 
       return (
-        <td key={`${item.id}-${i}`} className={`text-center py-2 ${column === "name" ? "text-start" : ""} ${column === "HTPrice" ? "text-end" : ""}`}>
+        <td key={`${item.ID}-${i}`} className={`text-center py-2 ${column === "name" ? "text-start" : ""} ${column === "HTPrice" ? "text-end" : ""}`}>
           <span className={styles}>
             {item[column]}
             {column === "HTPrice" ? " €" : ""}

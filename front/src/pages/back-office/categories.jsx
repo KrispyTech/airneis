@@ -21,7 +21,7 @@ const CategoriesBoard = () => {
     const id = event.currentTarget.getAttribute("data-id")
 
     if (id === "all") {
-      setSelected({ ...selected, ...categories.reduce((xs, x) => ({ ...xs, [x.id]: true }), {}) })
+      setSelected({ ...selected, ...categories.reduce((xs, x) => ({ ...xs, [x.ID]: true }), {}) })
 
       return
     }
@@ -35,12 +35,9 @@ const CategoriesBoard = () => {
 
   useEffect(() => {
     ;(async () => {
-      try {
-        const { data } = await getCategories()
-        console.log("Result of get categories", data)
-      } catch (e) {
-        console.log(e)
-      }
+      const { data } = await getCategories()
+
+      setCategories(data)
     })()
   }, [setCategories])
 

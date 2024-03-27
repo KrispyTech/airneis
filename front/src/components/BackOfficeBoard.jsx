@@ -21,9 +21,9 @@ const BackOfficeBoard = ({ handleOpenModal, itemId, isModalOpen, handleInput, ha
       <tbody>
         {items.map(item => (
           <TableListItem
-            key={item.id}
+            key={item.ID}
             item={item}
-            selected={selected[item.id]}
+            selected={selected[item.ID]}
             handleOpenModal={handleOpenModal}
             handleChange={handleChange}
             columns={columns}
