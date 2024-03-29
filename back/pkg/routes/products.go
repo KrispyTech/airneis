@@ -7,7 +7,7 @@ import (
 
 const (
 	productsRoute       = "products"
-	productsRouteWithID = "products/:categoryID"
+	productsRouteWithID = "products/:productID"
 )
 
 func setProductsRoutes(app fiber.Router) {
