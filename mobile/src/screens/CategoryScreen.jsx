@@ -1,4 +1,4 @@
-import { Image, ScrollView, Text, View } from "react-native"
+import { Button, Image, ScrollView, Text, TouchableHighlight, View } from "react-native"
 import Page from "../components/Page"
 import React, { useEffect, useState } from "react"
 import { getCategoryById } from "../utils/categoriesServices"
@@ -6,6 +6,13 @@ import ErrorScreen from "./ErrorScreen"
 import errors from "../utils/constants/errors"
 import mobileConfig from "../../mobileConfig"
 import ProductCard from "../components/ProductCard"
+import screens from "../utils/constants/screens"
+
+const categoryEx = {
+  name: "Chambre",
+  thumbnailURL: "https://picsum.photos/200/400",
+  products: [{ id: 1, name: "Canapé Blanc", thumbnailURL: "https://picsum.photos/200/300", priceWithTaxes: 1200 }]
+}
 
 const CategoryScreen = props => {
   const {
@@ -25,7 +32,8 @@ const CategoryScreen = props => {
     ;(async () => {
       try {
         const result = await getCategoryById(id)
-        setCategory(result.data)
+        // setCategory(result.data)
+        setCategory(categoryEx)
       } catch (e) {
         setError(true)
       }
@@ -35,6 +43,8 @@ const CategoryScreen = props => {
   if (hasError) {
     return <ErrorScreen navigation={navigation} text={errors.category.unableToLoad} />
   }
+
+  const navigateToProduct = id => () => navigation.navigate(screens.productPage, { id })
 
   return (
     <Page navigation={navigation}>
@@ -53,9 +63,11 @@ const CategoryScreen = props => {
           <View className="py-8 gap-5">
             {category.products &&
               category.products.map(product => (
-                <View key={`product${product.ID}`}>
-                  <ProductCard product={product} />
-                </View>
+                <TouchableHighlight key={`product${product.ID}`} onPress={navigateToProduct(product.id)}>
+                  <View>
+                    <ProductCard product={product} />
+                  </View>
+                </TouchableHighlight>
               ))}
           </View>
         </View>

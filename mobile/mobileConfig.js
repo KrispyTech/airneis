@@ -7,6 +7,10 @@ const mobileConfig = {
       width: "100%",
       height: 300
     },
+    fullScreenImageLG: {
+      width: "100%",
+      height: 250
+    },
     fullScreenImageMD: {
       width: "100%",
       height: 200

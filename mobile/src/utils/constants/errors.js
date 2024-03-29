@@ -4,6 +4,9 @@ const errors = {
   },
   category: {
     unableToLoad: "Unable to load category"
+  },
+  product: {
+    unableToLoad: "Unable to load product"
   }
 }
 
