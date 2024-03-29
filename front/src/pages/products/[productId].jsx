@@ -1,43 +1,13 @@
 import Page from "@/components/Page"
 import Button from "@/components/ui/Button"
 import MaterialChip from "@/components/materials/MaterialChip"
+import { getProductById } from "@/utils/services/productServices"
 
-export const getServerSideProps = ({ query }) => {
+export const getServerSideProps = async ({ query }) => {
   const { productId } = query
-  // eslint-disable-next-line no-unused-vars
-  const sampleProduct = {
-    ID: 16,
-    CreatedAt: "2024-03-18T20:04:47.659961Z",
-    UpdatedAt: "2024-03-19T07:50:18.289319Z",
-    DeletedAt: null,
-    name: "Super couch",
-    slug: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi exercitation at laboris tincidunt takimata sanctus volutpat blandit doming autem. Ullamcorper euismod incidunt. Iure tempor blandit. Eu anim nostrud sit. Accusam option justo.",
-    categoryID: 1,
-    category: {
-      ID: 0,
-      CreatedAt: "0001-01-01T00:00:00Z",
-      UpdatedAt: "0001-01-01T00:00:00Z",
-      DeletedAt: null,
-      name: "",
-      thumbnailURL: "",
-      slug: "",
-      description: "",
-      products: null,
-      orderOfDisplay: null
-    },
-    PriceWithoutTaxes: 450,
-    priceWithTaxes: 650,
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisi exercitation at laboris tincidunt takimata sanctus volutpat blandit doming autem. Ullamcorper euismod incidunt. Iure tempor blandit. Eu anim nostrud sit. Accusam option justo.",
-    thumbnailURL: "https://picsum.photos/200/300",
-    outOfStock: false,
-    highlanderOrder: 0,
-    orderOfPriority: 50,
-    productImages: null,
-    materials: [{ name: "Cuir" }, { name: "Bois" }, { name: "Métal" }, { name: "Tissu" }]
-  }
+  const { data: product } = await getProductById(productId)
 
-  return { props: { productId, product: sampleProduct } }
+  return { props: { product } }
 }
 const ProductPage = props => {
   const {
@@ -68,9 +38,7 @@ const ProductPage = props => {
             <div className="flex flex-col sm:flex-row justify-between mt-3">
               <Button text="Ajouter au panier" variant="orange"></Button>
               <div className="flex flex-row gap-5 mt-5">
-                {materials.map((material, index) => (
-                  <MaterialChip name={material.name} key={index} />
-                ))}
+                {materials && materials.map((material, index) => <MaterialChip name={material.name} key={index} />)}
               </div>
             </div>
           </div>
