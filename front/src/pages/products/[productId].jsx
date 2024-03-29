@@ -2,6 +2,8 @@ import Page from "@/components/Page"
 import Button from "@/components/ui/Button"
 import MaterialChip from "@/components/materials/MaterialChip"
 import { getProductById } from "@/utils/services/productServices"
+import Carousel from "@/components/Carousel"
+import ProductCard from "@/components/ProductCard"
 
 export const getServerSideProps = async ({ query }) => {
   const { productId } = query
@@ -11,7 +13,8 @@ export const getServerSideProps = async ({ query }) => {
 }
 const ProductPage = props => {
   const {
-    product: { name, description, outOfStock, priceWithTaxes, materials }
+    product: { name, description, outOfStock, priceWithTaxes, materials },
+    product
   } = props
 
   return (
@@ -21,8 +24,8 @@ const ProductPage = props => {
       </section>
       <div className="mx-12 mt-8 ">
         <section className="flex flex-col gap-7 w-full mt-3 sm:flex-row">
-          <div className="sm:w-[400px] flex justify-center items-center border-2 border-black">Carrousel</div>
-          <div>
+          <Carousel images={["https://picsum.photos/452/250", "https://picsum.photos/453/250", "https://picsum.photos/454/250"]} />
+          <div className="w-full">
             <div>
               <div className="flex flex-row  justify-between font-bold text-xl">
                 <h3>{priceWithTaxes} €</h3>
@@ -45,13 +48,13 @@ const ProductPage = props => {
         </section>
         <section className="mt-7">
           <h2 className="text-center font-bold text-xl">PRODUITS SIMILAIRES</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-5">
-            <div className="border-2 border-black">Produit 1</div>
-            <div className="border-2 border-black">Produit 2</div>
-            <div className="border-2 border-black">Produit 3</div>
-            <div className="border-2 border-black">Produit 4</div>
-            <div className="border-2 border-black">Produit 5</div>
-            <div className="border-2 border-black">Produit 6</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-12 cols-gap-2 mt-12 ">
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
+            <ProductCard product={product} />
           </div>
         </section>
       </div>
