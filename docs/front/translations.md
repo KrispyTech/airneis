@@ -1,7 +1,7 @@
 # Translations
 
 To make the site available in different languages, we use
-the [next-i18n](https://github.com/i18next/next-i18next/) packag
+the [next-i18n](https://github.com/i18next/next-i18next/) package
 
 # How to use it
 
