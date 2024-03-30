@@ -10,5 +10,11 @@
       "en": "Anglais",
       "fr": "Français"
     }
+  },
+  "productPage": {
+    "similarProducts": "Produits similaires",
+    "onStock": "En stock",
+    "outOfStock": "En rupture de stock",
+    "addToCart": "Ajouter au panier"
   }
 }

@@ -10,5 +10,11 @@
       "en": "English",
       "fr": "French"
     }
+  },
+  "productPage": {
+    "similarProducts": "Similar products",
+    "onStock": "On stock",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to cart"
   }
 }

@@ -8,7 +8,7 @@ const ProductCard = ({ product, className, otherProps }) => {
 
   return (
     <li
-      className={clsx(className, "flex flex-col gap-1 max-w-md border border-secondary p-1 rounded mx-auto")}
+      className={clsx(className, "flex flex-col gap-1 max-w-md border border-secondary  rounded mx-auto")}
       onClick={goToProductPage}
       {...otherProps}
     >
