@@ -45,7 +45,7 @@ const ProductPage = ({ product: { name, description, outOfStock, priceWithTaxes,
       </section>
       <section className="mt-7">
         <h2 className="text-center font-bold text-xl">PRODUITS SIMILAIRES</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-12 cols-gap-2 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-12 cols-gap-2 mt-12 mx-4">
           <ProductCard product={product} />
           <ProductCard product={product} />
           <ProductCard product={product} />

@@ -38,9 +38,11 @@ const Carousel = ({ images, className, text, ...otherProps }) => {
           images.map((image, index) => (
             <img alt={`image-${index}`} key={index} src={image} className={`w-full sm:rounded-md ${index !== current ? "hidden" : ""}`} />
           ))}
-        <h2 className="sm:hidden absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-4xl text-white font-semibold">{text}</h2>
+        <h2 className="sm:hidden absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-4xl text-white font-semibold whitespace-nowrap">
+          {text}
+        </h2>
       </div>
-      <div className="flex justify-evenly mt-5 ">
+      <div className="flex justify-evenly mt-5">
         {images.map((_, index) => (
           <button key={index} onClick={handleChangeImage(index)}>
             <CarouselControllerIcon filled={index === current} />

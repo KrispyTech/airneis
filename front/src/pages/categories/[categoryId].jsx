@@ -7,12 +7,12 @@ const category = {
 }
 
 const products = [
-  { id: 1, name: "CANAPÉ BLANC", price: 1200, thumbnailURL: "https://picsum.photos/450/250" },
-  { id: 2, name: "CANAPÉ SAUFA", price: 2450, thumbnailURL: "https://picsum.photos/450/250" },
-  { id: 3, name: "CHAISE DES LANDES", price: 575, thumbnailURL: "https://picsum.photos/450/250" },
-  { id: 4, name: "CANAPÉ BLANC", price: 1200, thumbnailURL: "https://picsum.photos/450/250" },
-  { id: 5, name: "CANAPÉ SAUFA", price: 2450, thumbnailURL: "https://picsum.photos/450/250" },
-  { id: 6, name: "CHAISE DES LANDES", price: 575, thumbnailURL: "https://picsum.photos/450/250" }
+  { id: 1, name: "CANAPÉ BLANC", priceWithTaxes: 1200, thumbnailURL: "https://picsum.photos/450/250" },
+  { id: 2, name: "CANAPÉ SAUFA", priceWithTaxes: 2450, thumbnailURL: "https://picsum.photos/450/250" },
+  { id: 3, name: "CHAISE DES LANDES", priceWithTaxes: 575, thumbnailURL: "https://picsum.photos/450/250" },
+  { id: 4, name: "CANAPÉ BLANC", priceWithTaxes: 1200, thumbnailURL: "https://picsum.photos/450/250" },
+  { id: 5, name: "CANAPÉ SAUFA", priceWithTaxes: 2450, thumbnailURL: "https://picsum.photos/450/250" },
+  { id: 6, name: "CHAISE DES LANDES", priceWithTaxes: 575, thumbnailURL: "https://picsum.photos/450/250" }
 ]
 
 export const getServerSideProps = ({ query }) => {
