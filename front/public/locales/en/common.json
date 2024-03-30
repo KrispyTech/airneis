@@ -1,0 +1,14 @@
+{
+  "Hello": "Hello",
+  "homePage": {
+    "wip": "WIP come back later!",
+    "linkExample": "Link example"
+  },
+  "header": {
+    "selectLanguage": "Select language",
+    "locales": {
+      "en": "English",
+      "fr": "French"
+    }
+  }
+}
