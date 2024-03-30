@@ -1,8 +1,6 @@
 import { useState } from "react"
 
-const CarouselControllerIcon = props => {
-  const { filled } = props
-
+const CarouselControllerIcon = ({ filled }) => {
   if (filled) {
     return (
       <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,8 +25,7 @@ const CarouselControllerIcon = props => {
   )
 }
 
-const Carousel = props => {
-  const { images, className, ...otherProps } = props
+const Carousel = ({ images, className, text, ...otherProps }) => {
   const [current, setCurrent] = useState(0)
   const handleChangeImage = index => () => {
     setCurrent(index)
@@ -36,13 +33,14 @@ const Carousel = props => {
 
   return (
     <div className={className} {...otherProps}>
-      <div>
+      <div className="relative">
         {images &&
           images.map((image, index) => (
-            <img alt={`image-${index}`} key={index} src={image} className={`w-full rounded-md ${index !== current ? "hidden" : ""}`} />
+            <img alt={`image-${index}`} key={index} src={image} className={`w-full sm:rounded-md ${index !== current ? "hidden" : ""}`} />
           ))}
+        <h2 className="sm:hidden absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-4xl text-white font-semibold">{text}</h2>
       </div>
-      <div className="flex justify-evenly mt-5">
+      <div className="flex justify-evenly mt-5 ">
         {images.map((_, index) => (
           <button key={index} onClick={handleChangeImage(index)}>
             <CarouselControllerIcon filled={index === current} />
