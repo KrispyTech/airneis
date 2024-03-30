@@ -8,6 +8,8 @@ import ProductCard from "@/components/ProductCard"
 export const getServerSideProps = async ({ query }) => {
   const { productId } = query
   const { data: product } = await getProductById(productId)
+  // AS MATERIALS ARE NOT IMPLEMENTED BACKEND SIDE, WE ADD THEM MANUALLY
+  product.materials = [{ name: "wood" }, { name: "leather" }, { name: "cotton" }]
 
   return { props: { product } }
 }
@@ -24,27 +26,27 @@ const ProductPage = ({ product: { name, description, outOfStock, priceWithTaxes,
         <Carousel images={["https://picsum.photos/452/250", "https://picsum.photos/453/250", "https://picsum.photos/454/250"]} text={product.name} />
         <div className="w-full px-8 ">
           <div>
-            <div className="flex flex-row  justify-between font-bold text-xl">
+            <div className="flex flex-row  justify-between font-bold text-2xl">
               <h3>{priceWithTaxes} €</h3>
               <h2>{name}</h2>
             </div>
-            <div className="flex sm:justify-end">
+            <div className="flex sm:justify-end text-slate-500">
               <p>{outOfStock ? "Stocks épuisés" : "En stock"}</p>
             </div>
           </div>
-          <div className="sm:mt-5 mt-2">
+          <div className="sm:mt-5 mt-2 font-semibold">
             <p>{description}</p>
           </div>
-          <div className="flex flex-col sm:flex-row justify-between mt-3">
+          <div className="flex flex-col itens-center sm:flex-row justify-between mt-3">
             <Button disabled={outOfStock} text="Ajouter au panier" variant="orange"></Button>
-            <div className="flex flex-row gap-5 mt-5">
+            <div className="flex flex-row items-center gap-5 mt-5 h-full">
               {materials && materials.map((material, index) => <MaterialChip name={material.name} key={index} />)}
             </div>
           </div>
         </div>
       </section>
       <section className="mt-7">
-        <h2 className="text-center font-bold text-xl">PRODUITS SIMILAIRES</h2>
+        <h2 className="text-center font-extrabold text-2xl">PRODUITS SIMILAIRES</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-12 cols-gap-2 mt-12 mx-4">
           <ProductCard product={product} />
           <ProductCard product={product} />
