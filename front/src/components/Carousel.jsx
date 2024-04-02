@@ -1,4 +1,7 @@
 import { useState } from "react"
+import Image from "next/image"
+import { clsx } from "clsx"
+import config from "@/utils/config"
 
 const CarouselControllerIcon = ({ filled }) => {
   if (filled) {
@@ -32,17 +35,24 @@ const Carousel = ({ images, className, text, ...otherProps }) => {
   }
 
   return (
-    <div className={className} {...otherProps}>
-      <div className="relative">
+    <div className={clsx("flex flex-col items-center justify-center", className)} {...otherProps}>
+      <div className="relative w-full flex justify-center">
         {images &&
           images.map((image, index) => (
-            <img alt={`image-${index}`} key={index} src={image} className={`w-full sm:rounded-md ${index !== current ? "hidden" : ""}`} />
+            <Image
+              alt={`image-${index}`}
+              key={index}
+              src={image}
+              width={config.images.productPage.carousel.width}
+              height={config.images.productPage.carousel.height}
+              className={`rounded-sm drop-shadow-box w-full lg:w-none ${index !== current ? "hidden" : ""}`}
+            />
           ))}
-        <h2 className="sm:hidden absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-4xl text-white font-semibold whitespace-nowrap drop-shadow-box">
+        <h2 className="md:hidden absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-4xl text-white font-semibold whitespace-nowrap drop-shadow-box">
           {text}
         </h2>
       </div>
-      <div className="flex justify-evenly mt-5">
+      <div className="flex justify-evenly mt-5 w-48">
         {images.map((_, index) => (
           <button key={index} onClick={handleChangeImage(index)}>
             <CarouselControllerIcon filled={index === current} />
