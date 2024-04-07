@@ -14,7 +14,7 @@ func GetProductByID(ctx *fiber.Ctx) error {
 		return sendProduct(ctx, product)
 	}
 
-	return helpers.SetResponseStatusAndMessages(
+	return helpers.SetStatusAndMessages(
 		constants.InternalServerErrorStatus,
 		constants.InternalServerErrorMessage,
 		ctx)

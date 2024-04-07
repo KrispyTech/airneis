@@ -13,7 +13,7 @@ func GetCategories(ctx *fiber.Ctx) error {
 	// We need to convert the page because query category must be an int
 	page, errParsing := helpers.ConvertStringToInt(ctx.Query(constants.Page, constants.DefaultPageValue))
 	if errParsing != nil {
-		return helpers.SetResponseStatusAndMessages(
+		return helpers.SetStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)

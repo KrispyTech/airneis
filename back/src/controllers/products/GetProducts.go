@@ -12,7 +12,7 @@ import (
 func GetProducts(ctx *fiber.Ctx) error {
 	page, errParsing := helpers.ConvertStringToInt(ctx.Query(constants.Page, constants.DefaultPageValue))
 	if errParsing != nil {
-		return helpers.SetResponseStatusAndMessages(
+		return helpers.SetStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)

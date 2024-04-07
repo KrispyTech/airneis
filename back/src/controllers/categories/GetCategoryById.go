@@ -11,7 +11,7 @@ func GetCategoryByID(ctx *fiber.Ctx) error {
 	var category model.Category
 
 	if err := SelectCategoryByID(&category, ctx); err != nil {
-		return helpers.SetResponseStatusAndMessages(
+		return helpers.SetStatusAndMessages(
 			constants.InternalServerErrorStatus,
 			constants.InternalServerErrorMessage,
 			ctx)

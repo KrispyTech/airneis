@@ -13,21 +13,21 @@ func EditCategory(ctx *fiber.Ctx) error {
 	var category model.Category
 
 	if errGet := SelectCategoryByID(&category, ctx); errGet != nil {
-		return helpers.SetResponseStatusAndMessages(
+		return helpers.SetStatusAndMessages(
 			constants.NotFoundStatus,
 			constants.NotFoundMessage,
 			ctx)
 	}
 
 	if errParsing := ctx.BodyParser(&category); errParsing != nil {
-		return helpers.SetResponseStatusAndMessages(
+		return helpers.SetStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)
 	}
 
 	if err := config.Database.Save(&category).Error; err != nil {
-		return helpers.SetResponseStatusAndMessages(
+		return helpers.SetStatusAndMessages(
 			constants.InternalServerErrorStatus,
 			constants.InternalServerErrorMessage,
 			ctx)
