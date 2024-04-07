@@ -1,6 +1,8 @@
 package helpers
 
 import (
+	"net/http"
+
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/gofiber/fiber/v2"
 )
@@ -13,21 +15,21 @@ func SendResult(status int, message string, ctx *fiber.Ctx) error {
 
 func SendBadRequest(ctx *fiber.Ctx) error {
 	return SendResult(
-		constants.BadRequestStatus,
+		http.StatusBadRequest,
 		constants.BadRequestMessage,
 		ctx)
 }
 
 func SendNotFound(ctx *fiber.Ctx) error {
 	return SendResult(
-		constants.NotFoundStatus,
+		http.StatusNotFound,
 		constants.NotFoundMessage,
 		ctx)
 }
 
 func SendInternalError(ctx *fiber.Ctx) error {
 	return SendResult(
-		constants.InternalServerErrorStatus,
+		http.StatusInternalServerError,
 		constants.InternalServerErrorMessage,
 		ctx)
 }
