@@ -12,14 +12,14 @@ func CreateProduct(ctx *fiber.Ctx) error {
 	var product model.Product
 
 	if err := ctx.BodyParser(&product); err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)
 	}
 
 	if err := config.Database.Create(&product).Error; err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.InternalServerErrorStatus,
 			constants.InternalServerErrorMessage,
 			ctx)

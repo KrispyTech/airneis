@@ -15,7 +15,7 @@ func DeleteCategory(ctx *fiber.Ctx) error {
 	var category model.Category
 
 	if err := SelectCategoryByID(&category, ctx); err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.NotFoundStatus,
 			constants.NotFoundMessage,
 			ctx)
@@ -25,7 +25,7 @@ func DeleteCategory(ctx *fiber.Ctx) error {
 	category.OrderOfDisplay = nil
 
 	if err := config.Database.Save(&category).Error; err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)
@@ -34,7 +34,7 @@ func DeleteCategory(ctx *fiber.Ctx) error {
 	categoryID := ctx.Params("categoryID")
 
 	if err := config.Database.Clauses(clause.Returning{}).Delete(&category, categoryID).Error; err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)

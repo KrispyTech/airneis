@@ -12,14 +12,14 @@ func CreateCategory(ctx *fiber.Ctx) error {
 	var category model.Category
 
 	if err := ctx.BodyParser(&category); err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)
 	}
 
 	if err := config.Database.Create(&category).Error; err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.InternalServerErrorStatus,
 			constants.InternalServerErrorMessage,
 			ctx)

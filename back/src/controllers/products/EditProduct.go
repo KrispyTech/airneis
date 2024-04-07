@@ -13,21 +13,21 @@ func EditProduct(ctx *fiber.Ctx) error {
 	var product model.Product
 
 	if errGet := SelectProductByID(&product, ctx); errGet != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.NotFoundStatus,
 			constants.NotFoundMessage,
 			ctx)
 	}
 
 	if errParsing := ctx.BodyParser(&product); errParsing != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.BadRequestStatus,
 			constants.BadRequestMessage,
 			ctx)
 	}
 
 	if err := config.Database.Save(&product).Error; err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.InternalServerErrorStatus,
 			constants.InternalServerErrorMessage,
 			ctx)

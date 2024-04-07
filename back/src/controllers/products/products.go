@@ -15,7 +15,7 @@ import (
 func sendProduct(ctx *fiber.Ctx, product model.Product) error {
 	productJSON, err := json.Marshal(product)
 	if err != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.InternalServerErrorStatus,
 			constants.InternalServerErrorMessage,
 			ctx)
@@ -27,7 +27,7 @@ func sendProduct(ctx *fiber.Ctx, product model.Product) error {
 func sendProducts(ctx *fiber.Ctx, products []model.Product) error {
 	jsonProducts, errMarshal := json.Marshal(products)
 	if errMarshal != nil {
-		return helpers.SetStatusAndMessages(
+		return helpers.SetResponseStatusAndMessages(
 			constants.InternalServerErrorStatus,
 			constants.InternalServerErrorMessage,
 			ctx)
