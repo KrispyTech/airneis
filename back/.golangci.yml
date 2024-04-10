@@ -1,7 +1,7 @@
 # Options for analysis running.
 run:
   concurrency: 4
-  timeout: 30s
+  timeout: 60s
   issues-exit-code: 1
   tests: true
   modules-download-mode: readonly
@@ -128,7 +128,7 @@ linters-settings:
       - name: argument-limit
         severity: warning
         disabled: false
-        arguments: [3]
+        arguments: [ 3 ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#atomic
       - name: atomic
         severity: warning
@@ -137,7 +137,7 @@ linters-settings:
       - name: banned-characters
         severity: warning
         disabled: false
-        arguments: ["Ω", "Σ", "σ", "7"]
+        arguments: [ "Ω", "Σ", "σ", "7" ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#bare-return
       - name: bare-return
         severity: warning
@@ -158,7 +158,7 @@ linters-settings:
       - name: cognitive-complexity
         severity: warning
         disabled: false
-        arguments: [7]
+        arguments: [ 7 ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#comment-spacings
       - name: comment-spacings
         severity: warning
@@ -192,7 +192,7 @@ linters-settings:
       - name: cyclomatic
         severity: error
         disabled: false
-        arguments: [7]
+        arguments: [ 7 ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#datarace
       - name: datarace
         severity: warning
@@ -206,7 +206,7 @@ linters-settings:
         severity: warning
         disabled: false
         arguments:
-          - ["call-chain", "loop"]
+          - [ "call-chain", "loop" ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#dot-imports
       - name: dot-imports
         severity: warning
@@ -261,12 +261,12 @@ linters-settings:
       - name: function-result-limit
         severity: error
         disabled: false
-        arguments: [3]
+        arguments: [ 3 ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#function-length
       - name: function-length
         severity: warning
         disabled: false
-        arguments: [10, 0]
+        arguments: [ 10, 0 ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#get-return
       - name: get-return
         severity: warning
@@ -297,12 +297,12 @@ linters-settings:
       - name: line-length-limit
         severity: warning
         disabled: false
-        arguments: [120]
+        arguments: [ 120 ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#max-public-structs
       - name: max-public-structs
         severity: warning
         disabled: true
-        arguments: [3]
+        arguments: [ 3 ]
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#modifies-parameter
       - name: modifies-parameter
         severity: warning
@@ -387,8 +387,8 @@ linters-settings:
         severity: warning
         disabled: false
         arguments:
-          - ["ID"] # AllowList
-          - ["VM"] # DenyList
+          - [ "ID" ] # AllowList
+          - [ "VM" ] # DenyList
           - - upperCaseConst: true
       # https://github.com/mgechev/revive/blob/master/RULES_DESCRIPTIONS.md#var-declaration
       - name: var-declaration
@@ -515,39 +515,39 @@ linters-settings:
     constant-kind: true
     # DEPRECATED Suggest the use of syslog.Priority.
     # Default: false
-    syslog-priority: true  
+    syslog-priority: true
 linters:
   # See the dedicated "linters" documentation section.
   enable:
-  - asciicheck
-  - bidichk
-  - decorder
-  - dupl
-  - errcheck
-  - errorlint
-  - funlen
-  - goconst
-  - goimports
-  - gosec
-  - gomnd
-  - gosimple
-  - govet
-  - ineffassign
-  - makezero
-  - misspell
-  - nestif
-  - nilerr
-  - nlreturn
-  - reassign
-  - revive
-  - staticcheck
-  - tagalign
-  - unconvert
-  - unused
-  - usestdlibvars
-  - wastedassign
-  - whitespace
-  
+    - asciicheck
+    - bidichk
+    - decorder
+    - dupl
+    - errcheck
+    - errorlint
+    - funlen
+    - goconst
+    - goimports
+    - gosec
+    - gomnd
+    - gosimple
+    - govet
+    - ineffassign
+    - makezero
+    - misspell
+    - nestif
+    - nilerr
+    - nlreturn
+    - reassign
+    - revive
+    - staticcheck
+    - tagalign
+    - unconvert
+    - unused
+    - usestdlibvars
+    - wastedassign
+    - whitespace
+
 issues:
   # Maximum issues count per one linter.
   # Set to 0 to disable.
