@@ -10,12 +10,12 @@ import (
 func GetProductByID(ctx *fiber.Ctx) error {
 	var product model.Product
 
-	if err := SelectProductByID(&product, ctx); err == nil {
-		return sendProduct(ctx, product)
+	if err := SelectProductByID(&product, ctx); err != nil {
+		return helpers.SetStatusAndMessages(
+			constants.InternalServerErrorStatus,
+			constants.InternalServerErrorMessage,
+			ctx)
 	}
 
-	return helpers.SetStatusAndMessages(
-		constants.InternalServerErrorStatus,
-		constants.InternalServerErrorMessage,
-		ctx)
+	return sendProduct(ctx, product)
 }
