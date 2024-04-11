@@ -13,6 +13,10 @@ const Header = ({ page }) => {
     push("", "", { locale })
   }
 
+  const handleInput = ({ target: { value } }) => {
+    changeLocale(value)
+  }
+
   return (
     <header className="bg-secondary text-primary px-4 flex justify-between items-center sticky top-0 z-30">
       <Link href={routes.home} className="text-xl md:text-4xl py-3 font-extrabold">
@@ -22,7 +26,7 @@ const Header = ({ page }) => {
         <nav>
           <ul className="flex flex-row items-center gap-5">
             <li>
-              <select className="bg-secondary " onInput={({ target: { value } }) => changeLocale(value)}>
+              <select className="bg-secondary " onInput={handleInput}>
                 <option value="">{t("header.selectLanguage")}</option>
                 {locales.map(locale => (
                   <option key={locale} value={locale}>
