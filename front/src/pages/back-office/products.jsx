@@ -121,7 +121,7 @@ const ProductsBoard = () => {
   }
 
   const handleInput = () => {
-    // To do
+    // To do to handle filter input
   }
 
   return (
