@@ -47,7 +47,7 @@ class Products {
     description text notNull
     thumbnailUrl text notNull
     outOfStock boolean default false notNull
-    isHighlanderOfTheMoment boolean default false notNull
+    highlanderOrder uint default 0 notNull
 }
 
 class ProductImages {
@@ -123,7 +123,6 @@ This class represents the user whether he is admin or not.
 We ask for his email and phone number to be able to contact him for commercials offers and for updates on his orders.
 The email will also be the logg in field
 For more safety we the password is hashed and we have one salt per user
-
 
 ## Categories
 
