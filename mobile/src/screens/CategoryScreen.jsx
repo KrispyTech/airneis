@@ -44,7 +44,7 @@ const CategoryScreen = props => {
     return <ErrorScreen navigation={navigation} text={errors.category.unableToLoad} />
   }
 
-  const navigateToProduct = id => () => navigation.navigate(screens.productPage, { id })
+  const navigateToProduct = productId => () => navigation.navigate(screens.productPage, { productId })
 
   return (
     <Page navigation={navigation}>
@@ -56,7 +56,9 @@ const CategoryScreen = props => {
               url: category.thumbnailURL
             }}
           ></Image>
-          <Text className="text-4xl text-center font-bold absolute top-1/2 left-0 right-0 text-white ">{category.name}</Text>
+          <Text className="text-4xl text-center font-bold absolute top-1/2 left-0 right-0 text-white" {...mobileConfig.dropShadow.textOutline}>
+            {category.name}
+          </Text>
         </View>
         <View className="px-3 py-8">
           <Text className="text-lg font-medium uppercase">{category.description}</Text>

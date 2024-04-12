@@ -2,6 +2,7 @@ const mobileConfig = {
   api: {
     url: process.env.EXPO_PUBLIC_API_URL
   },
+  dropShadow: { textOutline: { shadowOffset: { width: "0px", height: "0px" }, shadowOpacity: "100%" } },
   images: {
     fullScreenImageXL: {
       width: "100%",
