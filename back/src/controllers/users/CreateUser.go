@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/KrispyTech/airneis/lib/shared/auth"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/pkg/config"
 	model "github.com/KrispyTech/airneis/src/models"
@@ -8,17 +9,14 @@ import (
 )
 
 func CreateUser(ctx *fiber.Ctx) error {
-	var (
-		user model.User
-	)
+	var user model.User
 
 	if err := ctx.BodyParser(&user); err != nil {
 		return helpers.SendBadRequest(ctx)
 	}
 
-	hashedPassword, salt, errorGetPassword := helpers.GetHashedPasswordAndSaltFromContext(ctx)
-
-	if errorGetPassword != nil {
+	hashedPassword, salt, err := auth.CreatePassword(ctx)
+	if err != nil {
 		return helpers.SendBadRequest(ctx)
 	}
 
