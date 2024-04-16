@@ -2,104 +2,13 @@ import BackOfficeBoard from "@/components/BackOfficeBoard"
 import BackOfficeNav from "@/components/BackOfficeNav"
 import Page from "@/components/Page"
 import { backoffice } from "@/constants"
-import { useState } from "react"
-
-const products = [
-  {
-    id: 1,
-    name: "CANAPÉ BLANC",
-    priority: 1,
-    HTPrice: 1000,
-    "in stock": "Out of stock",
-    category: "Salon",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 2,
-    name: "CANAPÉ SAUFA",
-    priority: 1,
-    HTPrice: 2020,
-    "in stock": "Out of stock",
-    category: "Salon",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 3,
-    name: "CHAISE DES LANDES",
-    priority: 1,
-    HTPrice: 475,
-    "in stock": "Out of stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 4,
-    name: "CANAPÉ BLANC",
-    priority: 1,
-    HTPrice: 1000,
-    "in stock": "In stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 5,
-    name: "CANAPÉ SAUFA",
-    priority: 1,
-    HTPrice: 2020,
-    "in stock": "In stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 6,
-    name: "CHAISE DES LANDES",
-    priority: 1,
-    HTPrice: 475,
-    "in stock": "Out of stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 10,
-    name: "CANAPÉ BLANC",
-    priority: 1,
-    HTPrice: 1000,
-    "in stock": "Out of stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 20,
-    name: "CANAPÉ SAUFA",
-    priority: 1,
-    HTPrice: 2020,
-    "in stock": "Out of stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 30,
-    name: "CHAISE DES LANDES",
-    priority: 1,
-    HTPrice: 475,
-    "in stock": "Out of stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  },
-  {
-    id: 40,
-    name: "CANAPÉ BLANC",
-    priority: 1,
-    HTPrice: 1000,
-    "in stock": "Out of stock",
-    category: "Salle de bain",
-    image: "https://picsum.photos/90/70"
-  }
-]
+import { getProducts } from "@/utils/services/productServices"
+import { useEffect, useState } from "react"
 
 const ProductsBoard = () => {
   const [selected, setSelected] = useState({})
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [products, setProducts] = useState([])
   const [itemId, setItemId] = useState(null)
   const handleOpenModal = event => {
     const id = event.currentTarget.getAttribute("data-id")
@@ -124,6 +33,14 @@ const ProductsBoard = () => {
     // To do to handle filter input
   }
 
+  useEffect(() => {
+    ;(async () => {
+      const { data } = await getProducts()
+
+      setProducts(data)
+    })()
+  }, [setProducts])
+
   return (
     <Page page={backoffice}>
       <div className="flex h-full">
@@ -136,7 +53,7 @@ const ProductsBoard = () => {
           handleInput={handleInput}
           handleChange={handleChange}
           selected={selected}
-          columns={["name", "category", "priority", "in stock", "HTPrice"]}
+          columns={["name", "categoryID", "orderOfPriority", "outOfStock", "priceWithoutTaxes"]}
           pageName={"Products"}
         />
       </div>

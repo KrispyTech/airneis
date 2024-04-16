@@ -10,20 +10,26 @@ const TableListItem = ({ item, handleOpenModal, selected, handleChange, columns 
     </td>
     {columns.map((column, i) => {
       let styles = ""
+      let OTSText = ""
 
-      if (column === "in stock") {
-        if (item[column] === "Out of stock") {
+      if (column === "outOfStock") {
+        if (item[column] === true) {
           styles = "text-red-400"
+          OTSText = "out of stock"
         } else {
           styles = "text-green-400"
+          OTSText = "in stock"
         }
       }
 
       return (
-        <td key={`${item.ID}-${i}`} className={`text-center py-2 ${column === "name" ? "text-start" : ""} ${column === "HTPrice" ? "text-end" : ""}`}>
+        <td
+          key={`${item.ID}-${i}`}
+          className={`text-center py-2 ${column === "name" ? "text-start" : ""} ${column === "priceWithoutTaxes" ? "text-end" : ""}`}
+        >
           <span className={styles}>
-            {item[column]}
-            {column === "HTPrice" ? " €" : ""}
+            {column !== "outOfStock" ? item[column] : OTSText}
+            {column === "priceWithoutTaxes" ? " €" : ""}
           </span>
         </td>
       )

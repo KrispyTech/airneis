@@ -11,7 +11,7 @@ const BackOfficeTableHead = ({ handleChange, columns }) => (
       {columns.map((column, i) => (
         <td
           key={`th-${i}`}
-          className={`text-sm md:text-md lg:text-lg text-center ${column === "HTPrice" ? "text-end w-16 sm:w-20 md:w-24 lg:w-28" : ""} ${
+          className={`text-sm md:text-md lg:text-lg text-center ${column === "priceWithoutTaxes" ? "text-end w-16 sm:w-20 md:w-24 lg:w-28" : ""} ${
             column === "name" ? "text-start" : ""
           }  uppercase font-bold `}
         >
