@@ -16,16 +16,16 @@ func CreateProducts(hc httpclient.HttpApi) error {
 	for count := 0; count < amountToAdd; count++ {
 		productID := uint(count)
 		product := model.Product{
-			Name:           				fmt.Sprintf("Product Name %d", count),
-			Slug:           				fmt.Sprintf("Product Slug %d", count),
-			CategoryID:							uint(rand.Intn(29) + 1),
-			PriceWithoutTaxes: 			rand.Intn(2500),
-			PriceWithTaxes: 				rand.Intn(2500),
-			Description:    				fmt.Sprintf("Product Description %d", count),
-			ThumbnailURL:   				fmt.Sprintf("ProductURL%d.com", count),
-			OutOfStock:         		false,
-			HighlanderOrder: 				0,
-			OrderOfPriority: 				&productID,
+			Name:              fmt.Sprintf("Product Name %d", count),
+			Slug:              fmt.Sprintf("Product Slug %d", count),
+			CategoryID:        uint(rand.Intn(9) + 1),
+			PriceWithoutTaxes: rand.Intn(2500),
+			PriceWithTaxes:    rand.Intn(2500),
+			Description:       fmt.Sprintf("Product Description %d", count),
+			ThumbnailURL:      fmt.Sprintf("ProductURL%d.com", count),
+			OutOfStock:        false,
+			HighlanderOrder:   0,
+			OrderOfPriority:   &productID,
 		}
 
 		bodyToSend, err := json.Marshal(product)
@@ -36,7 +36,7 @@ func CreateProducts(hc httpclient.HttpApi) error {
 		headers := make(map[string]string)
 		headers["content-type"] = "application/json"
 
-		_, status, err := hc.Post("http://localhost:3001/api/products", headers, bodyToSend)
+		_, status, err := hc.Post("https://back.airneis.orb.local/api/products", headers, bodyToSend)
 		if err != nil || status != http.StatusOK {
 			fmt.Printf("CreateProducts, request impossible %s\n", err)
 			continue
