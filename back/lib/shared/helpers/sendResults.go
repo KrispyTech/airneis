@@ -33,3 +33,10 @@ func SendInternalError(ctx *fiber.Ctx) error {
 		constants.InternalServerErrorMessage,
 		ctx)
 }
+
+func SendUnauthorized(ctx *fiber.Ctx) error {
+	return SendResult(
+		http.StatusUnauthorized,
+		constants.UnauthorizedMessage,
+		ctx)
+}

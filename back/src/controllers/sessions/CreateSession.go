@@ -1,0 +1,24 @@
+package controllers
+
+import (
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
+	controllers "github.com/KrispyTech/airneis/src/controllers/users"
+	"github.com/KrispyTech/airneis/src/serializers"
+	"github.com/gofiber/fiber/v2"
+)
+
+func CreateSession(ctx *fiber.Ctx) error {
+	input, errInput := helpers.GetAuthContext(ctx)
+	if errInput != nil {
+		return helpers.SendInternalError(ctx)
+	}
+
+	user, errFindUser := controllers.GetUserByEmailOrError(input.Email)
+	if errFindUser != nil {
+		return helpers.SendUnauthorized(ctx)
+	}
+
+	serializedUser := serializers.SerializeUser(user)
+	
+	return nil
+}

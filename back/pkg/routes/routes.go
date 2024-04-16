@@ -10,5 +10,6 @@ func SetRoutes(app *fiber.App) {
 	setCategoriesRoutes(apiRouter)
 	setProductsRoutes(apiRouter)
 	setUsersRoutes(apiRouter)
+	setSessionsRoutes(apiRouter)
 	log.Info("Routes have been set")
 }
