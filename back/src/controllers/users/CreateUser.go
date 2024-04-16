@@ -15,9 +15,15 @@ func CreateUser(ctx *fiber.Ctx) error {
 		return helpers.SendBadRequest(ctx)
 	}
 
-	hashedPassword, salt, err := auth.CreatePassword(ctx)
+	authData, err := helpers.GetAuthContext(ctx)
 	if err != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendInternalError(ctx)
+	}
+
+	hashedPassword, salt, err := auth.CreatePassword(authData)
+	if err != nil {
+		return helpers.
+			SendBadRequest(ctx)
 	}
 
 	user.PasswordHash, user.PasswordSalt = hashedPassword, salt

@@ -9,18 +9,10 @@ import (
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
-	"github.com/gofiber/fiber/v2"
 )
 
-
-
-func CreatePassword(ctx *fiber.Ctx) (hashedPassword string, salt string, err error) {
-	password, err := helpers.GetPasswordFromContext(ctx)
-	if err != nil {
-		return "", "", err
-	}
-
-	hashedPassword, salt, err = createNewPasswordHash(password)
+func CreatePassword(authData helpers.AuthData) (hashedPassword string, salt string, err error) {
+	hashedPassword, salt, err = createNewPasswordHash(authData.Password)
 	if err != nil {
 		return "", "", err
 	}
@@ -86,4 +78,3 @@ func hashPassword(rawPassword, salt []byte) ([]byte, error) {
 
 	return hashedPassword, nil
 }
-

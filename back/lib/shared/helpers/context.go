@@ -6,17 +6,17 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-
-type inputData struct {
+type AuthData struct {
+	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-func GetPasswordFromContext(ctx *fiber.Ctx) (string, error) {
-	var inputData inputData
+func GetAuthContext(ctx *fiber.Ctx) (AuthData, error) {
+	var authData AuthData
 
-	if err := json.Unmarshal(ctx.Body(), &inputData); err != nil {
-		return "", err
+	if err := json.Unmarshal(ctx.Body(), &authData); err != nil {
+		return AuthData{}, err
 	}
 
-	return inputData.Password, nil
+	return authData, nil
 }
