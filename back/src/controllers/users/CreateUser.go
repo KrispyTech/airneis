@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/KrispyTech/airneis/lib/shared/auth"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/pkg/config"
 	model "github.com/KrispyTech/airneis/src/models"
