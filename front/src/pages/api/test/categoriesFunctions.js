@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { createCategory, deleteCategory, getCategories, getCategoryById, updateCategory } from "@/utils/services/CategoryServices"
+import { createCategory, deleteCategory, getCategories, getCategoryById, updateCategory } from "@/utils/services/categoryServices"
 
 const SAMPLE_CATEGORY = {
   ID: 127,
