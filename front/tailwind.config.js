@@ -11,7 +11,11 @@ module.exports = {
         gray: "#E2E2E2",
         listOdd: "#FFF8F6",
         listEven: "#F4DED7",
-        modal: "#F5F0EF"
+        modal: "#F5F0EF",
+        button: {
+          normal: "#FF897D",
+          hover: "#FF5449"
+        }
       },
       lineHeight: {
         "extra-loose": "2.5"
