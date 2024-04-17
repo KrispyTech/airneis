@@ -13,7 +13,7 @@
   },
   "productPage": {
     "similarProducts": "Produits similaires",
-    "onStock": "En stock",
+    "inStock": "En stock",
     "outOfStock": "En rupture de stock",
     "addToCart": "Ajouter au panier"
   }
