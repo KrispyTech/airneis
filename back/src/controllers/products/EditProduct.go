@@ -22,7 +22,7 @@ func EditProduct(ctx *fiber.Ctx) error {
 		return helpers.SendBadRequest(ctx)
 	}
 
-	if err := setCategoryIfModifyied(ctx, &product); err != nil {
+	if err := setCategoryIfModified(ctx, &product); err != nil {
 		return helpers.SendInternalError(ctx)
 	}
 
@@ -33,8 +33,9 @@ func EditProduct(ctx *fiber.Ctx) error {
 	return sendProduct(ctx, product)
 }
 
-func setCategoryIfModifyied(ctx *fiber.Ctx, product *model.Product) error {
+func setCategoryIfModified(ctx *fiber.Ctx, product *model.Product) error {
 	var inputData InputData
+	var category model.Category
 
 	if errParsing := ctx.BodyParser(&inputData); errParsing != nil {
 		return errParsing
@@ -43,8 +44,6 @@ func setCategoryIfModifyied(ctx *fiber.Ctx, product *model.Product) error {
 	if inputData.CategoryID == 0 {
 		return nil
 	}
-
-	var category model.Category
 
 	if err := config.Database.Preload("Products").First(&category, inputData.CategoryID).Error; err != nil {
 		return helpers.SendInternalError(ctx)
