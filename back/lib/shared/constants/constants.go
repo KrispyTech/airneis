@@ -63,3 +63,9 @@ const (
 	SaltLength int    = 64
 	Chars      string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%"
 )
+
+// JWT
+const (
+	EnvJWTSecretKey string = "JWT_SECRET"
+	EnvJWTExpire    string = "JWT_EXPIRE"
+)

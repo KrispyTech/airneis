@@ -19,6 +19,11 @@ func CreateSession(ctx *fiber.Ctx) error {
 	}
 
 	serializedUser := serializers.SerializeUser(user)
-	
-	return nil
+	userToken, errToken := helpers.CreateToken(serializedUser)
+
+	if errToken != nil {
+		return helpers.SendInternalError(ctx)
+	}
+
+	return ctx.SendString(userToken)
 }
