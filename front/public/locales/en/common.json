@@ -6,6 +6,7 @@
   },
   "header": {
     "selectLanguage": "Select language",
+    "backOffice": "Backoffice",
     "locales": {
       "en": "English",
       "fr": "French"

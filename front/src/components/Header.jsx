@@ -5,6 +5,7 @@ import { backoffice } from "@/constants"
 import routes from "@/routes"
 import { useTranslation } from "next-i18next"
 import { useRouter } from "next/router"
+import SelectLanguage from "@/components/ui/SelectLanguage"
 
 const Header = ({ page }) => {
   const { t } = useTranslation("common")
@@ -48,7 +49,10 @@ const Header = ({ page }) => {
           </ul>
         </nav>
       ) : (
-        <p className="text-xl md:text-4xl font-extrabold">BACKOFFICE</p>
+        <div>
+          <SelectLanguage />
+          <p className="text-xl md:text-4xl font-extrabold">{t("header.backOffice")}</p>
+        </div>
       )}
     </header>
   )
