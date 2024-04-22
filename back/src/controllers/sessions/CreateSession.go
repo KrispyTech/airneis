@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/KrispyTech/airneis/lib/shared/auth"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	controllers "github.com/KrispyTech/airneis/src/controllers/users"
 	"github.com/KrispyTech/airneis/src/serializers"
@@ -19,7 +20,7 @@ func CreateSession(ctx *fiber.Ctx) error {
 	}
 
 	serializedUser := serializers.SerializeUser(user)
-	userToken, errToken := helpers.CreateToken(serializedUser)
+	userToken, errToken := auth.CreateToken(serializedUser)
 
 	if errToken != nil {
 		return helpers.SendInternalError(ctx)

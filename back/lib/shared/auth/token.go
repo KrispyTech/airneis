@@ -1,7 +1,8 @@
-package helpers
+package auth
 
 import (
 	"fmt"
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"os"
 	"time"
 
@@ -12,7 +13,7 @@ import (
 
 var (
 	secretKey   = []byte(os.Getenv(constants.EnvJWTSecretKey))
-	expireIn, _ = ConvertStringToInt(os.Getenv(constants.EnvJWTExpire))
+	expireIn, _ = helpers.ConvertStringToInt(os.Getenv(constants.EnvJWTExpire))
 )
 
 func CreateToken(user serializers.SerializedUser) (string, error) {
