@@ -2,9 +2,10 @@ package auth
 
 import (
 	"fmt"
-	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"os"
 	"time"
+
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/src/serializers"
@@ -35,7 +36,7 @@ func CreateToken(user serializers.SerializedUser) (string, error) {
 }
 
 func CheckToken(token string) (serializers.SerializedUser, error) {
-	parsedToken, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) {
 		return secretKey, nil
 	})
 
