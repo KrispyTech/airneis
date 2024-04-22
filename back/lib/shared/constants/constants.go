@@ -57,3 +57,9 @@ var SelectHas = map[string]string{
 const (
 	PaginationLimit int = 10
 )
+
+// PASSWORD AND SALT
+const (
+	SaltLength int    = 64
+	Chars      string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%"
+)
