@@ -47,7 +47,7 @@ const ProductPage = ({ product: { name, description, outOfStock, priceWithTaxes,
               <p>{description}</p>
             </div>
             <div className="flex flex-col itens-center xl:flex-row justify-between mt-5">
-              <Button disabled={outOfStock} text={t("productPage.addToCart")} variant="orange"></Button>
+              <Button disabled={outOfStock} text={t("productPage.addToCart")} variant="orange" />
               <div className="flex flex-row items-center gap-5 mt-5 h-full">
                 {materials && materials.map((material, index) => <MaterialChip name={material.name} key={index} />)}
               </div>

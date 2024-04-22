@@ -1,4 +1,4 @@
-.DS_Store
+ga.DS_Store
 
 # Binaries for programs and plugins
 *.exe
@@ -58,5 +58,6 @@ test_report*
 .env
 
 
-#Ide for GoLand
+#Ides
 .idea
+.fleet
