@@ -26,5 +26,10 @@ func CreateSession(ctx *fiber.Ctx) error {
 		return helpers.SendInternalError(ctx)
 	}
 
-	return ctx.SendString(userToken)
+	ctx.Cookie(&fiber.Cookie{
+		Name:  "cookie",
+		Value: userToken,
+	})
+
+	return helpers.SendOk(ctx)
 }
