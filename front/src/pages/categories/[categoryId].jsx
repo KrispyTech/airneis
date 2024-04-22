@@ -2,12 +2,13 @@
 import Page from "@/components/Page"
 import ProductCard from "@/components/ProductCard"
 import { getCategoryById } from "@/utils/services/categoryServices"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 
-export const getServerSideProps = async ({ query }) => {
+export const getServerSideProps = async ({ query, locale }) => {
   const { categoryId } = query
   const { data: category } = await getCategoryById(categoryId)
 
-  return { props: { category } }
+  return { props: { category, ...(await serverSideTranslations(locale, ["common"])) } }
 }
 const CategoryPage = ({ category }) => (
   <Page>
