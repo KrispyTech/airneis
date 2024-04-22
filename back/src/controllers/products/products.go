@@ -32,5 +32,5 @@ func sendProducts(ctx *fiber.Ctx, products []model.Product) error {
 func SelectProductByID(product *model.Product, ctx *fiber.Ctx) error {
 	productID := ctx.Params("productID")
 
-	return config.Database.First(&product, productID).Error
+	return config.Database.Preload("Category").First(&product, productID).Error
 }

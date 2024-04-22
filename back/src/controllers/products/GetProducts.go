@@ -28,7 +28,8 @@ func queryProducts(page int, ctx *fiber.Ctx) ([]model.Product, error) {
 	offset := (page - 1) * pagLimit
 
 	products := make([]model.Product, pagLimit)
-	errQuery := config.Database.Limit(pagLimit).Offset(offset).Order("order_of_priority asc").Find(&products)
+	errQuery := config.Database.Limit(pagLimit).Offset(offset).Order("order_of_priority asc").
+		Preload("Category").Find(&products)
 	if errQuery.Error != nil {
 		return products, helpers.SendBadRequest(ctx)
 	}

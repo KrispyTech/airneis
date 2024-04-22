@@ -2,11 +2,14 @@ package controllers
 
 import (
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
-
 	"github.com/KrispyTech/airneis/pkg/config"
 	model "github.com/KrispyTech/airneis/src/models"
 	"github.com/gofiber/fiber/v2"
 )
+
+type InputData struct {
+	CategoryID uint `json:"categoryID"`
+}
 
 func EditProduct(ctx *fiber.Ctx) error {
 	var product model.Product
@@ -19,9 +22,34 @@ func EditProduct(ctx *fiber.Ctx) error {
 		return helpers.SendBadRequest(ctx)
 	}
 
+	if err := setCategoryIfModified(ctx, &product); err != nil {
+		return helpers.SendInternalError(ctx)
+	}
+
 	if err := config.Database.Save(&product).Error; err != nil {
 		return helpers.SendInternalError(ctx)
 	}
 
 	return sendProduct(ctx, product)
+}
+
+func setCategoryIfModified(ctx *fiber.Ctx, product *model.Product) error {
+	var inputData InputData
+	var category model.Category
+
+	if errParsing := ctx.BodyParser(&inputData); errParsing != nil {
+		return errParsing
+	}
+
+	if inputData.CategoryID == 0 {
+		return nil
+	}
+
+	if err := config.Database.Preload("Products").First(&category, inputData.CategoryID).Error; err != nil {
+		return helpers.SendInternalError(ctx)
+	}
+
+	product.Category = category
+
+	return nil
 }
