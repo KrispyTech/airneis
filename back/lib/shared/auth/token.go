@@ -2,32 +2,52 @@ package auth
 
 import (
 	"fmt"
-	"os"
 	"time"
 
-	"github.com/KrispyTech/airneis/lib/shared/helpers"
-
 	"github.com/KrispyTech/airneis/lib/shared/constants"
+	"github.com/KrispyTech/airneis/lib/shared/helpers"
+	"github.com/KrispyTech/airneis/pkg/config"
 	"github.com/KrispyTech/airneis/src/serializers"
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var (
-	secretKey   = []byte(os.Getenv(constants.EnvJWTSecretKey))
-	expireIn, _ = helpers.ConvertStringToInt(os.Getenv(constants.EnvJWTExpire))
-)
+func getJWTParameters() (string, int, error) {
+	var handler config.ClientHandler
+
+	secretKey, err := handler.VaultClient.ReadSecret(constants.JWT)
+	if err != nil {
+		return "", 0, fmt.Errorf("Vault Error: Unable to get JWT. %s", err.Error())
+	}
+
+	expirationIn, err := handler.VaultClient.ReadSecret(constants.JWTExpiration)
+	if err != nil {
+		return "", 0, fmt.Errorf("Vault Error: Unable to get JWT Expiration. %s", err.Error())
+	}
+
+	jwtExpiration, err := helpers.ConvertStringToInt(expirationIn)
+	if err != nil {
+		return "", 0, fmt.Errorf("Vault Error: Unable convert to string expiration duration. %s", err.Error())
+	}
+
+	return secretKey, jwtExpiration, nil
+}
 
 func CreateToken(user serializers.SerializedUser) (string, error) {
+	rawToken, expirationTime, err := getJWTParameters()
+	if err != nil {
+		return "", err
+	}
+
 	jwtPayload := map[string]serializers.SerializedUser{
 		"userData": user,
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"payload": jwtPayload,
-		"exp":     time.Now().Add(time.Minute * time.Duration(expireIn)).Unix(),
+		"exp":     time.Now().Add(time.Minute * time.Duration(expirationTime)).Unix(),
 	})
 
-	tokenString, err := token.SignedString(secretKey)
+	tokenString, err := token.SignedString(rawToken)
 	if err != nil {
 		return "", err
 	}
@@ -36,12 +56,17 @@ func CreateToken(user serializers.SerializedUser) (string, error) {
 }
 
 func CheckToken(token string) (serializers.SerializedUser, error) {
+	rawToken, _, err := getJWTParameters()
+	if err != nil {
+		return serializers.SerializedUser{}, err
+	}
+
 	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) {
-		return secretKey, nil
+		return rawToken, nil
 	})
 
 	if err != nil {
-		return serializers.SerializedUser{}, err
+		return serializers.SerializedUser{}, fmt.Errorf("Unable to parse token. %s", err.Error())
 	}
 
 	if !parsedToken.Valid {
