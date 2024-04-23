@@ -8,9 +8,16 @@ import (
 )
 
 func SendResult(status int, message string, ctx *fiber.Ctx) error {
-	ctx.Status(status)
+	type Response struct {
+		Message string `json:"message"`
+		Status  int    `json:"status"`
+	}
 
-	return ctx.SendString(message)
+	response := Response{
+		Message: message, Status: status,
+	}
+
+	return ctx.Status(status).JSON(response)
 }
 
 func SendBadRequest(ctx *fiber.Ctx) error {
