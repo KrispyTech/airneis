@@ -66,6 +66,6 @@ const (
 
 // JWT
 const (
-	EnvJWTSecretKey string = "JWT_SECRET"
-	EnvJWTExpire    string = "JWT_EXPIRE"
+	JWT           string = "JWT_SECRET"
+	JWTExpiration string = "JWT_EXPIRATION_IN"
 )

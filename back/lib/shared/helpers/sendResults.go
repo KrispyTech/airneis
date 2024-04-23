@@ -41,7 +41,7 @@ func SendUnauthorized(ctx *fiber.Ctx) error {
 		ctx)
 }
 
-func SendOk(ctx *fiber.Ctx) error {
+func SendOK(ctx *fiber.Ctx) error {
 	return SendResult(
 		http.StatusOK,
 		constants.OkMessage,
