@@ -14,22 +14,21 @@ func CreateSession(ctx *fiber.Ctx) error {
 		return helpers.SendInternalError(ctx)
 	}
 
-	user, errFindUser := controllers.GetUserByEmailOrError(input.Email)
+	user, errFindUser := controllers.GetUserByEmail(input.Email)
 	if errFindUser != nil {
 		return helpers.SendUnauthorized(ctx)
 	}
 
 	serializedUser := serializers.SerializeUser(user)
 	userToken, errToken := auth.CreateToken(serializedUser)
-
 	if errToken != nil {
 		return helpers.SendInternalError(ctx)
 	}
 
 	ctx.Cookie(&fiber.Cookie{
-		Name:  "cookie",
+		Name:  "session",
 		Value: userToken,
 	})
 
-	return helpers.SendOk(ctx)
+	return helpers.SendOK(ctx)
 }

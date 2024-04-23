@@ -26,7 +26,7 @@ func fillUserInformation(ctx *fiber.Ctx, user model.User) (model.User, error) {
 	return user, nil
 }
 
-func GetUserByEmailOrError(email string) (model.User, error) {
+func GetUserByEmail(email string) (model.User, error) {
 	var user model.User
 
 	if len(email) == 0 {

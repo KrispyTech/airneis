@@ -6,10 +6,7 @@ import (
 )
 
 func DestroySession(ctx *fiber.Ctx) error {
-	ctx.Cookie(&fiber.Cookie{
-		Name:  "cookie",
-		Value: "",
-	})
+	ctx.ClearCookie("session")
 
-	return helpers.SendOk(ctx)
+	return helpers.SendOK(ctx)
 }
