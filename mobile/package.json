@@ -12,6 +12,7 @@
     "@react-navigation/native": "^6.1.12",
     "@react-navigation/native-stack": "^6.9.20",
     "axios": "^1.6.7",
+    "clsx": "^2.1.1",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
     "i18next": "^23.11.2",

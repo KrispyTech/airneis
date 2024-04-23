@@ -15,5 +15,10 @@ export default {
     unableToLoadCategories: "Impossible de charger les catégories",
     unableToLoadCategory: "Impossible de charger la catégorie",
     unableToLoadProduct: "Impossible de charger le produit"
+  },
+  translations: {
+    selectLanguage: "Choisissez votre langue",
+    fr: "Francais",
+    en: "Anglais"
   }
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import ErrorScreen from "./ErrorScreen"
 import errors from "../utils/constants/errors"
 import { useTranslation } from "react-i18next"
+import LanguageSelector from "../components/LanguageSelector"
 
 const HomeScreen = props => {
   const { navigation } = props
@@ -33,6 +34,7 @@ const HomeScreen = props => {
     <Page navigation={navigation}>
       <ScrollView>
         <Text>{t("homePage.title")}</Text>
+        <LanguageSelector className="mt-5" />
         {categories.map(({ name, ID: id }) => (
           <Button title={name} onPress={navigateToCategory(id)} key={id} />
         ))}
