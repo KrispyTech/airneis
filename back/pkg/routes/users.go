@@ -9,6 +9,6 @@ const (
 	userRoute = "users"
 )
 
-func setUsersRoutes(router fiber.Router) {
+func SetUsersRoutes(router fiber.Router) {
 	router.Post(userRoute, controllers.CreateUser)
 }

@@ -6,10 +6,12 @@ import (
 )
 
 const (
-	sessionsRoute = "/sessions"
+	sessionsRoute = "sessions"
 )
 
-func setSessionsRoutes(router fiber.Router) {
+func SetSessionsRoutes(router fiber.Router) fiber.Router {
 	router.Post(sessionsRoute, controllers.CreateSession)
 	router.Delete(sessionsRoute, controllers.DestroySession)
+
+	return router
 }

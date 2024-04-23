@@ -10,7 +10,7 @@ const (
 	productsRouteWithID = "products/:productID"
 )
 
-func setProductsRoutes(app fiber.Router) {
+func SetProductsRoutes(app fiber.Router) {
 	app.Get(productsRoute, controllers.GetProducts)
 	app.Get(productsRouteWithID, controllers.GetProductByID)
 	app.Post(productsRoute, controllers.CreateProduct)

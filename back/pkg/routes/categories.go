@@ -10,7 +10,7 @@ const (
 	categoriesRouteWithID = "categories/:categoryID"
 )
 
-func setCategoriesRoutes(app fiber.Router) {
+func SetCategoriesRoutes(app fiber.Router) {
 	app.Get(categoriesRoute, controllers.GetCategories)
 	app.Get(categoriesRouteWithID, controllers.GetCategoryByID)
 	app.Post(categoriesRoute, controllers.CreateCategory)
