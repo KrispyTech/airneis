@@ -8,12 +8,6 @@ import mobileConfig from "../../mobileConfig"
 import ProductCard from "../components/ProductCard"
 import screens from "../utils/constants/screens"
 
-const categoryEx = {
-  name: "Chambre",
-  thumbnailURL: "https://picsum.photos/200/400",
-  products: [{ id: 1, name: "Canapé Blanc", thumbnailURL: "https://picsum.photos/200/300", priceWithTaxes: 1200 }]
-}
-
 const CategoryScreen = props => {
   const {
     navigation,
@@ -32,8 +26,7 @@ const CategoryScreen = props => {
     ;(async () => {
       try {
         const result = await getCategoryById(id)
-        // setCategory(result.data)
-        setCategory(categoryEx)
+        setCategory(result.data)
       } catch (e) {
         setError(true)
       }
