@@ -6,6 +6,7 @@ import { getProductById } from "../utils/productServices"
 import { Text, TouchableHighlight, View } from "react-native"
 import ImageGallery from "../components/ImageGallery"
 import ProductCard from "../components/ProductCard"
+import { useTranslation } from "react-i18next"
 
 // Placeholder to be removed when the images will be ready
 const sampleImage = ["https://picsum.photos/400/300", "https://picsum.photos/400/400"]
@@ -20,6 +21,7 @@ const ProductScreen = props => {
   const [product, setProduct] = useState({})
   const [imageToDisplay, setImageToDisplay] = useState(0)
   const [hasError, setError] = useState(false)
+  const { t } = useTranslation()
   const handleChangeImage = i => () => {
     setImageToDisplay(i)
   }
@@ -52,7 +54,7 @@ const ProductScreen = props => {
             <Text className="text-2xl font-extrabold uppercase">{product.name}</Text>
             <Text className="text-2xl font-extrabold">{product.priceWithTaxes}€</Text>
           </View>
-          <Text className="text-darkGray text-xl font-bold">{product.outOfStock ? "Out Of Stock" : "In stock"}</Text>
+          <Text className="text-darkGray text-xl font-bold">{product.outOfStock ? t("productScreen.outOfStock") : t("productScreen.inStock")}</Text>
           <View className="flex-row gap-4 pt-2">
             {/* Remove check when backoffice is merge and handle material*/}
             {product.materials &&
@@ -64,9 +66,9 @@ const ProductScreen = props => {
           </View>
           <Text className="text-lg pt-2 font-semibold">{product.description}</Text>
           <TouchableHighlight title="add to cart" className="border-4 bg-red-400 mx-auto px-6 py-3 mt-2" onPress={handleAddToCart}>
-            <Text className="text-xl font-bold">AJOUTER AU PANIER</Text>
+            <Text className="text-xl font-bold">{t("productScreen.addToCart")}</Text>
           </TouchableHighlight>
-          <Text className="mx-auto text-3xl font-extrabold uppercase mt-4 mb-4">Produits Similaires</Text>
+          <Text className="mx-auto text-3xl font-extrabold uppercase mt-4 mb-4">{t("productScreen.similarProducts")}</Text>
           {/* Remove check when api will handle similar products */}
           {product.similarProducts &&
             product.similarProducts.map(productSingle => <ProductCard key={`produitSimilaire-${productSingle.id}`} product={productSingle} />)}
