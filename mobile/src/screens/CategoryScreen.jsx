@@ -1,4 +1,4 @@
-import { Image, ScrollView, Text, View } from "react-native"
+import { Button, Image, ScrollView, Text, TouchableHighlight, View } from "react-native"
 import Page from "../components/Page"
 import React, { useEffect, useState } from "react"
 import { getCategoryById } from "../utils/categoriesServices"
@@ -6,6 +6,7 @@ import ErrorScreen from "./ErrorScreen"
 import errors from "../utils/constants/errors"
 import mobileConfig from "../../mobileConfig"
 import ProductCard from "../components/ProductCard"
+import screens from "../utils/constants/screens"
 
 const CategoryScreen = props => {
   const {
@@ -36,6 +37,8 @@ const CategoryScreen = props => {
     return <ErrorScreen navigation={navigation} text={errors.category.unableToLoad} />
   }
 
+  const navigateToProduct = productId => () => navigation.navigate(screens.productPage, { productId })
+
   return (
     <Page navigation={navigation}>
       <ScrollView className="relative">
@@ -46,16 +49,20 @@ const CategoryScreen = props => {
               url: category.thumbnailURL
             }}
           ></Image>
-          <Text className="text-4xl text-center font-bold absolute top-1/2 left-0 right-0 text-white ">{category.name}</Text>
+          <Text className="text-4xl text-center font-bold absolute top-1/2 left-0 right-0 text-white" {...mobileConfig.dropShadow.textOutline}>
+            {category.name}
+          </Text>
         </View>
         <View className="px-3 py-8">
           <Text className="text-lg font-medium uppercase">{category.description}</Text>
           <View className="py-8 gap-5">
             {category.products &&
               category.products.map(product => (
-                <View key={`product${product.ID}`}>
-                  <ProductCard product={product} />
-                </View>
+                <TouchableHighlight key={`product${product.ID}`} onPress={navigateToProduct(product.id)}>
+                  <View>
+                    <ProductCard product={product} />
+                  </View>
+                </TouchableHighlight>
               ))}
           </View>
         </View>
