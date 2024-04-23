@@ -7,8 +7,10 @@ import errors from "../utils/constants/errors"
 import mobileConfig from "../../mobileConfig"
 import ProductCard from "../components/ProductCard"
 import screens from "../utils/constants/screens"
+import { useTranslation } from "react-i18next"
 
 const CategoryScreen = props => {
+  const { t } = useTranslation()
   const {
     navigation,
     route: {
@@ -25,8 +27,8 @@ const CategoryScreen = props => {
   useEffect(() => {
     ;(async () => {
       try {
-        const result = await getCategoryById(id)
-        setCategory(result.data)
+        const { data: result } = await getCategoryById(id)
+        setCategory(result)
       } catch (e) {
         setError(true)
       }
@@ -34,7 +36,7 @@ const CategoryScreen = props => {
   }, [id])
 
   if (hasError) {
-    return <ErrorScreen navigation={navigation} text={errors.category.unableToLoad} />
+    return <ErrorScreen navigation={navigation} text={t(errors.category.unableToLoad)} />
   }
 
   const navigateToProduct = productId => () => navigation.navigate(screens.productPage, { productId })
@@ -58,7 +60,7 @@ const CategoryScreen = props => {
           <View className="py-8 gap-5">
             {category.products &&
               category.products.map(product => (
-                <TouchableHighlight key={`product${product.ID}`} onPress={navigateToProduct(product.id)}>
+                <TouchableHighlight key={`product${product.ID}`} onPress={navigateToProduct(product.ID)}>
                   <View>
                     <ProductCard product={product} />
                   </View>

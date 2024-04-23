@@ -26,7 +26,7 @@ const HomeScreen = props => {
   }, [])
 
   if (hasError) {
-    return <ErrorScreen navigation={navigation} text={errors.homePage.unableToLoadCategories} />
+    return <ErrorScreen navigation={navigation} text={t(errors.homePage.unableToLoadCategories)} />
   }
 
   return (
