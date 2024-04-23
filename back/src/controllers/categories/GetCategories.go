@@ -13,15 +13,12 @@ func GetCategories(ctx *fiber.Ctx) error {
 	// We need to convert the page because query category must be an int
 	page, errParsing := helpers.ConvertStringToInt(ctx.Query(constants.Page, constants.DefaultPageValue))
 	if errParsing != nil {
-		return helpers.SetStatusAndMessages(
-			constants.BadRequestStatus,
-			constants.BadRequestMessage,
-			ctx)
+		return helpers.SendBadRequest(ctx)
 	}
 
 	categories, err := queryCategories(page, ctx)
 	if err != nil {
-		return ctx.SendString(constants.InternalServerErrorMessage)
+		return helpers.SendInternalError(ctx)
 	}
 
 	return sendCategories(ctx, categories)
@@ -35,9 +32,7 @@ func queryCategories(page int, ctx *fiber.Ctx) ([]model.Category, error) {
 	categories := make([]model.Category, pagLimit)
 	err := db.Limit(pagLimit).Preload("Products").Offset(offset).Order("order_of_display asc").Find(&categories)
 	if err.Error != nil {
-		ctx.Status(constants.BadRequestStatus)
-
-		return categories, ctx.SendString(constants.BadRequestMessage)
+		return categories, helpers.SendBadRequest(ctx)
 	}
 
 	return categories, nil

@@ -1,0 +1,21 @@
+{
+  "hello": "Bonjour",
+  "homePage": {
+    "wip": "Travail en cours, revenez plus tard !",
+    "linkExample": "Exemple de lien"
+  },
+  "header": {
+    "selectLanguage": "Séléctionnez une langue",
+    "backOffice": "Administration",
+    "locales": {
+      "en": "Anglais",
+      "fr": "Français"
+    }
+  },
+  "productPage": {
+    "similarProducts": "Produits similaires",
+    "inStock": "En stock",
+    "outOfStock": "En rupture de stock",
+    "addToCart": "Ajouter au panier"
+  }
+}
