@@ -36,7 +36,7 @@ func CreateProducts(hc httpclient.HttpApi) error {
 		headers := make(map[string]string)
 		headers["content-type"] = "application/json"
 
-		_, status, err := hc.Post("https://back.airneis.orb.local/api/products", headers, bodyToSend)
+		_, status, err := hc.Post("http://localhost:3001/api/products", headers, bodyToSend)
 		if err != nil || status != http.StatusOK {
 			fmt.Printf("CreateProducts, request impossible %s\n", err)
 			continue
