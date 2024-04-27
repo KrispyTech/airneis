@@ -1,0 +1,62 @@
+package lib
+
+import (
+	"github.com/KrispyTech/airneis/lib/shared/vault"
+	"github.com/KrispyTech/airneis/src/controllers/categories"
+	"github.com/KrispyTech/airneis/src/controllers/sessions"
+	"github.com/KrispyTech/airneis/src/controllers/users"
+	"github.com/gofiber/fiber/v2"
+	"github.com/KrispyTech/airneis/src/controllers/products"
+	log "github.com/sirupsen/logrus"
+)
+
+const (
+	categoriesRoute       = "categories"
+	categoriesRouteWithID = "categories/:categoryID"
+	productsRoute         = "products"
+	productsRouteWithID   = "products/:productID"
+	sessionsRoute         = "sessions"
+	userRoute             = "users"
+)
+
+func SetupRoutes(router fiber.Router, services Services) fiber.Router {
+	SetProductsRoutes(router)
+	SetCategoriesRoutes(router)
+	SetUsersRoutes(router)
+	SetSessionsRoutes(router, services.VaultClient)
+	log.Info("Routes have been set")
+
+	return router
+}
+
+func SetCategoriesRoutes(app fiber.Router) {
+	app.Get(categoriesRoute, categories.GetCategories)
+	app.Get(categoriesRouteWithID, categories.GetCategoryByID)
+	app.Post(categoriesRoute, categories.CreateCategory)
+	app.Patch(categoriesRouteWithID, categories.EditCategory)
+	app.Delete(categoriesRouteWithID, categories.DeleteCategory)
+}
+
+func SetProductsRoutes(app fiber.Router) {
+	app.Get(productsRoute, products.GetProducts)
+	app.Get(productsRouteWithID, products.GetProductByID)
+	app.Post(productsRoute, products.CreateProduct)
+	app.Patch(productsRouteWithID, products.EditProduct)
+	app.Delete(productsRouteWithID, products.DeleteProduct)
+}
+
+func SetSessionsRoutes(router fiber.Router, vault vault.VaultClient) fiber.Router {
+	router.Post(sessionsRoute, func(ctx *fiber.Ctx) error {
+		return sessions.CreateSession(ctx, vault)
+	})
+
+	router.Delete(sessionsRoute, func(ctx *fiber.Ctx) error {
+		return sessions.DestroySession(ctx)
+	})
+
+	return router
+}
+
+func SetUsersRoutes(router fiber.Router) {
+	router.Post(userRoute, users.CreateUser)
+}
