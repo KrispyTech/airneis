@@ -8,6 +8,7 @@ import "./translations"
 import screens from "./src/utils/constants/screens"
 import ProductScreen from "./src/screens/ProductScreen"
 import SignUpScreen from "./src/screens/SignUpScreen"
+import SignInScreen from "./src/screens/SignInScreen"
 
 const { Navigator, Screen } = createNativeStackNavigator()
 const App = () => (
@@ -17,6 +18,7 @@ const App = () => (
       <Screen name={screens.categoryPage} component={CategoryScreen} />
       <Screen name={screens.productPage} component={ProductScreen} />
       <Screen name={screens.signUpScreen} component={SignUpScreen} />
+      <Screen name={screens.signInScreen} component={SignInScreen} />
     </Navigator>
   </NavigationContainer>
 )
