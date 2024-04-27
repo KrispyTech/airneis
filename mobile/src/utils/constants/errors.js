@@ -14,7 +14,8 @@ const errors = {
     requiredLastName: "errors.signup.requiredLastName",
     invalidEmail: "errors.signup.invalidEmail",
     requiredEmail: "errors.signup.requiredEmail",
-    requiredPassword: "errors.signup.requiredPassword"
+    requiredPassword: "errors.signup.requiredPassword",
+    invalidPassword: "errors.signup.invalidPassword"
   }
 }
 

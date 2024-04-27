@@ -39,6 +39,7 @@ export default {
     firstNamePlaceholder: "Your first name",
     lastNamePlaceholder: "Your last name",
     emailPlaceholder: "Your email",
-    passwordPlaceholder: "Your password"
+    passwordPlaceholder: "Your password",
+    invalidPassword: "Password must contains at least 8 Characters, One uppercase letter, One lowercase letter, one number and one special character"
   }
 }
