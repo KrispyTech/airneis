@@ -1,8 +1,8 @@
 {
   "Hello": "Hello",
   "homePage": {
-    "wip": "WIP come back later!",
-    "linkExample": "Link example"
+    "welcome": "Welcome to Airneis",
+    "description": "From the highlands of Scotland our furniture are immortal"
   },
   "header": {
     "selectLanguage": "Select language",
