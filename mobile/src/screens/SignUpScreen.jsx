@@ -49,22 +49,26 @@ const SignUpScreen = props => {
         {
             name: "firstName",
             label: t("signup.firstName"),
-            placeholder: t("signup.firstNamePlaceholder")
+            placeholder: t("signup.firstNamePlaceholder"),
+            secure: false
         },
         {
             name: "lastName",
             label: t("signup.lastName"),
-            placeholder: t("signup.lastNamePlaceholder")
+            placeholder: t("signup.lastNamePlaceholder"),
+            secure: false
         },
         {
             name: "email",
             label: t("signup.email"),
-            placeholder: t("signup.emailPlaceholder")
+            placeholder: t("signup.emailPlaceholder"),
+            secure: false
         },
         {
             name: "password",
             label: t("signup.password"),
-            placeholder: t("signup.passwordPlaceholder")
+            placeholder: t("signup.passwordPlaceholder"),
+            secure: true
         }
     ]
 
@@ -75,7 +79,7 @@ const SignUpScreen = props => {
             <Formik initialValues={initialValues} onSubmit={handleSignUp()} validationSchema={validationSchema}>
                 {({handleChange, handleBlur, handleSubmit, values, errors: formErrors}) => (
                     <View>
-                        {formData.map(({name, label, placeholder}) => (
+                        {formData.map(({name, label, placeholder}, secure) => (
                             <FormField
                                 key={name}
                                 value={values[name]}
@@ -84,6 +88,7 @@ const SignUpScreen = props => {
                                 label={label}
                                 placeholder={placeholder}
                                 error={formErrors[name]}
+                                secure={secure}
                             />
                         ))}
                         <Pressable onPress={handleSubmit}
