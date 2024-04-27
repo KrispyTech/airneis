@@ -2,8 +2,9 @@ package auth
 
 import (
 	"fmt"
-	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"time"
+
+	"github.com/KrispyTech/airneis/lib/shared/vault"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
@@ -11,13 +12,13 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func getJWTParameters(vault vault.VaultClient) (string, int, error) {
-	secretKey, err := vault.ReadSecret(constants.JWT)
+func getJWTParameters(vlt vault.VaultClient) (string, int, error) {
+	secretKey, err := vlt.ReadSecret(constants.JWT)
 	if err != nil {
 		return "", 0, fmt.Errorf("Vault Error: Unable to get JWT. %s", err.Error())
 	}
 
-	expirationIn, err := vault.ReadSecret(constants.JWTExpiration)
+	expirationIn, err := vlt.ReadSecret(constants.JWTExpiration)
 	if err != nil {
 		return "", 0, fmt.Errorf("Vault Error: Unable to get JWT Expiration. %s", err.Error())
 	}
@@ -30,8 +31,8 @@ func getJWTParameters(vault vault.VaultClient) (string, int, error) {
 	return secretKey, jwtExpiration, nil
 }
 
-func CreateToken(user serializers.SerializedUser, vault vault.VaultClient) (string, error) {
-	rawToken, expirationTime, err := getJWTParameters(vault)
+func CreateToken(user serializers.SerializedUser, vlt vault.VaultClient) (string, error) {
+	rawToken, expirationTime, err := getJWTParameters(vlt)
 	if err != nil {
 		return "", err
 	}
@@ -53,8 +54,8 @@ func CreateToken(user serializers.SerializedUser, vault vault.VaultClient) (stri
 	return tokenString, nil
 }
 
-func CheckToken(token string, vault vault.VaultClient) (serializers.SerializedUser, error) {
-	rawToken, _, err := getJWTParameters(vault)
+func CheckToken(token string, vlt vault.VaultClient) (serializers.SerializedUser, error) {
+	rawToken, _, err := getJWTParameters(vlt)
 	if err != nil {
 		return serializers.SerializedUser{}, err
 	}

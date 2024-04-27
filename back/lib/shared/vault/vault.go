@@ -160,7 +160,7 @@ func (vc *VaultClient) ReadSecret(secretName string) (string, error) {
 	var appSecret AppSecret
 	headers, err := vc.prepareReadSecretHeaders()
 	if err != nil {
-		return "", errors.Errorf("%s, ReadSecret, unable to get prepare headers to read secret", err)
+		return "", errors.Errorf("%s, ReadSecret, unable to get headers to read secret", err)
 	}
 
 	url := fmt.Sprintf("%s/secrets/2023-06-13/organizations/%s/projects/%s/apps/%s/open/%s",

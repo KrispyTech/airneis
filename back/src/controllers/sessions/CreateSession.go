@@ -9,7 +9,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func CreateSession(ctx *fiber.Ctx, vault vault.VaultClient) error {
+func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 	input, errInput := helpers.GetAuthContext(ctx)
 	if errInput != nil {
 		return helpers.SendInternalError(ctx)
@@ -21,7 +21,7 @@ func CreateSession(ctx *fiber.Ctx, vault vault.VaultClient) error {
 	}
 
 	serializedUser := serializers.SerializeUser(user)
-	userToken, errToken := auth.CreateToken(serializedUser, vault)
+	userToken, errToken := auth.CreateToken(serializedUser, vlt)
 	if errToken != nil {
 		return helpers.SendInternalError(ctx)
 	}

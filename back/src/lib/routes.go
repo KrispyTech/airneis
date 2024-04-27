@@ -3,10 +3,10 @@ package lib
 import (
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"github.com/KrispyTech/airneis/src/controllers/categories"
+	"github.com/KrispyTech/airneis/src/controllers/products"
 	"github.com/KrispyTech/airneis/src/controllers/sessions"
 	"github.com/KrispyTech/airneis/src/controllers/users"
 	"github.com/gofiber/fiber/v2"
-	"github.com/KrispyTech/airneis/src/controllers/products"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -45,9 +45,9 @@ func SetProductsRoutes(app fiber.Router) {
 	app.Delete(productsRouteWithID, products.DeleteProduct)
 }
 
-func SetSessionsRoutes(router fiber.Router, vault vault.VaultClient) fiber.Router {
+func SetSessionsRoutes(router fiber.Router, vlt vault.VaultClient) fiber.Router {
 	router.Post(sessionsRoute, func(ctx *fiber.Ctx) error {
-		return sessions.CreateSession(ctx, vault)
+		return sessions.CreateSession(ctx, vlt)
 	})
 
 	router.Delete(sessionsRoute, func(ctx *fiber.Ctx) error {
