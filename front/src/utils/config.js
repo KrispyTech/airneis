@@ -12,6 +12,10 @@ const config = {
     productCard: {
       width: 350,
       height: 200
+    },
+    categoryCard: {
+      width: 350,
+      height: 200
     }
   }
 }
