@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"fmt"
+	"github.com/KrispyTech/airneis/lib/shared/airror"
 	"time"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
@@ -14,17 +14,17 @@ import (
 func getJWTParameters(vlt vault.VaultClient) (string, int, error) {
 	secretKey, err := vlt.ReadSecret(constants.JWT)
 	if err != nil {
-		return "", 0, fmt.Errorf("Vault Error: Unable to get JWT. %s", err.Error())
+		return "", 0, airror.New(err, "Vault Error: Unable to get JWT")
 	}
 
 	expirationIn, err := vlt.ReadSecret(constants.JWTExpiration)
 	if err != nil {
-		return "", 0, fmt.Errorf("Vault Error: Unable to get JWT Expiration. %s", err.Error())
+		return "", 0, airror.New(err, "Vault Error: Unable to get JWT Expiration")
 	}
 
 	jwtExpiration, err := helpers.ConvertStringToInt(expirationIn)
 	if err != nil {
-		return "", 0, fmt.Errorf("Vault Error: Unable convert to string expiration duration. %s", err.Error())
+		return "", 0, airror.New(err, "Vault Error: Unable convert to string expiration duration")
 	}
 
 	return secretKey, jwtExpiration, nil
@@ -64,11 +64,11 @@ func CheckToken(token string, vlt vault.VaultClient) (serializers.SerializedUser
 	})
 
 	if err != nil {
-		return serializers.SerializedUser{}, fmt.Errorf("Unable to parse token. %s", err.Error())
+		return serializers.SerializedUser{}, airror.New(err, "Unable to parse token")
 	}
 
 	if !parsedToken.Valid {
-		return serializers.SerializedUser{}, fmt.Errorf("invalid token")
+		return serializers.SerializedUser{}, airror.New(err, "invalid token")
 	}
 
 	return getUserDataFromParsedToken(parsedToken), nil
