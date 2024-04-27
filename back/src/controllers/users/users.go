@@ -2,6 +2,7 @@ package users
 
 import (
 	"fmt"
+	"github.com/KrispyTech/airneis/lib/shared/airror"
 
 	"github.com/KrispyTech/airneis/lib/shared/auth"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
@@ -30,11 +31,11 @@ func GetUserByEmail(email string) (model.User, error) {
 	var user model.User
 
 	if len(email) == 0 {
-		return model.User{}, fmt.Errorf("user not found")
+		return model.User{}, fmt.Errorf("no email")
 	}
 
 	if err := config.Database.Where("email = ?", email).First(&user).Error; err != nil {
-		return model.User{}, err
+		return model.User{}, airror.New(err, "user not found")
 	}
 
 	return user, nil
