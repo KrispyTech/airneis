@@ -1,12 +1,12 @@
 const errors = {
   homePage: {
-    unableToLoadCategories: "Unable to load categories"
+    unableToLoadCategories: "errors.unableToLoadCategories"
   },
   category: {
-    unableToLoad: "Unable to load category"
+    unableToLoad: "errors.unableToLoadCategory"
   },
   product: {
-    unableToLoad: "Unable to load product"
+    unableToLoad: "errors.unableToLoadProduct"
   }
 }
 
