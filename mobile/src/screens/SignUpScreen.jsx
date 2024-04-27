@@ -1,4 +1,4 @@
-import { Button, Pressable, Text, TextInput, View } from "react-native"
+import { Pressable, Text, View } from "react-native"
 import screens from "../utils/constants/screens"
 import Page from "../components/Page"
 import React, { useState } from "react"
@@ -14,11 +14,10 @@ const SignUpScreen = props => {
   const { navigation } = props
   const handleSignUp = () => async () => {
     try {
-      console.log({ firstName, lastName, email, password })
       await createUsers({ firstName, lastName, email, password })
+      navigation.navigate(screens.signInScreen)
     } catch (e) {
       setError(e.message)
-      console.log(e)
     }
   }
 
