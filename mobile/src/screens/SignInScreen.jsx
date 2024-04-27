@@ -3,7 +3,7 @@ import Page from "../components/Page"
 
 const SignInScreen = () => (
   <Page>
-    <Text>SignInScreen</Text>
+    <Text>Sign In Screen</Text>
   </Page>
 )
 
