@@ -21,7 +21,9 @@ export default {
       requiredLastName: "Le nom est obligatoire",
       invalidEmail: "Merci de renter un email valide",
       requiredEmail: "Email obligatoire",
-      requiredPassword: "Mot de passe obligatoire"
+      requiredPassword: "Mot de passe obligatoire",
+      invalidPassword:
+        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
     }
   },
   translations: {
