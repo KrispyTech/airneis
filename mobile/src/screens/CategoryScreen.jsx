@@ -1,7 +1,7 @@
 import { Button, Image, ScrollView, Text, TouchableHighlight, View } from "react-native"
 import Page from "../components/Page"
 import React, { useEffect, useState } from "react"
-import { getCategoryById } from "../utils/categoriesServices"
+import { getCategoryById } from "../utils/services/categoriesServices"
 import ErrorScreen from "./ErrorScreen"
 import errors from "../utils/constants/errors"
 import mobileConfig from "../../mobileConfig"
