@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/KrispyTech/airneis/lib/shared/vault"
-
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
+	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"github.com/KrispyTech/airneis/src/serializers"
 	"github.com/golang-jwt/jwt/v5"
 )
