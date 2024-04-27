@@ -1,4 +1,4 @@
-package controllers
+package categories
 
 import (
 	"gorm.io/gorm/clause"

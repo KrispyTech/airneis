@@ -1,4 +1,4 @@
-package controllers
+package users
 
 import (
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
