@@ -39,7 +39,7 @@ const CategoryScreen = props => {
     return <ErrorScreen navigation={navigation} text={t(errors.category.unableToLoad)} />
   }
 
-  const navigateToProduct = productId => () => navigation.navigate(screens.productPage, { productId })
+  const navigateToProduct = productID => () => navigation.navigate(screens.productPage, { productID })
 
   return (
     <Page navigation={navigation}>

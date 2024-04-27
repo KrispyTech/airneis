@@ -14,7 +14,7 @@ const ProductScreen = props => {
   const {
     navigation,
     route: {
-      params: { productId }
+      params: { productID }
     }
   } = props
 
@@ -33,13 +33,13 @@ const ProductScreen = props => {
   useEffect(() => {
     ;(async () => {
       try {
-        const { data: result } = await getProductById(productId)
+        const { data: result } = await getProductById(productID)
         setProduct(result)
       } catch (e) {
         setError(true)
       }
     })()
-  }, [productId])
+  }, [productID])
 
   if (hasError) {
     return <ErrorScreen navigation={navigation} text={t(errors.product.unableToLoad)} />
