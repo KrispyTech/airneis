@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import HomeScreen from "./src/screens/HomeScreen"
 import CategoryScreen from "./src/screens/CategoryScreen"
+import "./translations"
 
 import screens from "./src/utils/constants/screens"
 import ProductScreen from "./src/screens/ProductScreen"
