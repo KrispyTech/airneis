@@ -1,16 +1,21 @@
 const errors = {
-    homePage: {
-        unableToLoadCategories: "Unable to load categories"
-    },
-    category: {
-        unableToLoad: "Unable to load category"
-    },
-    product: {
-        unableToLoad: "Unable to load product"
-    },
-    signup: {
-        invalidForm: "Invalid form"
-    }
+  homePage: {
+    unableToLoadCategories: "errors.unableToLoadCategories"
+  },
+  category: {
+    unableToLoad: "errors.unableToLoadCategory"
+  },
+  product: {
+    unableToLoad: "errors.unableToLoadProduct"
+  },
+  signup: {
+    invalidForm: "errors.signup.invalidForm",
+    requiredFirstName: "errors.signup.requiredFirstName",
+    requiredLastName: "errors.signup.requiredLastName",
+    invalidEmail: "errors.signup.invalidEmail",
+    requiredEmail: "errors.signup.requiredEmail",
+    requiredPassword: "errors.signup.requiredPassword"
+  }
 }
 
 export default errors
