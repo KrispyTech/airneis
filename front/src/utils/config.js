@@ -10,12 +10,12 @@ const config = {
       }
     },
     productCard: {
-      width: 350,
-      height: 200
+      imageWidth: 350,
+      imageHeight: 200
     },
     categoryCard: {
-      width: 350,
-      height: 200
+      imageWidth: 350,
+      imageHeight: 200
     }
   }
 }

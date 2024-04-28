@@ -13,8 +13,8 @@ const CategoryCard = ({ category, className, otherProps }) => {
       <Image
         alt={category.name}
         src={category.thumbnailURL}
-        width={config.images.categoryCard.width}
-        height={config.images.categoryCard.height}
+        width={config.images.categoryCard.imageWidth}
+        height={config.images.categoryCard.imageHeight}
         className="rounded-sm drop-shadow-box"
       />
       <h2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white drop-shadow-textOutline font-bold text-xl">
