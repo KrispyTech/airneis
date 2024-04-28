@@ -3,10 +3,11 @@ package vault
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/KrispyTech/airneis/lib/shared/airror"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/KrispyTech/airneis/lib/shared/airror"
 
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
 )
@@ -98,12 +99,12 @@ func getClientVariables() (clientID, secret string, err error) {
 func getAppVariables() (vault Vault, err error) {
 	organisationID := os.Getenv("HCP_ORG_ID")
 	if organisationID == "" {
-		return Vault{}, fmt.Errorf("getAppVariables, unable to get : HCP_ORG_ID")
+		return Vault{}, airror.New(err, "getAppVariables, unable to get : HCP_ORG_ID")
 	}
 
 	projectID := os.Getenv("HCP_PROJECT_ID")
 	if projectID == "" {
-		return Vault{}, fmt.Errorf("getAppVariables, unable to get : HCP_PROJECT_ID")
+		return Vault{}, airror.New(err, "getAppVariables, unable to get : HCP_PROJECT_ID")
 	}
 
 	return Vault{
@@ -129,7 +130,7 @@ func (vc *VaultClient) requestAccessKey() (VaultToken, error) {
 		ClientSecret: secret,
 	}
 
-	token, err := vc.getToken(fmt.Sprintf("%s/oauth/token", vc.Vault.AuthURL), headers, reqBody)
+	token, err := vc.getToken(fmt.Sprintf("%s/oauth2/token", vc.Vault.AuthURL), headers, reqBody)
 	if err != nil {
 		return VaultToken{}, airror.New(err, "requestAccessKey, unable to get token")
 	}
