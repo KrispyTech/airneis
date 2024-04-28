@@ -1,13 +1,10 @@
 package serializers
 
 import (
-	"gorm.io/gorm"
-
 	model "github.com/KrispyTech/airneis/src/models"
 )
 
 type SerializedUser struct {
-	gorm.Model
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 	Email     string `json:"email"     gorm:"unique"`
@@ -17,7 +14,6 @@ type SerializedUser struct {
 
 func SerializeUser(user model.User) SerializedUser {
 	return SerializedUser{
-		Model:     user.Model,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
 		Email:     user.Email,

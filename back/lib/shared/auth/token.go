@@ -1,10 +1,10 @@
 package auth
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/KrispyTech/airneis/lib/shared/airror"
-
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
@@ -54,22 +54,31 @@ func CreateToken(user serializers.SerializedUser, vlt vault.VaultClient) (string
 	return tokenString, nil
 }
 
-func CheckToken(token string, vlt vault.VaultClient) (serializers.SerializedUser, error) {
+func CheckToken(token string, vlt vault.VaultClient) error {
 	rawToken, _, err := getJWTParameters(vlt)
 	if err != nil {
-		return serializers.SerializedUser{}, err
+		return airror.New(err, "Failed to get JWT params")
 	}
 
-	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) { return rawToken, nil })
+	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) { return []byte(rawToken), nil })
 	if err != nil {
-		return serializers.SerializedUser{}, airror.New(err, "Unable to parse token")
+		return airror.New(err, "Unable to parse token")
 	}
 
 	if !parsedToken.Valid {
-		return serializers.SerializedUser{}, airror.New(err, "invalid token")
+		return airror.New(err, "invalid token")
 	}
 
-	return getUserDataFromParsedToken(parsedToken), nil
+	expirationTime, err := parsedToken.Claims.GetExpirationTime()
+	if err != nil {
+		return airror.New(err, "unable to get expiration time")
+	}
+
+	if expirationTime.Before(time.Now()) {
+		return fmt.Errorf("token has expired")
+	}
+
+	return nil
 }
 
 func getUserDataFromParsedToken(parsedToken *jwt.Token) serializers.SerializedUser {

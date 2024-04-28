@@ -47,7 +47,7 @@ func SetProductsRoutes(app fiber.Router) {
 
 func SetSessionsRoutes(router fiber.Router, vlt vault.VaultClient) fiber.Router {
 	router.Post(sessionsRoute, func(ctx *fiber.Ctx) error {
-		return sessions.CreateSession(ctx, vlt)
+		return sessions.ValidateSession(ctx, vlt)
 	})
 
 	router.Delete(sessionsRoute, func(ctx *fiber.Ctx) error {
