@@ -46,7 +46,7 @@ func CreateToken(user serializers.SerializedUser, vlt vault.VaultClient) (string
 		"exp":     time.Now().Add(time.Minute * time.Duration(expirationTime)).Unix(),
 	})
 
-	tokenString, err := token.SignedString(rawToken)
+	tokenString, err := token.SignedString([]byte(rawToken))
 	if err != nil {
 		return "", err
 	}
@@ -60,10 +60,7 @@ func CheckToken(token string, vlt vault.VaultClient) (serializers.SerializedUser
 		return serializers.SerializedUser{}, err
 	}
 
-	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) {
-		return rawToken, nil
-	})
-
+	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) { return rawToken, nil })
 	if err != nil {
 		return serializers.SerializedUser{}, airror.New(err, "Unable to parse token")
 	}

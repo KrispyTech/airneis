@@ -5,5 +5,5 @@ const (
 	NotFoundMessage            string = "Resource not found"
 	InternalServerErrorMessage string = "Internal server error"
 	UnauthorizedMessage        string = "Unauthorized"
-	OkMessage                  string = "Ok"
+	OkMessage                  string = "Success"
 )
