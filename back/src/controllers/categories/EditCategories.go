@@ -12,15 +12,15 @@ func EditCategory(ctx *fiber.Ctx) error {
 	var category model.Category
 
 	if errGet := SelectCategoryByID(&category, ctx); errGet != nil {
-		return helpers.SendNotFound(ctx)
+		return helpers.SendNotFound(ctx, errGet)
 	}
 
 	if errParsing := ctx.BodyParser(&category); errParsing != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendBadRequest(ctx, errParsing)
 	}
 
 	if err := config.Database.Save(&category).Error; err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return sendCategory(ctx, category)

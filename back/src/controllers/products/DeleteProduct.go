@@ -14,17 +14,17 @@ func DeleteProduct(ctx *fiber.Ctx) error {
 	var product model.Product
 
 	if err := SelectProductByID(&product, ctx); err != nil {
-		return helpers.SendNotFound(ctx)
+		return helpers.SendNotFound(ctx, err)
 	}
 
 	if err := config.Database.Save(&product).Error; err != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendBadRequest(ctx, err)
 	}
 
 	productID := ctx.Params("productID")
 
 	if err := config.Database.Clauses(clause.Returning{}).Delete(&product, productID).Error; err != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendBadRequest(ctx, err)
 	}
 
 	return sendProduct(ctx, product)

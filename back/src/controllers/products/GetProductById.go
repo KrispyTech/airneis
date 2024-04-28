@@ -10,7 +10,7 @@ func GetProductByID(ctx *fiber.Ctx) error {
 	var product model.Product
 
 	if err := SelectProductByID(&product, ctx); err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return sendProduct(ctx, product)

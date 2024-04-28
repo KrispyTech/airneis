@@ -3,6 +3,8 @@ package helpers
 import (
 	"net/http"
 
+	log "github.com/sirupsen/logrus"
+
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/gofiber/fiber/v2"
 )
@@ -20,37 +22,30 @@ func SendResult(status int, message string, ctx *fiber.Ctx) error {
 	return ctx.Status(status).JSON(response)
 }
 
-func SendBadRequest(ctx *fiber.Ctx) error {
-	return SendResult(
-		http.StatusBadRequest,
-		constants.BadRequestMessage,
-		ctx)
+func SendBadRequest(ctx *fiber.Ctx, err error) error {
+	log.Error(err)
+
+	return SendResult(http.StatusBadRequest, constants.BadRequestMessage, ctx)
 }
 
-func SendNotFound(ctx *fiber.Ctx) error {
-	return SendResult(
-		http.StatusNotFound,
-		constants.NotFoundMessage,
-		ctx)
+func SendNotFound(ctx *fiber.Ctx, err error) error {
+	log.Error(err)
+
+	return SendResult(http.StatusNotFound, constants.NotFoundMessage, ctx)
 }
 
-func SendInternalError(ctx *fiber.Ctx) error {
-	return SendResult(
-		http.StatusInternalServerError,
-		constants.InternalServerErrorMessage,
-		ctx)
+func SendInternalError(ctx *fiber.Ctx, err error) error {
+	log.Error(err)
+
+	return SendResult(http.StatusInternalServerError, constants.InternalServerErrorMessage, ctx)
 }
 
-func SendUnauthorized(ctx *fiber.Ctx) error {
-	return SendResult(
-		http.StatusUnauthorized,
-		constants.UnauthorizedMessage,
-		ctx)
+func SendUnauthorized(ctx *fiber.Ctx, err error) error {
+	log.Error(err)
+
+	return SendResult(http.StatusUnauthorized, constants.UnauthorizedMessage, ctx)
 }
 
 func SendOK(ctx *fiber.Ctx) error {
-	return SendResult(
-		http.StatusOK,
-		constants.OkMessage,
-		ctx)
+	return SendResult(http.StatusOK, constants.OkMessage, ctx)
 }

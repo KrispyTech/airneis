@@ -11,11 +11,11 @@ func CreateCategory(ctx *fiber.Ctx) error {
 	var category model.Category
 
 	if err := ctx.BodyParser(&category); err != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendBadRequest(ctx, err)
 	}
 
 	if err := config.Database.Create(&category).Error; err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return sendCategory(ctx, category)

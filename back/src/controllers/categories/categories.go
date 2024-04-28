@@ -14,7 +14,7 @@ import (
 func sendCategory(ctx *fiber.Ctx, category model.Category) error {
 	categoryJSON, err := json.Marshal(category)
 	if err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return ctx.Send(categoryJSON)
@@ -23,7 +23,7 @@ func sendCategory(ctx *fiber.Ctx, category model.Category) error {
 func sendCategories(ctx *fiber.Ctx, categories []model.Category) error {
 	jsonCategories, errMarshal := json.Marshal(categories)
 	if errMarshal != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, errMarshal)
 	}
 
 	return ctx.Send(jsonCategories)

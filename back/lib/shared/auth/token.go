@@ -1,8 +1,9 @@
 package auth
 
 import (
-	"github.com/KrispyTech/airneis/lib/shared/airror"
 	"time"
+
+	"github.com/KrispyTech/airneis/lib/shared/airror"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"

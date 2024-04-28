@@ -2,6 +2,7 @@ package users
 
 import (
 	"fmt"
+
 	"github.com/KrispyTech/airneis/lib/shared/airror"
 
 	"github.com/KrispyTech/airneis/lib/shared/auth"
@@ -14,12 +15,12 @@ import (
 func fillUserInformation(ctx *fiber.Ctx, user model.User) (model.User, error) {
 	authData, err := helpers.GetAuthContext(ctx)
 	if err != nil {
-		return model.User{}, helpers.SendInternalError(ctx)
+		return model.User{}, helpers.SendInternalError(ctx, err)
 	}
 
 	hashedPassword, salt, err := auth.CreatePassword(authData)
 	if err != nil {
-		return model.User{}, helpers.SendBadRequest(ctx)
+		return model.User{}, helpers.SendBadRequest(ctx, err)
 	}
 
 	user.PasswordHash, user.PasswordSalt = hashedPassword, salt

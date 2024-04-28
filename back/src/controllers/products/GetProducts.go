@@ -12,12 +12,12 @@ import (
 func GetProducts(ctx *fiber.Ctx) error {
 	page, errParsing := helpers.ConvertStringToInt(ctx.Query(constants.Page, constants.DefaultPageValue))
 	if errParsing != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendBadRequest(ctx, errParsing)
 	}
 
 	products, err := queryProducts(page, ctx)
 	if err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return sendProducts(ctx, products)
@@ -31,7 +31,7 @@ func queryProducts(page int, ctx *fiber.Ctx) ([]model.Product, error) {
 	errQuery := config.Database.Limit(pagLimit).Offset(offset).Order("order_of_priority asc").
 		Preload("Category").Find(&products)
 	if errQuery.Error != nil {
-		return products, helpers.SendBadRequest(ctx)
+		return products, helpers.SendBadRequest(ctx, errQuery.Error)
 	}
 
 	return products, nil

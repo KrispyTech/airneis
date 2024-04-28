@@ -12,18 +12,18 @@ import (
 func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 	input, errInput := helpers.GetAuthContext(ctx)
 	if errInput != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, errInput)
 	}
 
 	user, errFindUser := users.GetUserByEmail(input.Email)
 	if errFindUser != nil {
-		return helpers.SendUnauthorized(ctx)
+		return helpers.SendUnauthorized(ctx, errFindUser)
 	}
 
 	serializedUser := serializers.SerializeUser(user)
 	userToken, errToken := auth.CreateToken(serializedUser, vlt)
 	if errToken != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, errToken)
 	}
 
 	ctx.Cookie(&fiber.Cookie{
