@@ -80,9 +80,3 @@ func CheckToken(token string, vlt vault.VaultClient) error {
 
 	return nil
 }
-
-func getUserDataFromParsedToken(parsedToken *jwt.Token) serializers.SerializedUser {
-	var jwtPayload = parsedToken.Claims.(jwt.MapClaims)["payload"]
-
-	return jwtPayload.(map[string]interface{})["userData"].(serializers.SerializedUser)
-}

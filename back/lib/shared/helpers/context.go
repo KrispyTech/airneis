@@ -28,7 +28,7 @@ func GetSessionCookiesFromContext(ctx *fiber.Ctx) (string, bool) {
 	sessionCookie := ctx.Cookies("session")
 	if sessionCookie == "" {
 		log.Warn("Session cookie not found.")
-		
+
 		return "", false
 	}
 
