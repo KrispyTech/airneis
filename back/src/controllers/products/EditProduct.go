@@ -1,4 +1,4 @@
-package controllers
+package products
 
 import (
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
@@ -15,19 +15,19 @@ func EditProduct(ctx *fiber.Ctx) error {
 	var product model.Product
 
 	if errGet := SelectProductByID(&product, ctx); errGet != nil {
-		return helpers.SendNotFound(ctx)
+		return helpers.SendNotFound(ctx, errGet)
 	}
 
 	if errParsing := ctx.BodyParser(&product); errParsing != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendBadRequest(ctx, errParsing)
 	}
 
 	if err := setCategoryIfModified(ctx, &product); err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	if err := config.Database.Save(&product).Error; err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return sendProduct(ctx, product)
@@ -46,7 +46,7 @@ func setCategoryIfModified(ctx *fiber.Ctx, product *model.Product) error {
 	}
 
 	if err := config.Database.Preload("Products").First(&category, inputData.CategoryID).Error; err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	product.Category = category

@@ -1,4 +1,4 @@
-package controllers
+package products
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ import (
 func sendProduct(ctx *fiber.Ctx, product model.Product) error {
 	productJSON, err := json.Marshal(product)
 	if err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return ctx.Send(productJSON)
@@ -23,7 +23,7 @@ func sendProduct(ctx *fiber.Ctx, product model.Product) error {
 func sendProducts(ctx *fiber.Ctx, products []model.Product) error {
 	jsonProducts, errMarshal := json.Marshal(products)
 	if errMarshal != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, errMarshal)
 	}
 
 	return ctx.Send(jsonProducts)

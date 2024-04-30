@@ -1,4 +1,4 @@
-package controllers
+package categories
 
 import (
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
@@ -10,7 +10,7 @@ func GetCategoryByID(ctx *fiber.Ctx) error {
 	var category model.Category
 
 	if err := SelectCategoryByID(&category, ctx); err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return sendCategory(ctx, category)
