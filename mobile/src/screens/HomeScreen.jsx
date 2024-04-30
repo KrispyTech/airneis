@@ -5,12 +5,15 @@ import { getCategories } from "../utils/categoriesServices"
 import { useEffect, useState } from "react"
 import ErrorScreen from "./ErrorScreen"
 import errors from "../utils/constants/errors"
+import { useTranslation } from "react-i18next"
+import LanguageSelector from "../components/LanguageSelector"
 
 const HomeScreen = props => {
   const { navigation } = props
   const [categories, setCategories] = useState([])
   const [hasError, setError] = useState(false)
   const navigateToCategory = id => () => navigation.navigate(screens.categoryPage, { id })
+  const { t } = useTranslation()
 
   useEffect(() => {
     ;(async () => {
@@ -24,13 +27,14 @@ const HomeScreen = props => {
   }, [])
 
   if (hasError) {
-    return <ErrorScreen navigation={navigation} text={errors.homePage.unableToLoadCategories} />
+    return <ErrorScreen navigation={navigation} text={t(errors.homePage.unableToLoadCategories)} />
   }
 
   return (
     <Page navigation={navigation}>
       <ScrollView>
-        <Text>Home page</Text>
+        <Text>{t("homePage.title")}</Text>
+        <LanguageSelector className="mt-5" />
         {categories.map(({ name, ID: id }) => (
           <Button title={name} onPress={navigateToCategory(id)} key={id} />
         ))}

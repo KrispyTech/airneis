@@ -3,8 +3,10 @@ import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import HomeScreen from "./src/screens/HomeScreen"
 import CategoryScreen from "./src/screens/CategoryScreen"
+import "./translations"
 
 import screens from "./src/utils/constants/screens"
+import ProductScreen from "./src/screens/ProductScreen"
 
 const { Navigator, Screen } = createNativeStackNavigator()
 const App = () => (
@@ -12,6 +14,7 @@ const App = () => (
     <Navigator screenOptions={{ headerShown: false }}>
       <Screen name={screens.homePage} component={HomeScreen} />
       <Screen name={screens.categoryPage} component={CategoryScreen} />
+      <Screen name={screens.productPage} component={ProductScreen} />
     </Navigator>
   </NavigationContainer>
 )

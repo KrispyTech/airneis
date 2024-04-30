@@ -6,9 +6,16 @@
   },
   "header": {
     "selectLanguage": "Select language",
+    "backOffice": "Backoffice",
     "locales": {
       "en": "English",
       "fr": "French"
     }
+  },
+  "productPage": {
+    "similarProducts": "Similar products",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "addToCart": "Add to cart"
   }
 }

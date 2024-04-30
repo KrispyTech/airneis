@@ -1,0 +1,24 @@
+export default {
+  homePage: {
+    title: "Page d'accueil"
+  },
+  error: {
+    message: "Une erreur est survenue: "
+  },
+  productScreen: {
+    addToCart: "Ajouter au panier",
+    similarProducts: "Produits similaires",
+    inStock: "En stock",
+    outOfStock: "En rupture de stock"
+  },
+  errors: {
+    unableToLoadCategories: "Impossible de charger les catégories",
+    unableToLoadCategory: "Impossible de charger la catégorie",
+    unableToLoadProduct: "Impossible de charger le produit"
+  },
+  translations: {
+    selectLanguage: "Choisissez votre langue",
+    fr: "Francais",
+    en: "Anglais"
+  }
+}
