@@ -24,8 +24,7 @@ export default {
       invalidEmail: "Merci de renter un email valide",
       requiredEmail: "Email obligatoire",
       requiredPassword: "Mot de passe obligatoire",
-      invalidPassword:
-        "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial"
+      invalidPassword: "Le mot de passe doit contenir entre 6 caractères et 16, un lettre, un chiffre et un caractère spécial"
     }
   },
   translations: {

@@ -25,8 +25,7 @@ export default {
       invalidEmail: "Invalid email",
       requiredEmail: "Email is required",
       requiredPassword: "Password is required",
-      invalidPassword:
-        "Password must contains at least 8 Characters, One uppercase letter, One lowercase letter, one number and one special character"
+      invalidPassword: "Password must contain between 6 and 16 characters, a letter, a number and a special character"
     }
   },
   translations: {
