@@ -1,6 +1,8 @@
 export default {
   homePage: {
-    title: "Home page"
+    title: "Home page",
+    signUp: "Sign up",
+    signIn: "Sign in"
   },
   error: {
     message: "An error occured: "
