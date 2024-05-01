@@ -44,5 +44,13 @@ export default {
     lastNamePlaceholder: "Votre nom",
     emailPlaceholder: "Votre email",
     passwordPlaceholder: "Votre mot de passe"
+  },
+  signIn: {
+    title: "Connectez-vous",
+    buttonLabel: "Se connecter",
+    email: "Email",
+    password: "Mot de passe",
+    emailPlaceholder: "Votre email",
+    passwordPlaceholder: "Votre mot de passe"
   }
 }

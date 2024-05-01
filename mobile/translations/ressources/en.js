@@ -43,5 +43,13 @@ export default {
     emailPlaceholder: "Your email",
     passwordPlaceholder: "Your password",
     invalidPassword: "Password must contains at least 8 Characters, One uppercase letter, One lowercase letter, one number and one special character"
+  },
+  signIn: {
+    title: "Sign in",
+    buttonLabel: "Sign in",
+    email: "Email",
+    password: "Password",
+    emailPlaceholder: "Your email",
+    passwordPlaceholder: "Your password"
   }
 }
