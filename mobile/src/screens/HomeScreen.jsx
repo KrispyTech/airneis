@@ -15,6 +15,7 @@ const HomeScreen = props => {
   const navigateToCategory = id => () => navigation.navigate(screens.categoryPage, { id })
   const { t } = useTranslation()
   const navigateToSignUp = () => navigation.navigate(screens.signUpScreen)
+  const navigateToSignIn = () => navigation.navigate(screens.signInScreen)
 
   useEffect(() => {
     ;(async () => {
@@ -36,9 +37,8 @@ const HomeScreen = props => {
       <ScrollView>
         <Text>{t("homePage.title")}</Text>
         <LanguageSelector className="mt-5" />
-        <Button title="SignUp" onPress={navigateToSignUp}>
-          Sign up
-        </Button>
+        <Button title={t("homePage.signUp")} onPress={navigateToSignUp} />
+        <Button title={t("homePage.signIn")} onPress={navigateToSignIn} />
         {categories.map(({ name, ID: id }) => (
           <Button title={name} onPress={navigateToCategory(id)} key={id} />
         ))}
