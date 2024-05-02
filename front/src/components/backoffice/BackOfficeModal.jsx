@@ -1,4 +1,4 @@
-import routes from "@/routes"
+import routes from "@@/lib/constants/routes"
 import { CheckCircleIcon, PencilIcon, TrashIcon, XCircleIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { useState } from "react"
