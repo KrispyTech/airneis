@@ -8,6 +8,9 @@ import { passwordRegex } from "../utils/constants/password"
 import { Formik } from "formik"
 import FormField from "../components/FormField"
 import { createSession } from "../utils/services/sessionServices"
+import screens from "../utils/constants/screens"
+
+import useSessionStore from "../stores/sessions"
 
 const initialValues = {
   email: "",
@@ -17,6 +20,7 @@ const initialValues = {
 const SignInScreen = props => {
   const [error, setError] = useState("")
   const { t } = useTranslation()
+  const { signIn } = useSessionStore()
   const { navigation } = props
   const handleSignUp =
     errorsList =>
@@ -29,6 +33,9 @@ const SignInScreen = props => {
 
       try {
         await createSession({ email, password })
+        signIn()
+
+        navigation.navigate(screens.homePage)
       } catch (e) {
         setError(t(errors.signin.invalidForm))
       }

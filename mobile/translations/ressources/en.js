@@ -2,7 +2,8 @@ export default {
   homePage: {
     title: "Home page",
     signUp: "Sign up",
-    signIn: "Sign in"
+    signIn: "Sign in",
+    signOut: "Sign out"
   },
   error: {
     message: "An error occurred: "

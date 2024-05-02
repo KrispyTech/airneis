@@ -2,7 +2,8 @@ export default {
   homePage: {
     title: "Page d'accueil",
     signUp: "S'inscrire",
-    signIn: "Se connecter"
+    signIn: "Se connecter",
+    signOut: "Se déconnecter"
   },
   error: {
     message: "Une erreur est survenue: "
