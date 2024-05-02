@@ -16,6 +16,13 @@ const errors = {
     requiredEmail: "errors.signup.requiredEmail",
     requiredPassword: "errors.signup.requiredPassword",
     invalidPassword: "errors.signup.invalidPassword"
+  },
+  signin: {
+    invalidForm: "errors.signin.invalidForm",
+    invalidEmail: "errors.signin.invalidEmail",
+    requiredEmail: "errors.signin.requiredEmail",
+    requiredPassword: "errors.signin.requiredPassword",
+    invalidPassword: "errors.signin.invalidPassword"
   }
 }
 

@@ -3,12 +3,11 @@ import Page from "../components/Page"
 import React, { useState } from "react"
 import { useTranslation } from "react-i18next"
 import errors from "../utils/constants/errors"
-import { createUsers } from "../utils/services/usersServices"
-import screens from "../utils/constants/screens"
 import * as yup from "yup"
 import { passwordRegex } from "../utils/constants/password"
 import { Formik } from "formik"
 import FormField from "../components/FormField"
+import { createSession } from "../utils/services/sessionServices"
 
 const initialValues = {
   email: "",
@@ -23,15 +22,15 @@ const SignInScreen = props => {
     errorsList =>
     async ({ email, password }) => {
       if (errorsList) {
-        setError(t(errors.signup.invalidForm))
+        setError(t(errors.signin.invalidForm))
 
         return
       }
 
       try {
-        /* TODO: Implement sign in */
+        await createSession({ email, password })
       } catch (e) {
-        setError(t(errors.signup.invalidForm))
+        setError(t(errors.signin.invalidForm))
       }
     }
 
