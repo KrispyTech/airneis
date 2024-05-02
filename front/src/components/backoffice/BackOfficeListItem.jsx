@@ -1,4 +1,4 @@
-import routes from "@/routes"
+import routes from "@@/lib/constants/routes"
 import clsx from "clsx"
 import Link from "next/link"
 
