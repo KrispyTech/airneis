@@ -1,11 +1,11 @@
 import { MagnifyingGlassIcon, ShoppingCartIcon, Bars3Icon } from "@heroicons/react/24/outline"
 import webConfig from "@@/webConfig"
 import Link from "next/link"
-import { backoffice } from "@/constants"
-import routes from "@/routes"
 import { useTranslation } from "next-i18next"
 import { useRouter } from "next/router"
 import SelectLanguage from "@/components/ui/SelectLanguage"
+import { backoffice } from "@@/lib/constants/constants"
+import routes from "@@/lib/constants/routes"
 
 const Header = ({ page }) => {
   const { t } = useTranslation("common")
