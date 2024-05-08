@@ -1,9 +1,7 @@
 import Page from "@/components/Page"
-import Button from "@/components/ui/buttons/Button"
 import SubmitButton from "@/components/ui/buttons/SubmitButton"
 import FormField from "@/components/ui/forms/FormField"
 import MyForm from "@/components/ui/forms/MyForm"
-import { sessionStore } from "@/utils/services/sessionServices"
 import useSessionStore from "@/utils/stores/sessionStore"
 import routes from "@@/lib/constants/routes"
 import { emailValidator, passwordValidator } from "@@/lib/validators/user"
@@ -13,10 +11,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { object } from "yup"
 
-export const getServerSideProps = async ({ locale }) => {
-  return { props: { ...(await serverSideTranslations(locale, ["common"])) } }
-}
-
+export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
 const initialValues = {
   email: "",
   password: ""
@@ -29,13 +24,12 @@ const validationSchema = object({
 
 const LoginPage = () => {
   const router = useRouter()
-
-  const handleSession = (email, password) => {
+  const { createUserSession } = useSessionStore()
+  const handleSession = async (email, password) => {
     console.log("heloo")
-    const { createUserSession } = useSessionStore()
 
     try {
-      createUserSession(email, password)
+      await createUserSession(email, password)
       router.push(routes.home)
     } catch (e) {}
   }

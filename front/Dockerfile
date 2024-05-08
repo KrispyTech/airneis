@@ -7,6 +7,8 @@ RUN  bun install
 FROM base as dev
 WORKDIR /app
 
+RUN bunx next telemetry disable
+
 CMD ["bun", "run", "dev"]
 
 FROM alpine:3.19 as prod

@@ -10,10 +10,10 @@ import FormField from "@/components/ui/forms/FormField"
 import SubmitButton from "@/components/ui/buttons/SubmitButton"
 
 const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: ""
 }
 
 const validationSchema = object({
