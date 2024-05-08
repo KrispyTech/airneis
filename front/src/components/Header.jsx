@@ -4,8 +4,8 @@ import Link from "next/link"
 import { useTranslation } from "next-i18next"
 import { useRouter } from "next/router"
 import SelectLanguage from "@/components/ui/SelectLanguage"
-import { backoffice } from "@@/lib/constants/constants"
 import routes from "@@/lib/constants/routes"
+import { backoffice } from "@@/lib/constants/labels"
 
 const Header = ({ page }) => {
   const { t } = useTranslation("common")

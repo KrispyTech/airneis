@@ -1,10 +1,10 @@
-import Button from "@/web/ui/components/Button"
+import Button from "@/components/ui/buttons/Button"
 import { useFormikContext } from "formik"
 
-const SubmitButton = ({ disabled, ...otherProps }) => {
+const SubmitButton = ({ disabled, text, ...otherProps }) => {
   const { isSubmitting, isValid } = useFormikContext()
 
-  return <Button type="submit" variant="submit" disabled={disabled || isSubmitting || !isValid} {...otherProps} />
+  return <Button text={text} className="rounded-lg" type="submit" variant="submit" disabled={disabled || isSubmitting || !isValid} {...otherProps} />
 }
 
 export default SubmitButton
