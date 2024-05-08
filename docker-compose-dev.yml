@@ -16,6 +16,7 @@ services:
     build:
       target: dev
     volumes:
+      - ./front/lib:/app/lib
       - ./front/src:/app/src
       - ./front/public:/app/public
 
