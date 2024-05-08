@@ -3,8 +3,8 @@ import webConfig from "@@/webConfig"
 import Link from "next/link"
 import { useTranslation } from "next-i18next"
 import SelectLanguage from "@/components/ui/SelectLanguage"
-import { backoffice } from "@@/lib/constants/constants"
 import routes from "@@/lib/constants/routes"
+import { backoffice } from "@@/lib/constants/labels"
 
 const Header = ({ page }) => {
   const { t, locale } = useTranslation("common")

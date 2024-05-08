@@ -1,5 +1,5 @@
-import Alert from "@/web/ui/components/Alert"
-import Input from "@/web/ui/components/Input"
+import Alert from "@/components/Alert"
+import Input from "@/components/ui/Input"
 import clsx from "clsx"
 import { useField } from "formik"
 
