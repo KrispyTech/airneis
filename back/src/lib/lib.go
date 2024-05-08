@@ -23,9 +23,6 @@ func InitializeFiberApp(services Services) error {
 		fiber.New(),
 		services,
 	}
-	// This has to be be setup before the routing:
-	airneis.addLogger()
-	airneis.setupCORS()
 
 	airneis.setupGlobalMiddlewares()
 
