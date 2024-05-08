@@ -1,0 +1,6 @@
+export const backoffice = "backoffice"
+export const email = "Email"
+export const firstName = "First Name"
+export const lastName = "Last Name"
+export const name = "Name"
+export const password = "Password"
