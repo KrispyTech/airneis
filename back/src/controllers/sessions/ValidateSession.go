@@ -17,7 +17,7 @@ func ValidateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 		return nil
 	}
 
-	if err := auth.CheckToken(sessionToken, vlt); err != nil {
+	if _, err := auth.CheckToken(sessionToken, vlt); err != nil {
 		return helpers.SendUnauthorized(ctx, err)
 	}
 
