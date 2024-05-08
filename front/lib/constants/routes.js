@@ -9,7 +9,9 @@ const routes = {
     orders: "/back-office/orders",
     users: "/back-office/users",
     contacts: "/back-office/contacts"
-  }
+  },
+  login: "/onboarding/login",
+  register: "/onboarding/register"
 }
 
 export default routes
