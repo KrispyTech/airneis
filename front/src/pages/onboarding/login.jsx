@@ -1,14 +1,70 @@
-export const getServerSideProps = async ({ locale }) => {
+import Page from "@/components/Page"
+import Button from "@/components/ui/buttons/Button"
+import SubmitButton from "@/components/ui/buttons/SubmitButton"
+import FormField from "@/components/ui/forms/FormField"
+import MyForm from "@/components/ui/forms/MyForm"
+import { sessionStore } from "@/utils/services/sessionServices"
+import useSessionStore from "@/utils/stores/sessionStore"
+import routes from "@@/lib/constants/routes"
+import { emailValidator, passwordValidator } from "@@/lib/validators/user"
+import { Formik } from "formik"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { object } from "yup"
 
+export const getServerSideProps = async ({ locale }) => {
   return { props: { ...(await serverSideTranslations(locale, ["common"])) } }
 }
-const LoginPage = () => (
-  <Page>
-    <div className="w-full h-1/4 sm:h-1/3 bg-[url('https://picsum.photos/1800/350')] bg-center flex items-center justify-center">
-      <Text>Login Page Page</Text>
-    </div>
-    
-  </Page>
-)
+
+const initialValues = {
+  email: "",
+  password: ""
+}
+
+const validationSchema = object({
+  email: emailValidator.required(),
+  password: passwordValidator.required()
+})
+
+const LoginPage = () => {
+  const router = useRouter()
+
+  const handleSession = (email, password) => {
+    console.log("heloo")
+    const { createUserSession } = useSessionStore()
+
+    try {
+      createUserSession(email, password)
+      router.push(routes.home)
+    } catch (e) {}
+  }
+
+  return (
+    <>
+      <Page className="flex justify-center">
+        <div className="flex flex-col justify-center max-w-96">
+          <h1 className="text-center text-3xl rounded-md">Sign in to Airneis</h1>
+          <div className="rounded-md bg-modal m-4 border-2">
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSession}>
+              <MyForm>
+                <FormField name="email" type="email" placeholder="Enter your e-mail" label="E-mail" />
+                <FormField name="password" type="password" placeholder="Enter your password" label="Password" />
+                <SubmitButton text="Login" />
+              </MyForm>
+            </Formik>
+          </div>
+
+          <div className="flex justify-center rounded-md bg-modal m-4 border-2 p-2">
+            <p className="px-1">New to Airneis?</p>
+            <Link href={routes.register} className="text-sky-500">
+              Create an account
+            </Link>
+          </div>
+        </div>
+      </Page>
+    </>
+  )
+}
 
 export default LoginPage

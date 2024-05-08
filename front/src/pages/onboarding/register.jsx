@@ -9,23 +9,23 @@ import { emailValidator, firstNameValidator, lastNameValidator, passwordValidato
 import FormField from "@/components/ui/forms/FormField"
 import SubmitButton from "@/components/ui/buttons/SubmitButton"
 
-export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
-const RegisterPage = () => {
-  const router = useRouter()
-  const initialValues = {
+const initialValues = {
     firstName: "",
     lastName: "",
     email: "",
     password: ""
-  }
+}
 
-  const validationSchema = object({
-    firstName: firstNameValidator.required(),
-    lastName: lastNameValidator.required(),
-    email: emailValidator.required(),
-    password: passwordValidator.required()
-  })
+const validationSchema = object({
+  firstName: firstNameValidator.required(),
+  lastName: lastNameValidator.required(),
+  email: emailValidator.required(),
+  password: passwordValidator.required()
+})
 
+export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
+const RegisterPage = () => {
+  const router = useRouter()
   const handleRegister = () => {
     router.push(routes.home)
   }
