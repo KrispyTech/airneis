@@ -1,4 +1,4 @@
-# Dive-in: Configure GORM
+# Dive-in: Cart API documentation
 
 Author : Barnabé PILLIAUDIN  
 Date : 2024-05-06
@@ -19,6 +19,11 @@ We also need to be able to calculate the total price of the cart.
 ## Schema: of api calls
 
 ![img.png](img.png)
+
+### Precisions
+
+- A select request will be done to know if the user already have a cart or not.
+- The cart for a user that is not logged in will be handled later.
 
 ## How it will be store in DB
 
