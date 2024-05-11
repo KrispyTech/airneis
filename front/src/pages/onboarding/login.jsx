@@ -25,9 +25,8 @@ const validationSchema = object({
 const LoginPage = () => {
   const router = useRouter()
   const { createUserSession } = useSessionStore()
-  const handleSession = async (email, password) => {
-    console.log("heloo")
-
+  const handleSession = async values => {
+    const { email, password } = values
     try {
       await createUserSession(email, password)
       router.push(routes.home)
