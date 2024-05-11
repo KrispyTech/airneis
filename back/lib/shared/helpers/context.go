@@ -16,9 +16,8 @@ type AuthData struct {
 }
 
 func GetAuthContext(ctx *fiber.Ctx) (AuthData, error) {
-	log.Info(string(ctx.Body()))
-
 	var authData AuthData
+	
 	if err := json.Unmarshal(ctx.Body(), &authData); err != nil {
 		return AuthData{}, err
 	}
