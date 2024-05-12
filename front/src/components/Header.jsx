@@ -4,7 +4,6 @@ import Link from "next/link"
 import { backoffice } from "@/constants"
 import routes from "@/routes"
 import { useTranslation } from "next-i18next"
-import { useRouter } from "next/router"
 import SelectLanguage from "@/components/ui/SelectLanguage"
 
 const Header = ({ page }) => {

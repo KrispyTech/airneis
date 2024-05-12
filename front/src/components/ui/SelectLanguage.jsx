@@ -4,8 +4,8 @@ import { useTranslation } from "next-i18next"
 const SelectLanguage = () => {
   const { t } = useTranslation("common")
   const { locales, push, pathname, locale, query, asPath } = useRouter()
-  const changeLocale = async locale => {
-    await push({ pathname, query }, asPath, { locale: locale })
+  const changeLocale = async newLocale => {
+    await push({ pathname, query }, asPath, { locale: newLocale })
   }
 
   const handleInput = async ({ target: { value } }) => {
@@ -15,9 +15,9 @@ const SelectLanguage = () => {
   return (
     <select className="bg-secondary " onInput={handleInput}>
       <option value={locale}>{t("header.selectLanguage")}</option>
-      {locales.map(locale => (
-        <option key={locale} value={locale}>
-          {t(`header.locales.${locale}`)}
+      {locales.map(currentLocale => (
+        <option key={currentLocale} value={currentLocale}>
+          {t(`header.locales.${currentLocale}`)}
         </option>
       ))}
     </select>
