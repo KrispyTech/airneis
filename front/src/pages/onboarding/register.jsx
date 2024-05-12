@@ -28,13 +28,20 @@ const validationSchema = object({
 
 const RegisterPage = () => {
   const router = useRouter()
+  const [hasError, setError] = useState(false)
   const handleUserCreation = async values => {
     const { firstName, lastName, email, password } = values
     try {
       const user = { firstName, lastName, email, password }
       await createUser(user)
       router.push(routes.home)
-    } catch (e) {}
+    } catch (e) {
+      setError(true)
+    }
+  }
+
+  if (hasError) {
+    return <p className="bg-red-700">{t("errorMessage")}</p>
   }
 
   return (

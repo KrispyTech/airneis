@@ -17,5 +17,6 @@
     "inStock": "In stock",
     "outOfStock": "Out of stock",
     "addToCart": "Add to cart"
-  }
+  },
+  "errorMessage": "An error has occured"
 }

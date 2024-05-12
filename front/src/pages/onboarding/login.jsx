@@ -24,12 +24,20 @@ const validationSchema = object({
 
 const LoginPage = () => {
   const router = useRouter()
+  const [hasError, setError] = useState(false)
   const { createUserSession } = useSessionStore()
   const handleSession = async values => {
     const { email, password } = values
+
     try {
       await createUserSession(email, password, router)
-    } catch (e) {}
+    } catch (e) {
+      setError(true)
+    }
+  }
+
+  if (hasError) {
+    return <p className="bg-red-700">{t("errorMessage")}</p>
   }
 
   return (

@@ -17,5 +17,6 @@
     "inStock": "En stock",
     "outOfStock": "En rupture de stock",
     "addToCart": "Ajouter au panier"
-  }
+  },
+  "errorMessage": "Une erreur est survenue"
 }
