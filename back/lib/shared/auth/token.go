@@ -54,29 +54,56 @@ func CreateToken(user serializers.SerializedUser, vlt vault.VaultClient) (string
 	return tokenString, nil
 }
 
-func CheckToken(token string, vlt vault.VaultClient) error {
-	rawToken, _, err := getJWTParameters(vlt)
+func ValidateToken(token string, vlt vault.VaultClient) (*jwt.Token, error) {
+	parsedToken, err := getParsedUserJWT(token, vlt)
 	if err != nil {
-		return airror.New(err, "Failed to get JWT params")
-	}
-
-	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) { return []byte(rawToken), nil })
-	if err != nil {
-		return airror.New(err, "Unable to parse token")
+		return &jwt.Token{}, airror.New(err, "unable to get user's jwt token")
 	}
 
 	if !parsedToken.Valid {
-		return airror.New(err, "invalid token")
+		return &jwt.Token{}, airror.New(err, "invalid token")
 	}
 
 	expirationTime, err := parsedToken.Claims.GetExpirationTime()
 	if err != nil {
-		return airror.New(err, "unable to get expiration time")
+		return &jwt.Token{}, airror.New(err, "unable to get expiration time")
 	}
 
 	if expirationTime.Before(time.Now()) {
-		return fmt.Errorf("token has expired")
+		return &jwt.Token{}, fmt.Errorf("token has expired")
 	}
 
-	return nil
+	return parsedToken, nil
+}
+
+func getParsedUserJWT(token string, vlt vault.VaultClient) (*jwt.Token, error) {
+	rawToken, _, err := getJWTParameters(vlt)
+	if err != nil {
+		return &jwt.Token{}, airror.New(err, "failed to get JWT params")
+	}
+
+	parsedToken, err := jwt.Parse(token, func(_ *jwt.Token) (interface{}, error) { return []byte(rawToken), nil })
+	if err != nil {
+		return &jwt.Token{}, airror.New(err, "unable to parse token")
+	}
+
+	return parsedToken, nil
+
+}
+
+func SendSerializedUser(token string, vlt vault.VaultClient) (serializers.SerializedUser, error) {
+	parsedToken, err := ValidateToken(token, vlt)
+	if err != nil {
+		return serializers.SerializedUser{}, airror.New(err, "unable to validate token")
+	}
+
+	return serializers.SerializedUser{
+		ID:        parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["id"].(uint),
+		FirstName: parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["firstName"].(string),
+		LastName:  parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["lastName"].(string),
+		Email:     parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["email"].(string),
+		IsActive:  parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["isActive"].(bool),
+		IsAdmin:   parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["isAdmin"].(bool),
+	}, nil
+
 }

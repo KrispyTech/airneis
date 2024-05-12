@@ -2,11 +2,11 @@ package lib
 
 import (
 	"fmt"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -25,7 +25,9 @@ func InitializeFiberApp(services Services) error {
 		services,
 	}
 
-	airneis.addLogger()
+	airneis.setupGlobalMiddlewares()
+
+	//Always setup the routing config last, middlewares need to be setup before routes.
 	airneis.setupRoutingConfig()
 
 	if err := airneis.app.Listen(constants.Port); err != nil {
@@ -33,6 +35,13 @@ func InitializeFiberApp(services Services) error {
 	}
 
 	return nil
+}
+
+func (airneis *airneisFiberApp) setupGlobalMiddlewares() fiber.Router {
+	airneis.setupLogger()
+	airneis.setupCORS()
+
+	return airneis.app
 }
 
 func (airneis *airneisFiberApp) setupRoutingConfig() fiber.Router {
