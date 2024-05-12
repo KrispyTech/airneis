@@ -2,11 +2,13 @@ package sessions
 
 import (
 	"github.com/KrispyTech/airneis/lib/shared/auth"
+	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"github.com/KrispyTech/airneis/src/controllers/users"
 	"github.com/KrispyTech/airneis/src/serializers"
 	"github.com/gofiber/fiber/v2"
+	"net/http"
 )
 
 func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
@@ -31,5 +33,5 @@ func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 		Value: userToken,
 	})
 
-	return helpers.SendOK(ctx)
+	return helpers.SendResult(http.StatusOK, constants.OkMessage, userToken, ctx)
 }

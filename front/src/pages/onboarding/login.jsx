@@ -28,8 +28,7 @@ const LoginPage = () => {
   const handleSession = async values => {
     const { email, password } = values
     try {
-      await createUserSession(email, password)
-      router.push(routes.home)
+      await createUserSession(email, password, router)
     } catch (e) {}
   }
 
