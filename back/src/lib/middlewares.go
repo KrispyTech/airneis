@@ -2,6 +2,9 @@ package lib
 
 import (
 	"fmt"
+	"strings"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/KrispyTech/airneis/lib/shared/auth"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
@@ -16,7 +19,15 @@ func (airneis *airneisFiberApp) setupLogger() fiber.Router {
 }
 
 func (airneis *airneisFiberApp) setupCORS() fiber.Router {
-	return airneis.app.Use(cors.New())
+	return airneis.app.Use(cors.New(
+		cors.Config{
+			AllowCredentials: true,
+			AllowOriginsFunc: func(origin string) bool {
+				log.Infof("Origin: %s", origin)
+
+				return strings.Contains(origin, "http://localhost:3000")
+			},
+		}))
 }
 
 func authMiddleware(vc vault.VaultClient) func(*fiber.Ctx) error {
