@@ -17,5 +17,9 @@
     "inStock": "In stock",
     "outOfStock": "Out of stock",
     "addToCart": "Add to cart"
+  },
+  "cart": {
+    "title": "Cart",
+    "makeOrder": "Make order"
   }
 }

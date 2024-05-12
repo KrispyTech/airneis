@@ -27,14 +27,14 @@ const Header = ({ page }) => {
         <nav>
           <ul className="flex flex-row items-center gap-5">
             <li>
-              <select className="bg-secondary " onInput={handleInput}>
+              {/* <select className="bg-secondary " onInput={handleInput}>
                 <option value="">{t("header.selectLanguage")}</option>
                 {locales.map(locale => (
                   <option key={locale} value={locale}>
                     {t(`header.locales.${locale}`)}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </li>
             <li>
               <MagnifyingGlassIcon {...webConfig.icons.lgIcon} />

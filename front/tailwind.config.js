@@ -9,6 +9,8 @@ module.exports = {
         tertiary: "#DBC1B8",
         clay: "#C67955",
         gray: "#E2E2E2",
+        darkGray: "#70716F",
+        brown: "#85736C",
         listOdd: "#FFF8F6",
         listEven: "#F4DED7",
         modal: "#F5F0EF",
