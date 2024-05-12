@@ -2,7 +2,6 @@ package lib
 
 import (
 	"github.com/KrispyTech/airneis/lib/shared/vault"
-	"github.com/KrispyTech/airneis/pkg/middlewares"
 	"github.com/KrispyTech/airneis/src/controllers/cart"
 	"github.com/KrispyTech/airneis/src/controllers/categories"
 	"github.com/KrispyTech/airneis/src/controllers/products"
@@ -67,8 +66,7 @@ func SetUsersRoutes(router fiber.Router) {
 }
 
 func SetupCartRoutes(router fiber.Router, vc vault.VaultClient) {
-	router.Use(middlewares.AuthMiddleware(vc))
-
+	router.Use(authMiddleware(vc))
 	router.Get(cartRoute, cart.GetCart)
 	router.Post(cartRouteWithProductID, cart.AddProductToCart)
 	router.Patch(cartRouteWithProductID, cart.UpdateCartQuantity)
