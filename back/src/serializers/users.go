@@ -5,7 +5,7 @@ import (
 )
 
 type SerializedUser struct {
-	ID        uint   `json:"id"`
+	ID        float64   `json:"id"`
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 	Email     string `json:"email"`
@@ -15,7 +15,7 @@ type SerializedUser struct {
 
 func SerializeUser(user model.User) SerializedUser {
 	return SerializedUser{
-		ID:        user.ID,
+		ID:        float64(user.ID),
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
 		Email:     user.Email,
