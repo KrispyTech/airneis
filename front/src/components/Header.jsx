@@ -8,34 +8,17 @@ import { useRouter } from "next/router"
 import SelectLanguage from "@/components/ui/SelectLanguage"
 
 const Header = ({ page }) => {
-  const { t } = useTranslation("common")
-  const { locales, push } = useRouter()
-  const changeLocale = locale => {
-    push("", "", { locale })
-  }
-
-  const handleInput = ({ target: { value } }) => {
-    changeLocale(value)
-  }
+  const { t, locale } = useTranslation("common")
 
   return (
     <header className="bg-secondary text-primary px-4 flex justify-between items-center sticky top-0 z-30">
-      <Link href={routes.home} className="text-xl md:text-4xl py-3 font-extrabold">
+      <Link href={routes.home} className="text-xl md:text-4xl py-3 font-extrabold" locale={locale}>
         ÀIRNEIS
       </Link>
       {page !== backoffice ? (
         <nav>
           <ul className="flex flex-row items-center gap-5">
-            <li>
-              <select className="bg-secondary " onInput={handleInput}>
-                <option value="">{t("header.selectLanguage")}</option>
-                {locales.map(locale => (
-                  <option key={locale} value={locale}>
-                    {t(`header.locales.${locale}`)}
-                  </option>
-                ))}
-              </select>
-            </li>
+            <SelectLanguage />
             <li>
               <MagnifyingGlassIcon {...webConfig.icons.lgIcon} />
             </li>
