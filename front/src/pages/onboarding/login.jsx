@@ -9,6 +9,8 @@ import { Formik } from "formik"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { object } from "yup"
 
 export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
@@ -23,6 +25,7 @@ const validationSchema = object({
 })
 
 const LoginPage = () => {
+  const { t } = useTranslation("common")
   const router = useRouter()
   const [hasError, setError] = useState(false)
   const { createUserSession } = useSessionStore()

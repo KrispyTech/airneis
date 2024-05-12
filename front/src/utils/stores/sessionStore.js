@@ -22,6 +22,7 @@ const useSessionStore = create(set => ({
       const {
         payload: { userData: firstName, lastName, email, isAdmin, isActive }
       } = jwtDecode(token)
+
       router.push(routes.home)
 
       return {
@@ -35,6 +36,7 @@ const useSessionStore = create(set => ({
   removeUserSession: () =>
     set(async () => {
       await deleteSession()
+
       return initialValues
     })
 }))
