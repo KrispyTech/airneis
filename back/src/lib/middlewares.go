@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"encoding/json"
 	"fmt"
 
 	"github.com/KrispyTech/airneis/lib/shared/auth"
@@ -36,12 +35,9 @@ func authMiddleware(vc vault.VaultClient) func(*fiber.Ctx) error {
 			return helpers.SendUnauthorized(ctx, fmt.Errorf("user is inactive"))
 		}
 
-		userData, err := json.Marshal(user)
-		if err != nil {
-			return helpers.SendInternalError(ctx, err)
+		if err := helpers.AddUserToContext(ctx, user); err != nil {
+			return err
 		}
-
-		ctx.Locals("user", userData)
 
 		return ctx.Next()
 	}

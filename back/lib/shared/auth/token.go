@@ -88,7 +88,6 @@ func getParsedUserJWT(token string, vlt vault.VaultClient) (*jwt.Token, error) {
 	}
 
 	return parsedToken, nil
-
 }
 
 func SendSerializedUser(token string, vlt vault.VaultClient) (serializers.SerializedUser, error) {
@@ -97,13 +96,14 @@ func SendSerializedUser(token string, vlt vault.VaultClient) (serializers.Serial
 		return serializers.SerializedUser{}, airror.New(err, "unable to validate token")
 	}
 
-	return serializers.SerializedUser{
-		ID:        parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["id"].(uint),
-		FirstName: parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["firstName"].(string),
-		LastName:  parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["lastName"].(string),
-		Email:     parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["email"].(string),
-		IsActive:  parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["isActive"].(bool),
-		IsAdmin:   parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"].(map[string]interface{})["isAdmin"].(bool),
-	}, nil
+	userData := parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"]
 
+	return serializers.SerializedUser{
+		ID:        userData.(map[string]interface{})["id"].(uint),
+		FirstName: userData.(map[string]interface{})["firstName"].(string),
+		LastName:  userData.(map[string]interface{})["lastName"].(string),
+		Email:     userData.(map[string]interface{})["email"].(string),
+		IsActive:  userData.(map[string]interface{})["isActive"].(bool),
+		IsAdmin:   userData.(map[string]interface{})["isAdmin"].(bool),
+	}, nil
 }

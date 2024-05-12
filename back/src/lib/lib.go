@@ -2,7 +2,6 @@ package lib
 
 import (
 	"fmt"
-	"github.com/gofiber/fiber/v2/middleware/logger"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
@@ -49,7 +48,4 @@ func (airneis *airneisFiberApp) setupRoutingConfig() fiber.Router {
 	log.Info("All routes has been grouped to /api")
 
 	return SetupRoutes(router, airneis.services)
-}
-func (airneis *airneisFiberApp) addLogger() fiber.Router {
-	return airneis.app.Use(logger.New())
 }
