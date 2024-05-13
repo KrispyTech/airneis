@@ -5,17 +5,17 @@ import (
 )
 
 type SerializedUser struct {
-	ID        float64 `json:"id"`
-	FirstName string  `json:"firstName"`
-	LastName  string  `json:"lastName"`
-	Email     string  `json:"email"`
-	IsAdmin   bool    `json:"isAdmin"`
-	IsActive  bool    `json:"isActive"`
+	ID        uint   `json:"id"`
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"email"`
+	IsAdmin   bool   `json:"isAdmin"`
+	IsActive  bool   `json:"isActive"`
 }
 
 func SerializeUser(user model.User) SerializedUser {
 	return SerializedUser{
-		ID:        float64(user.ID),
+		ID:        user.ID,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
 		Email:     user.Email,
