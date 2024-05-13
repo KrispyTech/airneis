@@ -99,7 +99,7 @@ func SendSerializedUser(token string, vlt vault.VaultClient) (serializers.Serial
 	userData := parsedToken.Claims.(jwt.MapClaims)["payload"].(map[string]interface{})["userData"]
 
 	return serializers.SerializedUser{
-		ID:        userData.(map[string]interface{})["id"].(float64),
+		ID:        uint(userData.(map[string]interface{})["id"].(float64)),
 		FirstName: userData.(map[string]interface{})["firstName"].(string),
 		LastName:  userData.(map[string]interface{})["lastName"].(string),
 		Email:     userData.(map[string]interface{})["email"].(string),
