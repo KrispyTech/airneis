@@ -17,4 +17,6 @@ type Product struct {
 	HighlanderOrder   uint           `json:"highlanderOrder"   gorm:"default:0"`
 	OrderOfPriority   *uint          `json:"orderOfPriority"`
 	ProductImages     []ProductImage `json:"productImages"     gorm:"many2many:images_of_products"`
+	//Must be removed in serializer
+	OrderProduct []OrderProduct `json:"orderProduct"`
 }
