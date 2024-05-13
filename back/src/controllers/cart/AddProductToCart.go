@@ -5,7 +5,13 @@ import (
 )
 
 func AddProductToCart(ctx *fiber.Ctx) error {
-	ctx.Body()
+	_, errGetCart := GetCartOfLoggedUserIfExistsOrCreateOne(ctx)
+
+	if errGetCart != nil {
+		return errGetCart
+	}
+
+	// TODO: ADD PRODUCT TO CART AND RETURN CART
 
 	return nil
 }
