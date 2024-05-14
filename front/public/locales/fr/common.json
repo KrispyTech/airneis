@@ -18,5 +18,27 @@
     "outOfStock": "En rupture de stock",
     "addToCart": "Ajouter au panier"
   },
+  "auth": {
+    "createAccount": "Créer un compte",
+    "email": "email",
+    "hasAccount": "Déjà un compte?",
+    "login": "Connexion",
+    "newToAirneis": "Nouveau sur Airneis?",
+    "label": {
+      "email": "E-mail",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "password": "Password"
+    },
+    "password": "mot de passe",
+    "placeholder": {
+      "email": "Entrer votre e-mail",
+      "firstName": "Entrer votre prénom",
+      "lastName": "Entrer votre nom",
+      "password": "Entrer votre mot de passe"
+    },
+    "signIn": "Se connecter sur Airneis",
+    "register": "Créer votre compte! Bienvenue sur Airneis 😄"
+  },
   "errorMessage": "Une erreur est survenue"
 }
