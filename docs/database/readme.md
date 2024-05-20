@@ -12,11 +12,12 @@ Orders <|-- Status
 Products <|-- Orders
 Users <|-- Addresses
 Users <|-- Orders
-Orders <|-- CartsProducts
-Products <|-- CartsProducts
+Orders <|-- OrderProducts
+Products <|-- OrderProducts
 Products <|-- ProductImages
 Materials <|-- ProductsMaterials
 Products <|-- ProductsMaterials
+
 
 class Users {
     ID increments notNull
@@ -145,6 +146,12 @@ class Contact {
     recipientEmail text notNull
     subject text notNull
     message text notNull
+}
+
+class ProductsMaterials {
+    ID increments notNull
+    productID number notNull
+    materialID number notNull
 }
 
 ```
