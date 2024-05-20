@@ -1,8 +1,8 @@
-import BackOfficeBoard from "@/components/BackOfficeBoard"
-import BackOfficeNav from "@/components/BackOfficeNav"
+import BackOfficeBoard from "@/components/backoffice/BackOfficeBoard"
+import BackOfficeNav from "@/components/backoffice/BackOfficeNav"
 import Page from "@/components/Page"
-import { backoffice } from "@/constants"
-import { getCategories } from "@/utils/services/CategoryServices"
+import { getCategories } from "@/utils/services/categoryServices"
+import { backoffice } from "@@/lib/constants/labels"
 import { useEffect, useState } from "react"
 
 const CategoriesBoard = () => {

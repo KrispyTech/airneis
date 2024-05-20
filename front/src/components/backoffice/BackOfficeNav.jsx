@@ -1,4 +1,4 @@
-import BackOfficeListItem from "@/components/BackOfficeListItem"
+import BackOfficeListItem from "@/components/backoffice/BackOfficeListItem"
 import { ClockIcon, QuestionMarkCircleIcon, RectangleGroupIcon, ShoppingCartIcon, TagIcon, UserGroupIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/router"
 

@@ -9,43 +9,60 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func SendResult(status int, message string, ctx *fiber.Ctx) error {
-	type Response struct {
-		Message string `json:"message"`
-		Status  int    `json:"status"`
-	}
+type Response struct {
+	Message string      `json:"message"`
+	Status  int         `json:"status"`
+	Data    interface{} `json:"data"`
+}
 
-	response := Response{
-		Message: message, Status: status,
-	}
-
-	return ctx.Status(status).JSON(response)
+func SendResult(response Response, ctx *fiber.Ctx) error {
+	return ctx.Status(response.Status).JSON(response)
 }
 
 func SendBadRequest(ctx *fiber.Ctx, err error) error {
 	log.Error(err)
 
-	return SendResult(http.StatusBadRequest, constants.BadRequestMessage, ctx)
+	return SendResult(Response{
+		Data:    nil,
+		Message: constants.BadRequestMessage,
+		Status:  http.StatusBadRequest,
+	}, ctx)
 }
 
 func SendNotFound(ctx *fiber.Ctx, err error) error {
 	log.Error(err)
 
-	return SendResult(http.StatusNotFound, constants.NotFoundMessage, ctx)
+	return SendResult(Response{
+		Data:    nil,
+		Message: constants.NotFoundMessage,
+		Status:  http.StatusNotFound,
+	}, ctx)
 }
 
 func SendInternalError(ctx *fiber.Ctx, err error) error {
 	log.Error(err)
 
-	return SendResult(http.StatusInternalServerError, constants.InternalServerErrorMessage, ctx)
+	return SendResult(Response{
+		Data:    nil,
+		Message: constants.InternalServerErrorMessage,
+		Status:  http.StatusInternalServerError,
+	}, ctx)
 }
 
 func SendUnauthorized(ctx *fiber.Ctx, err error) error {
 	log.Error(err)
 
-	return SendResult(http.StatusUnauthorized, constants.UnauthorizedMessage, ctx)
+	return SendResult(Response{
+		Data:    nil,
+		Message: constants.UnauthorizedMessage,
+		Status:  http.StatusUnauthorized,
+	}, ctx)
 }
 
 func SendOK(ctx *fiber.Ctx) error {
-	return SendResult(http.StatusOK, constants.OkMessage, ctx)
+	return SendResult(Response{
+		Data:    nil,
+		Message: constants.OkMessage,
+		Status:  http.StatusOK,
+	}, ctx)
 }
