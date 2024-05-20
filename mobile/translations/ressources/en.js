@@ -1,4 +1,5 @@
 export default {
+  selectLanguage: "Select your language",
   homePage: {
     title: "Home page",
     signUp: "Sign up",
