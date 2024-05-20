@@ -1,7 +1,7 @@
-import BackOfficeModal from "@/components/BackOfficeModal"
-import BackOfficeTableHead from "@/components/BackOfficeTableHead"
+import BackOfficeModal from "@/components/backoffice/BackOfficeModal"
+import BackOfficeTableHead from "@/components/backoffice/BackOfficeTableHead"
 import TableListItem from "@/components/TableListItem"
-import routes from "@/routes"
+import routes from "@@/lib/constants/routes"
 import { PlusCircleIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 

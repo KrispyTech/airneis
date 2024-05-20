@@ -17,5 +17,28 @@
     "inStock": "In stock",
     "outOfStock": "Out of stock",
     "addToCart": "Add to cart"
-  }
+  },
+  "auth": {
+    "email": "email",
+    "password": "password",
+    "login": "login",
+    "signIn": "Sign in to Airneis",
+    "register": "Create your account! Welcome to Airneis 😄",
+    "newToAirneis": "New to Airneis?",
+    "hasAccount": "Have an account?",
+    "createAccount": "Create an account",
+    "placeholder": {
+      "email": "Enter your e-mail",
+      "password": "Enter your password",
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name"
+    },
+    "label": {
+      "email": "E-mail",
+      "password": "Password",
+      "firstName": "First name",
+      "lastName": "Last name"
+    }
+  },
+  "errorMessage": "An error has occured"
 }
