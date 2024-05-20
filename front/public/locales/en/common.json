@@ -29,7 +29,9 @@
     "createAccount": "Create an account",
     "placeholder": {
       "email": "Enter your e-mail",
-      "password": "Enter your password"
+      "password": "Enter your password",
+      "firstName": "Enter your first name",
+      "lastName": "Enter your last name"
     },
     "label": {
       "email": "E-mail",
