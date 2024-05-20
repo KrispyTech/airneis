@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next"
 import { object } from "yup"
 
 export const getStaticProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
-
 const initialValues = {
   email: "",
   password: ""
