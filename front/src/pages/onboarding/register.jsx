@@ -12,6 +12,8 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
 import { object } from "yup"
+// The only way to have translations work on this page was to disable SSR
+import NoSSR from "@/components/NoSSR"
 
 export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
 const initialValues = {
@@ -51,26 +53,28 @@ const RegisterPage = () => {
   return (
     <>
       <Page className="flex justify-center">
-        <div className="flex flex-col justify-center max-w-96">
-          <h1 className="text-center text-3xl rounded-md">{t("auth.register")}</h1>
-          <div className="rounded-md bg-modal m-4 border-2">
-            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleUserCreation}>
-              <MyForm>
-                <FormField name="firstName" type="text" placeholder={t("auth.placeholder.firstName")} label={t("auth.label.firstName")} />
-                <FormField name="lastName" type="text" placeholder={t("auth.placeholder.lastName")} label={t("auth.label.lastName")} />
-                <FormField name="email" type="email" placeholder={t("auth.placeholder.email")} label={t("auth.label.email")} />
-                <FormField name="password" type="password" placeholder={t("auth.placeholder.password")} label={t("auth.label.password")} />
-                <SubmitButton text={t("auth.createAccount")} />
-              </MyForm>
-            </Formik>
+        <NoSSR>
+          <div className="flex flex-col justify-center max-w-96">
+            <h1 className="text-center text-3xl rounded-md">{t("auth.register")}</h1>
+            <div className="rounded-md bg-modal m-4 border-2">
+              <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleUserCreation}>
+                <MyForm>
+                  <FormField name="firstName" type="text" placeholder={t("auth.placeholder.firstName")} label={t("auth.label.firstName")} />
+                  <FormField name="lastName" type="text" placeholder={t("auth.placeholder.lastName")} label={t("auth.label.lastName")} />
+                  <FormField name="email" type="email" placeholder={t("auth.placeholder.email")} label={t("auth.label.email")} />
+                  <FormField name="password" type="password" placeholder={t("auth.placeholder.password")} label={t("auth.label.password")} />
+                  <SubmitButton text={t("auth.createAccount")} />
+                </MyForm>
+              </Formik>
+            </div>
+            <div className="flex justify-center rounded-md bg-modal m-4 border-2 p-2">
+              <p className="px-1">{t("auth.hasAccount")}</p>
+              <Link href={routes.login} className="text-sky-500">
+                {t("auth.login")}
+              </Link>
+            </div>
           </div>
-          <div className="flex justify-center rounded-md bg-modal m-4 border-2 p-2">
-            <p className="px-1">{t("auth.hasAccount")}</p>
-            <Link href={routes.login} className="text-sky-500">
-              {t("auth.login")}
-            </Link>
-          </div>
-        </div>
+        </NoSSR>
       </Page>
     </>
   )
