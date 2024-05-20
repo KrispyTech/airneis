@@ -9,6 +9,7 @@ const makeRequest =
     }
 
     return await axios[method.toLowerCase()](`${mobileConfig.api.url}/${route}`, data, {
+      withCredentials: true,
       headers: {
         authorization: `Bearer ${token}`
       }

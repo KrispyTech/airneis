@@ -19,7 +19,7 @@ const HomeScreen = props => {
   const { t } = useTranslation()
   const navigateToSignUp = () => navigation.navigate(screens.signUpScreen)
   const navigateToSignIn = () => navigation.navigate(screens.signInScreen)
-  const handleSinOut = async () => {
+  const handleSignOut = async () => {
     await destroySession()
     signOut()
   }
@@ -45,7 +45,7 @@ const HomeScreen = props => {
         <Text>{t("homePage.title")}</Text>
         <LanguageSelector className="mt-5" />
         {isLogged ? (
-          <Button title={t("homePage.signOut")} onPress={handleSinOut} />
+          <Button title={t("homePage.signOut")} onPress={handleSignOut} />
         ) : (
           <View className="flex flex-row justify-center">
             <Button title={t("homePage.signUp")} onPress={navigateToSignUp} />
