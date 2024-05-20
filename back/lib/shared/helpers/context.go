@@ -3,6 +3,10 @@ package helpers
 import (
 	"encoding/json"
 
+	"github.com/KrispyTech/airneis/src/serializers"
+
+	log "github.com/sirupsen/logrus"
+
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -19,4 +23,26 @@ func GetAuthContext(ctx *fiber.Ctx) (AuthData, error) {
 	}
 
 	return authData, nil
+}
+
+func GetSessionCookiesFromContext(ctx *fiber.Ctx) (string, bool) {
+	sessionCookie := ctx.Cookies("session")
+	if sessionCookie == "" {
+		log.Warn("Session cookie not found.")
+
+		return "", false
+	}
+
+	return sessionCookie, true
+}
+
+func AddUserToContext(ctx *fiber.Ctx, user serializers.SerializedUser) error {
+	userData, err := json.Marshal(user)
+	if err != nil {
+		return SendInternalError(ctx, err)
+	}
+
+	ctx.Locals("user", userData)
+
+	return nil
 }

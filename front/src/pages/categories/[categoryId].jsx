@@ -18,7 +18,7 @@ const CategoryPage = ({ category }) => (
     <p className="font-semibold text-3xl px-8 py-14">{category.description}</p>
     <ul className="grid grid-cols-3 gap-x-12 gap-y-8 px-8 pb-6">
       {category.products.map(product => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product.ID} product={product} />
       ))}
     </ul>
   </Page>

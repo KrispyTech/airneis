@@ -29,7 +29,7 @@ func CreateCategories(hc httpclient.HttpApi) error {
 		headers := make(map[string]string)
 		headers["content-type"] = "application/json"
 
-		_, status, err := hc.Post("http://localhost:3001/api/categories", headers, bodyToSend)
+		_, status, err := hc.Post("https://back.airneis.orb.local/api/categories", headers, bodyToSend)
 		if err != nil || status != http.StatusOK {
 			fmt.Printf("CreateCategories, request impossible %s\n", err)
 			continue

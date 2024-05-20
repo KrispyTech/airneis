@@ -1,4 +1,4 @@
-package controllers
+package products
 
 import (
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
@@ -11,11 +11,11 @@ func CreateProduct(ctx *fiber.Ctx) error {
 	var product model.Product
 
 	if err := ctx.BodyParser(&product); err != nil {
-		return helpers.SendBadRequest(ctx)
+		return helpers.SendBadRequest(ctx, err)
 	}
 
 	if err := config.Database.Create(&product).Error; err != nil {
-		return helpers.SendInternalError(ctx)
+		return helpers.SendInternalError(ctx, err)
 	}
 
 	return sendProduct(ctx, product)

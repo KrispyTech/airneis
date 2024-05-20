@@ -63,3 +63,9 @@ const (
 	SaltLength int    = 64
 	Chars      string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%"
 )
+
+// JWT
+const (
+	JWT           string = "JWT_SECRET"
+	JWTExpiration string = "JWT_EXPIRATION_IN"
+)

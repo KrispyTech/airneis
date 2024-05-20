@@ -2,7 +2,7 @@ env:
   build_production: false
   text:
     vault:
-      authentication-url: https://auth.hashicorp.com
+      authentication-url: https://auth.idp.hashicorp.com
       base_url: https://api.cloud.hashicorp.com
       app_name: Airneis
   secrets:
