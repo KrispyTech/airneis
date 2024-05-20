@@ -19,7 +19,10 @@ Materials <|-- ProductsMaterials
 Products <|-- ProductsMaterials
 
 class Users {
-    id increments notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
     firstName text notNull
     lastName text notNull
     email text unique notNull
@@ -30,46 +33,65 @@ class Users {
 }
 
 class Categories {
-    id increments notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
     name text notNull
-    thumbnailUrl text notNull
+    thumbnailURL text notNull
     slug text unique notNull
     orderOfDisplay number notNull
 }
 
 class Products {
-    id increments notNull
+    ID increments notNull
+    CreatedAt timestamp
+	UpdatedAt timestamp
+	DeletedAt timestamp
     name text notNull
     slug unique notNull
-    categoryId number notNull
+    categoryID number notNull
     priceWithoutTaxes number notNull
     priceWithTaxes number notNull
     description text notNull
-    thumbnailUrl text notNull
+    thumbnailURL text notNull
     outOfStock boolean default false notNull
     highlanderOrder uint default 0 notNull
+    orderOfPriority uint default 0 notNull
 }
 
 class ProductImages {
-    id increments notNull
-    productId number notNull
-    imageUrl text notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
+    productID number notNull
+    imageURL text notNull
 }
 
 class Materials{
-    id increments notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
     name text notNull
 }
 
-class ProductsMaterials {
-    id increments notNull
-    productId number notNull
-    materialId number notNull
+class Materials {
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
+    productID number notNull
+    materialID number notNull
 }
 
 class Addresses {
-    id increments notNull
-    userId number notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
+    userID number notNull
     address text notNull
     address2 text
     city text notNull
@@ -80,33 +102,45 @@ class Addresses {
     lastName text notNull
     phoneNumber text notNull
     comment text
+    isActive boolean default true
 }
 
 class Orders {
-    id increments notNull
-    userId number notNull
-    statusId number notNull
-    shippingAddressId number notNull
-    billingAddressId number notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
+    userID number notNull
+    statusID number notNull
+    shippingAddressID number notNull
+    billingAddressID number notNull
     finalized_at date notNull
-    isActive boolean notNull default true
 }
 
 class Status {
-    id increments notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
     name text notNull
     isOrder boolean notNull
 }
 
-class CartsProducts {
-    id increments notNull
-    productId number notNull
-    cartId number notNull
+class OrderProducts {
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
+    productID number notNull
+    orderID number notNull
     quantity number notNull
 }
 
 class Contact {
-    id increments notNull
+    ID increments notNull
+    createdAt timestamp
+    updatedAt timestamp
+    deletedAt timestamp
     senderEmail text notNull
     recipientEmail text notNull
     subject text notNull
@@ -126,9 +160,11 @@ For more safety we the password is hashed and we have one salt per user
 
 ## Categories
 
-Each category has a `name`, a `thumbnail` and a `slug` this slug should be the category's name in lowercase and if the category is in multiple words,each space should be replaced by a dash .
+Each category has a `name`, a `thumbnail` and a `slug` this slug should be the category's name in lowercase and if the
+category is in multiple words,each space should be replaced by a dash .
 The `slug` should be unique as we will use it in the urls to identify specific `category`.
-`orderOfDisplay` represents the order in which the categories will be displayed on home page as it must be configurable in back office
+`orderOfDisplay` represents the order in which the categories will be displayed on home page as it must be configurable
+in back office
 
 ## Products
 
@@ -170,7 +206,7 @@ If it's an order it means that it has been paid and that it will be delivered.
 Can be both shipping or billing address.
 The `comment` is optional and can be used to give more information about the address for the delivery person.
 The `zipCode` is a string because some countries have letters in their zipCode.
-The `isActive` field is for history purpose. When an address is updated a new row should be created in the database. 
+The `isActive` field is for history purpose. When an address is updated a new row should be created in the database.
 This row should be a "clone" with the new information. This will avoid to affect the addresses used in past Orders.
 
 # Contact
@@ -178,4 +214,5 @@ This row should be a "clone" with the new information. This will avoid to affect
 This table represents the contact form.
 The content of this table will be displayed in backoffice.
 The `senderEmail` represent the email of the people who write to us
-The `recipientEmail` email represents the email of our company as we may send ourselves an email to keep another track of every contacts
+The `recipientEmail` email represents the email of our company as we may send ourselves an email to keep another track
+of every contacts
