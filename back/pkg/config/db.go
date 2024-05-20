@@ -62,9 +62,8 @@ func InitNeonDatabase(vc vault.VaultClient) (*gorm.DB, error) {
 
 func initDatabase(config Config, env string) (err error) {
 	databaseURI := os.Getenv("DB_URI")
-	err = loadDatabase(config, databaseURI, env)
-	if err != nil {
-		return errors.Errorf("initDatabase, unable pick")
+	if err = loadDatabase(config, databaseURI, env); err != nil {
+		return errors.Errorf("initDatabase, unable pick: %s", err.Error())
 	}
 
 	if err := Database.AutoMigrate(&model.Product{},

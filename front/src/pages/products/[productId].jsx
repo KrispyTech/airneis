@@ -1,5 +1,5 @@
 import Page from "@/components/Page"
-import Button from "@/components/ui/Button"
+import Button from "@/components/ui/buttons/Button"
 import MaterialChip from "@/components/materials/MaterialChip"
 import { getProductById } from "@/utils/services/productServices"
 import Carousel from "@/components/Carousel"

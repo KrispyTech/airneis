@@ -49,8 +49,6 @@ func generateSalt() (string, error) {
 		salt[i] = constants.Chars[randomNumber.Int64()]
 	}
 
-	println(string(salt))
-
 	return string(salt), nil
 }
 

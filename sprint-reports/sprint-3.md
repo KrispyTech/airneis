@@ -1,4 +1,4 @@
-# Sprint N°3 [04/03/2024 - 31/03/2024]
+# Sprint N°3 [04/03/2024 - 01/04/2024]
 
 _Continuity of product, category and Highlanders of the moment display management._
 
@@ -89,6 +89,6 @@ From 13 March onwards, we started to allocate the US and to do them. We've made 
 - Kylian
 - Magali
 - Cédric
-Alix
+- Alix
 
 
