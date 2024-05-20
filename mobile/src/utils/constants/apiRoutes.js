@@ -3,7 +3,8 @@ const apiRoutes = {
   categoryId: id => `${apiRoutes.categories}/${id}`,
   products: "products",
   productId: id => `${apiRoutes.products}/${id}`,
-  users: "users"
+  users: "users",
+  sessions: "sessions"
 }
 
 export default apiRoutes
