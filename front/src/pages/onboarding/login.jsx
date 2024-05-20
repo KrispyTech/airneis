@@ -28,7 +28,6 @@ const validationSchema = object({
 
 const LoginPage = () => {
   const { t } = useTranslation("common")
-
   const router = useRouter()
   const [hasError, setError] = useState(false)
   const { createUserSession } = useSessionStore()
