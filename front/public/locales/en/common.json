@@ -33,7 +33,9 @@
     },
     "label": {
       "email": "E-mail",
-      "password": "Password"
+      "password": "Password",
+      "firstName": "First name",
+      "lastName": "Last name"
     }
   },
   "errorMessage": "An error has occured"
