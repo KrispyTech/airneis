@@ -1,8 +1,8 @@
 {
   "hello": "Bonjour",
   "homePage": {
-    "wip": "Travail en cours, revenez plus tard !",
-    "linkExample": "Exemple de lien"
+    "welcome": "Bienvenue sur Airneis",
+    "description": "Venant des hautes terres d'Écosse nos meubles sont immortels"
   },
   "header": {
     "selectLanguage": "Séléctionnez une langue",
