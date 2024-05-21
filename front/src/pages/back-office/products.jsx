@@ -1,8 +1,9 @@
 import BackOfficeBoard from "@/components/backoffice/BackOfficeBoard"
 import BackOfficeNav from "@/components/backoffice/BackOfficeNav"
 import Page from "@/components/Page"
-import { backoffice } from "@/constants"
+
 import { getProducts } from "@/utils/services/productServices"
+import { backoffice } from "@@/lib/constants/labels"
 import { useEffect, useState } from "react"
 
 const ProductsBoard = () => {
