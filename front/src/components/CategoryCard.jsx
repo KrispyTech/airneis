@@ -2,11 +2,11 @@ import Image from "next/image"
 import { useRouter } from "next/router"
 import { clsx } from "clsx"
 import config from "@/utils/config"
-import apiRoutes from "@/utils/constants"
+import routes from "@@/lib/constants/routes"
 
 const CategoryCard = ({ category, className, otherProps }) => {
   const router = useRouter()
-  const goToCategoryPage = () => router.push(apiRoutes.categoryId(category.ID))
+  const goToCategoryPage = () => router.push(routes.categoryId(category.ID))
 
   return (
     <li className={clsx(className, "flex flex-col gap-1 max-w-md  rounded mx-auto relative")} onClick={goToCategoryPage} {...otherProps}>
