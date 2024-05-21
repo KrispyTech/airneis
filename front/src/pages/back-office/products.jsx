@@ -1,13 +1,13 @@
 import BackOfficeBoard from "@/components/backoffice/BackOfficeBoard"
 import BackOfficeNav from "@/components/backoffice/BackOfficeNav"
 import Page from "@/components/Page"
-
 import { getProducts } from "@/utils/services/productServices"
 import { backoffice } from "@@/lib/constants/labels"
 import { useEffect, useState } from "react"
 
 const ProductsBoard = () => {
   const [selected, setSelected] = useState({})
+  const [hasError, setError] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [products, setProducts] = useState([])
   const [itemId, setItemId] = useState(null)
@@ -36,9 +36,12 @@ const ProductsBoard = () => {
 
   useEffect(() => {
     ;(async () => {
-      const { data } = await getProducts()
-
-      setProducts(data)
+      try {
+        const { data } = await getProducts()
+        setProducts(data)
+      } catch (e) {
+        setError(true)
+      }
     })()
   }, [setProducts])
 
