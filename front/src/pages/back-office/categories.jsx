@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 
 const CategoriesBoard = () => {
   const [selected, setSelected] = useState({})
-  const [_, setError] = useState(false)
+  const [hasError, setError] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [categories, setCategories] = useState([])
   const [itemId, setItemId] = useState(null)
@@ -18,7 +18,7 @@ const CategoriesBoard = () => {
   }
 
   const handleChange = event => {
-    // More things to do when filter will be done
+    // More things to do when filter will be done.
     const id = event.currentTarget.getAttribute("data-id")
 
     if (id === "all") {
@@ -28,6 +28,10 @@ const CategoriesBoard = () => {
     }
 
     setSelected({ ...selected, [id]: !selected[id] })
+  }
+
+  const handleInput = () => {
+    // To do
   }
 
   useEffect(() => {
