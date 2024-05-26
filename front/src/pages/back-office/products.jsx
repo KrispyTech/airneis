@@ -5,9 +5,9 @@ import { getProducts } from "@/utils/services/productServices"
 import { backoffice } from "@@/lib/constants/labels"
 import { useEffect, useState } from "react"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { useTranslation } from "react-i18next"
 
 export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
-
 const ProductsBoard = () => {
   const { t } = useTranslation("common")
   const [selected, setSelected] = useState({})
