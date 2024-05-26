@@ -1,4 +1,4 @@
-# Sprint N°4 [02/04/2024 - 29/04/2024]
+# Sprint N°4 [01/04/2024 - 29/04/2024]
 
 _Cart and Authentication management for greater functionalities._
 
@@ -71,7 +71,7 @@ No ideas for this Sprint.
 
 You can see that it took us a long time to get started on the tasks because the whole team was demotivated that month, so it was very complicated to get started.
 
-But from 17 May onwards, we started to become more motivated and we were able to catch up. From 25 May to 29 May we worked on authentication, it was a pain but it was done with a lot of work.
+But from 17 April onwards, we started to become more motivated and we were able to catch up. From 25 May to 29 April we worked on authentication, it was a pain but it was done with a lot of work.
 
 ## Participants
 
