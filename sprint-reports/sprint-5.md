@@ -44,7 +44,7 @@ _Cart and session management, with the option of creating an account and orderin
   - Consequences: Time lost for other US.
   - Commitment:
     - Said by: Cédric
-    - What: Better estimate the most complex tasks to better manage our architecture .
+    - What: We should've estimated that the task would took longer than expected as there was a lot reworks done. There should've been a better scoping phase. (Why did we not attack the auth first?)
     - When: During the last Sprint (#6)
 
 - Review 2
