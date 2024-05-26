@@ -59,7 +59,7 @@ _Cart and session management, with the option of creating an account and orderin
 - Review 3
 
   - Description: One less member in the last two sprints.
-  - Consequences: More work and a new organisation of 4 instead of 5.
+  - Consequences: More work and a new organisation for 4 people instead of 5.
   - Commitment:
     - Said by: Kylian
     - What: Organising in teams of 4.
