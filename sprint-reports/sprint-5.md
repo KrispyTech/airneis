@@ -44,7 +44,7 @@ _Cart and session management, with the option of creating an account and orderin
   - Consequences: Time lost for other US.
   - Commitment:
     - Said by: Cédric
-    - What: Trying to organise yourself better to waste less time.
+    - What: Better estimate the most complex tasks to better manage our architecture .
     - When: During the last Sprint (#6)
 
 - Review 2
