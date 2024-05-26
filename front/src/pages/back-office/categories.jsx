@@ -4,8 +4,12 @@ import Page from "@/components/Page"
 import { getCategories } from "@/utils/services/categoryServices"
 import { backoffice } from "@@/lib/constants/labels"
 import { useEffect, useState } from "react"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+
+export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
 
 const CategoriesBoard = () => {
+  const { t } = useTranslation("common")
   const [selected, setSelected] = useState({})
   const [hasError, setError] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -43,6 +47,10 @@ const CategoriesBoard = () => {
       } catch (e) {}
     })()
   }, [setCategories])
+
+  if (hasError) {
+    return <p className="bg-red-700">{t("errorMessage")}</p>
+  }
 
   return (
     <Page page={backoffice}>
