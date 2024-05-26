@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 
 const ProductsBoard = () => {
   const [selected, setSelected] = useState({})
-  const [hasError, setError] = useState(false)
+  const [_, setError] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [products, setProducts] = useState([])
   const [itemId, setItemId] = useState(null)
@@ -28,10 +28,6 @@ const ProductsBoard = () => {
     }
 
     setSelected({ ...selected, [id]: !selected[id] })
-  }
-
-  const handleInput = () => {
-    // To do to handle filter input
   }
 
   useEffect(() => {

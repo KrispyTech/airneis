@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 
 const CategoriesBoard = () => {
   const [selected, setSelected] = useState({})
-  const [hasError, setError] = useState(false)
+  const [_, setError] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [categories, setCategories] = useState([])
   const [itemId, setItemId] = useState(null)
@@ -28,10 +28,6 @@ const CategoriesBoard = () => {
     }
 
     setSelected({ ...selected, [id]: !selected[id] })
-  }
-
-  const handleInput = () => {
-    // To do
   }
 
   useEffect(() => {
