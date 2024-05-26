@@ -50,7 +50,7 @@ _Cart and session management, with the option of creating an account and orderin
 - Review 2
 
   - Description: Hashicorp has changed its authentication system of Vault.
-  - Consequences: A major rework was carried out on the Vault, which wasted a lot of time.
+  - Consequences: A minor rework was carried out on the Vault, which wasted a lot of time.
   - Commitment:
     - Said by: Barnabé
     - What: Better management of more complex US.
