@@ -4,8 +4,12 @@ import Page from "@/components/Page"
 import { getProducts } from "@/utils/services/productServices"
 import { backoffice } from "@@/lib/constants/labels"
 import { useEffect, useState } from "react"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { useTranslation } from "react-i18next"
 
+export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
 const ProductsBoard = () => {
+  const { t } = useTranslation("common")
   const [selected, setSelected] = useState({})
   const [hasError, setError] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -44,6 +48,10 @@ const ProductsBoard = () => {
       }
     })()
   }, [setProducts])
+
+  if (hasError) {
+    return <p className="bg-red-700">{t("errorMessage")}</p>
+  }
 
   return (
     <Page page={backoffice}>
