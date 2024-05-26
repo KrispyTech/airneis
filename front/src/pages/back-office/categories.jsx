@@ -18,7 +18,7 @@ const CategoriesBoard = () => {
   }
 
   const handleChange = event => {
-    // More things to do when filter will be done.
+    // More things to do when filter will be done
     const id = event.currentTarget.getAttribute("data-id")
 
     if (id === "all") {
