@@ -43,7 +43,6 @@ const CategoriesBoard = () => {
       try {
         const { data } = await getCategories()
         setCategories(data)
-        setError(true)
       } catch (e) {
         setError(true)
       }
