@@ -51,9 +51,8 @@ func generateSalt() (string, error) {
 	}
 
 	runes := utf16.Decode(rawSalt)
-	salt := string(runes)
 
-	return salt, nil
+	return string(runes), nil
 }
 
 func hashPassword(rawPassword, salt []byte) ([]byte, error) {
