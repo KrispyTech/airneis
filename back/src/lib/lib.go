@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
+	"github.com/KrispyTech/airneis/lib/shared/sendgrid"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"github.com/gofiber/fiber/v2"
 	log "github.com/sirupsen/logrus"
@@ -16,6 +17,7 @@ type airneisFiberApp struct {
 
 type Services struct {
 	VaultClient vault.VaultClient
+	SendgridClient sendgrid.SendgridAPI
 }
 
 func InitializeFiberApp(services Services) error {
