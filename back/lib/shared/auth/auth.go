@@ -2,6 +2,7 @@ package auth
 
 import (
 	"crypto/rand"
+	"encoding/base64"
 	"encoding/hex"
 	"math/big"
 
@@ -9,6 +10,7 @@ import (
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
+	"github.com/sirupsen/logrus"
 )
 
 func CreatePassword(authData helpers.AuthData) (hashedPassword string, salt string, err error) {
@@ -18,6 +20,31 @@ func CreatePassword(authData helpers.AuthData) (hashedPassword string, salt stri
 	}
 
 	return hashedPassword, salt, nil
+}
+
+func VerifyPassword(authData helpers.AuthData, userPasswordHash, userPasswordSalt string) (bool, error) {
+	logrus.Info(authData.Password)
+	password := "HelloWorld123!!!"
+
+	passwordHash, err := hashPassword([]byte(password), []byte(userPasswordSalt))
+	if err != nil {
+		return false, err
+	}
+
+	logrus.Info(base64.StdEncoding.EncodeToString(passwordHash))
+
+	authDataPasswordHash, err := hashPassword([]byte(authData.Password), []byte(userPasswordSalt))
+	if err != nil {
+		return false, err
+	}
+
+	logrus.Info(base64.StdEncoding.EncodeToString(authDataPasswordHash))
+
+	if base64.StdEncoding.EncodeToString(authDataPasswordHash) != userPasswordHash {
+		return false, err
+	}
+
+	return true, nil
 }
 
 func createNewPasswordHash(rawPassword string) (password string, salt string, err error) {
@@ -48,6 +75,8 @@ func generateSalt() (string, error) {
 
 		salt[i] = constants.Chars[randomNumber.Int64()]
 	}
+
+	logrus.Info(string(salt))
 
 	return string(salt), nil
 }

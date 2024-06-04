@@ -15,23 +15,25 @@ const useSessionStore = create(set => ({
   ...initialValues,
   createUserSession: (inputEmail, inputPassword, router) =>
     set(async () => {
-      const {
-        data: { data: token }
-      } = await createSession(inputEmail, inputPassword)
+      try {
+        const {
+          data: { data: token }
+        } = await createSession(inputEmail, inputPassword)
 
-      const {
-        payload: { userData: firstName, lastName, email, isAdmin, isActive }
-      } = jwtDecode(token)
+        const {
+          payload: { userData: firstName, lastName, email, isAdmin, isActive }
+        } = jwtDecode(token)
 
-      router.push(routes.home)
+        router.push(routes.home)
 
-      return {
-        firstName,
-        lastName,
-        email,
-        isAdmin,
-        isActive
-      }
+        return {
+          firstName,
+          lastName,
+          email,
+          isAdmin,
+          isActive
+        }
+      } catch (error) {}
     }),
   removeUserSession: () =>
     set(async () => {

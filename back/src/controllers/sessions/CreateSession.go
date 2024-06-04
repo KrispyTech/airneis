@@ -23,6 +23,15 @@ func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 		return helpers.SendUnauthorized(ctx, errFindUser)
 	}
 
+	passwordCheck, err := auth.VerifyPassword(input, user.PasswordHash, user.PasswordSalt)
+	if err != nil {
+		return helpers.SendInternalError(ctx, errInput)
+	}
+
+	if !passwordCheck {
+		return helpers.SendUnauthorized(ctx, errFindUser)
+	}
+
 	serializedUser := serializers.SerializeUser(user)
 	userToken, errToken := auth.CreateToken(serializedUser, vlt)
 	if errToken != nil {
