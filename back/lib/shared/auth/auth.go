@@ -2,7 +2,6 @@ package auth
 
 import (
 	"crypto/rand"
-	"encoding/base64"
 	"encoding/hex"
 	"math/big"
 
@@ -23,24 +22,12 @@ func CreatePassword(authData helpers.AuthData) (hashedPassword string, salt stri
 }
 
 func VerifyPassword(authData helpers.AuthData, userPasswordHash, userPasswordSalt string) (bool, error) {
-	logrus.Info(authData.Password)
-	password := "HelloWorld123!!!"
-
-	passwordHash, err := hashPassword([]byte(password), []byte(userPasswordSalt))
-	if err != nil {
-		return false, err
-	}
-
-	logrus.Info(base64.StdEncoding.EncodeToString(passwordHash))
-
 	authDataPasswordHash, err := hashPassword([]byte(authData.Password), []byte(userPasswordSalt))
 	if err != nil {
 		return false, err
 	}
 
-	logrus.Info(base64.StdEncoding.EncodeToString(authDataPasswordHash))
-
-	if base64.StdEncoding.EncodeToString(authDataPasswordHash) != userPasswordHash {
+	if hex.EncodeToString(authDataPasswordHash) != userPasswordHash {
 		return false, err
 	}
 
