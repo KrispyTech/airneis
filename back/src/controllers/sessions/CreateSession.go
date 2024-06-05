@@ -1,6 +1,7 @@
 package sessions
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/KrispyTech/airneis/lib/shared/auth"
@@ -30,6 +31,10 @@ func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 
 	if !passwordCheck {
 		return helpers.SendUnauthorized(ctx, errFindUser)
+	}
+
+	if !user.IsActive {
+		return helpers.SendUnauthorized(ctx, fmt.Errorf("please activate your account"))
 	}
 
 	serializedUser := serializers.SerializeUser(user)
