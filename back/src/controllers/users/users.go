@@ -18,6 +18,14 @@ func fillUserInformation(ctx *fiber.Ctx, user model.User) (model.User, error) {
 		return model.User{}, helpers.SendInternalError(ctx, err)
 	}
 
+	if len(authData.Email) == 0 {
+		return model.User{}, fmt.Errorf("please provide an email")
+	}
+
+	if len(authData.Password) == 0 {
+		return model.User{}, fmt.Errorf("please provide a password")
+	}
+
 	hashedPassword, salt, err := auth.CreatePassword(authData)
 	if err != nil {
 		return model.User{}, helpers.SendBadRequest(ctx, err)
@@ -40,4 +48,20 @@ func GetUserByEmail(email string) (model.User, error) {
 	}
 
 	return user, nil
+}
+
+func checkUser(user model.User) error {
+	if len(user.FirstName) == 0 {
+		return fmt.Errorf("please provide a first name")
+	}
+
+	if len(user.LastName) == 0 {
+		return fmt.Errorf("please provide a last name")
+	}
+
+	if len(user.Email) == 0 {
+		return fmt.Errorf("please provide an email")
+	}
+
+	return nil
 }
