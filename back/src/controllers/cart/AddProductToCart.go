@@ -20,7 +20,7 @@ func AddProductToCart(ctx *fiber.Ctx) error {
 		return helpers.SendNotFound(ctx, err)
 	}
 
-	cart.Products = append(cart.Products, product)
+	cart.Products = append(cart.Products, model.OrderProduct{Product: product, Quantity: 1})
 
 	// TODO: RETURN CART WHEN AUTH PR IS MERGED
 	return nil

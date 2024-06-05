@@ -5,6 +5,8 @@ import "gorm.io/gorm"
 type OrderProduct struct {
 	gorm.Model
 	OrderID   uint
+	Order     Order
 	ProductID uint
-	quantity  int
+	Product   Product
+	Quantity  int
 }
