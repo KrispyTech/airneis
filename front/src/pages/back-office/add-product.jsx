@@ -25,7 +25,7 @@ const initialValues = {
   priceET: 0,
   priceIT: 0,
   materialsString: "",
-  category: "",
+  categoryID: 0,
   description: ""
 }
 
@@ -35,7 +35,7 @@ const validationSchema = object({
   priceET: priceETValidator.required(),
   priceIT: priceITValidator.required(),
   materialsString: materialsValidator.required(),
-  category: categoryValidator,
+  categoryID: categoryValidator,
   description: descriptionValidator,
 })
 
@@ -45,8 +45,9 @@ const AddProduct = () => {
   const [hasError, setError] = useState(false)
   const [categories, setCategories] = useState([])
   const handleProductCreation = async values => {
-    const { name, priority, priceET, priceIT, materialsString, category, description } = values
+    const { name, priority, priceET, priceIT, materialsString, categoryID, description } = values
     const materials = materialsString.split(',').map((material) => ({"name": material}))
+    const category = categories.filter((categorie) => categorie.ID == categoryID)[0]
 
     try {
       const product = { name, priority, priceET, priceIT, materials, category, description }
@@ -88,9 +89,9 @@ const AddProduct = () => {
                 <FormField name="materialsString" type="text" placeholder={t("backoffice.placeholder.materials")} label={t("backoffice.label.materials")} />
                 <label className={clsx("flex flex-col gap-2")}>
                 {t("backoffice.label.category") && <span className="font-semibold">{t("backoffice.label.category")}</span>}
-                <Field name="category" component="select" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category")} >
+                <Field name="categoryID" component="select" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category")} >
                   {categories.map(categorie => (
-                    <option key={categorie.ID} data-value={categorie}>{categorie.name}</option>
+                    <option key={categorie.ID} value={categorie.ID}>{categorie.ID}</option>
                     ))}
                 </Field>
                 </label>
