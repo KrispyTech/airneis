@@ -12,8 +12,8 @@ const ProductCard = ({ product, className, otherProps }) => {
       <Image
         alt={product.name}
         src={product.thumbnailURL}
-        width={config.images.productCard.width}
-        height={config.images.productCard.height}
+        width={config.images.productCard.imageWidth}
+        height={config.images.productCard.imageHeight}
         className="rounded-sm drop-shadow-box"
       />
       <div className="flex justify-between">

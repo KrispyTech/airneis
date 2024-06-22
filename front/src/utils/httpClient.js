@@ -5,10 +5,13 @@ const makeRequest =
   method =>
   async (route, token, data = {}) => {
     if (token === "") {
-      return await axios[method.toLowerCase()](`${config.api.url}/${route}`, data, {})
+      return await axios[method.toLowerCase()](`${config.api.url}/${route}`, data, {
+        withCredentials: true
+      })
     }
 
     return await axios[method.toLowerCase()](`${config.api.url}/${route}`, data, {
+      withCredentials: true,
       headers: {
         authorization: `Bearer ${token}`
       }
