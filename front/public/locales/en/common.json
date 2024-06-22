@@ -7,6 +7,9 @@
   "header": {
     "selectLanguage": "Select language",
     "backOffice": "Backoffice",
+    "login": "Login ",
+    "register": "Register",
+    "logout": "Logout",
     "locales": {
       "en": "English",
       "fr": "French"
