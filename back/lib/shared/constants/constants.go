@@ -59,9 +59,11 @@ const (
 )
 
 // PASSWORD AND SALT
+// The utf codes are from utf-16 codes and contains numbers, letters uppers and lowers and special characters
 const (
-	SaltLength int    = 64
-	Chars      string = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%"
+	FirstSaltCharacter int64 = 33
+	LastSaltCharacter  int64 = 126
+	SaltLength         int   = 64
 )
 
 // JWT
