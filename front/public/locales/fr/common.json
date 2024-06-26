@@ -43,18 +43,18 @@
   "backoffice": {
     "label": {
       "name": "Nom",
-      "priority": "Priorité",
-      "priceET": "PrixHT",
-      "priceIT": "PrixTTC",
+      "orderOfPriority": "Priorité",
+      "priceWithoutTaxes": "PrixHT",
+      "priceWithTaxes": "PrixTTC",
       "materials": "Materiaux",
       "category": "Categorie",
       "description": "Description"
     },
     "placeholder": {
       "name": "Nom",
-      "priority": "Priorité",
-      "priceET": "Prix hors taxes",
-      "priceIT": "Price TTC",
+      "orderOfPriority": "Priorité",
+      "priceWithoutTaxes": "Prix hors taxes",
+      "priceWithTaxes": "Price TTC",
       "materials": "Materiaux séparés par une ','",
       "category": "Selectionner une categorie",
       "description": "Description"

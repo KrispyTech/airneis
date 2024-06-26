@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import { backoffice } from "@@/lib/constants/labels"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import { priorityValidator, priceETValidator, priceITValidator, materialsValidator, categoryValidator, descriptionValidator, nameValidator } from "@@/lib/validators/product"
+import { orderOfPriorityValidator, priceWithoutTaxesValidator, priceWithTaxesValidator, materialsValidator, categoryValidator, descriptionValidator, nameValidator } from "@@/lib/validators/product"
 import { object } from "yup"
 import { getCategories } from "@/utils/services/categoryServices"
 import routes from "@@/lib/constants/routes"
@@ -21,9 +21,9 @@ import clsx from "clsx"
 export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
 const initialValues = {
   name: "",
-  priority: 0,
-  priceET: 0,
-  priceIT: 0,
+  orderOfPriority: 0,
+  priceWithoutTaxes: 0,
+  priceWithTaxes: 0,
   materialsString: "",
   categoryID: 0,
   description: ""
@@ -31,9 +31,9 @@ const initialValues = {
 
 const validationSchema = object({
   name: nameValidator.required(),
-  priority: priorityValidator,
-  priceET: priceETValidator.required(),
-  priceIT: priceITValidator.required(),
+  orderOfPriority: orderOfPriorityValidator,
+  priceWithoutTaxes: priceWithoutTaxesValidator.required(),
+  priceWithTaxes: priceWithTaxesValidator.required(),
   materialsString: materialsValidator.required(),
   categoryID: categoryValidator,
   description: descriptionValidator,
@@ -45,12 +45,14 @@ const AddProduct = () => {
   const [hasError, setError] = useState(false)
   const [categories, setCategories] = useState([])
   const handleProductCreation = async values => {
-    const { name, priority, priceET, priceIT, materialsString, categoryID, description } = values
+    const { name, orderOfPriority, priceWithoutTaxes, priceWithTaxes, materialsString, categoryID, description } = values
     const materials = materialsString.split(',').map((material) => ({"name": material}))
     const category = categories.filter((categorie) => categorie.ID == categoryID)[0]
+    const slug = name.split(' ').join('_').toLowerCase()
+    console.log(typeof categoryID)
 
     try {
-      const product = { name, priority, priceET, priceIT, materials, category, description }
+      const product = { name, slug, categoryID: parseInt(categoryID), orderOfPriority: parseInt(categoryID), priceWithoutTaxes: parseInt(priceWithoutTaxes), priceWithTaxes: parseInt(priceWithTaxes), materials, category, description }
       console.log(product)
       await createProduct(product)
       router.push(routes.backoffice.products)
@@ -80,18 +82,19 @@ const AddProduct = () => {
         <div className="flex h-full">
           <BackOfficeNav />
           <section className="flex flex-col w-full px-4 pt-3 overflow-y-scroll">
+            <Image></Image>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleProductCreation}>
               <MyForm>
                 <FormField name="name" type="text" placeholder={t("backoffice.placeholder.name")} label={t("backoffice.label.name")} />
-                <FormField name="priority" type="number" placeholder={t("backoffice.placeholder.priority")} label={t("backoffice.label.priority")} />
-                <FormField name="priceET" type="number" placeholder={t("backoffice.placeholder.priceET")} label={t("backoffice.label.priceET")} />
-                <FormField name="priceIT" type="number" placeholder={t("backoffice.placeholder.priceIT")} label={t("backoffice.label.priceIT")} />
+                <FormField name="orderOfPriority" type="number" placeholder={t("backoffice.placeholder.orderOfPriority")} label={t("backoffice.label.orderOfPriority")} />
+                <FormField name="priceWithoutTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithoutTaxes")} label={t("backoffice.label.priceWithoutTaxes")} />
+                <FormField name="priceWithTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithTaxes")} label={t("backoffice.label.priceWithTaxes")} />
                 <FormField name="materialsString" type="text" placeholder={t("backoffice.placeholder.materials")} label={t("backoffice.label.materials")} />
                 <label className={clsx("flex flex-col gap-2")}>
                 {t("backoffice.label.category") && <span className="font-semibold">{t("backoffice.label.category")}</span>}
                 <Field name="categoryID" component="select" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category")} >
                   {categories.map(categorie => (
-                    <option key={categorie.ID} value={categorie.ID}>{categorie.ID}</option>
+                    <option key={categorie.ID} value={categorie.ID}>{categorie.name}</option>
                     ))}
                 </Field>
                 </label>

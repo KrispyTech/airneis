@@ -43,18 +43,18 @@
   "backoffice": {
     "label": {
       "name": "Name",
-      "priority": "Priority",
-      "priceET": "Price excluding taxes",
-      "priceIT": "Price including taxes",
+      "orderOfPriority": "Priority",
+      "priceWithoutTaxes": "Price excluding taxes",
+      "priceWithTaxes": "Price including taxes",
       "materials": "Materials",
       "category": "Category",
       "description": "Description"
     },
     "placeholder": {
       "name": "Name",
-      "priority": "Priority",
-      "priceET": "Price excluding taxes",
-      "priceIT": "Price including taxes",
+      "orderOfPriority": "Priority",
+      "priceWithoutTaxes": "Price excluding taxes",
+      "priceWithTaxes": "Price including taxes",
       "materials": "Values with ',' separator",
       "category": "Select category",
       "description": "Description"
