@@ -58,7 +58,7 @@ const Carousel = ({ images, className, text, width, height, ...otherProps }) => 
       <div className="flex justify-evenly mt-5 w-48">
         {images &&
         images.map((_, index) => (
-          <button key={index} onClick={handleChangeImage(index)}>
+          <button key={index} type= "button" onClick={handleChangeImage(index)}>
             <CarouselControllerIcon filled={index === current} />
           </button>
         ))}

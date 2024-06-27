@@ -20,8 +20,8 @@ const config = {
     },
     backoffice: {
       carousel: {
-        width: 125,
-        height: 125
+        width: 350,
+        height: 200
       }
     }
   }

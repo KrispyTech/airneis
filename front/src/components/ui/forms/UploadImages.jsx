@@ -16,7 +16,7 @@ const UploadImages = () => {
         width={config.images.backoffice.carousel.width}
         height={config.images.backoffice.carousel.height}
       />
-      <label for="file-upload" className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center">
+      <label for="file-upload" type="button" className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center">
         Add
       </label>
         <Input
