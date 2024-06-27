@@ -6,6 +6,7 @@ import Carousel from "@/components/Carousel"
 import ProductCard from "@/components/ProductCard"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { useTranslation } from "next-i18next"
+import config from "@/utils/config"
 
 export const getServerSideProps = async ({ query, locale }) => {
   const { productId } = query
@@ -32,6 +33,8 @@ const ProductPage = ({ product: { name, description, outOfStock, priceWithTaxes,
             images={["https://picsum.photos/452/250", "https://picsum.photos/453/250", "https://picsum.photos/454/250"]}
             text={product.name}
             className="w-full"
+            width={config.images.productPage.carousel.width}
+            height={config.images.productPage.carousel.height}
           />
           <div className="w-full px-8 ">
             <div>

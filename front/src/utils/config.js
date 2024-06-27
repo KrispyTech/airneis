@@ -17,6 +17,12 @@ const config = {
     categoryCard: {
       imageWidth: 350,
       imageHeight: 200
+    },
+    backoffice: {
+      carousel: {
+        width: 125,
+        height: 125
+      }
     }
   }
 }

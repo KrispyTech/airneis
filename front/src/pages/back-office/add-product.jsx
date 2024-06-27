@@ -17,6 +17,8 @@ import { useTranslation } from "react-i18next"
 import NoSSR from "@/components/NoSSR"
 import { createProduct } from "@/utils/services/productServices"
 import clsx from "clsx"
+import Input from "@/components/ui/Input"
+import UploadAndDisplayImage from "@/components/ui/forms/UploadImages"
 
 export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
 const initialValues = {
@@ -82,22 +84,28 @@ const AddProduct = () => {
         <div className="flex h-full">
           <BackOfficeNav />
           <section className="flex flex-col w-full px-4 pt-3 overflow-y-scroll">
-            <Image></Image>
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleProductCreation}>
               <MyForm>
-                <FormField name="name" type="text" placeholder={t("backoffice.placeholder.name")} label={t("backoffice.label.name")} />
-                <FormField name="orderOfPriority" type="number" placeholder={t("backoffice.placeholder.orderOfPriority")} label={t("backoffice.label.orderOfPriority")} />
-                <FormField name="priceWithoutTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithoutTaxes")} label={t("backoffice.label.priceWithoutTaxes")} />
-                <FormField name="priceWithTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithTaxes")} label={t("backoffice.label.priceWithTaxes")} />
-                <FormField name="materialsString" type="text" placeholder={t("backoffice.placeholder.materials")} label={t("backoffice.label.materials")} />
-                <label className={clsx("flex flex-col gap-2")}>
-                {t("backoffice.label.category") && <span className="font-semibold">{t("backoffice.label.category")}</span>}
-                <Field name="categoryID" component="select" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category")} >
-                  {categories.map(categorie => (
-                    <option key={categorie.ID} value={categorie.ID}>{categorie.name}</option>
-                    ))}
-                </Field>
-                </label>
+                < div className="flex justify-between gap-x-16">
+                  <div className="flex flex-col items-center justify-center">
+                    <UploadAndDisplayImage/>
+                  </div>
+                  <div className="flex flex-1 flex-col justify-start">
+                  <FormField name="name" type="text" placeholder={t("backoffice.placeholder.name")} label={t("backoffice.label.name")} />
+                  <FormField name="orderOfPriority" type="number" placeholder={t("backoffice.placeholder.orderOfPriority")} label={t("backoffice.label.orderOfPriority")} />
+                  <FormField name="priceWithoutTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithoutTaxes")} label={t("backoffice.label.priceWithoutTaxes")} />
+                  <FormField name="priceWithTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithTaxes")} label={t("backoffice.label.priceWithTaxes")} />
+                  <FormField name="materialsString" type="text" placeholder={t("backoffice.placeholder.materials")} label={t("backoffice.label.materials")} />
+                  <label className={clsx("flex flex-col gap-2")}>
+                  {t("backoffice.label.category") && <span className="font-semibold">{t("backoffice.label.category")}</span>}
+                  <Field name="categoryID" component="select" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category")} className="border-2 p-2 bg-white">
+                    {categories.map(categorie => (
+                      <option key={categorie.ID} value={categorie.ID}>{categorie.name}</option>
+                      ))}
+                  </Field>
+                  </label>
+                  </div>
+                </div>
                 <FormField name="description" type="textarea" placeholder={t("backoffice.placeholder.description")} label={t("backoffice.label.description")} />
                 <SubmitButton text={"validate"} />
               </MyForm>

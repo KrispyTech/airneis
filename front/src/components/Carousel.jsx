@@ -1,7 +1,6 @@
 import { useState } from "react"
 import Image from "next/image"
 import { clsx } from "clsx"
-import config from "@/utils/config"
 
 const FilledCarouselControllerIcon = () => (
   <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,7 +31,7 @@ const CarouselControllerIcon = ({ filled }) => {
   return <NotFilledCarouselControllerIcon />
 }
 
-const Carousel = ({ images, className, text, ...otherProps }) => {
+const Carousel = ({ images, className, text, width, height, ...otherProps }) => {
   const [current, setCurrent] = useState(0)
   const handleChangeImage = index => () => {
     setCurrent(index)
@@ -47,8 +46,8 @@ const Carousel = ({ images, className, text, ...otherProps }) => {
               alt={`image-${index}`}
               key={index}
               src={image}
-              width={config.images.productPage.carousel.width}
-              height={config.images.productPage.carousel.height}
+              width={width}
+              height={height}
               className={`rounded-sm drop-shadow-box w-full lg:w-none ${index !== current ? "hidden" : ""}`}
             />
           ))}
@@ -57,7 +56,8 @@ const Carousel = ({ images, className, text, ...otherProps }) => {
         </h2>
       </div>
       <div className="flex justify-evenly mt-5 w-48">
-        {images.map((_, index) => (
+        {images &&
+        images.map((_, index) => (
           <button key={index} onClick={handleChangeImage(index)}>
             <CarouselControllerIcon filled={index === current} />
           </button>
