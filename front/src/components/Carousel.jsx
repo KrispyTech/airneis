@@ -48,6 +48,7 @@ const Carousel = ({ images, className, text, width, height, ...otherProps }) => 
               src={image}
               width={width}
               height={height}
+              priority={true}
               className={`rounded-sm drop-shadow-box w-full lg:w-none ${index !== current ? "hidden" : ""}`}
             />
           ))}
@@ -57,11 +58,11 @@ const Carousel = ({ images, className, text, width, height, ...otherProps }) => 
       </div>
       <div className="flex justify-evenly mt-5 w-48">
         {images &&
-        images.map((_, index) => (
-          <button key={index} type= "button" onClick={handleChangeImage(index)}>
-            <CarouselControllerIcon filled={index === current} />
-          </button>
-        ))}
+          images.map((_, index) => (
+            <button key={index} type="button" onClick={handleChangeImage(index)}>
+              <CarouselControllerIcon filled={index === current} />
+            </button>
+          ))}
       </div>
     </div>
   )

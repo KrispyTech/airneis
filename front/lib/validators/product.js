@@ -1,5 +1,14 @@
-import { productName, orderOfPriority, priceWithoutTaxes, priceWithTaxes, materials, categoryID, description, thumbnailURL, productImages } from "@@/lib/constants/labels"
-import { string, number, array } from "yup"
+import {
+  productName,
+  orderOfPriority,
+  priceWithoutTaxes,
+  priceWithTaxes,
+  materials,
+  categoryID,
+  description,
+  thumbnailURL
+} from "@@/lib/constants/labels"
+import { string, number } from "yup"
 
 export const nameValidator = string().min(2).max(255).label(productName)
 export const orderOfPriorityValidator = number().positive().integer().label(orderOfPriority)

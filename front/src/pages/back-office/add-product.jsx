@@ -4,7 +4,15 @@ import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import { backoffice } from "@@/lib/constants/labels"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import { orderOfPriorityValidator, priceWithoutTaxesValidator, priceWithTaxesValidator, materialsValidator, categoryValidator, descriptionValidator, nameValidator, thumbnailURLValidator, productImagesValidator } from "@@/lib/validators/product"
+import {
+  orderOfPriorityValidator,
+  priceWithoutTaxesValidator,
+  priceWithTaxesValidator,
+  materialsValidator,
+  categoryValidator,
+  descriptionValidator,
+  nameValidator
+} from "@@/lib/validators/product"
 import { object } from "yup"
 import { getCategories } from "@/utils/services/categoryServices"
 import routes from "@@/lib/constants/routes"
@@ -28,7 +36,6 @@ const initialValues = {
   materialsString: "",
   categoryID: 0,
   description: ""
-
 }
 
 const validationSchema = object({
@@ -38,7 +45,7 @@ const validationSchema = object({
   priceWithTaxes: priceWithTaxesValidator.required(),
   materialsString: materialsValidator.required(),
   categoryID: categoryValidator,
-  description: descriptionValidator,
+  description: descriptionValidator
 })
 
 const AddProduct = () => {
@@ -46,15 +53,26 @@ const AddProduct = () => {
   const router = useRouter()
   const [hasError, setError] = useState(false)
   const [categories, setCategories] = useState([])
-  const [images, setImages] = useState(["/no_img.jpeg"]);
+  const [images, setImages] = useState(["/no_img.jpeg"])
   const handleProductCreation = async values => {
     const { name, orderOfPriority, priceWithoutTaxes, priceWithTaxes, materialsString, categoryID, description } = values
-    const materials = materialsString.split(',').map((material) => ({"name": material}))
-    const category = categories.filter((categorie) => categorie.ID == categoryID)[0]
-    const slug = name.split(' ').join('_').toLowerCase()
+    const materials = materialsString.split(",").map(material => ({ name: material }))
+    const category = categories.filter(categorie => categorie.ID === categoryID)[0]
+    const slug = name.split(" ").join("_").toLowerCase()
 
     try {
-      const product = { name, slug, categoryID: parseInt(categoryID), orderOfPriority: parseInt(orderOfPriority), priceWithoutTaxes: parseInt(priceWithoutTaxes), priceWithTaxes: parseInt(priceWithTaxes), materials, category, description, thumbnailURL: images[0] }
+      const product = {
+        name,
+        slug,
+        categoryID: parseInt(categoryID),
+        orderOfPriority: parseInt(orderOfPriority),
+        priceWithoutTaxes: parseInt(priceWithoutTaxes),
+        priceWithTaxes: parseInt(priceWithTaxes),
+        materials,
+        category,
+        description,
+        thumbnailURL: images[0]
+      }
       await createProduct(product)
       router.push(routes.backoffice.products)
     } catch (e) {
@@ -88,20 +106,60 @@ const AddProduct = () => {
                 <h1 className="font-semibold text-3xl">NEW</h1>
                 <div className="flex justify-between gap-x-16">
                   <div className="flex flex-col items-center justify-center">
-                    <UploadAndDisplayImage images={images} setImages={setImages}/>
+                    <UploadAndDisplayImage images={images} setImages={setImages} />
                   </div>
                   <div className="flex flex-1 flex-col justify-start ">
-                    <FormField name="name" type="text" placeholder={t("backoffice.placeholder.name")} label={t("backoffice.label.name") + "*"} className="py-2" />
-                    <FormField name="orderOfPriority" type="number" placeholder={t("backoffice.placeholder.orderOfPriority")} label={t("backoffice.label.orderOfPriority")} className="py-2" />
-                    <FormField name="priceWithoutTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithoutTaxes")} label={t("backoffice.label.priceWithoutTaxes") + "*"} className="py-2" />
-                    <FormField name="priceWithTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithTaxes")} label={t("backoffice.label.priceWithTaxes") + "*"} className="py-2" />
-                    <FormField name="materialsString" type="text" placeholder={t("backoffice.placeholder.materials")} label={t("backoffice.label.materials") + "*"} className="py-2" />
-                    <FormFieldSelect name="categoryID" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category") } options={categories} />
+                    <FormField
+                      name="name"
+                      type="text"
+                      placeholder={t("backoffice.placeholder.name")}
+                      label={t("backoffice.label.name") + "*"}
+                      className="py-2"
+                    />
+                    <FormField
+                      name="orderOfPriority"
+                      type="number"
+                      placeholder={t("backoffice.placeholder.orderOfPriority")}
+                      label={t("backoffice.label.orderOfPriority")}
+                      className="py-2"
+                    />
+                    <FormField
+                      name="priceWithoutTaxes"
+                      type="number"
+                      placeholder={t("backoffice.placeholder.priceWithoutTaxes")}
+                      label={t("backoffice.label.priceWithoutTaxes") + "*"}
+                      className="py-2"
+                    />
+                    <FormField
+                      name="priceWithTaxes"
+                      type="number"
+                      placeholder={t("backoffice.placeholder.priceWithTaxes")}
+                      label={t("backoffice.label.priceWithTaxes") + "*"}
+                      className="py-2"
+                    />
+                    <FormField
+                      name="materialsString"
+                      type="text"
+                      placeholder={t("backoffice.placeholder.materials")}
+                      label={t("backoffice.label.materials") + "*"}
+                      className="py-2"
+                    />
+                    <FormFieldSelect
+                      name="categoryID"
+                      placeholder={t("backoffice.placeholder.category")}
+                      label={t("backoffice.label.category")}
+                      options={categories}
+                    />
                   </div>
                 </div>
-                <FormField name="description" as="textarea" placeholder={t("backoffice.placeholder.description")} label={t("backoffice.label.description")} />
+                <FormField
+                  name="description"
+                  as="textarea"
+                  placeholder={t("backoffice.placeholder.description")}
+                  label={t("backoffice.label.description")}
+                />
                 <div className="">
-                  <SubmitButton text={"validate"} className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center"/>
+                  <SubmitButton text={"validate"} className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center" />
                 </div>
               </MyForm>
             </Formik>
@@ -109,7 +167,7 @@ const AddProduct = () => {
         </div>
       </NoSSR>
     </Page>
-)
+  )
 }
 
 export default AddProduct
