@@ -9,15 +9,14 @@ import { object } from "yup"
 import { getCategories } from "@/utils/services/categoryServices"
 import routes from "@@/lib/constants/routes"
 import MyForm from "@/components/ui/forms/MyForm"
-import { Formik, Field } from "formik"
+import { Formik } from "formik"
 import SubmitButton from "@/components/ui/buttons/SubmitButton"
 import FormField from "@/components/ui/forms/FormField"
 import { useTranslation } from "react-i18next"
 // The only way to have translations work on this page was to disable SSR
 import NoSSR from "@/components/NoSSR"
 import { createProduct } from "@/utils/services/productServices"
-import clsx from "clsx"
-import Input from "@/components/ui/Input"
+import FormFieldSelect from "@/components/ui/forms/FormFieldSelect"
 import UploadAndDisplayImage from "@/components/ui/forms/UploadImages"
 
 export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
@@ -55,7 +54,7 @@ const AddProduct = () => {
     const slug = name.split(' ').join('_').toLowerCase()
 
     try {
-      const product = { name, slug, categoryID: parseInt(categoryID), orderOfPriority: parseInt(categoryID), priceWithoutTaxes: parseInt(priceWithoutTaxes), priceWithTaxes: parseInt(priceWithTaxes), materials, category, description, thumbnailURL: images[0] }
+      const product = { name, slug, categoryID: parseInt(categoryID), orderOfPriority: parseInt(orderOfPriority), priceWithoutTaxes: parseInt(priceWithoutTaxes), priceWithTaxes: parseInt(priceWithTaxes), materials, category, description, thumbnailURL: images[0] }
       await createProduct(product)
       router.push(routes.backoffice.products)
     } catch (e) {
@@ -97,14 +96,7 @@ const AddProduct = () => {
                     <FormField name="priceWithoutTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithoutTaxes")} label={t("backoffice.label.priceWithoutTaxes") + "*"} className="py-2" />
                     <FormField name="priceWithTaxes" type="number" placeholder={t("backoffice.placeholder.priceWithTaxes")} label={t("backoffice.label.priceWithTaxes") + "*"} className="py-2" />
                     <FormField name="materialsString" type="text" placeholder={t("backoffice.placeholder.materials")} label={t("backoffice.label.materials") + "*"} className="py-2" />
-                    <label className={clsx("flex flex-row gap-2")}>
-                    {t("backoffice.label.category") && <span className="content-center font-semibold">{t("backoffice.label.category")}</span>}
-                    <Field name="categoryID" component="select" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category")} className="border-2 p-2 bg-white flex-row">
-                      {categories.map(categorie => (
-                        <option key={categorie.ID} value={categorie.ID}>{categorie.name}</option>
-                        ))}
-                    </Field>
-                    </label>
+                    <FormFieldSelect name="categoryID" placeholder={t("backoffice.placeholder.category")} label={t("backoffice.label.category") } options={categories} />
                   </div>
                 </div>
                 <FormField name="description" as="textarea" placeholder={t("backoffice.placeholder.description")} label={t("backoffice.label.description")} />
