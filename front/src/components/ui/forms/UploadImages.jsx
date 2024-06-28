@@ -1,22 +1,18 @@
 import React, { useState, Im } from "react";
 import Input from "../Input";
-import Image from "next/image"
 import Carousel from "@/components/Carousel";
 import config from "@/utils/config";
+import { PhotoIcon} from "@heroicons/react/24/outline"
 
-const UploadImages = () => {
-  const [images, setImages] = useState(["/no_img.jpeg"]);
-
-  console.log(images)
-
-  return (
+const UploadAndDisplayImages = ({images, setImages}) => (
     <div className="flex flex-col items-center">
       <Carousel 
         images={images}
         width={config.images.backoffice.carousel.width}
         height={config.images.backoffice.carousel.height}
       />
-      <label for="file-upload" type="button" className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center">
+      <label for="file-upload" type="button" className="mt-4 py-0.5 px-3.5 bg-gray w-fit rounded-full border flex gap-1 items-center">
+        <PhotoIcon className="w-6 h-6" />
         Add
       </label>
         <Input
@@ -30,7 +26,7 @@ const UploadImages = () => {
             }}
         />
     </div>
-  );
-};
+  )
 
-export default UploadImages;
+
+export default UploadAndDisplayImages;

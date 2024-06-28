@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { useState, useEffect } from "react"
 import { backoffice } from "@@/lib/constants/labels"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import { orderOfPriorityValidator, priceWithoutTaxesValidator, priceWithTaxesValidator, materialsValidator, categoryValidator, descriptionValidator, nameValidator } from "@@/lib/validators/product"
+import { orderOfPriorityValidator, priceWithoutTaxesValidator, priceWithTaxesValidator, materialsValidator, categoryValidator, descriptionValidator, nameValidator, thumbnailURLValidator, productImagesValidator } from "@@/lib/validators/product"
 import { object } from "yup"
 import { getCategories } from "@/utils/services/categoryServices"
 import routes from "@@/lib/constants/routes"
@@ -29,6 +29,7 @@ const initialValues = {
   materialsString: "",
   categoryID: 0,
   description: ""
+
 }
 
 const validationSchema = object({
@@ -46,16 +47,15 @@ const AddProduct = () => {
   const router = useRouter()
   const [hasError, setError] = useState(false)
   const [categories, setCategories] = useState([])
+  const [images, setImages] = useState(["/no_img.jpeg"]);
   const handleProductCreation = async values => {
     const { name, orderOfPriority, priceWithoutTaxes, priceWithTaxes, materialsString, categoryID, description } = values
     const materials = materialsString.split(',').map((material) => ({"name": material}))
     const category = categories.filter((categorie) => categorie.ID == categoryID)[0]
     const slug = name.split(' ').join('_').toLowerCase()
-    console.log(typeof categoryID)
 
     try {
-      const product = { name, slug, categoryID: parseInt(categoryID), orderOfPriority: parseInt(categoryID), priceWithoutTaxes: parseInt(priceWithoutTaxes), priceWithTaxes: parseInt(priceWithTaxes), materials, category, description }
-      console.log(product)
+      const product = { name, slug, categoryID: parseInt(categoryID), orderOfPriority: parseInt(categoryID), priceWithoutTaxes: parseInt(priceWithoutTaxes), priceWithTaxes: parseInt(priceWithTaxes), materials, category, description, thumbnailURL: images[0] }
       await createProduct(product)
       router.push(routes.backoffice.products)
     } catch (e) {
@@ -89,7 +89,7 @@ const AddProduct = () => {
                 <h1 className="font-semibold text-3xl">NEW</h1>
                 <div className="flex justify-between gap-x-16">
                   <div className="flex flex-col items-center justify-center">
-                    <UploadAndDisplayImage/>
+                    <UploadAndDisplayImage images={images} setImages={setImages}/>
                   </div>
                   <div className="flex flex-1 flex-col justify-start ">
                     <FormField name="name" type="text" placeholder={t("backoffice.placeholder.name")} label={t("backoffice.label.name") + "*"} className="py-2" />
@@ -108,7 +108,9 @@ const AddProduct = () => {
                   </div>
                 </div>
                 <FormField name="description" as="textarea" placeholder={t("backoffice.placeholder.description")} label={t("backoffice.label.description")} />
-                <SubmitButton text={"validate"} className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center"/>
+                <div className="">
+                  <SubmitButton text={"validate"} className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center"/>
+                </div>
               </MyForm>
             </Formik>
           </section>
