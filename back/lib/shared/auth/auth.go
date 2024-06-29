@@ -21,6 +21,19 @@ func CreatePassword(authData helpers.AuthData) (hashedPassword string, salt stri
 	return hashedPassword, salt, nil
 }
 
+func VerifyPassword(authData helpers.AuthData, userPasswordHash, userPasswordSalt string) (bool, error) {
+	authDataPasswordHash, err := hashPassword([]byte(authData.Password), []byte(userPasswordSalt))
+	if err != nil {
+		return false, err
+	}
+
+	if hex.EncodeToString(authDataPasswordHash) != userPasswordHash {
+		return false, err
+	}
+
+	return true, nil
+}
+
 func createNewPasswordHash(rawPassword string) (password string, salt string, err error) {
 	salt, err = generateSalt()
 	if err != nil {
