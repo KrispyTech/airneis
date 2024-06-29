@@ -1,7 +1,6 @@
 package users
 
 import (
-	"fmt"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/pkg/config"
 	model "github.com/KrispyTech/airneis/src/models"
@@ -15,12 +14,8 @@ func CreateUser(ctx *fiber.Ctx) error {
 		return helpers.SendBadRequest(ctx, err)
 	}
 
-	if len(user.FirstName) == 0 {
-		return helpers.SendBadRequest(ctx, fmt.Errorf("please provide a first name"))
-	}
-
-	if len(user.LastName) == 0 {
-		return helpers.SendBadRequest(ctx, fmt.Errorf("please provide a last name"))
+	if err := checkUser(user); err != nil {
+		return helpers.SendBadRequest(ctx, err)
 	}
 
 	user, err := fillUserInformation(ctx, user)
