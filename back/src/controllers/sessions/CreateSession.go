@@ -34,7 +34,7 @@ func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 	}
 
 	if !user.IsActive {
-		return helpers.SendUnauthorized(ctx, fmt.Errorf("please activate your account"))
+		return helpers.SendUnauthorized(ctx, fmt.Errorf("Account is deactivated"))
 	}
 
 	serializedUser := serializers.SerializeUser(user)
