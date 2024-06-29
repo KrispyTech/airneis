@@ -16,7 +16,7 @@ type airneisFiberApp struct {
 }
 
 type Services struct {
-	VaultClient vault.VaultClient
+	VaultClient    vault.VaultClient
 	SendgridClient sendgrid.SendgridAPI
 }
 

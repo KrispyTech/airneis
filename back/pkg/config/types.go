@@ -48,8 +48,8 @@ type Env struct {
 }
 
 type ClientHandler struct {
-	httpClient  httpclient.Req
-	VaultClient vault.VaultClient
+	httpClient     httpclient.Req
+	VaultClient    vault.VaultClient
 	SendgridClient sendgrid.SendgridAPI
 }
 

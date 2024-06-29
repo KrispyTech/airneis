@@ -12,7 +12,7 @@ import (
 )
 
 type SendgridAPI interface {
-	ValidateMail(email Mail) (*mail.SGMailV3, error) 
+	ValidateMail(email Mail) (*mail.SGMailV3, error)
 	SendMail(mail *mail.SGMailV3) (err error)
 }
 
@@ -33,7 +33,6 @@ type User struct {
 	LastName  string
 	Email     string `validate:"required,email"`
 }
-
 
 func InitializeSendgridAPI(vc vault.VaultClient) (client SendgridAPI, err error) {
 	token, err := vc.ReadSecret("SENDGRID_API_KEY")
@@ -59,7 +58,7 @@ func (sg *SendgridClient) ValidateMail(email Mail) (*mail.SGMailV3, error) {
 		}
 	}
 
-return message, nil
+	return message, nil
 }
 
 func (sg *SendgridClient) SendMail(mail *mail.SGMailV3) (err error) {

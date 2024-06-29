@@ -93,8 +93,8 @@ func loadClientHandler(config Config) (ClientHandler, error) {
 	}
 
 	ch := ClientHandler{
-		httpClient:  httpClient,
-		VaultClient: vc,
+		httpClient:     httpClient,
+		VaultClient:    vc,
 		SendgridClient: SendgridClient,
 	}
 
