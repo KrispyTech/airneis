@@ -33,7 +33,9 @@ const useSessionStore = create(set => ({
           isAdmin,
           isActive
         }
-      } catch (error) {}
+      } catch (error) {
+        return {}
+      }
     }),
   removeUserSession: () =>
     set(async () => {
