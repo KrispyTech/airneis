@@ -9,7 +9,6 @@ import (
 
 	"github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
-	"github.com/sirupsen/logrus"
 )
 
 func CreatePassword(authData helpers.AuthData) (hashedPassword string, salt string, err error) {
@@ -62,8 +61,6 @@ func generateSalt() (string, error) {
 
 		salt[i] = constants.Chars[randomNumber.Int64()]
 	}
-
-	logrus.Info(string(salt))
 
 	return string(salt), nil
 }
