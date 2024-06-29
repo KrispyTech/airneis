@@ -1,6 +1,7 @@
 package sessions
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/KrispyTech/airneis/lib/shared/auth"
@@ -21,6 +22,19 @@ func CreateSession(ctx *fiber.Ctx, vlt vault.VaultClient) error {
 	user, errFindUser := users.GetUserByEmail(input.Email)
 	if errFindUser != nil {
 		return helpers.SendUnauthorized(ctx, errFindUser)
+	}
+
+	passwordCheck, err := auth.VerifyPassword(input, user.PasswordHash, user.PasswordSalt)
+	if err != nil {
+		return helpers.SendInternalError(ctx, errInput)
+	}
+
+	if !passwordCheck {
+		return helpers.SendUnauthorized(ctx, errFindUser)
+	}
+
+	if !user.IsActive {
+		return helpers.SendUnauthorized(ctx, fmt.Errorf("Account is deactivated"))
 	}
 
 	serializedUser := serializers.SerializeUser(user)

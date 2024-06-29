@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"math/big"
+	"unicode/utf16"
 
 	"golang.org/x/crypto/scrypt"
 
@@ -18,6 +19,19 @@ func CreatePassword(authData helpers.AuthData) (hashedPassword string, salt stri
 	}
 
 	return hashedPassword, salt, nil
+}
+
+func VerifyPassword(authData helpers.AuthData, userPasswordHash, userPasswordSalt string) (bool, error) {
+	authDataPasswordHash, err := hashPassword([]byte(authData.Password), []byte(userPasswordSalt))
+	if err != nil {
+		return false, err
+	}
+
+	if hex.EncodeToString(authDataPasswordHash) != userPasswordHash {
+		return false, err
+	}
+
+	return true, nil
 }
 
 func createNewPasswordHash(rawPassword string) (password string, salt string, err error) {
@@ -37,19 +51,21 @@ func createNewPasswordHash(rawPassword string) (password string, salt string, er
 }
 
 func generateSalt() (string, error) {
-	salt := make([]byte, constants.SaltLength)
-	max := big.NewInt(int64(len(constants.Chars)))
-
-	for i := range salt {
-		randomNumber, err := rand.Int(rand.Reader, max)
+	rawSalt := make([]uint16, constants.SaltLength)
+	for i := range rawSalt {
+		randomNumber, err := rand.Int(rand.Reader, big.NewInt(
+			constants.LastSaltCharacter-constants.FirstSaltCharacter))
 		if err != nil {
 			return "", err
 		}
 
-		salt[i] = constants.Chars[randomNumber.Int64()]
+		sanitizedRandomNumber := randomNumber.Int64() + constants.FirstSaltCharacter
+		rawSalt[i] = uint16(sanitizedRandomNumber)
 	}
 
-	return string(salt), nil
+	runes := utf16.Decode(rawSalt)
+
+	return string(runes), nil
 }
 
 func hashPassword(rawPassword, salt []byte) ([]byte, error) {

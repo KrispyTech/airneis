@@ -14,6 +14,10 @@ func CreateUser(ctx *fiber.Ctx) error {
 		return helpers.SendBadRequest(ctx, err)
 	}
 
+	if err := checkUser(user); err != nil {
+		return helpers.SendBadRequest(ctx, err)
+	}
+
 	user, err := fillUserInformation(ctx, user)
 	if err != nil {
 		return helpers.SendInternalError(ctx, err)

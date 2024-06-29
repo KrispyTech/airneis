@@ -5,9 +5,11 @@ import { useTranslation } from "next-i18next"
 import SelectLanguage from "@/components/ui/SelectLanguage"
 import routes from "@@/lib/constants/routes"
 import { backoffice } from "@@/lib/constants/labels"
+import useSessionStore from "@/utils/stores/sessionStore"
 
 const Header = ({ page }) => {
   const { t, locale } = useTranslation("common")
+  const { email } = useSessionStore()
 
   return (
     <header className="bg-secondary text-primary px-4 flex justify-between items-center sticky top-0 z-30">
@@ -17,7 +19,23 @@ const Header = ({ page }) => {
       {page !== backoffice ? (
         <nav>
           <ul className="flex flex-row items-center gap-5">
-            <SelectLanguage />
+            {email ? (
+              <li>
+                <Link href={routes.backoffice}>{t("header.logout")}</Link>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link href={"/onboarding/login"}>{t("header.login")}</Link>
+                </li>
+                <li>
+                  <Link href={"/onboarding/register"}>{t("header.register")}</Link>
+                </li>
+              </>
+            )}
+            <li>
+              <SelectLanguage />
+            </li>
             <li>
               <MagnifyingGlassIcon {...webConfig.icons.lgIcon} />
             </li>
