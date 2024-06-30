@@ -69,7 +69,7 @@ const AddProduct = () => {
         description,
         thumbnailURL: images[0]
       }
-      
+
       await createProduct(product)
       router.push(routes.backoffice.products)
     } catch (e) {
@@ -99,7 +99,7 @@ const AddProduct = () => {
           <BackOfficeNav />
           <section className="flex flex-col w-full px-4 pt-3 overflow-y-scroll">
             <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleProductCreation}>
-              <AddProductForm images={images} setImages={setImages} categories={categories} t={t}/>
+              <AddProductForm images={images} setImages={setImages} categories={categories} t={t} />
             </Formik>
           </section>
         </div>
