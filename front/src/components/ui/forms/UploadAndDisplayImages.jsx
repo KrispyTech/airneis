@@ -24,6 +24,7 @@ const UploadAndDisplayImages = ({ images, setImages }) => {
         onChange={handleAddImages}
       />
     </div>
-  )}
+  )
+}
 
 export default UploadAndDisplayImages

@@ -69,6 +69,7 @@ const AddProduct = () => {
         description,
         thumbnailURL: images[0]
       }
+      
       await createProduct(product)
       router.push(routes.backoffice.products)
     } catch (e) {
