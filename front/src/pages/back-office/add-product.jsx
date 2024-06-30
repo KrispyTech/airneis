@@ -53,17 +53,17 @@ const AddProduct = () => {
   const handleProductCreation = async values => {
     const { name, orderOfPriority, priceWithoutTaxes, priceWithTaxes, materialsString, categoryID, description } = values
     const materials = materialsString.split(",").map(material => ({ name: material }))
-    const category = categories.filter(categorie => categorie.ID === categoryID)[0]
+    const [category, ..._] = categories.filter(category => category.ID === categoryID)
     const slug = name.split(" ").join("_").toLowerCase()
 
     try {
       const product = {
         name,
         slug,
-        categoryID: parseInt(categoryID),
-        orderOfPriority: parseInt(orderOfPriority),
-        priceWithoutTaxes: parseInt(priceWithoutTaxes),
-        priceWithTaxes: parseInt(priceWithTaxes),
+        categoryID: Number.parseInt(categoryID, 10),
+        orderOfPriority: Number.parseInt(orderOfPriority, 10),
+        priceWithoutTaxes: Number.parseInt(priceWithoutTaxes, 10),
+        priceWithTaxes: Number.parseInt(priceWithTaxes, 10),
         materials,
         category,
         description,
