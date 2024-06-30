@@ -43,5 +43,25 @@
       "lastName": "Last name"
     }
   },
+  "backoffice": {
+    "label": {
+      "name": "Name",
+      "orderOfPriority": "Priority",
+      "priceWithoutTaxes": "Price excluding taxes",
+      "priceWithTaxes": "Price including taxes",
+      "materials": "Materials",
+      "category": "Category",
+      "description": "Description"
+    },
+    "placeholder": {
+      "name": "Name",
+      "orderOfPriority": "Priority",
+      "priceWithoutTaxes": "Price excluding taxes",
+      "priceWithTaxes": "Price including taxes",
+      "materials": "Values with ',' separator",
+      "category": "Select category",
+      "description": "Description"
+    }
+  },
   "errorMessage": "An error has occured"
 }

@@ -43,5 +43,25 @@
     "signIn": "Se connecter sur Airneis",
     "register": "Créer votre compte! Bienvenue sur Airneis 😄"
   },
+  "backoffice": {
+    "label": {
+      "name": "Nom",
+      "orderOfPriority": "Priorité",
+      "priceWithoutTaxes": "PrixHT",
+      "priceWithTaxes": "PrixTTC",
+      "materials": "Materiaux",
+      "category": "Categorie",
+      "description": "Description"
+    },
+    "placeholder": {
+      "name": "Nom",
+      "orderOfPriority": "Priorité",
+      "priceWithoutTaxes": "Prix hors taxes",
+      "priceWithTaxes": "Price TTC",
+      "materials": "Materiaux séparés par une ','",
+      "category": "Selectionner une categorie",
+      "description": "Description"
+    }
+  },
   "errorMessage": "Une erreur est survenue"
 }
