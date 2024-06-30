@@ -5,9 +5,9 @@ import { PhotoIcon } from "@heroicons/react/24/outline"
 
 const UploadAndDisplayImages = ({ images, setImages }) => {
   const handleAddImages = event => {
-        setImages(() => [...event.target.files].map(image => URL.createObjectURL(image)))
-      }
-  
+    setImages(() => [...event.target.files].map(image => URL.createObjectURL(image)))
+  }
+
   return (
     <div className="flex flex-col items-center">
       <Carousel images={images} width={config.images.backoffice.carousel.width} height={config.images.backoffice.carousel.height} />
@@ -15,14 +15,7 @@ const UploadAndDisplayImages = ({ images, setImages }) => {
         <PhotoIcon className="w-6 h-6" />
         Add
       </label>
-      <Input
-        id="file-upload"
-        type="file"
-        name="myImage"
-        className={"hidden"}
-        multiple
-        onChange={handleAddImages}
-      />
+      <Input id="file-upload" type="file" name="myImage" className={"hidden"} multiple onChange={handleAddImages} />
     </div>
   )
 }
