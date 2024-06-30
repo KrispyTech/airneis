@@ -12,7 +12,13 @@ const AddProductForm = ({ images, setImages, categories, t }) => (
         <UploadAndDisplayImage images={images} setImages={setImages} />
       </div>
       <div className="flex flex-1 flex-col justify-start ">
-        <FormField name="name" type="text" placeholder={t("backoffice.placeholder.name")} label={t("backoffice.label.name") + "*"} className="py-2" />
+        <FormField
+          name="name"
+          type="text"
+          placeholder={t("backoffice.placeholder.name")}
+          label={`${t("backoffice.label.name")} *`}
+          className="py-2"
+        />
         <FormField
           name="orderOfPriority"
           type="number"
@@ -24,21 +30,21 @@ const AddProductForm = ({ images, setImages, categories, t }) => (
           name="priceWithoutTaxes"
           type="number"
           placeholder={t("backoffice.placeholder.priceWithoutTaxes")}
-          label={t("backoffice.label.priceWithoutTaxes") + "*"}
+          label={`${t("backoffice.label.priceWithoutTaxes")} *`}
           className="py-2"
         />
         <FormField
           name="priceWithTaxes"
           type="number"
           placeholder={t("backoffice.placeholder.priceWithTaxes")}
-          label={t("backoffice.label.priceWithTaxes") + "*"}
+          label={`${t("backoffice.label.priceWithTaxes")} *`}
           className="py-2"
         />
         <FormField
           name="materialsString"
           type="text"
           placeholder={t("backoffice.placeholder.materials")}
-          label={t("backoffice.label.materials") + "*"}
+          label={`${t("backoffice.label.materials")} *`}
           className="py-2"
         />
         <FormFieldSelect
