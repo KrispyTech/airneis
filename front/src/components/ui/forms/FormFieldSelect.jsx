@@ -7,7 +7,7 @@ const FormFieldSelect = props => {
   const [field] = useField(name)
 
   return (
-    <label className={clsx("flex flex-row gap-2", className)}>
+    <label className={clsx("flex flex-col gap-2", className)}>
       {label && <span className="content-center font-semibold">{label}</span>}
       <Component name={name} component="select" {...field} {...otherProps} className="border-2 p-2 bg-white flex-row">
         {options.map(option => (
