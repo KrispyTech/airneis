@@ -3,6 +3,7 @@ package config
 import (
 	c "github.com/KrispyTech/airneis/lib/shared/constants"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
+	"github.com/KrispyTech/airneis/lib/shared/sendgrid"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 )
 
@@ -47,8 +48,9 @@ type Env struct {
 }
 
 type ClientHandler struct {
-	httpClient  httpclient.Req
-	VaultClient vault.VaultClient
+	httpClient     httpclient.Req
+	VaultClient    vault.VaultClient
+	SendgridClient sendgrid.SendgridAPI
 }
 
 type HashicorpVault struct {

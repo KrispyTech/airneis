@@ -14,7 +14,8 @@ func main() {
 	}
 
 	externalServices := lib.Services{
-		VaultClient: conf.Handler.VaultClient,
+		VaultClient:    conf.Handler.VaultClient,
+		SendgridClient: conf.Handler.SendgridClient,
 	}
 
 	if err := lib.InitializeFiberApp(externalServices); err != nil {

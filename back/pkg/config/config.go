@@ -6,6 +6,7 @@ import (
 
 	"github.com/KrispyTech/airneis/lib/shared/helpers"
 	"github.com/KrispyTech/airneis/lib/shared/httpclient"
+	"github.com/KrispyTech/airneis/lib/shared/sendgrid"
 	"github.com/KrispyTech/airneis/lib/shared/vault"
 	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
@@ -86,9 +87,15 @@ func loadClientHandler(config Config) (ClientHandler, error) {
 		return ClientHandler{}, errors.Wrapf(err, "loadClientHandler, unable to create vault client")
 	}
 
+	SendgridClient, err := sendgrid.InitializeSendgridAPI(vc)
+	if err != nil {
+		return ClientHandler{}, errors.Wrapf(err, "loadClientHandler, unable to create sendgrid client")
+	}
+
 	ch := ClientHandler{
-		httpClient:  httpClient,
-		VaultClient: vc,
+		httpClient:     httpClient,
+		VaultClient:    vc,
+		SendgridClient: SendgridClient,
 	}
 
 	return ch, nil
