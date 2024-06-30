@@ -5,7 +5,7 @@ import FormFieldSelect from "@/components/ui/forms/FormFieldSelect"
 import UploadAndDisplayImage from "@/components/ui/forms/UploadAndDisplayImages"
 
 const AddProductForm = ({images, setImages, categories, t}) => (
-    <MyForm className="text-2xl">
+  <MyForm className="text-2xl">
     <h1 className="font-semibold text-3xl">NEW</h1>
     <div className="flex justify-between gap-x-16">
       <div className="flex flex-col items-center justify-center">
@@ -55,12 +55,12 @@ const AddProductForm = ({images, setImages, categories, t}) => (
         />
       </div>
     </div>
-    <FormField
-      name="description"
-      as="textarea"
-      placeholder={t("backoffice.placeholder.description")}
-      label={t("backoffice.label.description")}
-    />
+      <FormField
+        name="description"
+        as="textarea"
+        placeholder={t("backoffice.placeholder.description")}
+        label={t("backoffice.label.description")}
+      />
     <div className="">
       <SubmitButton text={"validate"} className="mt-4 py-0.5 px-2.5 bg-gray w-fit rounded-full border flex gap-1 items-center" />
     </div>

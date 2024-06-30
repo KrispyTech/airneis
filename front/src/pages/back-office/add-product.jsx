@@ -16,16 +16,11 @@ import {
 import { object } from "yup"
 import { getCategories } from "@/utils/services/categoryServices"
 import routes from "@@/lib/constants/routes"
-import MyForm from "@/components/ui/forms/MyForm"
 import { Formik } from "formik"
-import SubmitButton from "@/components/ui/buttons/SubmitButton"
-import FormField from "@/components/ui/forms/FormField"
 import { useTranslation } from "react-i18next"
 // The only way to have translations work on this page was to disable SSR
 import NoSSR from "@/components/NoSSR"
 import { createProduct } from "@/utils/services/productServices"
-import FormFieldSelect from "@/components/ui/forms/FormFieldSelect"
-import UploadAndDisplayImage from "@/components/ui/forms/UploadAndDisplayImages"
 import AddProductForm from "@/components/ui/forms/AddProductForm"
 
 export const getServerSideProps = async ({ locale }) => ({ props: { ...(await serverSideTranslations(locale, ["common"])) } })
